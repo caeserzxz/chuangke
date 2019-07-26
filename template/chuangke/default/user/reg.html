@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/layer/mobile/layer.js"></script>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 注册 </title>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">注册</div>
+            <div class="header-right">
+            </div>
+        </div>
+    </div>
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+    <form action="" method="post" id="regFrom" >
+        <input type="hidden" name="is_bind" value="{$Request.param.is_bind}">
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">推荐码</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="invite" id="invite" value="{$invite_code}" type="text" placeholder="请输入推荐码(必填)">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">姓名</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="nickname" id="nickname" value="" type="text" placeholder="请输入用户姓名">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">手机号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="mobile" id="mobile" value="" type="tel" placeholder="请输入手机号" onBlur="checkMobilePhone(this.value);">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">微信</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="wx_number" id="wx_number" value="" type="text" placeholder="请输入微信号" >
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">密码</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="password" id="password" value="" type="password" placeholder="请输入密码" onBlur="check_password(this.value);">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">确认密码</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="password2" id="password2" value="" type="password" placeholder="请确认密码" onBlur="check_confirm_password(this.value);">
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area">
+            <input type="button" name="" id="" class="weui-btn weui-btn_primary" onclick="checkSubmit()" value="确认注册"/>
+        </div>
+
+    </form>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+
+  //提交表单
+    function checkSubmit()
+    {
+        $.ajax({
+            type:'POST',
+            url:"/index.php?m=chuangke&c=User&a=reg",
+            dataType:'JSON',
+            data:$('#regFrom').serialize(),
+            success:function(data){
+                console.log(data);
+                if(data.status == 1){
+                    showSkin('注册成功');
+
+                    location.href='/index.php/chuangke/User/index';
+                }else{
+                    showSkin(data.msg);
+                }
+            }
+        })
+    }
+
+    var flag = false;
+    //手机验证
+    function checkMobilePhone(mobile) {
+        if (mobile == '') {
+            showSkin('手机不能空');
+            flag = false;
+        } else if (mobile){ //判断手机格式
+            $.ajax({
+                type: "GET",
+                url: "/index.php?m=Home&c=Api&a=issetMobile",//+tab,
+                data: {mobile: mobile},// 你的formid 搜索表单 序列化提交
+                success: function (data) {
+                    if (data == '0') {
+                        flag = true;
+                    } else {
+                        showSkin('* 手机号已存在');
+                        flag = false;
+                    }
+                }
+            });
+        } else {
+            showSkin('* 手机号码格式不正确');
+            flag = false;
+        }
+    }
+
+    //密码
+    function check_password(password) {
+        var password = $.trim(password);
+        if (password == '') {
+            showSkin("*登录密码不能包含空格");
+            flag = false;
+        } else if (password.length < 6) {
+            showSkin('*登录密码不能少于 6 个字符。');
+            flag = false;
+        }
+    }
+
+    //验证确认密码
+    function check_confirm_password(confirm_password) {
+        var password1 = $.trim($('#password').val());
+        var password2 = $.trim(confirm_password);
+        if (password1 == '') {
+            showSkin("*确认密码不能包含空格");
+            flag = false;
+        }
+        if (password2.length < 6) {
+            showSkin('*登录密码不能少于 6 个字符。');
+            flag = false;
+        }
+        if (password2 != password1) {
+            showSkin('*两次密码不一致');
+            flag = false;
+        } else {
+            flag = true;
+        }
+    }
+
+    function showSkin(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+<script src="__STATIC__/assets3/js/page.js"></script>
+<script src="__STATIC__/assets/js/layer/mobile/layer.js"></script>
+
+  <title> 收货地址 </title>
+  <style>
+    .weui-label{
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="page-hd">
+    <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">收货地址</div>
+    <div class="header-right">
+        <div class="right_menu">
+            
+        </div>
+    </div>
+</div>
+  </div>
+
+  <div class="page-bd">
+
+    <!-- 页面内容-->
+    <volist name="lists" id="list">
+    <div class="weui-cells card-cells">
+        <div class="weui-cell">
+          <div class="weui-cell__bd">
+            <div class="weui-flex" style="justify-content: space-between;">
+              <div><label class="weui-label">{$list[consignee]}</label></div>
+              <div>{$list[mobile]}</div>
+            </div>
+            <div class="fs24 text-gray mt10">{$region_list[$list['province']]} {$region_list[$list['city']]} {$region_list[$list['district']]} {$region_list[$list['twon']]} {$list['address']}</div>
+          </div>
+        </div>
+
+        <div class="weui-cell">
+          <div class="weui-cell__bd tr">
+            <div class="action_group">
+              <input type="radio" data-value="{$list[address_id]}" <if condition="$list[is_default] eq 1">checked="true" </if> class="weui-icon-checked" name="radio1" id="x{$list['address_id']}">
+              <span>默认地址</span>
+              <if condition="$Request.param.source eq 'integral'">
+                 <a href="{:U('/chuangke/User/edit_address',array('id'=>$list[address_id],'source'=>$Request.param.source,'goods_id'=>$Request.param.goods_id,'goods_num'=>$Request.param.goods_num,'item_id'=>$Request.param.item_id))}" class="action_edit"><i class="icon_edit"></i><span>编辑</span></a>
+                <else/>
+                <a href="{:U('/chuangke/User/edit_address',array('id'=>$list[address_id],'source'=>$Request.param.source,'act_id'=>$Request.param.act_id,'goods_num'=>$Request.param.goods_num,'order_id'=>$Request.param.order_id,'goods_id'=>$Request.param.goods_id,'item_id'=>$Request.param.item_id))}" class="action_edit"><i class="icon_edit"></i><span>编辑</span></a>
+              </if>
+              <a href="javascript:void(0);" data-value="{$list[address_id]}" class="action_del js_del del" ><i class="icon_del"></i><span>删除</span></a>
+            </div>
+          </div>
+        </div>
+    </div>
+    </volist>
+
+    
+    <div class="bottom-btn-wrap1">
+      <div class="bottom-btn">
+        <if condition="$Request.param.source eq 'integral'">
+          <a href="{:U('/chuangke/User/add_address',array('source'=>$Request.param.source,'order_id'=>$Request.param.order_id,'goods_id'=>$Request.param.goods_id,'goods_num'=>$Request.param.goods_num,'item_id'=>$Request.param.item_id))}" class="weui-btn weui-btn_primary"><span class="mr10">+</span>新建地址</a>
+        <else/>
+          <a href="{:U('/chuangke/User/add_address',array('source'=>$Request.param.source,'act_id'=>$Request.param.act_id,'goods_num'=>$Request.param.goods_num,'order_id'=>$Request.param.order_id))}" class="weui-btn weui-btn_primary"><span class="mr10">+</span>新建地址</a>
+        </if>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+<script>
+    //删除按钮
+    $('.del').click(function(){
+        var del = $(this);
+
+        if(confirm("确认要删除？")){ 
+            $.ajax({
+                type : "GET",
+                url:"{:U('chuangke/User/del_address')}",//+tab,
+                dataType:'JSON',
+                data :{id:del.attr('data-value')},
+                success: function(data) {
+                    if (data.status == 1) {
+                        Centen_title(data.msg);
+                        window.location.reload();
+                    } else {
+                        Centen_title(data.msg);
+                    }
+                }
+            });
+        } 
+        // return;
+        // layer.open({
+        //     content:'确认要删除吗?',
+        //     btn:['确认','取消'],
+        //     yes:function(index)
+        //     {
+        //         $.get("{:url('del_address')}",{id:del.attr('data-value')},function(data){
+        //             layer.open({content:data.msg,time:2});
+        //             if(data.code == 1)
+        //             {
+        //                 del.parents('.weui-cells').html('');
+        //             }
+        //         },'json');
+        //         layer.close(index);
+        //     }
+        // });
+
+    });  
+
+
+    $('input[name=radio1]').change(function(){
+        $.get("{:url('set_default1')}",{id:$(this).attr('data-value')},function(data){
+
+           Centen_title(data.msg);
+        },'json');
+    });
+  function Centen_title(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+    }
+    // layer.open({
+    //         content: content
+    //         ,skin: 'msg'
+    //         ,time: 2 //2秒后自动关闭
+    //       });
+</script>
+<script>
+  $(function () {
+    $("#city-picker").cityPicker();
+  });
+</script>
+</body>
+</html>

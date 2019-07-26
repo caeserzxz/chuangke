@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+<script src="__STATIC__/assets3/js/page.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__STATIC__/assets/js/layer/mobile/layer.js"></script>
+
+  <title> 新增地址 </title>
+</head>
+<body>
+<div class="page">
+  <div class="page-hd">
+    <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">新增地址</div>
+    <div class="header-right">
+        <div class="right_menu">  
+        </div>
+    </div>
+</div>
+</div>
+
+  <div class="page-bd">
+    <form id="addressForm">
+        <input type="hidden" name="area_codes" id="area_codes" value="">
+        <input type="hidden" name="id" id="id" value="{$id}">
+    <!-- 页面内容-->
+        <div class="weui-cells">
+
+              <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">联系人</label></div>
+                <div class="weui-cell__bd">
+                  <input type="text" class="weui-input" name="consignee" id="consignee" value="{$address.consignee}"  placeholder="请输入您的姓名"/>
+                </div>
+                <div class="weui-cell__ft"></div>
+              </div>
+              <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">联系电话</label></div>
+                <div class="weui-cell__bd">
+                  <input type="text" class="weui-input"  name="mobile" id="mobile" value="{$address.mobile}"  placeholder="请输入您的电话"/>
+                </div>
+                <div class="weui-cell__ft"></div>
+              </div>
+              <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd"><label class="weui-label">所在地区</label></div>
+                <div class="weui-cell__bd">
+                  <input type="text" class="weui-input"  id='city-picker' name="city-picker" value="{$province}" data-codes="{$address.addres}"   placeholder="请选择所在地区"/>
+                </div>
+                <div class="weui-cell__ft"></div>
+              </div>
+              <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">详细地址</label></div>
+                <div class="weui-cell__bd">
+                  <input type="text" class="weui-input"  name="address" id="address" value="{$address.address}" placeholder="请输入详细的地址信息"/>
+                </div>
+                <div class="weui-cell__ft"></div>
+              </div>
+
+              <div class="weui-cells weui-cells_checkbox">
+                  <label class="weui-cell weui-check__label" for="s11">
+                      <div class="weui-cell__hd">
+                          <input type="checkbox" class="weui-check" name="is_default" id="s11"  value="{$address.is_default}"  <if condition="$address.is_default == 1">checked="checked"</if> >
+                          <i class="weui-icon-checked"></i>
+                      </div>
+                      <div class="weui-cell__bd">
+                          <p>设为默认地址</p>
+                      </div>
+                  </label>
+              </div>
+            
+        </div>
+    </form>
+    <div class="weui-btn-area">
+      <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="checkForm()">保存</a>
+    </div>
+  </div>
+</div>
+
+<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+<script>
+  
+  function checkForm(){
+
+        var consignee = $('input[name="consignee"]').val();
+        var mobile = $('input[name="mobile"]').val();
+        var area_codes = $('input[name="city-picker"]').data('codes');
+        var address = $('input[name="address"]').val();
+        
+        $('#area_codes').val(area_codes);
+
+        if(address == ''){
+            Centen_title('详细地址不能为空');
+        }
+
+        if(area_codes == ''){
+            Centen_title('所在地区不能为空');
+        }
+
+        if(!checkMobile(mobile)){
+            Centen_title('手机号码格式有误');
+        }
+
+         if(mobile == ''){
+            Centen_title('手机号码不为空');
+        }
+
+        if(consignee == ''){
+            Centen_title('联系人不能为空');
+        }
+
+        $.ajax({
+            type : "POST",
+            url:"{:U('chuangke/User/edit_address')}",//+tab,
+            dataType:'JSON',
+            data :$('#addressForm').serialize(),
+            success: function(data) {
+                if (data.status == 1) {
+                    Centen_title(data.msg);
+                    window.location.href = data.url;
+
+                } else {
+                    Centen_title(data.msg);
+                }
+            },
+            error:function(){
+                Centen_title('请稍后再试');
+            }
+        });
+    }  
+
+   $('#s11').click(function () {
+        if ($(this).is(":checked")) {
+            $(this).attr('value', 1);
+        } else {
+            $(this).attr('value', 0);
+
+        }
+    });
+
+    function Centen_title(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+    }
+</script>
+<script>
+  $(function () {
+    $("#city-picker").cityPicker();
+  });
+</script>
+</body>
+</html>
+

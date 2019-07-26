@@ -1,0 +1,9 @@
+<volist name="count_leader" id="c">
+    <div class="weui-grids" style="float: left; width: 33.3%">
+        <div class="weui-grid" style="text-align: center;width: 100%;" onclick="subordinate(this)" u_id = "{$c['user_id']}">
+            <div class="grid_avatar"><img src="{$c['head_pic']|default="__STATIC__/images/user68.jpg"}" alt=""><span class="have"></span></div>
+            <div class="grid_text" style="width: 100%; text-align: center;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">{$c['nickname']}</div>
+            <div class="grid_text" style="width: 100%; text-align: center; margin-top: 0">{$c['user_id']}</div>
+        </div>
+    </div>
+</volist>

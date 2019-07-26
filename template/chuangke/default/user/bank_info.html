@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 银行卡信息 </title>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">银行卡信息</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+    </div>
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">银行卡账号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="account" id="account" value="{$list['account']}"  type="text" placeholder="请输入银行卡账号">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">收款人</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="name" id="name" value="{$list['name']}" type="text" placeholder="请输入收款人姓名">
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">开户银行</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="bank_name" value="{$list['bank_name']}" type="text" id="bank" placeholder="请选择开户银行">
+                </div>
+                <div class="weui-cell__ft"></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">支行</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="branch_name" id="branch_name" value="{$list['branch_name']}" type="text" placeholder="请输入支行名称">
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area">
+            <a href="javascript:;" class="weui-btn weui-btn_primary but" data-id="{$list['id']}">保存</a>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script>
+    $("#bank").picker({
+        title: "请选择开户银行",
+        cols: [
+            {
+                textAlign: 'center',
+                values: ['中国银行', '中国建设银行', '中国工商银行', '中国农业银行', '中国邮政储蓄银行', '招商银行', '交通银行', '中国光大银行', '中国民生银行', '平安银行', '浦发银行', '中信银行', '兴业银行', '华夏银行', '广发银行']
+            }
+        ]
+    });
+
+    $('.but').click(function(){
+
+        var data = {};
+        data.account = $('#account').val();//账号      
+        data.name    = $('#name').val();   //收款人
+        data.bank_name= $('#bank').val();    //开户银行
+        data.branch_name= $('#branch_name').val();//支行
+        data.id = $(this).attr('data-id');
+
+        if(data.account == ''){
+            $.toast("请输入账号", "text");
+            return;
+        }
+        if(data.name == ''){
+            $.toast("请输入收款人", "text");
+            return;
+        }
+        if(data.bank_name == ''){
+            $.toast("请选择开户银行", "text");
+            return;
+        }
+        if(data.branch_name == ''){
+            $.toast("请输入支行名称", "text");
+            return;
+        }
+        
+         $.ajax({
+            type:'POST',
+            url:"/index.php?m=chuangke&c=User&a=edit_bank_info",
+            dataType:'JSON',
+            data:data,
+            success:function(data){
+                if(data.status == 1){
+                    $.toast(data.msg, "text");
+                    window.location.href = data.url;
+                }else{
+                    $.toast(data.msg, "text");
+                }
+            }
+        })
+        
+    });
+</script>
+</body>
+</html>

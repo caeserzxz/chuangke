@@ -1,0 +1,120 @@
+<include file="common/header" />
+<body>
+<style>
+    .starts img{
+        width: 16px;
+        height: 16px;
+    }
+    .loadMore {
+        overflow: hidden;
+        padding: 10px;
+        text-align: center;
+        font-size: 0.55rem;
+        color: #323232;
+    }
+</style>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">我的评论</div>
+            <div class="header-right"><a href="#"></a> </div>
+        </div>
+    </div>
+    <div class="page-bd vux-1px-t">
+        <if condition="empty($user)">
+            <div class="nodata">
+                <div class="text">
+                    <div class="fs11 text-muted" style="padding-top: 16px;text-align: center;">亲爱的~您没有评价过哦！</div>
+                </div>
+            </div>
+        </if>
+        <div class="comments" style="margin-top: -8px;">
+          <volist name="user" id="u">
+            <div class="weui-cells" style="padding-bottom: 0;">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <img  class="avatar" src="{$u['head_pic']}" alt="" height="45" width="45">
+                    </div>
+                    <div class="weui-cell__bd" style="margin-left: 10px;">
+                        <div class="text-muted">{$u['nickname']}</div>
+                        <div>
+                            <span class="starts" style="margin-left: 0;">
+                                {$u['star_images']}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft fs8 "><span class="text-muted">{$u['add_time']}</span></div>
+                </div>
+                <div  class="weui-cell">{$u['content']}</div>
+                <div class="weui-cell proimgs">
+                    <ul class="jd-slider-container gallery">
+                        <foreach name="u['img']" key="key" item="v2">
+                            <li class="weui-uploader__file" onClick="img_show('{$v2}')" style="background-image:url({$v2});list-style-type: none;"></li>
+                        </foreach>
+                    </ul>
+                </div>
+                <!-- <div class="weui-cell">
+                    <div class="yhzbox text-muted">店家回复：亲亲感谢您用心评价，我们会为了您的满意做一百分的努力，您的再次光临定会满意而归。</div>
+                </div> -->
+                <div class="vux-1px-t"></div>
+                <a href="{:U('Goods/goodsInfo',array('id'=>$u['goods_id']))}" >
+                    <div class="weui-cell pjpro">
+                        <div class="weui-cell__hd"><img src="{$u['original_img']}" alt="" height="46.88" width="46.88"></div>
+                        <div class="weui-cell__bd">
+                        <div class="fs9 text-muted">{$u['goods_name']}</div>
+                        <div class="fs9 text-muted">{$u['spec_key_name']}</div>
+                        <div class="text-muted"><span class="fs8">￥</span><b class="fs10">{$u['shop_price']}</b></div>
+                        </div>
+                    </div>
+                </a>
+                <div class="vux-1px-t"></div>
+                <!-- <div class="weui-cell">
+                    <div class="weui-cell__bd tr">
+                        <a href="###" class="weui-btn weui-btn_plain-primary weui-btn_mini">回复</a>
+                    </div>
+                </div> -->
+            </div>
+          </volist>
+        </div>
+        <div class="loadMore" style="display: none;">数据加载中...</div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/assets/jquery-weui/js/jquery-weui.min.js"></script>
+<script>
+    //加载更多商品
+    var page = 1;
+    function ajax_sourch_submit() {
+        $('.loadMore').css('display','block');
+        ++page;
+        $.ajax({
+            type: 'GET',
+            url: "/index.php?m=Mobile&c=User&is_ajax=1&a=zpevaluate_list&p=" + page,
+            success: function (data) {
+                if (data) {
+                    $(".comments").append(data);
+                    $(".loadMore").attr('display','none');
+                    loading = false;
+                }else{
+                    $(".loadMore").text("没有更多数据了哦~").attr('display','block');
+                }
+            }
+        })
+    }
+
+    var loading = false;  //状态标记
+    $('.page-bd').infinite().on("infinite", function() {
+        if (loading) return;
+        loading = true;
+        ajax_sourch_submit();           
+    });
+
+    function img_show(url){
+        weui.gallery(url);
+        $('.weui-gallery__del').remove();
+    }
+</script>
+</body>
+</html>

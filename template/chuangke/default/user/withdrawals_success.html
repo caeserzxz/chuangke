@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 提现结果 </title>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">提现结果</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+    </div>
+
+    <div class="page-bd" style="background-color: #FFFFFF;">
+        <!-- 页面内容-->
+        <div class="tx_result">
+            <img src="__STATIC__/assets/images/check.png" alt="">
+            <p class="fs30 mt10">提现申请成功，等待平台处理</p>
+            <p class="fs26 text-muted mt10">预计12小时内到账</p>
+        </div>
+        <div class="weui-cells border-none">
+            <div class="weui-cell border-none">
+                <div class="weui-cell__bd">
+                    <p class="text-muted">提现数量：</p>
+                    <p class="text-muted mt20">提现方式：</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <p class="text-gray">￥{$money}</p>
+                    <p class="text-gray mt20">{$bank_name}</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area mt80">
+            <a href="javascript:;" class="weui-btn weui-btn_primary">完成</a>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+</body>
+</html>

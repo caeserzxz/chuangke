@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 微信账户信息 </title>
+</head>
+<style>
+    .avatar{
+        float: left;
+        margin-right: 9px;
+        margin-bottom: 9px;
+        width: 79px;
+        height: 79px;
+        background: no-repeat center center;
+        background-size: cover;
+        background-size: cover;
+    }
+</style>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">微信账户信息</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+    </div>
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">微信账号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="account" id="account" value="{$list['account']}" type="text" placeholder="请输入微信账号">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">收款人</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="name" id="name" type="text" value="{$list['name']}" placeholder="请输入收款人姓名">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title fs28">
+            上传二维码
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderFiles">
+                                <!-- <li class="weui-uploader__file" style="background-image:url('__STATIC__/assets/images/tx.jpg')"></li> -->
+                            </ul>
+                            <form id="head_pic" method="post" enctype="multipart/form-data">
+                            <div class="weui-uploader__input-box">
+                                <if condition="$list['qrcode_url']">
+                                    <img src="{$list['qrcode_url']}" class="avatar"/>
+                                <else>
+                                    <img class="avatar"/>
+                                </if>
+                                <input id="uploaderInput" name="head_pic"  onchange="loadimg('head_pic')" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area">
+            <div class="weui-btn weui-btn_primary but" data-id="{$list['id']}">保存</div>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script src="__STATIC__/assets/js/layer/layer.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+
+    function loadimg(uploadfile){
+        
+            uploadImage(uploadfile)
+    }
+
+    function uploadImage(uploadfile) {
+        //判断是否有选择上传文件
+        var imgPath = $("[name='"+ uploadfile +"']").val();
+        
+        if (imgPath == "") {
+            $.toast("请选择上传图片！", "text");
+            return false;
+        }
+        //判断上传文件的后缀名
+        var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+        if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp') {
+            $.toast("请选择图片文件", "text");
+            return false;
+        }
+        //创建FormData对象
+        var data = new FormData();
+        //为FormData对象添加数据
+        $.each($("[name='"+ uploadfile +"']")[0].files, function (i, file) {
+            data.append('head_pic', file);
+        });
+        $.ajax({
+            type: "POST",
+            url: "{:U('User/uploadimage')}",
+            data: data,
+            dataType: 'json',
+            cache: false,
+            contentType: false, /*不可缺*/
+            processData: false, /*不可缺*/
+            success: function (data) {
+
+                if (data.status == "success") {
+                    // console.log(data.data.imgpath);
+                    $(".avatar").attr('src',data.data.imgpath);
+                    window.return_img = data.data.imgpath;
+                    // upload_avatar(data.data.imgpath)
+                } else {
+                    $.toast("上传失败，请检查网络后重试", "text");
+                    return false;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $.toast("上传失败，请检查网络后重试", "text");
+                return false;
+            }
+        });
+    }
+
+    $('.but').click(function(){
+
+        var data = {};
+
+        data.account = $('#account').val();      
+        data.name    = $('#name').val();
+        data.id = $(this).attr('data-id');
+        data.head_pic= window.return_img;
+        if(data.head_pic == undefined){
+           data.head_pic= $('img').attr('src');
+        }else{
+           data.head_pic= window.return_img; 
+        }
+        if(data.account == ''){
+            $.toast("账号不为空", "text");
+            return;
+        }
+        if(data.name == ''){
+            $.toast("收款人不为空", "text");
+            return;
+        }
+        if(data.head_pic == ''){
+            $.toast("二维码不为空", "text");
+            return;
+        }
+        
+         $.ajax({
+            type:'POST',
+            url:"/index.php?m=chuangke&c=User&a=edit_weixin_info",
+            dataType:'JSON',
+            data:data,
+            success:function(data){
+                if(data.status == 1){
+                    $.toast(data.msg, "text");
+                    window.location.href = data.url;
+                }else{
+                    $.toast(data.msg, "text");
+                }
+            }
+        })
+        
+    });
+
+
+
+
+</script>
+</body>
+</html>

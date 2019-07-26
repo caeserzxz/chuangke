@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 账户列表 </title>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">账户列表</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+    </div>
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+<!--         <foreach name='payment_list' item="list">
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <if $list.type eq 1>
+                        <div class="weui-cell__hd hd_img1 mr10">
+                            <img src="__STATIC__/assets/images/zhifubao.png" alt="">
+                        </div>
+                    <elseif $list.type eq 2>
+                        <div class="weui-cell__hd hd_img1 mr10">
+                            <img src="__STATIC__/assets/images/weixin.png" alt="">
+                        </div>
+                    <elseif $list.type eq 3>
+                        <div class="weui-cell__hd hd_img1 mr10">
+                            <img src="__STATIC__/assets/images/bankcard.png" alt="">
+                        </div>
+                    <else>
+                    </if>
+                    <div class="weui-cell__hd fs28 w150">
+                        {$list['pay_name']}
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p class="fs28">姓名：{$list['name']}</p>
+                        <p class="fs26 text-gray mt20">账号：{$list['account']}</p>
+                    </div>
+                    <if $list.type eq 1>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/alipay_info',array('id'=>$list['id']))}" class="text-main">编辑</a>
+                    </div>
+                    <elseif $list.type eq 2>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/weixin_info',array('id'=>$list['id']))}" class="text-main">编辑</a>
+                    </div>
+                    <elseif $list.type eq 3>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/bank_info',array('id'=>$list['id']))}" class="text-main">编辑</a>
+                    </div>
+                    </if>
+                    
+                </div>
+            </div>
+        </foreach> -->
+        <if $payment_alipay.id gt 0>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd hd_img1 mr10">
+                        <img src="__STATIC__/assets/images/zhifubao.png" alt="">
+                    </div>
+                    <div class="weui-cell__hd fs28 w150">
+                        支付宝
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p class="fs28">姓名：{$payment_alipay['name']}</p>
+                        <p class="fs26 text-gray mt20">账号：{$payment_alipay['account']}</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/alipay_info',array('id'=>$payment_alipay['id']))}" class="text-main">编辑</a>
+                    </div>
+                </div>
+            </div>
+        <else>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd hd_img1 mr10">
+                        <img src="__STATIC__/assets/images/zhifubao.png" alt="">
+                    </div>
+                    <div class="weui-cell__hd fs28 w150">
+                        支付宝
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p class="fs28">姓名：***</p>
+                        <p class="fs26 text-gray mt20">账号：**************</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/alipay_info')}" class="text-main">添加</a>
+                    </div>
+                </div>
+            </div>
+        </if>
+
+        <if $payment_weixin.id gt 0>
+            <div class="weui-cells">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd hd_img1 mr10">
+                    <img src="__STATIC__/assets/images/weixin.png" alt="">
+                </div>
+                <div class="weui-cell__hd fs28 w150">
+                    微信
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="fs28">姓名：{$payment_weixin['name']}</p>
+                    <p class="fs26 text-gray mt20">账号：{$payment_weixin['account']}</</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <a href="{:U('chuangke/User/weixin_info',array('id'=>$payment_weixin['id']))}" class="text-main">编辑</a>
+                </div>
+            </div>
+            </div>
+        <else>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd hd_img1 mr10">
+                        <img src="__STATIC__/assets/images/weixin.png" alt="">
+                    </div>
+                    <div class="weui-cell__hd fs28 w150">
+                        微信
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p class="fs28">姓名：***</p>
+                        <p class="fs26 text-gray mt20">账号：**************</</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/weixin_info')}" class="text-main">添加</a>
+                    </div>
+                </div>
+            </div>
+        </if>
+
+        <if $payment_bank.id gt 0>
+              <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd hd_img1 mr10">
+                        <img src="__STATIC__/assets/images/bankcard.png" alt="">
+                    </div>
+                    <div class="weui-cell__hd fs28 w150">
+                        银行卡
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p class="fs28">姓名：{$payment_bank['name']}</p>
+                        <p class="fs26 text-gray mt20">账号：{$payment_bank['account']}</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/bank_info',array('id'=>$payment_bank['id']))}" class="text-main">编辑</a>
+                    </div>
+                </div>
+            </div>
+        <else>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__hd hd_img1 mr10">
+                        <img src="__STATIC__/assets/images/bankcard.png" alt="">
+                    </div>
+                    <div class="weui-cell__hd fs28 w150">
+                        银行卡
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p class="fs28">姓名：***</p>
+                        <p class="fs26 text-gray mt20">账号：**************</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="{:U('chuangke/User/bank_info')}" class="text-main">添加</a>
+                    </div>
+                </div>
+            </div>
+        </if>
+
+        <div class="weui-cells__title notice">
+            <img src="__STATIC__/assets/images/notice.png" alt="">
+            <span>信息一经填写不可修改，如要修改，请联系平台</span>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+</body>
+</html>

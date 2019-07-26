@@ -1,0 +1,256 @@
+.fw500 {
+  font-weight: 500;
+}
+
+.fw600 {
+  font-weight: 600;
+}
+
+.team_cells {
+  box-shadow: 0.013333rem 0.026667rem 0.066667rem 0 rgba(4, 0, 0, 0.1);
+  border-radius: 0.1rem;
+  margin: 0.186667rem;
+}
+
+.hd_img img {
+  width: 0.56rem;
+  height: 0.56rem;
+  box-shadow: 0 0.04rem 0.033333rem 0 rgba(3, 0, 0, 0.15);
+  border: solid 0.026667rem #ffffff;
+  border-radius: 50%;
+}
+
+.mr10 {
+  margin-right: 0.066667rem;
+}
+
+.hd_img1 img {
+  width: 0.326667rem;
+  height: 0.326667rem;
+}
+
+.mr30 {
+  margin-right: 0.2rem;
+}
+
+.w150 {
+  width: 1rem;
+}
+
+.notice img {
+  width: 0.2rem;
+  height: 0.2rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notice span {
+  font-size: 0.16rem;
+  color: #9c9c9c;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.income_table {
+  background-color: #ffffff;
+}
+
+.income_table table {
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.income_table th,
+.income_table td {
+  border-bottom: 1px solid #f1f1f1;
+  height: 0.666667rem;
+  font-size: 0.173333rem;
+  color: #333333;
+}
+
+.tx_input {
+  margin: 0.533333rem 0;
+}
+
+.tx_input input {
+  border: none;
+  outline: none;
+}
+
+.tx_result {
+  padding: 0.666667rem 0 0.4rem 0;
+  border-bottom: 0.006667rem solid #f1f1f1;
+  text-align: center;
+  margin: 0 0.453333rem;
+}
+
+.tx_result img {
+  width: 0.72rem;
+  height: 0.72rem;
+}
+
+.mt80 {
+  margin-top: 0.533333rem;
+}
+
+.eye_type {
+  width: 0.333333rem;
+  height: 0.333333rem;
+}
+
+.share {
+  background: url("../images/bg01.jpg") no-repeat;
+  background-size: cover;
+}
+
+.share h1 {
+  font-size: 0.533333rem;
+  color: #fb9841;
+  margin-top: 0.553333rem;
+  text-align: center;
+}
+
+.share h3 {
+  font-size: 0.26rem;
+  color: #fb9841;
+  text-align: center;
+}
+
+.share_box {
+  background: url("../images/bg02.png") no-repeat;
+  background-size: 100%;
+  width: 4.333333rem;
+  height: 5.206667rem;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 0.413333rem;
+  padding: 0.313333rem 0;
+}
+
+.fs60 {
+  font-size: 0.4rem;
+}
+
+.fs40 {
+  font-size: 0.266667rem;
+}
+
+.share_code {
+  margin-top: 0.466667rem;
+  border-radius: 0.106667rem;
+  display: inline-block;
+  border: solid 0.006667rem #e7e7e7;
+}
+
+.share_code img {
+  width: 1.866667rem;
+  height: 1.866667rem;
+  padding: 0.2rem;
+  display: block;
+}
+
+.mt50 {
+  margin-top: 0.333333rem;
+}
+
+.goods_img {
+  width: 0.88rem;
+  height: 0.88rem;
+  border: solid 0.006667rem #f1f1f1;
+  display: block;
+}
+
+.order_flex {
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+
+.submit_btn {
+  background-color: #fb9841;
+  font-size: 0.186667rem;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+}
+
+.hd_img2 img {
+  width: 0.753333rem;
+  height: 0.766667rem;
+  border: solid 0.02rem #ffffff;
+  border-radius: 50%;
+}
+
+.set_img {
+  position: absolute;
+  top: 0.266667rem;
+  right: 0.18rem;
+}
+
+.set_img img {
+  width: 0.193333rem;
+  height: 0.193333rem;
+}
+
+.grid-flex {
+  margin: 0.1rem 0.1rem;
+  text-align: center;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+.card_box {
+  margin: 0.1rem;
+  background-color: #FFFFFF;
+  border-radius: 0.1rem;
+  padding: 0.333333rem 0;
+}
+
+.card_box img {
+  width: 0.633333rem;
+  height: 0.633333rem;
+}
+
+.mysytopbg {
+  padding-top: 1.066667rem;
+  background-image: url("../images/bg03.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.my_sy_card {
+  padding: 0 0.2rem;
+}
+
+.my_sy_card h3 {
+  font-size: 0.32rem;
+  color: #fff;
+}
+
+.my_sy_card .weui-cells {
+  background-color: #ffffff;
+  border-radius: 0.1rem;
+}
+
+.my_sy_card .weui-cells:before {
+  display: none;
+}
+
+.icon_eys_open {
+  display: inline-block;
+  width: 0.333333rem;
+  height: 0.333333rem;
+  background-repeat: no-repeat;
+  background-image: url("../images/icon_eyeopen.png");
+  background-size: 100% 100%;
+  margin-left: 0.133333rem;
+}
+
+.icon_eys_close {
+  background-image: url("../images/icon_eyeclose.png");
+}
+
+.white_btn {
+  background: #ffffff!important;
+  border: solid 0.013333rem #ededed;
+  color: #333333;
+}

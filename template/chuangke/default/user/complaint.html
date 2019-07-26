@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+<script src="__STATIC__/assets/js/layer/mobile/layer.js"></script>
+<script src="__STATIC__/assets3/js/page.js"></script>
+
+    <title> 提交投诉 </title>
+</head>
+<style>
+    .avatar{
+        float: left;
+        margin-right: 9px;
+        margin-bottom: 9px;
+        width: 79px;
+        height: 79px;
+        background: no-repeat center center;
+        background-size: cover;
+        background-size: cover;
+    }
+    .remove:before{
+        display: none !important;
+    }
+    .remove:after{
+        display: none !important;
+    }
+
+</style>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">提交投诉</div>
+    <div class="header-right">
+        <div class="right_menu">
+            
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells mt0">
+            <div class="weui-cells__title bor-1px-b pt30 pb30 fs28" style="margin: 0px;">
+                <span>请填写投诉内容</span>
+            </div>
+            <div class="weui-cells__tips pd0">
+                <div class="weui-cell" style="align-items: baseline;">
+                    <div class="weui-cell__hd mr30">
+                        <span style="color: #333333;" class="fs26">投诉内容</span>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" name="content" id="content" placeholder="请填写详细的投诉内容，最少填写30个字以上" rows="6"></textarea>
+                        <div class="weui-textarea-counter"><span></span></div>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd mr30">
+                        <span style="color: #333333;" class="fs26">上传截图</span>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles">
+
+                            <!-- <li class="weui-uploader__file" style="background-image:url(__STATIC__/assets3/images/icon_3.png)"> -->
+                            </li>
+                        </ul>
+                        
+                        
+                            
+                        <div class="weui-uploader__input-box border-radius10 " style="border-style: solid;">
+                            <form id="head_pic" method="post" enctype="multipart/form-data">
+                            <img class="avatar"/> 
+                            <input id="uploaderInput"  name="head_pic"  onchange="loadimg('head_pic')" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                             </form>
+                        </div>
+                       
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="pd30" style="color: #575757;">请如实填写投诉内容，我们核实后第一时间对该会员进行处理，感谢您对我们的支持！</p>
+        <div class="weui-btn-area">
+            <a href="javascript:;" class="weui-btn weui-btn_primary bg-danger but">提交投诉</a>
+        </div>
+        <div class="fixed_style1">
+            <a href="{:U('chuangke/user/index')}" class="weui-btn weui-btn_plain-primary weui-btn_class1">首页</a>
+        </div>
+
+    </div>
+    <script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+<script>
+
+    function loadimg(uploadfile){
+
+            uploadImage(uploadfile)
+
+    }
+
+    function uploadImage(uploadfile) {
+        //判断是否有选择上传文件
+        var imgPath = $("[name='"+ uploadfile +"']").val();
+        
+        if (imgPath == "") {
+            showSkin("请选择上传图片！");
+            return false;
+        }
+        //判断上传文件的后缀名
+        var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+        if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp') {
+            showSkin("请选择图片文件");
+            return false;
+        }
+        //创建FormData对象
+        var data = new FormData();
+        //为FormData对象添加数据
+        $.each($("[name='"+ uploadfile +"']")[0].files, function (i, file) {
+            data.append('head_pic', file);
+        });
+        $.ajax({
+            type: "POST",
+            url: "{:U('User/uploadimage')}",
+            data: data,
+            dataType: 'json',
+            cache: false,
+            contentType: false, /*不可缺*/
+            processData: false, /*不可缺*/
+            success: function (data) {
+
+                if (data.status == "success") {
+                    // console.log(data.data.imgpath);
+                    $(".avatar").attr('src',data.data.imgpath);
+                    window.return_img = data.data.imgpath;
+                    $('.weui-uploader__input-box').addClass('remove');
+                    // upload_avatar(data.data.imgpath)
+                } else {
+                    showSkin("上传失败，请检查网络后重试");
+                    return false;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                showSkin("上传失败，请检查网络后重试");
+                return false;
+            }
+        });
+    }
+
+
+    $('.but').click(function(){
+
+        var content = $('#content').val();      
+        var head_pic= window.return_img;
+    
+        if(content == ''){
+            showSkin("内容必填");
+            return;
+        }
+        if(head_pic == undefined){
+            showSkin("请上传图片");
+            return;
+        }
+        
+         $.ajax({
+            type:'POST',
+            url:"/index.php?m=chuangke&c=User&a=complaint",
+            dataType:'JSON',
+            data:{content:content,head_pic:head_pic},
+            success:function(data){
+                if(data.status == 1){
+                    showSkin(data.msg);
+                    window.location.href = data.url;
+                }else{
+                    showSkin(data.msg);
+                    
+                }
+            }
+        })
+        
+    });  
+
+    function showSkin(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+    }
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

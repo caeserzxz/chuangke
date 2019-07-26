@@ -1,0 +1,73 @@
+<include file="public/layout" />
+<style>
+    td{height:40px;line-height:40px; padding-left:20px;}
+    .span_1{
+        float:left;
+        margin-left:0px;
+        height:130px;
+        line-height:130px;
+    }
+    .span_1 ul{list-style:none;padding:0px;}
+    .span_1 ul li{
+        border:1px solid #CCC;
+        height:40px;
+        padding:0px 10px;
+        margin-left:-1px;
+        margin-top:-1px;
+        line-height:40px;
+    }
+    html{
+        overflow: hidden;
+    }
+</style>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+
+
+    <form class="form-horizontal" id="user_form" method="post">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="email"><em>上级用户ID</em></label>
+                </dt>
+                <dd class="opt">
+
+                    <input type="text" name="first_leader" class="first_leader" value="{$list['first_leader']}">
+
+                    <span class="err"></span>
+                    <p class="notic">请填写更改的上级ID</p>
+                </dd>
+            </dl>
+            <div class="bot"><a href="JavaScript:void(0);" onclick="change_leader();" data-url="{:U('system/user/change_leader',array('id'=>$list['user_id']))}" class="ncap-btn-big ncap-btn-green">确认提交</a></div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function change_leader(obj){
+        var url = $(obj).attr('data-url')
+        var first_leader = $('.first_leader').val();
+        console.log(first_leader);
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {first_leader:first_leader},
+            dataType: 'json',
+            success: function (data) {
+                layer.closeAll();
+                if (data.status == 1) {
+                    layer.alert(data.message, {icon: 1});
+                    window.setTimeout(function(){
+                        parent.location.reload();
+                    },1000);
+                } else {
+                    layer.alert(data.message, {icon: 2});
+                    window.setTimeout(function(){
+                        parent.location.reload();
+                    },1000);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

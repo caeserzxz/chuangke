@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+  <title> 我的收入 </title>
+  <style>
+    .page-hd {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="page-hd">
+        <div class="header bor-1px-b">
+            <div class="header-left">
+                <a href="{:U('chuangke/user/index')}" class="left-arrow"></a>
+            </div>
+            <div class="header-title">我的收入</div>
+            <div class="header-right">
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+  <div class="page-bd">
+    <!-- 页面内容-->
+    <div class="mysytopbg">
+      <div class="my_sy_card">
+        <h3>我的收益</h3>
+        <div class="weui-cells">
+          <div class="weui-cell weui-cell_access">
+            <div class="weui-cell__bd">
+              <div><span class="fs60 show_jg">{$user['user_money']}</span><span style="display: none;" class="fs60 close_jg">****</span><i class="icon_eys_open"></i></div>
+              <div class="fs26 text-gray">当前余额(元)</div>
+            </div>
+            <div class="weui-cell__ft"></div>
+          </div>
+          <div class="weui-cell border-none">
+            <div class="weui-cell__bd">
+              <div class="fs40">{$user['distribut_money']}</div>
+              <div class="fs26 text-gray">总收入(元)</div>
+            </div>
+            <div class="weui-cell__bd">
+              <div class="fs40"><if condition="$pent_price['user_money']">{$pent_price['user_money']}<else>0.00</if></div>
+              <div class="fs26 text-gray">总支出(元)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="weui-btn-area">
+        <a href="{:U('chuangke/user/income_log',array('type'=>'plus'))}" class="weui-btn weui-btn_primary">查看明细</a>
+        <a href="{:U('chuangke/user/withdrawals')}" style="color:#333333;" class="weui-btn weui-btn_primary white_btn mt50">提现</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script>
+  $(function () {
+    $('.icon_eys_open').on('click', function () {
+      if($(this).hasClass('icon_eys_close')){
+        $(this).removeClass('icon_eys_close');
+        $('.close_jg').hide();
+        $('.show_jg').show();
+      } else {
+        $(this).addClass('icon_eys_close');
+        $('.close_jg').show();
+        $('.show_jg').hide();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

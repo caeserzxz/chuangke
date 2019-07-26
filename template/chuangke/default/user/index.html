@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+<script src="__STATIC__/assets3/js/layer/mobile/layer.js"></script>
+<script src="__STATIC__/assets3/js/page.js"></script>
+
+    <title> {$title_name} </title>
+    <style>
+        .weui-grid {
+            width: 2.193333rem;
+            height: 1.7rem;
+            background-color: #ffffff;
+            border-radius: 0.1rem;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+        }
+        .swiper-container {
+            height: .3rem!important;
+            line-height: .31rem;
+        }
+        .none {
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">首页</div>
+    <div class="header-right">
+        <div class="right_menu">
+            
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells mt0" style="background-color: transparent;">
+            <div class="weui-cell home-hd">
+                <div class="weui-cell__bd">
+                    <p class="mt10">ID：<span>{$user['user_id']}</span></p>
+                    <p class="mt5">等级：<span>{$level_name}</span></p>
+                    <p class="mt5">昵称：<span>{$user['nickname']}</span></p>
+                    <p class="weui-flex mt5" style="position: relative;">推荐码：<span>{$user_code}</span>
+                        <!--<a href="javascript:;" class="weui-btn weui-btn_plain-default fs24 ml15 mr20 copyBtn" data-clipboard-text="" onclick="copyUrl()">复制</a>-->
+                        <img src="__STATIC__/assets3/images/xsm.gif" alt="" class="xsm-style">
+                    </p>
+                </div>
+                <div class="weui-cell__ft" style="color: #3d3d3d;">
+                    <a href="{:U('chuangke/user/setsys')}" class="weui-flex mb10" style="align-items: center;"><i class="icon_set"></i><span class="ml5">设置</span></a>
+                    <a href="{:U('chuangke/user/help',array('cat_id'=>1))}"  class="none weui-flex" style="align-items: center;"><i class="icon_bz"></i><span class="ml5">帮助</span></a>
+                </div>
+            </div>
+            <div class="weui-cell mt20 bg-fff">
+                <div class="weui-cell__hd" style="min-width: .6rem;">
+                    <span>公告：</span>
+                </div>
+                <div class="weui-cell__bd" style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <volist name="notice" id="vo">
+                                <div class="swiper-slide">
+                                    <a href="{:U('chuangke/user/notice_detail',array('id'=>$vo['article_id']))}" class="w100" style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">{$vo.title}</a>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="weui-grids pd20" style="background-color: transparent;display: flex;flex-wrap: wrap;justify-content: space-around;">
+
+                <a href="javascript:;" onclick="is_share()" class="weui-grid js_grid">
+                    <div class="weui-grid__icon img115">
+                        <img src="__STATIC__/assets3/images/icon_5.png" alt="">
+                    </div>
+                    <p class="weui-grid__label fs30 mt0">
+                        帮助注册
+                    </p>
+                </a>
+
+                <a href="{:U('chuangke/CkUser/check_level')}" class="weui-grid js_grid mb30">
+                    <div class="weui-grid__icon img115">
+                        <img src="__STATIC__/assets3/images/icon_6.png" alt="">
+                    </div>
+                    <p class="weui-grid__label fs30 mt0">
+                        审核升级
+                    </p>
+                </a>
+
+
+                <empty name="apply">
+                    <a href="{:U('chuangke/CkUser/applylevel')}" class="weui-grid js_grid mb30">
+                        <div class="weui-grid__icon img115">
+                            <img src="__STATIC__/assets3/images/icon_7.png" alt="">
+                        </div>
+                        <p class="weui-grid__label fs30 mt0">
+                            申请升级
+                        </p>
+                    </a>
+                    <else/>
+                    <a href="{:U('chuangke/CkUser/applying',array('id'=>$apply['id']))}" class="weui-grid js_grid mb30">
+                        <div class="weui-grid__icon img115">
+                            <img src="__STATIC__/assets3/images/icon_7.png" alt="">
+                        </div>
+                        <p class="weui-grid__label fs30 mt0">
+                            升级审核中
+                        </p>
+                    </a>
+                </empty>
+
+                <a href="{:U('chuangke/user/team_list')}" class="weui-grid js_grid">
+                    <div class="weui-grid__icon img115">
+                        <img src="__STATIC__/assets3/images/icon_8.png" alt="">
+                    </div>
+                    <p class="weui-grid__label fs30 mt0">
+                        我的团队
+                    </p>
+                </a>
+
+                <a href="javascript:;" onclick="showSkin('正在开发中')" class="none weui-grid js_grid">
+                    <div class="weui-grid__icon img115">
+                        <img src="__STATIC__/assets3/images/icon_9.png" alt="">
+                    </div>
+                    <p class="weui-grid__label fs30 mt0">
+                        平台商城
+                    </p>
+                </a>
+                <a href="javascript:;" onclick="showSkin('正在开发中')" class="none weui-grid js_grid">
+                    <div class="weui-grid__icon img115">
+                        <img src="__STATIC__/assets3/images/icon_10.png" alt="">
+                    </div>
+                    <p class="weui-grid__label fs30 mt0">
+                        会员商城
+                    </p>
+                </a>
+            </div>
+        </div>
+        <div class="weui-cells mt0 mb30">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <span>客服</span>
+                </div>
+                <div class="weui-cell__ft">
+                    <span style="color: #696969;">{$kefu_mobile}</span>
+                </div>
+            </div>
+            <a href="{:U('chuangke/user/notice_list')}" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <span>公告</span>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+            <a href="{:U('chuangke/user/complaint')}" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <span>我要投诉</span>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+            <a href="{:U('chuangke/user/logout')}" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <span>退出登录</span>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>..
+<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets3/js/clipboard.min.js"></script>
+<script src="__STATIC__/assets3/js/layer/layer.js"></script>
+<script type='text/javascript' src='__STATIC__/assets3/js/swiper.js' charset='utf-8'></script>
+<script>
+    $(function () {
+
+        $(".swiper-container").swiper({
+            autoplay: 2000,
+            loop:true,
+            direction : 'vertical'
+        });
+
+        // 切换密码框是否可见
+        $(".input_password").on('click', '.eye', function () {
+            var $this = $(this);
+            if ($this.hasClass('close')) {
+                $this.removeClass('close');
+                $this.parents('.input_password').find('input').attr('type', 'password');
+            } else {
+                $this.addClass('close');
+                $this.parents('.input_password').find('input').attr('type', 'text');
+            }
+        });
+    });
+
+function is_share(){
+    var level = {$user['level']};
+    if(level == 1){
+        showSkin("普通用户没有帮助注册权限");
+        return false;
+    }
+    var url = "{:U('chuangke/user/assist_reg')}";
+  
+    window.location.href = url;
+  }
+
+
+//复制链接
+   function  copyUrl(){
+
+        var user_code = "{$user_code}";
+        $('.copyBtn').attr('data-clipboard-text',user_code)
+        new ClipboardJS('.copyBtn');
+        // layer.open({content: "复制成功", time: 2});
+        showSkin("复制成功");
+   }
+
+  function showSkin(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 2000 //2秒后自动关闭
+          });
+    }
+</script>
+</body>
+</html>

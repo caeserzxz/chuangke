@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+<script src="__STATIC__/assets/js/layer/mobile/layer.js"></script>
+<script src="__STATIC__/assets3/js/page.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+
+    <title> 登录 </title>
+
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">会员登录</div>
+    <div class="header-right">
+        <div class="right_menu">
+            
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="page-bd bg-fff">
+        <!-- 页面内容-->
+        <div class="weui-cells pd-15 border-after_none border-before_none mt50" style="background: none;">
+            <div class="weui-cell border-radius10 pd25" style="border: solid 1px #f1f1f1;">
+                <div class="weui-cell__hd">
+                    <img src="__STATIC__/assets3/images/icon_3.png" alt="" class="img-40">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input phone_input" name="username" id="username" value="" placeholder="输入手机号码" type="tel">
+                </div>
+            </div>
+            <div class="weui-cell mt20 border-radius10 pd25" style="border: solid 1px #f1f1f1;">
+                <div class="weui-cell__hd">
+                    <img src="__STATIC__/assets3/images/icon_4.png" alt="" class="img-40">
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input phone_input" type="password" name="password" id="password" value="" placeholder="输入密码" type="password">
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area md45">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="submitverify()">登录</a>
+        </div>
+        <div class="weui-cell border-none pt0 pr50" style="margin-top: -5px;">
+            <div class="weui-cell__ft" style="display: block;width: 100%;">
+                <a href="{:U('Mobile/User/forget_pwd')}" class="fs26 tr" style="color: #757c98;">忘记密码？</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets3/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script>
+    $(function () {
+        // 切换密码框是否可见
+        $(".input_password").on('click', '.eye', function () {
+            var $this = $(this);
+            if ($this.hasClass('close')) {
+                $this.removeClass('close');
+                $this.parents('.input_password').find('input').attr('type', 'password');
+            } else {
+                $this.addClass('close');
+                $this.parents('.input_password').find('input').attr('type', 'text');
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+        $(function () {
+            $('.eye').on('click', function (e) {
+                $(this).toggleClass('close');
+                if ($('#password').attr('type') == 'password') {
+                    $('#password').attr('type', 'text');
+                } else {
+                    $('#password').attr('type', 'password');
+                }
+
+            });
+        });
+        function verify(){
+            $('#verify_code_img').attr('src','/index.php?m=chuangke&c=User&a=verify&r='+Math.random());
+        }
+        //复选框状态
+        function remember(obj){
+            var che= $(obj).attr("class");
+            if(che == 'che check_t'){
+                $("#autologin").prop('checked',false);
+            }else{
+                $("#autologin").prop('checked',true);
+            }
+        }
+        function submitverify() {
+            var username = $.trim($('#username').val());
+            var password = $.trim($('#password').val());
+            var remember = $('#remember').val();
+            var referurl = $('#referurl').val();
+            var verify_code = $.trim($('#verify_code').val());
+            if(username == ''){
+                showErrorMsg('手机号码不能为空!');
+                return false;
+            }
+            if(!checkMobile(username) && !checkEmail(username)){
+                showErrorMsg('手机号码格式不匹配!');
+                return false;
+            }
+            if(password == ''){
+                showErrorMsg('密码不能为空!');
+                return false;
+            }
+            var codeExist = $('#verify_code').length;
+            if (codeExist && verify_code == ''){
+                showErrorMsg('验证码不能为空!');
+                return false;
+            }
+            var data = {username:username,password:password,referurl:referurl};
+            if (codeExist) {
+                data.verify_code = verify_code;
+            }
+            $.ajax({
+                type: 'post',
+                url: '/index.php?m=chuangke&c=User&a=do_login&t=' + Math.random(),
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 1) {
+                        var url = data.url.toLowerCase();
+                        if (url.indexOf('user') != false && url.indexOf('login') != false || url == '') {
+                            showErrorMsg('登录成功');
+                            window.location.href = '/index.php/chuangke/user/index';
+                        } else {
+                            showErrorMsg('登录成功');
+                            window.location.href = '/index.php/chuangke/user/index';
+                        }
+                    } else {
+                        showErrorMsg(data.msg);
+                        /*if (codeExist) {
+                            verify();
+                         } else {
+                            location.reload();
+                         }*/
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    showErrorMsg('网络异常，请稍后重试');
+                }
+            })
+        }
+
+    function showErrorMsg(content){
+        layer.open({
+            content: content
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+          });
+    }
+    </script>
+</body>
+</html>

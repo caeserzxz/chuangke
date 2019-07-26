@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 提现 </title>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">提现</div>
+    <div class="header-right">
+        <a href="#"><a href="{:U('chuangke/user/user_account')}">收款方式</a></a>
+    </div>
+</div>
+    </div>
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd w150">
+                    <p class="fs28 fw600">提现方式</p>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input tr text-gray" type="text" id='picker' placeholder="请选择提现方式"/>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </div>
+        </div>
+<!--         <div class="weui-cells">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <p class="fs28 fw600">提现方式</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <p class="text-gray">支付宝</p>
+                </div>
+            </div>
+        </div> -->
+        <div class="weui-cells">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <p class="fs28 fw600">提现金额</p>
+                    <div class="tx_input">
+                        <input type="number" name="money" id="money" value="" placeholder="请输入提现金额">
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    可提现数量：￥{$user_money}
+                </div>
+                <div class="weui-cell__ft">
+                    <p class="text-main fs28 quanbu" data-money="{$user_money}">全部提现</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="checkSubmit()">确认提现</a>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+ 
+    $("#picker").select({
+      title: "提现方式",
+      items: [
+        {
+            title:'支付宝',
+            value:'2',
+        },
+        {
+            title:'微信',
+            value:'1',
+        },
+        {
+            title:'银行卡',
+            value:'3',
+        },
+        ]
+    });
+</script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+
+ $('.quanbu').click(function(){
+
+    var user_money = $(this).attr('data-money');
+    $("#money").val(user_money);
+
+ });
+
+     /**
+     * 提交表单
+     * */
+    function checkSubmit() {
+         
+        var money = $('#money').val();
+        var usermoney = parseFloat({$user_money});  //用户余额
+        var type = $('#picker').attr('data-values');
+        
+        if (type === undefined) {
+            $.toast("请选择提现方式", "text");
+            return false;
+        }
+        
+        if (money === '') {
+            $.toast("请输入金额", "text");
+            return false;
+        }
+        if (money > usermoney) {
+            $.toast("提现金额大于您的账户余额", "text");
+            return false;
+        }
+   
+        $.ajax({
+            type: "post",
+            url: "{:U('chuangke/User/withdrawals')}",
+            dataType: 'json',
+            data: {money:money,usermoney:usermoney,type:type},
+            success: function (data) {
+            
+                if (data.status == 1) {
+                    $.toast(data.msg, "text");
+                    window.location.href = data.url;
+                } else if(data.status == 0){
+                    $.toast(data.msg, "text");
+                    window.location.reload();
+                   
+                }
+            }
+        });
+    }
+
+    // function showErrorMsg(msg) {
+    //     layer.open({content: msg, time: 3});
+    // }
+</script>
+</body>
+</html>

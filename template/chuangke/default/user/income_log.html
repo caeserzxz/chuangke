@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__STATIC__/assets/css/zpui.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/all.css"/>
+<script src="__STATIC__/assets/js/page.js"></script>
+
+    <title> 收入明细 </title>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header bor-1px-b">
+            <div class="header-left">
+                <a href="{:U('chuangke/User/income')}" class="left-arrow"></a>
+            </div>
+            <div class="header-title">收入明细</div>
+            <div class="header-right">
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <a href="{:U('User/income_log',array('type'=>'plus'))}" class="weui-navbar__item <if condition="$type eq 'plus'">weui-bar__item--on</if>">
+                    收入
+                </a>
+                <a href="{:U('User/income_log',array('type'=>'minus'))}" class="weui-navbar__item <if condition="$type eq 'minus'">weui-bar__item--on</if>" >
+                    支出
+                </a>
+            </div>
+            <div class="weui-tab__bd">
+                <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    <div class="weui-cells">
+                        <foreach name="account_log" item="v">
+                            <div class="weui-cell">
+                                <div class="weui-cell__bd">
+                                    <p class="fs26">描述:{$v[desc]}</p>
+                                    <p class="fs24 text-muted mt10">{:date('Y-m-d H:i:s',$v[change_time])}</p>
+                                </div>
+                                <div class="weui-cell__ft">
+                                    <p class="fs30 text-default fw600">{$v[user_money]}</p>
+                                </div>
+                            </div>
+                      </foreach>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets/js/lib/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+</body>
+</html>

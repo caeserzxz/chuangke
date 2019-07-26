@@ -1,0 +1,252 @@
+<layout name="common/layout_nav" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/assets/weui/weui.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/assets/css/comm.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/assets/css/fenxiao.css">
+<script type="text/javascript">
+    $(document).ready(function () {
+        get_dist(this);
+    })
+</script>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left"><a href="javascript:history.go(-1)" class="left-arrow"></a></div>
+            <div class="header-title">我的分销</div>
+            <div class="header-right"><a href="#"></a> </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <div class="weui-cells vux-1px-t tc mt0">
+            <div class="topbox">
+                <div><img class="avatar" src="{$user['head_pic']|default='__STATIC__/images/user68.jpg'}"></div>
+                <div class="fs12 mt5">{$user['nickname']}</div>
+            </div>
+            <div class="weui-cell after-left__0" style="padding-left:0; padding-right:0;">
+                <div class="weui-cell__bd">
+                    <div class="weui-flex cell-flex">
+                        <a href="javascript:void(0);" class="weui-flex__item vux-1px-r">
+                            <div><b class="fs13">{$commission}</b></div>
+                            <div class="fs8 text-muted">佣金</div>
+                        </a>
+                        <a href="javascript:void(0);" class="weui-flex__item vux-1px-r">
+                            <div><b class="fs13">{$user['pay_points']}</b></div>
+                            <div class="fs8 text-muted">积分</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells mb10">
+            <div class="weui-cell fansbox">
+                <div class="weui-cell__hd">
+                    <ul>
+                        <li class="active" href="#tab1" onclick="get_dist(this)" data-click="0" data-tab="1"><div>所有粉丝<p>{$user['count_leader']}人</p></div></li>
+                        <li href="#tab2" onclick="get_dist(this)" data-click="0" data-tab="2"><div>第一层</div><p>{$user['first_leader']}人</p></li>
+                        <li href="#tab3" onclick="get_dist(this)" data-click="0" data-tab="3"><div>第二层</div><p>{$user['second_leader']}人</p></li>
+                        <li href="#tab4" onclick="get_dist(this)" data-click="0" data-tab="4"><div>第三层</div><p>{$user['third_leader']}人</p></li>
+                    </ul>
+                </div>
+                <div class="weui-cell__bd">
+                    <div class="searchbox">
+                        <i class="search_icon" onclick="search(this)" data-tab="6"></i>
+                        <input id='account' value="" type="text" placeholder="可输入ID或名称查询">
+                    </div>
+                    <div id="tab" class="search"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function search(obj) {
+        var account = $("#account").val();
+        if (account == '') {
+            layer.open({content: '输入用户id', time: 0.5});
+            return;
+        }
+        var dom = $(obj);
+        var data = {
+            type: 1, account: account
+        };
+        // console.log(account)
+        $.ajax({
+            url: "{:U('Mobile/user/ajax_count_leader')}",
+            type: 'post',
+            data: data,
+            waitting: false,
+            success: function (data) {
+                try {
+                    if (data != "") {
+                        $("#tab").html(data);
+                    } else {
+                        $("#tab").html('<div style="text-align:center">此用户不是您的下级哦~</div>');
+                    }
+                } catch (e) {
+                    //load_alert.alertmessage('网络繁忙，请稍后重试')
+                }
+            },
+            error: function (xhr, errorType, error) {
+                //load_alert.alertmessage('网络繁忙，请稍后重试')
+            }
+        });
+    }
+</script>
+<div class="popup" id="pop1" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="popuo-conent">
+        <div class="weui-panel">
+            <div class="weui-panel__hd tc"><span class="son_id">ID 651423 </span><span class="close_popup"></span></div>
+            <div class="weui-panel__bd panel_h">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd son_head_pic"><img style="width:2rem; height: 2rem; border-radius: 50%; margin-right: 10px;" src="" alt=""></div>
+                    <div class="weui-cell__bd">
+                        <div class="fs11">
+                            <span class="son_nickname"></span>
+                            <span class="weui-badge son_layer" style="background-color: #f3a1a1;"></span>
+                        </div>
+                        <div class="fs9 text-muted son_reg_time"></div>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <div class="weui-flex cell-flex">
+                            <a href="javascript:void(0);" class="weui-flex__item vux-1px-r">
+                                <div><b class="fs13 son_distribut_money"></b></div>
+                                <div class="fs8 text-muted">佣金收益</div>
+                            </a>
+                            <a href="javascript:void(0);" class="weui-flex__item">
+                                <div><b class="fs13 son_pay_points" style="position: relative"></b></div>
+                                <div class="fs8 text-muted">积分收益</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd"><span class="fs10">所有粉丝</span> <span class="fs9 text-muted">[共3层]</span></div>
+                    <div class="fs11"><span class="son_count_leader"></span>人</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd"><span class="fs10 text-muted">第一层</span></div>
+                    <div class="fs11"><span class="son_first_leader"></span>人</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd"><span class="fs10 text-muted">第二层</span></div>
+                    <div class="fs11"><span class="son_second_leader"></span>人</div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd"><span class="fs10 text-muted">第三层</span></div>
+                    <div class="fs11"><span class="son_third_leader"></span>人</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/assets/jquery-weui/js/jquery-weui.min.js"></script>
+<script>
+    $(function () {
+        $(".close_popup").on('click', function (e) {
+            $("#pop1").hide();
+        });
+    });
+    var type = 1;
+    function get_dist(obj) {
+        loading = false;
+        page = 1;
+        var dom = $(obj);
+        var click = dom.attr('data-click');
+        var tab = dom.attr('data-tab') ? dom.attr('data-tab') : 1;
+        type = tab;
+        $(obj).addClass('active').siblings().removeClass();
+        var data = {
+            type: tab
+        };
+        $.ajax({
+            url: "{:U('Mobile/user/ajax_count_leader')}",
+            type: 'post',
+            data: data,
+            waitting: false,
+            success: function (data) {
+                try {
+                    if (data != "") {
+                        $("#tab").html(data);
+                    } else {
+                        $("#tab").html('<div style="text-align:center; line-height: 50px;">暂时没有数据哦~</div>');
+                    }
+                } catch (e) {
+                    //load_alert.alertmessage('网络繁忙，请稍后重试')
+                }
+            },
+            error: function (xhr, errorType, error) {
+                //load_alert.alertmessage('网络繁忙，请稍后重试')
+            }
+        });
+    }
+
+    function subordinate(obj) {
+        $('#pop1').show();
+        var dom = $(obj);
+        var u_id = dom.attr('u_id');
+        var data = {u_id: u_id};
+        $.ajax({
+            url: "{:U('Mobile/user/zpdistribution_list')}",
+            type: 'post',
+            data: data,
+            dataType: "json",
+            waitting: false,
+            success: function (datas) {
+
+                if (datas != null) {
+                    $(".son_id").html('ID ' + datas.subordinate.user_id);
+                    $(".son_head_pic >img").attr("src", datas.subordinate['head_pic']);
+                    $(".son_nickname").html(datas.subordinate['nickname']);
+                    $(".son_distribut_money").html(datas.subordinate['distribut_money']);
+                    $(".son_pay_points").html(datas.subordinate['pay_points']);
+                    $(".son_reg_time").html(datas.reg_time);
+                    $(".son_layer").html(datas.layer);
+                    $(".son_first_leader").html(datas.first);
+                    $(".son_second_leader").html(datas.second);
+                    $(".son_third_leader").html(datas.third);
+                    $(".son_count_leader").html(datas.count);
+                } else {
+                    //$("#pop1").html('<div style="text-align:center">暂时没有数据哦~1</div>');
+                }
+            },
+            error: function (errorType, error) {
+                //load_alert.alertmessage('网络繁忙，请稍后重试')
+            }
+        });
+
+    }
+
+
+    $('.close_popup').on('click', function () {
+        $('#pop1').hide();
+    })
+
+
+    //加载更多
+    var page = 1;
+    function ajax_sourch_submit() {
+        $('.loadMore').css('display', 'block');
+        ++page;
+        $.ajax({
+            type: 'GET',
+            url: "/index.php?m=Mobile&c=User&is_ajax=1&a=ajax_count_leader&p=" + page + "&type=" + type,
+            success: function (data) {
+                if (data) {
+                    $("#tab").append(data);
+                    // $(".loadMore").attr('display','none');
+                    loading = false;
+                } else {
+                    // $(".loadMore").text("没有更多数据了哦~").attr('display','block');
+                }
+            }
+        })
+    }
+    var loading = false;  //状态标记
+    $('.page-bd').infinite().on("infinite", function () {
+        if (loading) return;
+        loading = true;
+        ajax_sourch_submit();
+    });
+</script>

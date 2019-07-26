@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+    <link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+    <script src="__STATIC__/assets3/js/page.js"></script>
+
+    <title> 申请升级 </title>
+    <style>
+        .weui-cells_checkbox .weui-icon-checked:before {
+            font-size: 18px!important;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">申请升级</div>
+            <div class="header-right">
+                <div class="right_menu">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells pd30 mt0 border-after_none" style="background: none;">
+            <div class="weui-cell bg-fff border-radius15 mb20" style="flex-flow: column;align-items: baseline;">
+                <div class="weui-cell__bd w100">
+                    <p>您当前的团队：<span>{$total}人</span></p>
+                    <p class="mt30">您当前的等级：<span>{$now_level['level_name']}</span></p>
+                    <p class="mt30">您可申请升级的等级：<span>{$next_level['level_name']}</span></p>
+                    <!--<div class="weui-cell pd0 mt30 border-before_none">-->
+                        <!--<div class="weui-cell_hd">-->
+                            <!--<span>选择提货方式：</span>-->
+                        <!--</div>-->
+                        <!--<div class="weui-cell_bd" style="flex: 1;">-->
+                            <!--<div class="weui-cells weui-cells_checkbox border-none weui-flex mt0">-->
+                                <!--<label class="weui-cell weui-check__label border-before_none pd0" for="s11">-->
+                                    <!--<div class="weui-cell__hd pr0">-->
+                                        <!--<input type="radio" class="weui-check" name="radio1" id="s11" checked="checked" data-index="1">-->
+                                        <!--<i class="weui-icon-checked"></i>-->
+                                    <!--</div>-->
+                                    <!--<div class="weui-cell__bd">-->
+                                        <!--<p>快递</p>-->
+                                    <!--</div>-->
+                                <!--</label>-->
+                                <!--<label class="weui-cell weui-check__label border-before_none pd0 pl35" for="s12">-->
+                                    <!--<div class="weui-cell__hd pr0">-->
+                                        <!--<input type="radio" name="radio1" class="weui-check" id="s12" data-index="2">-->
+                                        <!--<i class="weui-icon-checked"></i>-->
+                                    <!--</div>-->
+                                    <!--<div class="weui-cell__bd">-->
+                                        <!--<p>自提</p>-->
+                                    <!--</div>-->
+                                <!--</label>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="ti-type">-->
+                        <!--<div class="ti-type_ctn" style="display: none;">-->
+                            <!--<div class="weui-cell pd0 mt30 border-before_none">-->
+                                <!--<div class="weui-cell_hd">-->
+                                    <!--<span>收货人姓名：</span>-->
+                                <!--</div>-->
+                                <!--<div class="weui-cell_bd" style="flex: 1;">-->
+                                    <!--<input type="text" id="con_name" readonly placeholder="请输入收货人姓名" class="weui-input w100">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="weui-cell pd0 mt30 border-before_none">-->
+                                <!--<div class="weui-cell_hd">-->
+                                    <!--<span>收货人电话：</span>-->
+                                <!--</div>-->
+                                <!--<div class="weui-cell_bd" style="flex: 1;">-->
+                                    <!--<input type="tel" id="con_tel" readonly placeholder="请输入收货人电话" class="weui-input w100">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="weui-cell pd0 mt30 border-before_none">-->
+                                <!--<div class="weui-cell_hd">-->
+                                    <!--<span>收货人地址：</span>-->
+                                <!--</div>-->
+                                <!--<div class="weui-cell_bd" style="flex: 1;">-->
+                                    <!--<input type="text" id='city_picker' value="" readonly placeholder="请输入收货人地址" class="weui-input w100"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="weui-cell pd0 mt30 border-before_none">-->
+                                <!--<div class="weui-cell_hd">-->
+                                    <!--<span>-详细地址-：</span>-->
+                                <!--</div>-->
+                                <!--<div class="weui-cell_bd" style="flex: 1;">-->
+                                    <!--<input placeholder="请输入详细地址" readonly id="address" class="weui-input w100"/>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<a href="{:Url('User/add_address')}" id="change-address" class="weui-btn_class1 border-radius10 mt20" style="background-color: #ff8101;color: #ffffff;">添加收货地址</a>-->
+                    <!--</div>-->
+                    <input type="hidden" name="shopping" id="shopping" value="1">
+                    <p class="mt20">是否提交申请?</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area mt0">
+            <a href="javascript:;" onclick="submit_apply()" class="weui-btn weui-btn_primary bg-danger">提交申请</a>
+        </div>
+        <div class="fixed_style1" style="bottom:1rem;">
+            <a href="{:Url('chuangke/user/index')}" class="weui-btn weui-btn_plain-primary weui-btn_class1">首页</a>
+        </div>
+        <!--<div class="bottom-btn-wrap">-->
+        <!--<div class="bottom-btn">-->
+        <!--<a href="历史订单.html" class="weui-btn weui-btn_primary">过往历史</a>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+<script src="__STATIC__/assets3/js/city-picker.js"></script>
+<script>
+    $(function () {
+        $('.ti-type_ctn').hide();
+        //shopping_address();
+        console.log(123456);
+        $("input[name='radio1']").change(function(){
+            console.log($(this).data("index"));
+            if($(this).data("index") == 2){
+                $(".ti-type").hide();
+                $('#shopping').val(2);
+                $('.ti-type_ctn').hide();
+            }
+            else {
+                $(".ti-type").show();
+                $('#shopping').val(1);
+                $('.ti-type_ctn').show();
+            }
+        })
+        $("#city-picker").cityPicker({
+            title: "请选择收货地址"
+        });
+    });
+
+    //提交申请
+    function submit_apply() {
+
+        //var shopping = $('#shopping').val();
+        var shopping = 2;
+        var data = {};
+        if(!shopping){
+            alert('请选择快递方式');
+            return false;
+        }
+        data.shopping = shopping;
+        console.log(data);
+        $.ajax({
+            type : 'POST',
+            url  : "{:Url('CkUser/apply_handle')}",
+            data : data,
+            dataType : 'JSON',
+            success  : function (res) {
+                console.log(res);
+                 if(res.status == 1){
+                    var url = "{:U('chuangke/CkUser/applying',array('id'=>'ids'))}";
+                    var tiaourl = url.replace('ids',res.data);
+                    window.location.href = tiaourl;
+                }else{
+                    alert(res.msg);
+                }            },
+            error    : function () {
+                alert('错误的数据类型');
+            }
+        })
+    }
+
+    function shopping_address() {
+        $.ajax({
+            type : 'POST',
+            url  : "{:Url('CkUser/user_address')}",
+            data : '',
+            dataType : 'JSON',
+            success  : function (res) {
+                console.log(res);
+                if(res.status == 1){
+                    $('#con_name').val(res.data.consignee);
+                    $('#con_tel').val(res.data.mobile);
+                    $('#address').val(res.data.address);
+                    $('#city_picker').val(res.data.p_c_d);
+                    $('.ti-type_ctn').show();
+                    $('#change-address').html('更改收货地址');
+                }else {
+                    $('.ti-type_ctn').hide();
+                    $('#change-address').html('添加收货地址');
+                }
+            },
+            error    : function () {
+                alert('错误的数据类型');
+            }
+        })
+    }
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
+    <link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
+    <script src="__STATIC__/assets3/js/page.js"></script>
+
+    <title> 上级信息 </title>
+    <style>
+        .weui-btn {
+            color: #ffffff;
+            background-color: #fff;
+            height: .3rem;
+            min-width: .65rem;
+            background-color: #d0d0d0;
+            padding:0px .1rem;
+            line-height:.3rem;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="{:U('user/index')}" class="left-arrow"></a>
+            </div>
+            <div class="header-title">审核详情</div>
+            <div class="header-right">
+                <div class="right_menu">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="weui-cells pd30 mt0 border-after_none" style="background: none;">
+
+            <div class="weui-cell bg-fff border-radius15 mb20" style="align-items: center;">
+                <div class="weui-cell__bd">
+                    <if condition="$apply['level'] == 2">
+                        <p>推荐人：<span>{$apply.check_leader_level}</span></p>
+                    <else>
+                        <p><span>{$apply.check_leader_level}</span></p>
+                    </if>
+                    <p class="mt10">姓名：<span>{$apply.nickname_1}</span></p>
+                    <p class="mt10">手机号：<span>{$apply.mobile_1}</span></p>
+                    <p class="mt10">微信号：<span>{$apply.wx_1}</span></p>
+                </div>
+                <div class="weui-cell__ft" style="justify-content: space-between;align-items: center;">
+                    <a href="#" class="weui-btn weui-btn_plain-default border-radius10 fs24">
+
+                        <if condition="$apply.check_status_1 == 1">
+                            同意
+                            <elseif condition="$apply.check_status_1 == -1" />
+                            拒绝
+                            <else/>
+                            审核中
+                        </if>
+
+                    </a>
+                </div>
+            </div>
+
+            <if condition="$apply.check_leader_2">
+                <div class="weui-cell bg-fff border-radius15 mb20" style="align-items: center;">
+                    <div class="weui-cell__bd">
+                        <p><span>{$apply.check_leader2_level}</span></p>
+                        <p class="mt10">姓名：<span>{$apply.nickname_2}</span></p>
+                        <p class="mt10">手机号：<span>{$apply.mobile_2}</span></p>
+                        <p class="mt10">微信号：<span>{$apply.wx_2}</span></p>
+                    </div>
+                    <div class="weui-cell__ft" style="justify-content: space-between;align-items: center;">
+                        <a href="#" class="weui-btn weui-btn_plain-default border-radius10 fs24">
+
+                            <if condition="$apply.check_status_2 == 1">
+                                同意
+                                <elseif condition="$apply.check_status_2 == -1" />
+                                拒绝
+                                <else/>
+                                审核中
+                            </if>
+
+                        </a>
+                    </div>
+                </div>
+            </if>
+
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
+<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
+
+<script>
+    $(function () {
+
+    });
+</script>
+</body>
+</html>

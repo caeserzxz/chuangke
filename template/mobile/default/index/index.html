@@ -1,0 +1,118 @@
+<layout name="common/layout_nav" />
+<div class="page-hd">
+    <div class="search-bar">
+        <div class="weui-flex">
+            <a href="{:U('Goods/categoryList')}" class="fenlei"></a>
+            <div class="weui-flex__item search-input">
+                <form action=""  method="post">
+                    <a href="{:U('Goods/ajaxSearch')}">
+                        <input type="search" name="q" id="search_text" class="search_text"   value="" placeholder="搜索您想要的商品名称">
+                        <a href="" class="search-icon"></a>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-bd">
+    <div class="swiper-container index-banner">
+        <div class="swiper-wrapper">
+            <adv pid ="32" limit="5" item="v">
+                <div class="swiper-slide"><a href="{$v.ad_link}"><img src="{$v[ad_code]}" style="width: 100%"/> </a></div>
+            </adv>
+        </div>
+        <div class="swiper-pagination-wrap"><div class="swiper-pagination"></div></div>
+    </div>
+    <div class="weui-panel">
+        <div class="weui-panel__bd">
+            <div class="weui-flex">
+                <div class="weui-flex__item">
+                    <a href="{:U('Activity/promote_goods')}" class="nav-icon-link">
+                        <div class="weui-grid__icon"><img src="__STATIC__/assets/images/icon_01.png" alt=""></div>
+                        <p class="weui-grid__label">优惠活动</p>
+                    </a>
+                </div>
+                <div class="weui-flex__item">
+                    <a href="{:U('hot/goods_list')}" class="nav-icon-link">
+                        <div class="weui-grid__icon"><img src="__STATIC__/assets/images/icon_03.png" alt=""></div>
+                        <p class="weui-grid__label">狂销热卖</p>
+                    </a>
+                </div>
+                <div class="weui-flex__item">
+                    <a href="{:U('activity/todaygoods')}" class="nav-icon-link">
+                        <div class="weui-grid__icon"><img src="__STATIC__/assets/images/icon_04.png" alt=""></div>
+                        <p class="weui-grid__label">今日上新</p>
+                    </a>
+                </div>
+                <div class="weui-flex__item">
+                    <a href="{:U('team/index')}" class="nav-icon-link">
+                        <div class="weui-grid__icon"><img src="__STATIC__/assets/images/icon_05.png" alt=""></div>
+                        <p class="weui-grid__label">团购商城</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--底部商品列表-s-->
+<div class="floor guesslike groupquess dic">
+    <div class="likeshop">
+        <ul>
+            <foreach name="list" item="v" key="k">
+                <li style="margin-bottom: 2%; list-style:none;width: 49%; <if condition=" $k%2==0">margin-right: 2%</if>" >
+                    <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v[goods_id]))}">
+                        <div class="similer-product">
+                            <div class="zjj close"><img src="{$v.goods_id|goods_thum_images=200,200}"></div>
+                            <span class="similar-product-text">{$v[goods_name]}</span>
+                            <span class="similar-product-price">
+                                ¥<span class="big-price">{$v[shop_price]}元</span>
+                                <span class="fr sg_g_time last_g_time" id="jstimerBox{$v[goods_id]}"></span>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="loadMore" style="display: none;overflow: hidden;padding: 20px 10px;text-align: center;font-size: 0.55rem;color: #323232;">数据加载中...</div>
+</div>
+
+<!--底部商品列表-e-->
+</div>
+<script type="text/javascript" src="__STATIC__/assets/jquery-weui/js/jquery-weui.min.js"></script>
+<script type="text/javascript">
+    //加载更多商品
+    var page = 1;
+    function ajax_sourch_submit() {
+        $('.loadMore').css('display', 'block');
+        ++page;
+        $.ajax({
+            type: 'GET',
+            url: "/index.php?m=Mobile&c=Index&is_ajax=1&a=_index_goods&p=" + page,
+            success: function (data) {
+                if (data) {
+                    $(".likeshop > ul").append(data);
+                    $(".loadMore").attr('display', 'none');
+                    loading = false;
+                } else {
+                    $(".loadMore").text("没有更多数据了哦~").attr('display', 'block');
+                }
+            }
+        })
+    }
+    // ajax_sourch_submit();
+    var loading = false;  //状态标记
+    $('.page-bd').infinite().on("infinite", function () {
+        if (loading) return;
+        loading = true;
+        ajax_sourch_submit();
+    });
+</script>
+<script src="__STATIC__/assets/js/lib/Swiper-3.4.2/swiper.jquery.min.js"></script>
+<script type="text/javascript">
+    var swiper = new Swiper('.index-banner', {
+        pagination: '.swiper-pagination',
+        autoplay:3000,
+        paginationClickable: true,
+        autoplayDisableOnInteraction : false
+    });
+</script>
