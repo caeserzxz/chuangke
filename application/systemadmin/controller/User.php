@@ -44,7 +44,7 @@ class User extends Base {
             $condition['user_id']=['in',$user_ids];
         }
         $sort_order = I('order_by').' '.I('sort');
-
+        $sort_order = $sort_order?$sort_order:"user_id desc";
         $model = M('users');
         $count = $model->where($condition)->count();
         $Page  = new AjaxPage($count,10);
@@ -53,11 +53,14 @@ class User extends Base {
             $Page->parameter['tier']   =   urlencode($tier);
         }
         $userList = $model->where($condition)->order($sort_order)->limit($Page->firstRow.','.$Page->listRows)->select();
+        $withdrawalsModel = Db('withdrawals');
+        $usersModel = Db('users');
+        $tuijianCodeModel = Db('tuijian_code');
         foreach($userList as $key => $val) {
-            $userList[$key]['total_withdraw'] = Db('withdrawals')->where(['user_id'=>$val['user_id'],'status'=>2])->sum('money');
-            $userList[$key]['direct_sum'] = Db('users')->where(['first_leader'=>$val['user_id']])->count();
-            $userList[$key]['leader_mobile'] = Db('users')->where(['user_id'=>$val['first_leader']])->value('mobile');
-            $userList[$key]['tuijian_code'] = Db('tuijian_code')->where(['user_id'=>$val['user_id']])->value('code');
+            $userList[$key]['total_withdraw'] = $withdrawalsModel->where(['user_id'=>$val['user_id'],'status'=>2])->sum('money');
+            $userList[$key]['direct_sum'] = $usersModel->where(['first_leader'=>$val['user_id']])->count();
+            $userList[$key]['leader_mobile'] = $usersModel->where(['user_id'=>$val['first_leader']])->value('mobile');
+            $userList[$key]['tuijian_code'] = $tuijianCodeModel->where(['user_id'=>$val['user_id']])->value('code');
         }
         $show = $Page->show();
         $this->assign('userList',$userList);
@@ -786,7 +789,7 @@ exit("功能正在开发中。。。");
         // $user_id && $where['u.user_id'] = $user_id;
 
         $count = Db::name('ck_apply')->alias('w')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->count();
-        $Page  = new Page($count,5);
+        $Page  = new Page($count,20);
         $list = Db::name('ck_apply')->alias('w')->field('w.*,u.nickname')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->order("w.id desc")->limit($Page->firstRow.','.$Page->listRows)->select();
 
         foreach ($list as $key => $value) {
