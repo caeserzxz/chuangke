@@ -397,14 +397,14 @@ class CkUser extends MobileBase
             -> join('users C','A.check_leader_2 = C.user_id','left')
             -> where('A.id',$id)
             -> find();
-
+        $usersModel = Db('users');
         foreach ($apply as $key => $val) {
 
-            $check_leader_level = Db('users t1')->field('t2.level_name')->join('user_level t2','t1.level = t2.level_id')->where('t1.user_id',$apply['check_leader_1'])->find();
+            $check_leader_level = $usersModel->alias('t1')->field('t2.level_name')->join('user_level t2','t1.level = t2.level_id')->where('t1.user_id',$apply['check_leader_1'])->find();
             $apply['check_leader_level']  = $check_leader_level['level_name'];
 
             if(!empty($apply['check_leader_2'])){
-                $check_leader2_level = Db('users t1')->field('t2.level_name')->join('user_level t2','t1.level = t2.level_id')->where('t1.user_id',$apply['check_leader_2'])->find();
+                $check_leader2_level = $usersModel->alias('t1')->field('t2.level_name')->join('user_level t2','t1.level = t2.level_id')->where('t1.user_id',$apply['check_leader_2'])->find();
                 $apply['check_leader2_level']  = $check_leader2_level['level_name'];
             }
         }
