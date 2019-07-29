@@ -48,11 +48,8 @@ class CkUser extends MobileBase
 
         //获取用户等级信息
         $user = Users::get($this->user_id);
-
         //是否存在用户
         if(!$user) $this->ajaxReturn(['status'=>0,'msg'=>'用户不存在']);
-        //if($user['level'] == 1) $this->ajaxReturn(['status'=>0,'msg'=>'普通用户没有提交申请的权利']);
-
         //是否有默认地址
         if(($shopping == 1)){
             $address_info = Db::name('user_address')->where(['user_id'=>$user['user_id'],'is_default'=>1])->find();
@@ -66,7 +63,7 @@ class CkUser extends MobileBase
         }
 
         //获取下一个等级信息
-        $next_level = Db::name('user_level')->where('level_id',$user['level'] + 1)->field('level_id,level_name,need_num,recom_condition')->find();
+        $next_level = Db::name('user_level')->where('level_id',$user['level'] + 1)->field('level_id,level_name,need_num,recom_condition,make_money')->find();
         if(empty($next_level)) $this->ajaxReturn(['status'=>0,'msg'=>'没有下一个等级信息']);
 
         //是否已有等级在审核中
@@ -87,72 +84,106 @@ class CkUser extends MobileBase
         // if(!$user['leader_all']) $this->ajaxReturn(['status'=>0,'msg'=>'没有关系链']);
 
         //获取拥有审核权的用户
-        $leader_arr = explode('_',$user['leader_all']);
+        $leader_arr = explode('_',$user['leader_all']);        
         krsort($leader_arr);
         $leader = array_values($leader_arr);
-
+        $team_data = [];
         //满足审核条件的用户
         $check_id = 0;
         foreach ($leader as $k=>$v){
-            if($k < ($next_level['level_id']-1)) continue;//升级N星则从N层开始找，N-1层直接跳过
+            if($k  < ($next_level['level_id']-1)) continue;//升级N星则从N层开始找，N-1层直接跳过
 
-            $level = Db::name('users')->where('user_id',$v)->value('level');
-            if($level >= $next_level['level_id']){
+            $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
+            // 对应层级用户是否满足
+            if ($k == $next_level['level_id']-1) {
+                if($now_user['level'] >= $next_level['level_id'] && $now_user['is_lock'] != 1){
+                    $check_id = $v;
+                    // 添加订单数
+                    $team_data[$v]['team_order_'.$k] = 1;
+                    break;
+                }else{
+                    // 添加漏单记录
+                    $team_data[$v]['is_out'] = 1;
+                    $team_data[$v]['team_order_out_'.$k] = 1;
+                }
+            }
+            // 对应层级不满足找最近的链上管理员 不分等级
+            if ($now_user['user_type'] == 1 && !$now_user['is_lock']) {
                 $check_id = $v;
                 break;
             }
-            break;//第N层找不到直接退出循环
         }
-
         //特殊情况 第N层找不到满足条件的用户，直接分配管理员
         if(empty($check_id)){
             //关系链最近的N星管理员
-            $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>$next_level['level_id'],'user_type'=>1])->value('user_id');
+            /*$check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>$next_level['level_id'],'user_type'=>1])->value('user_id');
             if($check_user){
                 $check_id = $check_user;
-            }else{
-                //关系链上没有N星管理员则选择平台的N星管理员
-                $check_user = Db::name('users')->where(['level'=>$next_level['level_id'],'user_type'=>1])->value('user_id');
+            }else{*/
+                //关系链上没有N星管理员则选择平台管理员 不分等级 取比自己ID大的
+                $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['GT',$this->user_id],'is_lock' => 0])->value('user_id');
+                if (!$check_user) {
+                    // 没有比自己大的取最近的
+                    $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['NEQ',$this->user_id],'is_lock' => 0])->value('user_id');
+                }
                 if($check_user){
                     $check_id = $check_user;
                 }else{
-                    $this->ajaxReturn(['status'=>0,'msg'=>'平台没有'.($next_level['level_id']-1).'星管理员']);
+                    $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
                 }
-            }
+            // }
         }
 
-        //如果是四星升级到五星 需要增加一个九星星身份的审核
-        if($next_level['level_id'] == 2 || $next_level['level_id'] == 6){
+        //升级一星 需要增加一个九星星身份的审核
+        if($next_level['level_id'] == 3){
             //满足审核条件的用户
             $check_id_2 = 0;
             foreach ($leader as $k=>$v){
                 if($k < 10) continue;//从第十层开始找
-                //如果第九层有九星以上身份则选择该身份，否则直接退出循环
-                $level = Db::name('users')->where('user_id',$v)->value('level');
-                if($level >= 11){
+
+                $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
+
+                if ($k == 10) {
+                    //如果第九层有九星以上身份则选择该身份，否则直接退出循环
+                    if($now_user['level'] >= 11 && $now_user['is_lock'] != 1){
+                        $check_id_2 = $v;
+                        // 添加订单记录
+                        $team_data[$v]['team_order_'.$k] = 1;
+                        break;
+                    }else{
+                        // 添加漏单记录
+                        $team_data[$v]['is_out'] = 1;
+                        $team_data[$v]['team_order_out_'.$k] = 1;
+                    }
+                }
+                // 对应层级不满足找最近的链上管理员 不分等级
+                if (($now_user['user_type'] == 1) && ($v != $check_id) && ($now_user['is_lock'] != 1)) {
                     $check_id_2 = $v;
                     break;
                 }
-                break;
             }
             //特殊情况 第九层没有九星以上身份 则分配管理员
             if(empty($check_id_2)){
                 //关系链最近的九星管理员
-                $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
+                /*$check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
                 if($check_user){
                     $check_id_2 = $check_user;
-                }else{
+                }else{*/
+                    $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id > ' . $this->user_id . ' and is_lock = 0';
                     //关系链上没有九星管理员则选择平台的九星管理员
-                    $check_user = Db::name('users')->where(['level'=>10,'user_type'=>1])->value('user_id');
+                    $check_user = Db::name('users')->where($where_id2)->value('user_id');
+                    if (!$check_user) {
+                        $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id <> ' . $this->user_id . ' and is_lock = 0';
+                        $check_user = Db::name('users')->where($where_id2)->value('user_id');
+                    }
                     if($check_user){
                         $check_id_2 = $check_user;
                     }else{
-                        $this->ajaxReturn(['status'=>0,'msg'=>'平台没有九星管理员']);
+                        $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
                     }
-                }
+                // }
             }
         }
-
 
         //满足条件 添加到审核表
         $data = array();
@@ -168,16 +199,41 @@ class CkUser extends MobileBase
         $data['city']           = $city;
         $data['district']       = $district;
         $data['address']        = $address;
+        $data['make_money']     = $next_level['make_money'];
 
-        $res = Db::name('ck_apply')->add($data);
-        if($res){
-            $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$res]);
-        }else{
-            $this->ajaxReturn(['status'=>0,'msg'=>'添加审核失败']);
+        Db::startTrans();
+        try {
+            $resID = Db::name('ck_apply')->add($data);
+            if (!$resID) {
+                Db::rollback();
+                $this->ajaxReturn(['status'=>0,'msg'=>'添加审核失败']);
+            }
+            if (!$team_data) {
+                Db::commit();
+                $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$res]);
+            }
+            # 添加团队统计记录
+            foreach ($team_data as $key => $value) {
+                $users_team = M('users_team')->where(['user_id' => $key])->find();
+
+                if ($value['is_out'] == 1) {
+                    end($value);
+                    // 添加漏单消息记录
+                    $res = add_message($key,'亲爱的有钱还用户:你错过了审核'.substr_replace($user['mobile'],'****',3,4).'用户升级的订单');
+                    if (!$res) break;
+                }
+                $res = M('users_team')->where(['id' => $users_team['id']])->setInc(key($value),1);
+                if (!$res) break;
+            }
+            if (!$res) {
+                Db::rollback();
+                $this->ajaxReturn(['status'=>0,'msg'=>'添加审核失败']);
+            }
+            Db::commit();
+            $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$resID]);
+        } catch (\Exception $e){
+            $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);
         }
-
-
-
     }
 
 	public function addOrder(){
@@ -186,7 +242,6 @@ class CkUser extends MobileBase
 			$user = Users::get($this->user_id);
 
 			//判断是否前往购买商品升级 是否满足条件
-			// var_dump($user['distribut_money']);die;
 			$user_level_money = Db::name('user_level')->where('level_id',$user['level']+1)->value('conditions_1');
 
 			if($user['level'] == 1 && $user['first_leader'] == 0){
@@ -211,7 +266,7 @@ class CkUser extends MobileBase
 			$data['level'] = $user['level'];
 			$validate = $this->validate($data,'ApplyLevel.apply_submit');
 			$validate1 = $this->validate($data,'UserAddress.apply_submit');	//验证地址
-			// var_dump($validate1);die;
+
 			if($validate !== true)
 				exit(json_encode(['status'=>0,'msg'=>$validate]));
 			if($validate1 !== true)

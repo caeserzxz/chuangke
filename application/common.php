@@ -1590,3 +1590,25 @@ function get_team_all_user($user_id = 0,$level = 0,$arr = []){
         return $arr;
     }
 }
+/**
+ * 添加消息记录
+ * @param $user_id 用户id $level 当前等级
+ * @return array 获佣用户
+ */
+function add_message($user_id = 0,$content = 0){
+    $user = M('users')->field('nickname,mobile')->where(['user_id' => $user_id])->find();
+
+    $data = [
+        'user_id'     => $user_id,
+        'username'    => $user['nickname'],
+        'mobile'      => $user['mobile'],
+        'content'     => $content,
+        'create_time' => time(),
+    ];
+    if (M('message_board')->add($data)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
