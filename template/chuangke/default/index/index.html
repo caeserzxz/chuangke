@@ -1,0 +1,121 @@
+<layout name="common/layout_nav" />
+<body>
+    <div class="page index">
+        <div class="page-hd">
+            <div class="header">
+                <a href="{:U('chuangke/news/newsList')}"><img src="__PUBLIC__/static/chuangke/images/index01.png" alt=""></a>
+
+                <p class="fs30 color_w">有钱还</p>
+                <a href="{:U('chuangke/Member/callMeBaby')}"><img src="__PUBLIC__/static/chuangke/images/index02.png" alt=""></a>
+            </div>
+        </div>
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <div class="swiper-container swiperBox swiper1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                    </div>
+                </div>
+                <div class="swiper-pagination pagination1"></div>
+            </div>
+            <div class="log">
+                <div class="sign fs26 color_w">近期还款</div>
+                <div class="fs24 data">
+                    <p>180****5482</p>
+                    <div>成功还款<p>10000元</p>
+                    </div>
+                    <a href="#">查看更多</a>
+                </div>
+            </div>
+            <div class="rowBox">
+                <div class="title fs26">特色产品</div>
+                <a href="#">
+                    <div class="fs36 fw_b color_w left one">智能还贷</div>
+                    <div class="right">
+                        <p class="fs26 fw_b">还房贷 还车贷</p>
+                        <span class="fs24">3-5个月还清百万债务</span>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="fs36 fw_b color_w left two">0费率还卡</div>
+                    <div class="right">
+                        <p class="fs26 fw_b">随借谁还 低门槛</p>
+                        <span class="fs24">担保金抵扣利息</span>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="fs36 fw_b color_w left there">帮还赚利息</div>
+                    <div class="right">
+                        <p class="fs26 fw_b">担保抵押 平台担保</p>
+                        <span class="fs24">帮助他人还卡赚利息，轻松摆脱债务</span>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="fs36 fw_b color_w left four">申请代理</div>
+                    <div class="right">
+                        <p class="fs26 fw_b">无忧裂变计划 长期稳定高收入</p>
+                        <span class="fs24">长期稳定高收入</span>
+                    </div>
+                </a>
+            </div>
+            <div class="columnBox">
+                <div class="title">
+                    <p class="fs26">有钱还学院</p><div class="fs22">学习更多还卡知识摆脱卡奴</div>
+                </div>
+                <div class="list">
+                    <a href="{:U('chuangke/index/earningInterest')}">
+                        <img src="__PUBLIC__/static/chuangke/images/index04.png" alt="">
+                        <p class="fs26 fw_b">0费率还款技巧</p>
+                    </a>
+                    <a href="{:U('chuangke/index/obtainGuarantee')}">
+                        <img src="__PUBLIC__/static/chuangke/images/index05.png" alt="">
+                        <p class="fs26 fw_b">担保金如何获取？</p>
+                    </a>
+                    <a href="{:U('chuangke/index/earningInterest')}">
+                        <img src="__PUBLIC__/static/chuangke/images/index06.png" alt="">
+                        <p class="fs26 fw_b">如何帮他人还款赚利息</p>
+                    </a>
+                    <a href="{:U('chuangke/index/noPayment')}">
+                        <img src="__PUBLIC__/static/chuangke/images/index07.png" alt="">
+                        <p class="fs26 fw_b">借款人不还钱怎么办？</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <include file="common/chuangke_footer_nav" />
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+        });
+    </script>
+    <script src="__PUBLIC__/static/chuangke/js/Swiper-4.0.7/swiper.min.js"></script>
+    <script>
+        var swiper1 = createSwiper(1);
+        function createSwiper(index) {
+            var swiper = new Swiper(".swiper" + index, {
+                pagination: {
+                    el: ".pagination" + index
+                },
+                loop: true,
+                autoplay: {
+                    delay: 3000
+                },
+                onSlideChangeEnd: function (swiper) {
+                    swiper.update(); //swiper更新
+                }
+            });
+            return swiper;
+        }
+    </script>

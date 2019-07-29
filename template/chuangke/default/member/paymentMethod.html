@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all.css"/>
+<script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+
+
+    <title> 有钱还 </title>
+</head>
+
+<body>
+    <div class="page collection">
+        <div class="page-hd">
+            <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">收款方式</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+        </div>
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <div class="inputBox">
+                <span class="fs28">收款渠道</span>
+                <input type="text" class="weui-input fs28 color_w" placeholder="微信或支付宝">
+            </div>
+            <div class="inputBox">
+                <span class="fs28">账号</span>
+                <input type="text" class="weui-input fs28 color_w" placeholder="请输入微信或支付宝收款账号">
+            </div>
+            <div class="title fs26">收款二维码</div>
+
+                <div class="uploader__input-box">
+                <img src="__PUBLIC__/static/chuangke/images/upload.png" alt="">
+                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                </div>
+            <div class="inputBox">
+                    <span class="fs28">验证码</span>
+                    <input type="text" class="weui-input fs28 color_w" placeholder="请输入短信验证码">
+                    <div class="codeBox">
+                            <span class="color_r fs28  getCode" onclick="codeButton()">获取验证码</span>
+                            <span class="color_9 fs28  time" style="display:none"></span>
+                        </div> 
+                </div>
+                <button class="fs30 color_w fw_b button_btn">保存</button>
+        </div>
+
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+    <script>
+	function codeButton(){
+        var time = 60;
+      var timeObj=$('.time')
+      var getCodeObj=$('.getCode')
+      timeObj.text(""+time+"s后重新点击");
+      getCodeObj.hide();
+      timeObj.show();
+	    
+	    var set=setInterval(function(){
+        timeObj.text(""+--time+"s后重新点击");
+        if (time<=0) {
+          timeObj.hide();
+          getCodeObj.show();
+          clearInterval(set);
+        }
+	    }, 1000);
+	}
+    </script>
+</body>
+
+</html>

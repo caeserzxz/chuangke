@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all.css"/>
+<script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+
+    <title> 登录 </title>
+</head>
+
+<body>
+    <div class="page login">
+        <div class="logoimg">
+                <img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">
+        </div>
+        
+        <div class="form_box">
+            <p class="tou ">登录</p>
+            <input type="number" class="fs28 tel" placeholder="请输入您的手机号">
+            <input type="password" class="fs28 pwd" placeholder="请输入密码(6-20位字符)">
+            <a href="忘记密码.html" class="rember">忘记密码</a>
+            <a href="javascript:;" class="weui-btn loading_btn fs30">登录</a>
+        </div>
+
+
+        <a href="注册.html" class="weui-btn zhuce fs26">快速注册</a>
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+    <script>
+        $(function() {
+            $(".tel").val()
+            $(".pwd").val()
+        })
+    </script>
+</body>
+
+</html>

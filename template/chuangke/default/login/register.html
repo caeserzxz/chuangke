@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all.css"/>
+<script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+
+    <title> 注册 </title>
+</head>
+
+<body>
+    <div class="page login forgetPwd zhuce">
+        <div class="page-hd">
+            <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title"></div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+        </div>
+        <div class="page-bd">
+            <div class="logoimg">
+                <img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">
+            </div>
+            <div class="form_box">
+                <p class="tou ">注册</p>
+                <input type="number" class="fs28 tel" placeholder="请输入您的手机号">
+                <div class="yanzheng">
+                    <div class="left">
+                        <input class="input fs28" type="number" pattern="[0-9]*" placeholder="验证码">
+                    </div>
+                    <div class="right">
+                        <span class="fs26  getCode" onclick="codeButton()">获取验证码</span>
+                        <span class="fs26  time" style="display: none">60s</span>
+                    </div>
+                </div>
+                <input type="password" class="fs28 pwd1" placeholder="密码">
+                <input type="text" class="fs28" placeholder="邀请码(必填）">
+                <p class="fs24 see ">注册并同意<a href="javascript:;" class="fs24">《注册协议》</a></p>
+                <a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>
+            </div>
+            <a href="注册.html" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
+        </div>
+
+
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+    <script>
+        function codeButton() {
+            var timeObj = $('.time')
+            var getCodeObj = $('.getCode')
+            getCodeObj.hide();
+            timeObj.show();
+            var time = 60;
+            var set = setInterval(function () {
+                timeObj.text("" + --time + "s");
+                if (time <= 0) {
+                    timeObj.hide();
+                    getCodeObj.show();
+                    clearInterval(set);
+                }
+            }, 1000);
+        }
+        $(".loading_btn").on("click", function () {
+            $.toast("注册成功", 2000);
+            window.location.href = "登录.html"
+        })
+        $(".kuailogin").on("click", function () {
+            window.location.href = "登录.html"
+        })
+    </script>
+</body>
+
+</html>
