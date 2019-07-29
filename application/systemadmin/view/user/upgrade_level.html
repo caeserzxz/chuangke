@@ -186,6 +186,13 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+    });
+
+    $(document).ready(function(){
         $('#add_time_begin').layDate();
         $('#add_time_end').layDate();
     });
