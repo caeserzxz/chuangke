@@ -157,14 +157,12 @@
             return false;
         }
         data.shopping = shopping;
-        console.log(data);
         $.ajax({
             type : 'POST',
             url  : "{:Url('CkUser/apply_handle')}",
             data : data,
             dataType : 'JSON',
             success  : function (res) {
-                console.log(res);
                  if(res.status == 1){
                     var url = "{:U('chuangke/CkUser/applying',array('id'=>'ids'))}";
                     var tiaourl = url.replace('ids',res.data);

@@ -1570,3 +1570,45 @@ function mkdirs($dir)
     }
     return true;
 }
+/**
+ * 获取用户所有下级
+ * @param $user_id 用户id $level 当前等级
+ * @return array 获佣用户
+ */
+function get_team_all_user($user_id = 0,$level = 0,$arr = []){
+
+    if($user_id){
+        $pid = Db::name('users')->where("first_leader in ($user_id) and level >= ($level) ")->column('user_id');
+        if($pid){
+            $arr[] = $pid;
+            $ids = implode(',',$pid);
+            return get_team_all_user($ids,$level,$arr);
+        }else{
+            return $arr;
+        }
+    }else{
+        return $arr;
+    }
+}
+/**
+ * 添加消息记录
+ * @param $user_id 用户id $level 当前等级
+ * @return array 获佣用户
+ */
+function add_message($user_id = 0,$content = 0){
+    $user = M('users')->field('nickname,mobile')->where(['user_id' => $user_id])->find();
+
+    $data = [
+        'user_id'     => $user_id,
+        'username'    => $user['nickname'],
+        'mobile'      => $user['mobile'],
+        'content'     => $content,
+        'create_time' => time(),
+    ];
+    if (M('message_board')->add($data)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
