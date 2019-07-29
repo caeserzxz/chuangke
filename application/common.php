@@ -1570,3 +1570,23 @@ function mkdirs($dir)
     }
     return true;
 }
+/**
+ * 获取用户所有下级
+ * @param $user_id 用户id $level 当前等级
+ * @return array 获佣用户
+ */
+function get_team_all_user($user_id = 0,$level = 0,$arr = []){
+
+    if($user_id){
+        $pid = Db::name('users')->where("first_leader in ($user_id) and level >= ($level) ")->column('user_id');
+        if($pid){
+            $arr[] = $pid;
+            $ids = implode(',',$pid);
+            return get_team_all_user($ids,$level,$arr);
+        }else{
+            return $arr;
+        }
+    }else{
+        return $arr;
+    }
+}

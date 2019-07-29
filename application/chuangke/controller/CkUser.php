@@ -66,22 +66,25 @@ class CkUser extends MobileBase
         }
 
         //获取下一个等级信息
-        $next_level = Db::name('user_level')->where('level_id',$user['level'] + 1)->field('level_id,level_name,need_num')->find();
+        $next_level = Db::name('user_level')->where('level_id',$user['level'] + 1)->field('level_id,level_name,need_num,recom_condition')->find();
         if(empty($next_level)) $this->ajaxReturn(['status'=>0,'msg'=>'没有下一个等级信息']);
 
         //是否已有等级在审核中
         $count = Db::name('ck_apply')->where(['user_id'=>$user['user_id'],'level'=>$next_level['level_id'],'apply_status'=>0])->count();
         if($count) $this->ajaxReturn(['status'=>0,'msg'=>'已有等级正在审核中，请稍后再试']);
 
-
+        // 验证推荐条件是否满足
+        $check_recom_condition = $this->check_recom_condition($this->user_id,$next_level);
+        if ($check_recom_condition['code'] != 1) {
+            $this->ajaxReturn(['status'=>0,'msg'=>'您的推荐人数不足']);
+        }
         //我的N层下级一星以上用户数量
-        $user_id_arr = sub_user1([$user['user_id']],$user['level']-1);
+       /* $user_id_arr = sub_user1([$user['user_id']],$user['level']-1);
         $num = count($user_id_arr) - 1;
-        if($num < $next_level['need_num']) $this->ajaxReturn(['status'=>0,'msg'=>'你的团队的一星或以上人数不足'.$next_level['need_num'].'人' ]);
-
+        if($num < $next_level['need_num']) $this->ajaxReturn(['status'=>0,'msg'=>'你的团队的一星或以上人数不足'.$next_level['need_num'].'人' ]);*/
 
         //如果没有关系链
-        if(!$user['leader_all']) $this->ajaxReturn(['status'=>0,'msg'=>'没有关系链']);
+        // if(!$user['leader_all']) $this->ajaxReturn(['status'=>0,'msg'=>'没有关系链']);
 
         //获取拥有审核权的用户
         $leader_arr = explode('_',$user['leader_all']);
@@ -414,6 +417,47 @@ class CkUser extends MobileBase
         ]);
 
     }
+    /**
+     * 验证升级条件是否满足
+     * $user_id 用户ID
+     * $level 升级等级
+     * time 19-07-29
+     */
+    public function check_recom_condition($user_id,$level){
+        $condition_one = $condition_two = true;
+        // 升级条件
+        $condition = unserialize($level['recom_condition']);
+        if ($condition['direct_num'] > 0) {        
+            // 直推达标人数
+            $direct_where = [
+                'first_leader' => $user_id,
+                'level' => ['>=',$condition['direct_level']]
+            ];
+            $direct_num = M('users')->where($direct_where)->count();
+            if ($direct_num < $condition['direct_num']) {
+                $condition_one = false;
+            }
+        }
+        if ($condition['team_num'] > 0) {
+            // 团队达标人数
+            $all_sub = get_team_all_user($user_id,$condition['team_level'],[]);    
+            $all_subs = []; // 二维数组合并成一维数组
+            array_walk_recursive($all_sub, function($value2) use (&$all_subs) {
+                array_push($all_subs, $value2);
+            });
+            $team_num = count($all_subs);
+
+            if ($team_num < $condition['team_num']) {
+                $condition_two = false;
+            }
+        }
+        if ($condition_one && $condition_two) {
+            return ['code' => 1];
+        }else{
+            return ['code' => 0];
+        }
+    }
+    
 
 
 }

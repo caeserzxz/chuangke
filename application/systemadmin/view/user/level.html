@@ -28,12 +28,39 @@
             </dl>
             <dl class="row">
                 <dt class="tit">
-                    <label for="conditions_1"><em>*</em>升级需要的人数</label>
+                    <label for="conditions_1"><em>*</em>推荐条件</label>
                 </dt>
                 <dd class="opt">
-                    <input type="text" id="need_num" name="need_num" value="{$info.need_num}" class="input-txt">
+                    <div class="add_direct_grade" style="float: left;">
+                        <span>直推</span>
+                        <input type="text" name="recom_condition[direct_num]" class="form-control oud" value="{$recom_condition['direct_num']}" placeholder="请输入">
+                        个
+                        <select class="form-control" name="recom_condition[direct_level]">
+                            <option value="0">请选择</option>
+                            <foreach name="all_level" item="vo">
+                                <option value="{$vo['level_id']}" <if condition="$recom_condition['direct_level'] eq $vo['level_id']">selected</if>>{$vo['level_name']}</option>
+                            </foreach>
+                        </select>
+                        团队满
+                        <input type="text" name="recom_condition[team_num]" class="form-control oud" value="{$recom_condition['team_num']}" placeholder="请输入">
+                        个
+                        <select class="form-control" name="recom_condition[team_level]">
+                            <option value="0">请选择</option>
+                            <foreach name="all_level" item="vo">
+                                <option value="{$vo['level_id']}"  <if condition="$recom_condition['team_level'] eq $vo['level_id']">selected</if>>{$vo['level_name']}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="conditions_1"><em>*</em>打款金额</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="make_money" name="make_money" value="{$info.make_money}" class="input-txt">
                     <span class="err" ></span>
-                    <p class="notic">设置会员升级为该等级需要的人数</p>
+                    <p class="notic">设置会员升级时打款金额</p>
                 </dd>
             </dl>
            <!--  <dl class="row">

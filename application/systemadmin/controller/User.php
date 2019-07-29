@@ -332,8 +332,14 @@ class User extends Base {
     	$level_id = I('get.level_id');
     	if($level_id){
     		$level_info = D('user_level')->where('level_id='.$level_id)->find();
+            // 推荐条件
+            $recom_condition = unserialize($level_info['recom_condition']);
+            $this->assign('recom_condition',$recom_condition);
     		$this->assign('info',$level_info);
     	}
+        $all_level = M('user_level')->where(1)->select();
+        $this->assign('all_level',$all_level);
+
     	return $this->fetch();
     }
 
@@ -423,6 +429,8 @@ class User extends Base {
             // if (!$userLevelValidate->scene('edit')->batch()->check($data)) {
             //     $return = ['status' => 0, 'msg' => '编辑失败', 'result' => $userLevelValidate->getError()];
             // } else {
+                $data['recom_condition'] = serialize($data['recom_condition']);
+
                 $r = D('user_level')->where('level_id=' . $data['level_id'])->save($data);
                 if ($r !== false) {
                     $return = ['status' => 1, 'msg' => '编辑成功', 'result' => $userLevelValidate->getError()];
