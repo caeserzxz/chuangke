@@ -365,6 +365,7 @@ class CkUser extends MobileBase
             if(empty($id) || empty($status)) $this->ajaxReturn(['status'=>0,'msg'=>'数据有误']);
             $info = Db::name('ck_apply')->where('id',$id)->find();
             if(empty($info)) $this->ajaxReturn(['status'=>0,'msg'=>'查无信息']);
+
             //第一层领导审核
             $updata = array();
             if($info['check_leader_1'] == $this->user_id){
@@ -372,49 +373,78 @@ class CkUser extends MobileBase
                 if(!empty($info['check_status_2'])) $updata['apply_status'] = $status;
                 $updata['check_status_1'] = $status;
                 $updata['check_time_1']   = time();
-                $res = Db::name('ck_apply')->where('id',$id)->save($updata);
-                if($res){
-                    if($updata['apply_status'] == 1){
-                        //审核通过
-                        $res1 = Db::name('users')->where('user_id',$info['user_id'])->setField('level',$info['level']);
-                    }
-                    $this->ajaxReturn(['status'=>1,'msg'=>'审核成功']);
-                }
-                $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
-            }
-
-            //第二层领导审核
-            $updata = array();
-            if($info['check_leader_2'] == $this->user_id){
+            }elseif($info['check_leader_2'] == $this->user_id){
+                //第二层领导审核
                 if(!empty($info['check_status_1'])) $updata['apply_status'] = $status;
                 $updata['check_status_2'] = $status;
                 $updata['check_time_2']   = time();
-                $res = Db::name('ck_apply')->where('id',$id)->save($updata);
-                if($res){
-                    if($updata['apply_status'] == 1){
-                        //审核通过
-                        $res1 = Db::name('users')->where('user_id',$info['user_id'])->setField('level',$info['level']);
-                    }
-                    $this->ajaxReturn(['status'=>1,'msg'=>'审核成功']);
-                }
-                $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
+            }else{
+                $this->ajaxReturn(['status'=>0,'msg'=>'数据错误']);
             }
+            if (!$updata) $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
 
+            $res = Db::name('ck_apply')->where('id',$id)->save($updata);
+            if($res){
+                if($updata['apply_status'] == 1){
+                    //审核通过 更新用户等级
+                    $res1 = Db::name('users')->where('user_id',$info['user_id'])->setField('level',$info['level']);
+
+                    if (!$user['is_lock']) {
+                        // 验证是否已还款完成 冻结账号
+                        $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys'); // 所有负债
+                        // 已收款金额
+                        $all_rece = M('ck_apply')
+                            ->where(['check_leader_1' => $this->user_id,'apply_status' => 1])
+                            ->whereOR(['check_leader_2' => $this->user_id,'apply_status' => 1])
+                            ->sum('make_money');
+
+                        if ($all_rece >= $all_debt) {
+                            M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
+                        }
+                    }
+                }
+                $this->ajaxReturn(['status'=>1,'msg'=>'审核成功']);
+            }
+            $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
+        }else{
+            $check_user = Db::name('ck_apply')->alias('A')
+                -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name,D.user_name,D.id_card')
+                -> join('users B','A.user_id = B.user_id','left')
+                -> join('user_level C','A.level = C.level_id','left')
+                -> join('user_authentication D','A.user_id = D.user_id','left')
+                // -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
+                -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
+                ->order('A.apply_status ASC')
+                -> select();
+            foreach ($check_user as $key => $value) {
+                $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
+                $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
+
+                if ($value['check_leader_1'] == $this->user_id) {
+                    $check_user[$key]['type'] = 1;
+                }else{
+                    $check_user[$key]['type'] = 2;
+                }
+                // 当前用户是否审核
+                if ($value['apply_status'] != 0) {
+                    $check_user[$key]['is_check'] = 1;
+                    continue;
+                }
+                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
+                    $check_user[$key]['is_check'] = 1;
+                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
+                    $check_user[$key]['is_check'] = 1;
+                }else{
+                    $check_user[$key]['is_check'] = 0;
+                }
+            }
+            $content = Db::name('article')->where('cat_id = 3')->value('content');
+
+            return $this->fetch('user/check_level',[
+                'check_user' => $check_user,
+                'content'    => htmlspecialchars_decode($content),
+            ]);
         }
-
-	    $check_user = Db::name('ck_apply')->alias('A')
-            -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name')
-            -> join('users B','A.user_id = B.user_id','left')
-            -> join('user_level C','A.level = C.level_id','left')
-            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
-            -> select();
-
-	    $content = Db::name('article')->where('cat_id = 3')->value('content');
-        
-        return $this->fetch('user/check_level',[
-            'check_user' => $check_user,
-            'content'    => htmlspecialchars_decode($content),
-        ]);
     }
 
     /**
@@ -549,11 +579,10 @@ class CkUser extends MobileBase
         return $text;
     }
     /**
-     * 上传打款凭证
+     * 付款信息
      * @author MEI
      */
     public function pay_detail($id,$type){
-
         $apply = M('ck_apply')->where(['id' => $id])->find();
 
         if ($type == 1) {
@@ -585,4 +614,29 @@ class CkUser extends MobileBase
         }
         $res = M('ck_apply')->where(['id' => $id])->updata($updata);
     }
+    /**
+     * 收款信息
+     * @author MEI
+     */
+    public function rece_detail($id){
+        $apply = M('ck_apply')->alias('A')
+            ->field('A.*,B.user_name,B.id_card,C.account_number')
+            ->join('user_authentication B','A.user_id = B.user_id')
+            ->join('receipt_information C','A.user_id = C.user_id')
+            ->where(['A.id' => $id])
+            ->find();
+        if ($apply['check_leader_1'] == $this->user_id) {
+            $apply['img'] = $apply['voucher_img1'];
+        }elseif ($apply['check_leader_2'] == $this->user_id) {
+            $apply['img'] = $apply['voucher_img2'];
+        }else{
+            $this->error('数据错误');
+        }
+        $apply['user_name']  = $this->substr_cut($apply['user_name']);
+        $apply['id_card']  = substr_replace($apply['id_card'],'**********',4,10);
+
+        $this->assign('apply',$apply);
+        return $this->fetch('plan/rece_detail');
+    }
+    
 }

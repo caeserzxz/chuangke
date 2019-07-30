@@ -91,7 +91,7 @@ class Plan extends MobileBase
         $this->assign('all_debt',$all_debt);        // 负债总额
         $this->assign('stage',$stage);              // 阶段数据
         $this->assign('ratio',json_encode($ratio)); // 各阶段还款百分比
-        $this->assign('apply',$apply);  // 审核中等级申请数量
+        $this->assign('apply',$apply);              // 审核中等级申请数量
 
 		return $this->fetch();
 	}
@@ -143,6 +143,4 @@ class Plan extends MobileBase
             return $this->fetch();
         }
     }
-    
-
 }

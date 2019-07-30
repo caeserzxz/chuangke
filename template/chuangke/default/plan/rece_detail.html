@@ -1,0 +1,62 @@
+<layout name="common/layout_nav" />
+
+    <div class="page collectionInfo">
+        <div class="page-hd">
+            <div class="header">
+                <div class="header-left">
+                    <a href="javascript:history.go(-1)" class="left-arrow"></a>
+                </div>
+                <div class="header-title">打款人信息</div>
+                <div class="header-right">
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <div class="title fs26">打款人信息</div>
+            <div class="meninfo">
+                <p class="fs26">姓名：<span>{$apply.user_name}</span></p>
+                <p class="fs26">身份证：<span>{$apply.id_card}</span></p>
+            </div>
+            <div class="codeInfo fs26">
+                <img src="{$apply.img}" alt="" style="width: 90%;height:auto">
+                <p class="name">打款凭证</p>
+                <p>支付账号：<span>{$apply.account_number}</span></p>
+                <p>付款金额：<span>{$apply.make_money}</span> 元</p>
+            </div>
+            <div class="tipsBox">
+                <p class="fs26">请确认收到款后再点击“我已收款”操作</p>
+            </div>
+            <button class="fs30 color_w fw_b button_btn" onclick="change_status()">我已收款</button>
+        </div>
+    </div>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    function change_status() {
+        var id = "{$apply.id}";
+        var status = 1;
+        $.ajax({
+            type : 'POST',
+            url  : "{:Url('CkUser/check_level')}",
+            data : {id:id,status:status},
+            dataType : 'json',
+            success  : function (res) {
+                $.toast(res.msg, "text");
+                if(res.status == 1){
+                    window.location.href = "{:U('chuangke/CkUser/check_level')}";
+                }
+            },
+            error : function () {
+                $.toast('请稍后重试', "text");
+            }
+        })
+    }
+</script>
+</body>
+
+</html>
