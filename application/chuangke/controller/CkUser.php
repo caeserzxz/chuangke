@@ -79,7 +79,6 @@ class CkUser extends MobileBase
        /* $user_id_arr = sub_user1([$user['user_id']],$user['level']-1);
         $num = count($user_id_arr) - 1;
         if($num < $next_level['need_num']) $this->ajaxReturn(['status'=>0,'msg'=>'你的团队的一星或以上人数不足'.$next_level['need_num'].'人' ]);*/
-
         //如果没有关系链
         // if(!$user['leader_all']) $this->ajaxReturn(['status'=>0,'msg'=>'没有关系链']);
 

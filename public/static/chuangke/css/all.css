@@ -429,6 +429,30 @@
 .message .heng .wen {
   padding: 0 2.4vw;
 }
+.message .listBox {
+  margin-top: 2.66667vw;
+}
+.message .listBox .list {
+  background-color: #343c6d;
+  margin-bottom: 2.66667vw;
+}
+.message .listBox .list .cell {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 4vw 4vw;
+  -webkit-box-pack: justify;
+          -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-align-content: center;
+          align-content: center;
+}
+.message .listBox .list .details {
+  padding: 0 4vw;
+  line-height: 5.33333vw;
+  padding-bottom: 4vw;
+  display: none;
+}
 div,
 a,
 p,
@@ -971,6 +995,9 @@ img {
           -webkit-justify-content: center;
           justify-content: center;
 }
+.collectionMen .block .btnBox .check_end {
+  background-color: #9c9c9c;
+}
 .collectionInfo .page-bd {
   width: 100vw;
   padding: 0 3.73333vw;
@@ -1466,6 +1493,9 @@ img {
 .plan .selectNav .spanActive {
   background-color: #35bffd;
   color: #252d41;
+  border-radius: 1.33333vw;
+  margin-left: -1px;
+  margin-right: -1px;
 }
 .plan .Box .planType {
   display: -webkit-box;
@@ -1634,4 +1664,67 @@ img {
   -webkit-box-align: center;
           -webkit-align-items: center;
           align-items: center;
+}
+.plan .model {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+.plan .model .modelContent {
+  width: 70vw;
+  background-color: #3b4375;
+  position: absolute;
+  left: 15vw;
+  top: 40vh;
+}
+.plan .model .modelContent .text {
+  width: 100%;
+  height: 20vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+}
+.plan .model .modelContent .cellBtn {
+  padding: 0 2.66667vw 4vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.plan .model .modelContent .cellBtn button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+  height: 8vw;
+  border-radius: 1.33333vw;
+  width: 30vw;
+}
+.plan .model .modelContent .cellBtn button:nth-child(1) {
+  border: solid 1px #35bffd;
+  color: #35bffd;
+}
+.plan .model .modelContent .cellBtn button:nth-child(2) {
+  background-color: #35bffd;
+  color: #fff;
 }
