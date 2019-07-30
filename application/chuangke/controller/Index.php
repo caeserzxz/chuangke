@@ -59,5 +59,20 @@ class Index extends Controller
 
         return $this->fetch();
     }
+    /**
+     * 自动审核计划任务
+     */
+    public function autoCheck(){
+        $shop_info = tpCache('shop_info');
+        $time = time() - $shop_info['autoTime'] * 60;
+        $where = "status=1 and createtime<$time and " .
+            "(moneys <= ".$shop_info['artificial_min1']." and type=1 or ".
+            "moneys <= ". $shop_info['artificial_min2']." and type=2 or ".
+            "moneys <= ". $shop_info['artificial_min3']." and type=3 or ".
+            "moneys <= ". $shop_info['artificial_min4']." and type=4)";
+
+        // $data = M('user_debt')->where($where)->select();
+        M('user_debt')->where($where)->update(['status' => 2,'update_time' =>time()]);
+    }
 
 }

@@ -1,0 +1,48 @@
+<layout name="common/layout_nav" />
+
+    <div class="page collectionInfo">
+        <div class="page-hd">
+            <div class="header">
+                <div class="header-left">
+                    <a href="javascript:history.go(-1)" class="left-arrow"></a>
+                </div>
+                <div class="header-title">付款信息</div>
+                <div class="header-right">
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <div class="title fs26">借款人信息</div>
+            <div class="meninfo">
+                <p class="fs26">姓名：<span>{$apply['user_name']}</span></p>
+                <p class="fs26">身份证：<span>{$apply['id_card']}</span></p>
+            </div>
+            <div class="codeInfo fs26">
+                <img src="{$apply['account_code_img']}" alt="">
+                <p class="name">收款二维码</p>
+                <p>收款账号：<span>{$apply['account_number']}</span></p>
+                <p>付款金额：<span>{$apply['make_money']}</span> 元</p>
+            </div>
+            <div class="tipsBox">
+                <p class="fs26">请使用微信或支付宝App，扫码以上二维码付款{$apply['make_money']}元</p>
+                <span class="fs28 fw_b">付款时在微信或支付宝订单备注您平台认证的姓名</span>
+            </div>
+            <div class="uploader__input-box">
+                <img src="__PUBLIC__/static/chuangke/images/money02.png" alt="">
+                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+            </div>
+            <button class="fs30 color_w fw_b button_btn">我已付款</button>
+        </div>
+    </div>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+
+</script>
+</body>
+</html>

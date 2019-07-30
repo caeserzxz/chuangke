@@ -1,0 +1,66 @@
+<layout name="common/layout_nav" />
+
+<div class="page collection">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">录入债务</div>
+            <div class="header-right">
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="inputBox">
+            <span class="fs28">债务类型</span>
+            <input type="text" class="weui-input fs28 color_w" placeholder="{$debt_name[$type]}" disabled>
+        </div>
+        <div class="inputBox">
+            <span class="fs28">债务金额</span>
+            <input type="text" class="weui-input fs28 color_w" placeholder="请输入金额" id="money">
+        </div>
+        <div class="title fs26">上传债务凭证</div>
+        <div class="uploader__input-box">
+        <img src="__PUBLIC__/static/chuangke//images/upload2.png" alt="">
+            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+        </div>
+        <button class="fs30 color_w fw_b button_btn" onclick="add_debt();">提交审核</button>
+    </div>
+</div>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    function add_debt() {
+        var money = $("#money").val();
+        if (money < 1) {
+            $.toast("请输入金额", "text");
+            return false;
+        }
+        $.ajax({
+            type : "POST",
+            url:"{:U('chuangke/Plan/add_debt')}",//+tab,
+            dataType:'JSON',
+            data : {'money':money,'type':"{$type}"},
+            success: function(data) {
+                if (data.code == 1) {
+                    window.location.href = data.url;
+                } else {
+                    $.toast(data.msg, "text");
+                }
+            },
+            error:function(){
+                $.toast('请稍后再试', "text");
+
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

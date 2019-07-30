@@ -1,108 +1,43 @@
-<!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
-    <link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
-    <link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
-    <script src="__STATIC__/assets3/js/page.js"></script>
-
-    <title> 审核升级 </title>
-    <style>
-        .weui-btn {
-            color: #ffffff;
-            background-color: #fff;
-            height: .3rem;
-            min-width: .65rem;
-            background-color: #d0d0d0;
-            padding:0px .1rem;
-            line-height:.3rem;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-<div class="page">
-
-    <div class="page-hd">
-        <div class="header">
-            <div class="header-left">
-                <a href="javascript:history.go(-1)" class="left-arrow"></a>
-            </div>
-            <div class="header-title">审核升级</div>
-            <div class="header-right">
-                <div class="right_menu">
-                    <a href="{:Url('CkUser/old_check')}">历史订单</a>
+<layout name="common/layout_nav" />
+    <div class="page collectionMen">
+        <div class="page-hd">
+            <div class="header">
+                <div class="header-left">
+                    <a href="javascript:history.go(-1)" class="left-arrow"></a>
+                </div>
+                <div class="header-title">打款人</div>
+                <div class="header-right">
+                    <a href="#"></a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="page-bd">
-        <!-- 页面内容-->
-        <div class="weui-cells pd30 mt0 border-after_none" style="background: none;">
-            <empty name="check_user">
-                <div class="weui-cell bg-fff border-radius15 mb20" style="align-items: center;">
-                    暂无数据
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <volist name="check_user" id="vo">
+                 <div class="block">
+                     <div class="info">
+                        <p class="fs26">姓名：<span>{$vo.user_name}</span></p>
+                        <p class="fs26">身份证：<span>{$vo.id_card}</span></p>
+                     </div>
+                     <div class="btnBox">
+                        <p class="fs26 fw_b">打款金额：<span>{$vo.make_money}</span></p>
+                        <if condition="$vo.is_check eq 1">
+                            <a href="JavaScript:;" class="fs24 color_w check_end">已审核</a>
+                        <else/>
+                            <a href="{:U('chuangke/CkUser/rece_detail',['id' => $vo.id])}" class="fs24 color_w">去审核</a>
+                        </if>
+                     </div>
                 </div>
-
-                <else/>
-
-                <volist name="check_user" id="vo">
-                    <div class="weui-cell bg-fff border-radius15 mb20" style="align-items: center;">
-                        <div class="weui-cell__bd">
-                            <!--<p>对方ID：<span>{$vo.user_id}</span></p>-->
-                            <p class="mt10">姓名：<span>{$vo.nickname}</span></p>
-                            <p class="mt10">等级：<span>{$vo.level_name}</span></p>
-                            <p class="mt10">手机号：<span>{$vo.mobile}</span></p>
-                            <p class="mt10">微信号：<span>{$vo.wx_number}</span></p>
-                        </div>
-                        <div class="weui-cell__ft" style="justify-content: space-between;align-items: center;">
-                            <a href="javascript:;" onclick="change_status({$vo.id},1)" class="weui-btn weui-btn_plain-default border-radius10 fs24 bg-color">同意</a>
-                            <a href="javascript:;" onclick="change_status({$vo.id},-1)" class="weui-btn weui-btn_plain-default border-radius10 fs24" style="color: #484848;">拒绝</a>
-                        </div>
-                    </div>
-                </volist>
-            </empty>
-
+            </volist>
         </div>
-        <!--<div class="weui-cells mt0 border-before_none" style="background-color: transparent;">-->
-            <!--<div class="weui-cells__title" style="background-color: transparent;color: #696969;">-->
-                <!--操作规则说明-->
-            <!--</div>-->
-            <!--<div class="weui-cells__tips">-->
-                <!--{$content}-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<div class="weui-cell__tips bg-fff pd30" style="padding-bottom: 2rem!important;">&ndash;&gt;-->
-                <!--&lt;!&ndash;{$content}&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--</div>-->
     </div>
-</div>
-<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
-<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
-
 <script>
-
-    function change_status(id,status) {
-        console.log(id);console.log(status);
-        $.ajax({
-            type : 'POST',
-            url  : "{:Url('CkUser/check_level')}",
-            data : {id:id,status:status},
-            dataType : 'json',
-            success  : function (res) {
-                console.log(res);
-                alert(res.msg);
-                if(res.status == 1){
-                    location.reload();
-                }
-            },
-            error : function () {
-                alert('错误的数据类型');
-            }
-        })
-    }
-
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
 </script>
 </body>
+
 </html>

@@ -1,0 +1,140 @@
+<layout name="common/layout_nav" />
+<div class="page plan">
+    <div class="page-hd">
+        <div class="header">
+            <p class="fs30 color_w">计划</p>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="selectNav fs26">
+            <span class="spanActive">众筹计划</span>
+            <span>还款计划</span>
+        </div>
+        <div class="block">
+            <div class="Box">
+                <div class="planType">
+                    <volist name="debt" id="vo">
+                        <a href="<if condition="$vo.money GT 0"> # <else/> {:U('chuangke/Plan/add_debt',['type' => $vo.code])} </if>">
+                            <div class="fs26">
+                                <if condition="$vo.money GT 0">
+                                    <p>{$vo.money}</p>
+                                <else/>
+                                    <img src="__PUBLIC__/static/chuangke//images/plan01.png" alt="">
+                                </if>
+                                <span>{$vo.name}</span>
+                            </div>
+                        </a>
+                    </volist>
+                </div>
+                <div class="planMoney">
+                    <div class="fs26">
+                        <p>可还款总额：</p><span>￥{$all_debt}</span><img src="__PUBLIC__/static/chuangke//images/plan02.png" alt="">
+                    </div>
+                    <if condition="$apply['id'] GT 0">
+                        <a href="{:U('chuangke/CkUser/applying',['id' => $apply['id']])}" class="fs26 level_text">去付款</a>
+                    <else/>
+                        <if condition="$user.level eq 1">
+                            <a href="javascript:go_use();" class="fs26 level_text">去激活</a>
+                        <else if condtion="$user.level lt 10"/>
+                            <a href="javascript:go_use();" class="fs26 level_text">去升级</a>
+                        </if>
+                    </if>
+                </div>
+                <div class="planList">
+                    <div class="fs26 name">还款计划</div>
+                    <volist name="stage" id="vo">
+                        <div class="list">
+                            <div class="left">
+                                <p class="fs26">第{$text[$key]}阶段</p>
+                                <div class="line">
+                                    <div style="width: 80%"></div>
+                                </div>
+                                <span class="fs24">{$vo.rece_money}/{$vo.need_money}</span>
+                            </div>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+            <div class="Box" style="display: none">
+                <div class="box_t ">
+                    <img src="__PUBLIC__/static/chuangke//images/message_no.png" alt="" class="mess_img">
+                    <div class="heng">
+                        <p>——————</p>
+                        <p class="fs24 wen">暂无相关数据</p>
+                        <p>——————</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="model">
+        <div class="modelContent">
+            <div class="text fs26 color_w">是否确定<if condition="$user.level eq 1">激活<else/>升级</if></div>
+            <div class="cellBtn">
+                <button class="fs24 cancel">取消</button>
+                <button class="fs24 confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    <include file="common/chuangke_footer_nav" />
+</div>
+
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+ <script>
+    $(function () {
+        $.toast.prototype.defaults.duration=1500//提示消失秒数
+        // var arr=[30,50,80,100];
+        var arr = {$ratio};
+        $('.line div').each(function(index){
+            $(this).animate({
+                'width': arr[index]+'%'
+            },1000)
+        })
+
+        $('.cancel').on('click', function () {
+            $(this).parents('.model').hide()
+        })
+        $('.confirm').on('click', function () {
+            $(this).parents('.model').hide()
+            $.ajax({
+                type : "POST",
+                url:"{:U('chuangke/CkUser/apply_handle')}",//+tab,
+                dataType:'JSON',
+                data : {},
+                success: function(data) {
+                    if (data.code == 1) {
+                        // window.location.href = data.url;
+                        $('.level_text').text(data.text);
+                        $('#level_text').attr('href',data.url);
+                    } else {
+                        $.toast(data.msg, "text");
+                    }
+                },
+                error:function(){
+                    $.toast('请稍后再试', "text");
+
+                }
+            });
+            // $.toast("有钱还：请现在个人中心绑定收款方式！", "text");
+        })
+        $('.selectNav span').on('click', function () {
+            var _index = $(this).index()
+            $(this).siblings().removeClass('spanActive')
+            $(this).addClass('spanActive')
+            $('.Box').eq(_index).siblings().hide()
+            $('.Box').eq(_index).show()
+        })
+    })
+    function go_use(){
+        $('.model').show()
+    }
+</script>
+
+</body>
+
+</html>
