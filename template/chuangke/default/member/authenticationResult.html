@@ -1,29 +1,42 @@
 <layout name="common/layout_nav" />
 <div class="page index">
     <div class="page-hd">
-        <div class="header">
-    <div class="header-left">
-        <a href="javascript:history.go(-1)" class="left-arrow"></a>
-    </div>
-    <div class="header-title">实名认证</div>
-    <div class="header-right">
-        <a href="#"></a>
-    </div>
+    <div class="header">
+        <div class="header-left">
+            <a href="javascript:history.go(-1)" class="left-arrow"></a>
+        </div>
+        <div class="header-title">实名认证</div>
+        <div class="header-right">
+            <a href="#"></a>
+        </div>
 </div>
     </div>
     <div class="page-bd">
         <!-- 页面内容-->
-        <div class="sh_top">
-            <img src="__PUBLIC__/static/chuangke/images/sh01.png" alt="">
-            <div class="color_8 fs28 mt20">您的实名认证审核已通过</div>
-        </div>
+        <if condition="$auth.status eq 0">
+            <div class="sh_top">
+                <img src="__PUBLIC__/static/chuangke/images/sh01.png" alt="">
+                <div class="color_8 fs28 mt20">您的实名认证审核已通过</div>
+            </div>
+        <elseif condition="$auth.status eq 1" />
+            <div class="sh_top">
+                <img src="__PUBLIC__/static/chuangke/images/sh01.png" alt="">
+                <div class="color_8 fs28 mt20">您的实名认证审核已通过</div>
+            </div>
+        <elseif condition="$auth.status eq 2" />
+            <div class="sh_top">
+                <img src="__PUBLIC__/static/chuangke/images/sh02.png" alt="">
+                <div class="color_8 fs28 mt20">您的实名认证审核未通过</div>
+            </div>
+        </if>
+
         <div class="weui-cells border-none" style="background-color: #3b4375;">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <p class="fs30 color_a">真实姓名</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <p class="fs28 color_8">刘德辉</p>
+                    <p class="fs28 color_8">{$auth.user_name}</p>
                 </div>
             </div>
             <div class="weui-cell">
@@ -39,7 +52,7 @@
                     <p class="fs30 color_a">证件号码</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <p class="fs28 color_8">4418***************3411</p>
+                    <p class="fs28 color_8">{$auth.str_id_card}</p>
                 </div>
             </div>
             <div class="weui-cell">
@@ -47,10 +60,20 @@
                     <p class="fs30 color_a">状态</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <p class="fs28 text-green">已通过</p>
+                    <if condition="$auth.status eq 0">
+                        <p class="fs28 text-green">已通过</p>
+                    <elseif condition="$auth.status eq 1" />
+                        <p class="fs28 text-green">已通过</p>
+                    <elseif condition="$auth.status eq 2" />
+                        <p class="fs28 text-red">未通过</p>
+                    </if>
                 </div>
             </div>
         </div>
+        <if condition="$auth.status neq 1">
+            <button class="fs30 color_w fw_b button_btn" onclick="seturl()">重新认证</button>
+        </if>
+
     </div>
 </div>
 
@@ -62,4 +85,9 @@
     $(function() {
         FastClick.attach(document.body);
     });
+
+    function seturl(){
+        window.location.href = "{:U('chuangke/Member/realNameAuthentication')}";
+    }
+
 </script>

@@ -13,29 +13,35 @@
         </div>
         <div class="page-bd">
             <!-- 页面内容-->
+            <form id="form"  method="post" enctype="multipart/form-data">
             <div class="inputBox">
                 <span class="fs28">收款渠道</span>
-                <input type="text" class="weui-input fs28 color_w" placeholder="微信或支付宝">
+                <input type="text" class="weui-input fs28 color_w" name="receivables_name" id="receivables_name" value="{$account.receivables_name}" placeholder="微信或支付宝">
             </div>
             <div class="inputBox">
                 <span class="fs28">账号</span>
-                <input type="text" class="weui-input fs28 color_w" placeholder="请输入微信或支付宝收款账号">
+                <input type="text" class="weui-input fs28 color_w" name="account_number" id="account_number" value="{$account.account_number}" placeholder="请输入微信或支付宝收款账号">
             </div>
             <div class="title fs26">收款二维码</div>
 
                 <div class="uploader__input-box">
-                <img src="__PUBLIC__/static/chuangke/images/upload.png" alt="">
-                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                    <if condition="$account.account_code_img neq ''">
+                        <img src="{$account.account_code_img}" class="account_code_img" alt="">
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/upload.png" class="account_code_img" alt="">
+                    </if>
+                    <input id="uploaderInput" class="weui-uploader__input" name="account_code_img" type="file" accept="image/*" multiple="">
                 </div>
             <div class="inputBox">
                     <span class="fs28">验证码</span>
-                    <input type="text" class="weui-input fs28 color_w" placeholder="请输入短信验证码">
+                    <input type="text" class="weui-input fs28 color_w" id="verify_code" name="verify_code" placeholder="请输入短信验证码">
                     <div class="codeBox">
                             <span class="color_r fs28  getCode" onclick="codeButton()">获取验证码</span>
                             <span class="color_9 fs28  time" style="display:none"></span>
                         </div> 
                 </div>
-                <button class="fs30 color_w fw_b button_btn">保存</button>
+                <button class="fs30 color_w fw_b button_btn" type="button" onclick="sub();">保存</button>
+            </form>
         </div>
 
     </div>
@@ -44,27 +50,155 @@
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
-    <script>
-	function codeButton(){
-        var time = 60;
-      var timeObj=$('.time')
-      var getCodeObj=$('.getCode')
-      timeObj.text(""+time+"s后重新点击");
-      getCodeObj.hide();
-      timeObj.show();
-	    
-	    var set=setInterval(function(){
-        timeObj.text(""+--time+"s后重新点击");
-        if (time<=0) {
-          timeObj.hide();
-          getCodeObj.show();
-          clearInterval(set);
+<script>
+    var mobile = {$userInfo.mobile};
+    function codeButton(){
+        var reg = /(1[3-9]\d{9}$)/;
+        if (!reg.test(mobile)) {
+            $("#mobile").focus();
+            layer.msg('请输入正确的手机号码', function () {
+                $("button").attr('has-click', '0');
+            });
+            return false;
         }
-	    }, 1000);
-	}
-    </script>
+
+        //发送验证码
+        $.ajax({
+            url: '/chuangke/login/captcha',
+            type: 'POST',
+            data: {
+                mobile: mobile,
+                type:'reg_user',
+            },
+            success: function (data1) {
+                if (data1.status == 200) {
+                    res_data = data1.result;
+                    console.log(res_data);
+
+                    var time = 60;
+                    var timeObj=$('.time')
+                    var getCodeObj=$('.getCode')
+                    timeObj.text(""+time+"s后重新点击");
+                    getCodeObj.hide();
+                    timeObj.show();
+
+                    var set=setInterval(function(){
+                        timeObj.text(""+--time+"s后重新点击");
+                        if (time<=0) {
+                            timeObj.hide();
+                            getCodeObj.show();
+                            clearInterval(set);
+                        }
+                    }, 1000);
+
+
+                    layer.msg('发送成功');
+
+                }
+                else {
+                    layer.msg(data1.msg);
+                    $("button").attr('has-click', '0');
+                    return;
+                }
+
+            },
+            error: function () {
+                layer.msg('发送失败');
+                $("button").attr('has-click', '0');
+            },
+
+
+        });
+    }
+
+    function sub(){
+        var receivables_name = $('#receivables_name').val();
+        var account_number = $('#account_number').val();
+        var verify_code = $('#verify_code').val();
+
+        if(receivables_name==''||receivables_name==null) {
+            layer.msg('请填写收款渠道',{icon: 5,time:3000});
+            return false;
+        }else if(account_number==''||account_number==null){
+            layer.msg('请填写收款账号',{icon: 5,time:3000});
+            return false;
+        }else if(verify_code==''||verify_code==null){
+            layer.msg('请填写验证码',{icon: 5,time:3000});
+            return false;
+        }
+
+        $.ajax({
+            url: "{:url('/chuangke/Member/paymentMethod')}",
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#form')[0]),
+            processData: false,
+            contentType: false,
+            dataType:"json",
+            success : function(data) {
+                console.log(data);
+                return false;
+                if(data.status==1){
+                    layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                        window.location = "{:url('/chuangke/Member/index')}";
+                        return false;
+                    });
+                }else{
+                    layer.msg(data.msg, { icon: 5, time: 2000 });
+                    return false;
+                }
+            }
+        });
+    }
+    $("input[name=account_code_img]").change(function() {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                // console.log(e.target.result+"路径")
+                // console.log(file);
+                $(".account_code_img").attr("src", e.target.result); //e.target.result就是最后的路径地址
+            };
+        }
+    });
+
+    function AppReturnBase64Image(base64imag) {
+        $.ajax({
+            'url': "{:url('Member/uploadimage')}",
+            'type': 'post',
+            'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
+            'dataType': 'json',
+            'success': function (data) {
+                // layer.msg(data.image_path, { icon: 5, time: 5000 });
+                if (data) {
+                    if (data.img_name == 'card_positive') {
+                        $('.card_positive').attr('src',  data.image_path);
+                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_positive" class="imagesinput"/>';
+                    } else if (data.img_name == 'card_back') {
+                        $('.card_back').attr('src', data.image_path);
+                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                    }
+                    $('.images-list').append(str);
+                } else {
+                    layer.msg('二维码上传失败', {icon: 5, time: 3000});
+                    return false;
+                }
+            }
+        });
+    }
+
+    function loadimg(uploadfile){
+        img_type = uploadfile;
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
+            window.app.Photo();
+        }
+    }
+</script>

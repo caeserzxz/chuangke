@@ -108,10 +108,10 @@ class Login extends Controller
 
         //1、校验user表手机号用户是否存在
         $user_data=db('users')->where('mobile',$input['mobile'])->find();
-        if($user_data)
-        {
-            return array('status' => 500, 'msg' => '手机用户已存在', 'result' => '');
-        }
+//        if($user_data)
+//        {
+//            return array('status' => 500, 'msg' => '手机用户已存在', 'result' => '');
+//        }
         //生成验证码
         $captcha = mt_rand(100000, 999999);
         //发送验证码接口（阿里云短信）

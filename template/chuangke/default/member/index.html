@@ -1,10 +1,21 @@
 <layout name="common/layout_nav" />
+<style>
+    .uploader__input-box{
+        
+    }
+</style>
     <div class="page my">
 
         <div class="page-bd">
             <!-- 页面内容-->
             <div class="userInfo">
-                <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
+                <form id="form"  method="post" enctype="multipart/form-data">
+                    <div class="uploader__input-box">
+                        <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                        <!--<input id="uploaderInput" class="weui-uploader__input" id="head_pic" name="head_pic" type="file" accept="image/*" multiple="">-->
+                    </div>
+                </form>
+
                 <div class="fs26">
                     <p>刘德辉</p>
                     <span onclick="applicationAgency();">申请代理</span>
@@ -16,7 +27,16 @@
                         <img src="__PUBLIC__/static/chuangke/images/my01.png" alt="">
                         <span class="fs30">实名认证</span>
                     </div>
-                    <div class="weui-cell__ft">未认证</div>
+                    <if condition="$is_auth eq 1">
+                        <div class="weui-cell__ft">未认证</div>
+                    <elseif condition="$auth_status eq 0" />
+                        <div class="weui-cell__ft">已通过</div>
+                    <elseif condition="$auth_status eq 1" />
+                        <div class="weui-cell__ft">已通过</div>
+                    <elseif condition="$auth_status eq 2" />
+                        <div class="weui-cell__ft">未通过</div>
+                    </if>
+
                 </a>
                 <a href="#" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
@@ -37,7 +57,11 @@
                         <img src="__PUBLIC__/static/chuangke/images/my04.png" alt="">
                         <span class="fs30">收款方式</span>
                     </div>
-                    <div class="weui-cell__ft">已设置</div>
+                    <if condition="$is_account eq 1">
+                        <div class="weui-cell__ft">已设置</div>
+                    <else />
+                        <div class="weui-cell__ft">未设置</div>
+                    </if>
                 </a>
                 <a href="{:U('chuangke/Member/myGoodFriend')}" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
@@ -76,6 +100,10 @@
     });
 </script>
 <script>
+    var auth_status = {$auth_status};
+    var is_auth = {$is_auth};
+
+
     //申请代理
     function applicationAgency(){
         window.location.href = "{:U('chuangke/Member/applicationAgency')}";
@@ -83,12 +111,21 @@
 
     //收款方式
     function paymentMethod(){
-        window.location.href = "{:U('chuangke/Member/paymentMethod')}";
+        if(is_auth==2&&auth_status!=2){
+            window.location.href = "{:U('chuangke/Member/paymentMethod')}";
+        }else{
+            layer.msg('请先实名认证',{time:2500});
+        }
     }
 
     //实名认证
     function Authentication(){
-        window.location.href = "{:U('chuangke/Member/realNameAuthentication')}";
+        if(is_auth==1){
+            window.location.href = "{:U('chuangke/Member/realNameAuthentication')}";
+        }else{
+            window.location.href = "{:U('chuangke/Member/authenticationResult')}";
+        }
+
     }
 
     //退出登录
@@ -109,4 +146,39 @@
             }
         });
     }
+
+    $("input[name=head_pic]").change(function() {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                // console.log(e.target.result+"路径")
+                // console.log(file);
+                // $(".head_pic").attr("src", e.target.result); //e.target.result就是最后的路径地址
+                $.ajax({
+                    url: "{:url('/chuangke/Member/uploda_head_pic')}",
+                    type: 'POST',
+                    cache: false,
+                    data: new FormData($('#form')[0]),
+                    processData: false,
+                    contentType: false,
+                    dataType:"json",
+                    success : function(data) {
+                        console.log(data);
+                        // return false;
+                        if(data.status==1){
+                            layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                                window.location = "{:url('/chuangke/Member/index')}";
+                            });
+                        }else{
+                            layer.msg(data.msg, { icon: 5, time: 2000 });
+                            return false;
+                        }
+                    }
+                });
+            };
+        }
+    });
 </script>

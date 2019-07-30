@@ -13,13 +13,14 @@
     </div>
     <div class="page-bd">
         <!-- 页面内容-->
+        <form id="form"  method="post" enctype="multipart/form-data">
         <div class="weui-cells weui-cells_form reset_cells">
             <div class="weui-cell">
                 <div class="weui-cell__hd">
                     <label class="weui-label fs28">姓名</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input fs28" type="text" placeholder="请填写姓名">
+                    <input class="weui-input fs28" id="user_name" name="user_name" type="text" placeholder="请填写姓名">
                 </div>
             </div>
         </div>
@@ -29,7 +30,7 @@
                     <label class="weui-label fs28">身份证</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input fs28" type="text" placeholder="请输入身份证">
+                    <input class="weui-input fs28" id="id_card" name="id_card" type="text" placeholder="请输入身份证">
                 </div>
             </div>
         </div>
@@ -38,34 +39,146 @@
             <div class="weui-flex">
                 <div class="weui-flex__item">
                     <div class="sfz_box">
-                        <div class="uploader__input-box">
-                            <img src="__PUBLIC__/static/chuangke/images/bg01.png" alt="">
-                                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                            <div class="uploader__input-box">
+                                <img src="__PUBLIC__/static/chuangke/images/bg01.png" class="card_positive" alt="">
+                                <input id="uploaderInput" class="weui-uploader__input" id="card_positive" name="card_positive" type="file" accept="image/*" multiple="">
                             </div>
                         <sapn class="upload_btn fs26">上传身份证正面</span>
                     </div>
                 </div>
                 <div class="weui-flex__item">
                     <div class="sfz_box">
-                        <div class="uploader__input-box">
-                            <img src="__PUBLIC__/static/chuangke/images/bg02.png" alt="">
-                                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                            <div class="uploader__input-box">
+                                <img src="__PUBLIC__/static/chuangke/images/bg02.png" class="card_back" alt="">
+                                <input id="uploaderInput" class="weui-uploader__input" id="card_back" name="card_back" type="file" accept="image/*" multiple="">
                             </div>
                         <span class="upload_btn fs26">上传身份证反面</span>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="fs30 color_w fw_b button_btn">确认</button>
+            <div class="images-list"><!--上传图片列表--></div>
+        <button class="fs30 color_w fw_b button_btn" type="button" onclick="sub();">确认</button>
+        </form>
     </div>
+
 </div>
 
 <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
+
+    function sub(){
+
+        var idcardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+        var user_name = $('#user_name').val();
+        var id_card = $('#id_card').val();
+        var card_positive = $('#card_positive').val();
+        var card_back = $('#card_back').val();
+
+        console.log(user_name);
+        console.log(id_card);
+        console.log(card_positive);
+        console.log(card_back);
+
+        if(user_name==''||user_name==null){
+            layer.msg('请填写姓名',{icon: 5,time:3000});
+            return false;
+        }else if(!(idcardReg.test(id_card))){
+            layer.msg('请输入正确身份证号',{icon: 5,time:3000});
+            return false;
+        }
+
+        $.ajax({
+            url: "{:url('/chuangke/Member/realNameAuthentication')}",
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#form')[0]),
+            processData: false,
+            contentType: false,
+            dataType:"json",
+            success : function(data) {
+                console.log(data);
+                // return false;
+                if(data.status==1){
+                    layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                        window.location = "{:url('/chuangke/Member/index')}";
+                    });
+                }else{
+                    layer.msg(data.msg, { icon: 5, time: 2000 });
+                    return false;
+                }
+            }
+        });
+
+
+    }
+
+    $("input[name=card_positive]").change(function() {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                // console.log(e.target.result+"路径")
+                // console.log(file);
+                $(".card_positive").attr("src", e.target.result); //e.target.result就是最后的路径地址
+            };
+        }
+    });
+
+    $("input[name=card_back]").change(function() {
+        console.log(22);
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                // console.log(e.target.result+"路径")
+                // console.log(file);
+                $(".card_back").attr("src", e.target.result); //e.target.result就是最后的路径地址
+            };
+        }
+    });
+
+    function AppReturnBase64Image(base64imag) {
+        $.ajax({
+            'url': "{:url('Member/uploadimage')}",
+            'type': 'post',
+            'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
+            'dataType': 'json',
+            'success': function (data) {
+                // layer.msg(data.image_path, { icon: 5, time: 5000 });
+                if (data) {
+                    if (data.img_name == 'card_positive') {
+                        $('.card_positive').attr('src',  data.image_path);
+                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_positive" class="imagesinput"/>';
+                    } else if (data.img_name == 'card_back') {
+                        $('.card_back').attr('src', data.image_path);
+                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                    }
+                    $('.images-list').append(str);
+                } else {
+                    layer.msg('二维码上传失败', {icon: 5, time: 3000});
+                    return false;
+                }
+            }
+        });
+    }
+
+    function loadimg(uploadfile){
+        img_type = uploadfile;
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
+            window.app.Photo();
+        }
+    }
+
 </script>
