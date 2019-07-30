@@ -17,22 +17,22 @@
             </div>
             <div class="form_box">
                 <p class="tou ">注册</p>
-                <input type="number" class="fs28 tel" placeholder="请输入您的手机号">
+                <input type="number"  name="mobile" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">
                 <div class="yanzheng">
                     <div class="left">
-                        <input class="input fs28" type="number" pattern="[0-9]*" placeholder="验证码">
+                        <input class="input fs28" name="verify_code" type="number" pattern="[0-9]*" placeholder="验证码">
                     </div>
                     <div class="right">
                         <span class="fs26  getCode" onclick="codeButton()">获取验证码</span>
                         <span class="fs26  time" style="display: none">60s</span>
                     </div>
                 </div>
-                <input type="password" class="fs28 pwd1" placeholder="密码">
-                <input type="text" class="fs28" placeholder="邀请码(必填）">
+                <input type="password" class="fs28 pwd1" name="password" placeholder="密码">
+                <input type="text" name="tuijian_code" class="fs28" placeholder="邀请码(必填）">
                 <p class="fs24 see ">注册并同意<a href="javascript:;" class="fs24">《注册协议》</a></p>
                 <a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>
             </div>
-            <a href="注册.html" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
+            <a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
         </div>
 
 
@@ -41,30 +41,123 @@
     <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
     <script>
+
         function codeButton() {
             var timeObj = $('.time')
             var getCodeObj = $('.getCode')
-            getCodeObj.hide();
-            timeObj.show();
-            var time = 60;
-            var set = setInterval(function () {
-                timeObj.text("" + --time + "s");
-                if (time <= 0) {
-                    timeObj.hide();
-                    getCodeObj.show();
-                    clearInterval(set);
-                }
-            }, 1000);
+            // getCodeObj.hide();
+            // timeObj.show();
+            // var time = 60;
+            // var set = setInterval(function () {
+            //     timeObj.text("" + --time + "s");
+            //     if (time <= 0) {
+            //         timeObj.hide();
+            //         getCodeObj.show();
+            //         clearInterval(set);
+            //     }
+            // }, 1000);
+
+            var mobile = $("#mobile").val();
+            console.log(mobile);
+            //验证手机格式
+            var reg = /(1[3-9]\d{9}$)/;
+            if (!reg.test(mobile)) {
+                $("#mobile").focus();
+                layer.msg('请输入正确的手机号码', function () {
+                    $("button").attr('has-click', '0');
+                });
+                return false;
+            }
+
+            //发送验证码
+            $.ajax({
+                url: '/chuangke/login/captcha',
+                type: 'POST',
+                data: {
+                    mobile: mobile,
+                    type:'reg_user',
+                },
+                success: function (data1) {
+                    console.log(data1);
+
+                    if (data1.status == 200) {
+                        res_data = data1.result;
+                        console.log(res_data);
+                        layer.msg('发送成功');
+                    }
+                    else {
+                        layer.msg(data1.msg);
+                        $("button").attr('has-click', '0');
+                        return;
+                    }
+
+                    getCodeObj.hide();
+                    timeObj.show();
+                    var time = 60;
+                    var set = setInterval(function () {
+                        timeObj.text("" + --time + "s");
+                        if (time <= 0) {
+                            timeObj.hide();
+                            getCodeObj.show();
+                            clearInterval(set);
+                        }
+                    }, 1000);
+
+
+                },
+                error: function () {
+                    layer.msg('发送失败');
+                    $("button").attr('has-click', '0');
+                },
+
+
+            });
         }
+
         $(".loading_btn").on("click", function () {
-            $.toast("注册成功", 2000);
-            window.location.href = "登录.html"
+            var mobile = $('input[name=mobile]').val();
+            var verify_code = $('input[name=verify_code]').val();
+            var password = $('input[name=password]').val();
+            var tuijian_code = $('input[name=tuijian_code]').val();
+
+            if(mobile==''||mobile==null){
+                layer.msg('请填写手机号',{icon:5,time:2000});
+                return false;
+            }else if(verify_code==''||verify_code==null){
+                layer.msg('请填写验证码',{icon:5,time:2000});
+                return false;
+            }else if(password==''||password==null){
+                layer.msg('请填写密码',{icon:5,time:2000});
+                return false;
+            }else if(tuijian_code==''||tuijian_code==null){
+                layer.msg('请填些邀请码',{icon:5,time:2000});
+                return false;
+            }
+
+            $.ajax({
+                'url':"{:U('chuangke/login/ajaxRegister')}",
+                'type':'post',
+                'data':{'mobile':mobile,'verify_code':verify_code,'password':password,'tuijian_code':tuijian_code},
+                'dataType':'json',
+                'success':function(data){
+                   if(data.status==1){
+                        layer.msg(data.msg,{time:2000},function(){
+                            window.location.href = "{:U('chuangke/login/index')}";
+                        })
+                   }else{
+                       layer.msg(data.msg,{icon:5,time:2000});
+                   }
+                }
+            });
+            // $.toast("注册成功", 2000);
+            // window.location.href = "登录.html"
         })
         $(".kuailogin").on("click", function () {
             window.location.href = "登录.html"

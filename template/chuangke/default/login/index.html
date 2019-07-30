@@ -6,19 +6,20 @@
         
         <div class="form_box">
             <p class="tou ">登录</p>
-            <input type="number" class="fs28 tel" placeholder="请输入您的手机号">
-            <input type="password" class="fs28 pwd" placeholder="请输入密码(6-20位字符)">
-            <a href="忘记密码.html" class="rember">忘记密码</a>
-            <a href="javascript:;" class="weui-btn loading_btn fs30">登录</a>
+            <input type="number" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">
+            <input type="password" id="password" class="fs28 pwd" placeholder="请输入密码(6-20位字符)">
+            <a href="{:U('chuangke/login/forgotPassword')}" class="rember">忘记密码</a>
+            <a href="javascript:;" class="weui-btn loading_btn fs30" onclick="loginBtn();">登录</a>
         </div>
 
 
-        <a href="注册.html" class="weui-btn zhuce fs26">快速注册</a>
+        <a href="{:U('chuangke/login/register')}" class="weui-btn zhuce fs26">快速注册</a>
     </div>
 
     <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
@@ -30,3 +31,35 @@
             $(".pwd").val()
         })
     </script>
+<script>
+    function loginBtn(){
+        var mobile = $('#mobile').val();
+        var password = $('#password').val();
+        if(mobile==''||mobile==null){
+            layer.msg('请填写手机号',{icon:5,time:2000});
+            return false;
+        }else if(password==''||password==null){
+            layer.msg('请填写密码',{icon:5,time:2000});
+            return false;
+        }
+
+        $.ajax({
+            'url':"{:U('chuangke/login/login_check')}",
+            'type':'post',
+            'data':{'mobile':mobile,'password':password},
+            'dataType':'json',
+            'success':function(data){
+                console.log(data);
+                // return false;
+                if(data.status==1){
+                    layer.msg(data.msg,{time:2000},function(){
+                        window.location.href = "{:U('chuangke/index/index')}";
+                    })
+                }else{
+                    layer.msg(data.msg,{icon:5,time:2000});
+                }
+            }
+        });
+
+    }
+</script>

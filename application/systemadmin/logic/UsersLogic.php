@@ -58,11 +58,11 @@ class UsersLogic extends Model
 		if ($user_count > 0) {
 			return array('status' => -1, 'msg' => '账号已存在');
 		}
-    	$user['password'] = encrypt($user['password']);
-    	$user['reg_time'] = time();
-    	$user_id = M('users')->add($user);
-    	if(!$user_id){
-    		return array('status'=>-1,'msg'=>'添加失败');
+        $user['password'] = encrypt($user['password']);
+        $user['reg_time'] = time();
+        $user_id = M('users')->add($user);
+        if(!$user_id){
+    		return array('status'=>-1,'msg'=>'注册');
     	}else{
     		$pay_points = tpCache('basic.reg_integral'); // 会员注册赠送积分
     		if($pay_points > 0)
@@ -83,8 +83,9 @@ class UsersLogic extends Model
             }
             Db::name('users')->where('user_id',$user_id)->setField('leader_all',$leader);
 
-    		return array('status'=>1,'msg'=>'添加成功','user_id'=>$user_id);
+    		return array('status'=>1,'msg'=>'注册成功','user_id'=>$user_id);
     	}
     }
+
 
 }

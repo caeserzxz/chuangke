@@ -10,7 +10,7 @@
             <div class="block">
                 <div class="name">
                     <p class="fs26">佣金账户</p>
-                    <a href="钱包明细.html" class="fs24">明细</a>
+                    <a href="{:U('chuangke/Wallet/walletRecord')}" class="fs24">明细</a>
                 </div>
                 <div class="money">
                     <span class="fs24">￥</span><p class="color_w fw_b">5.00</p>
@@ -26,7 +26,7 @@
             <div class="block">
                     <div class="name">
                         <p class="fs26">保证金账户</p>
-                        <a href="钱包明细.html" class="fs24">明细</a>
+                        <a href="{:U('chuangke/Wallet/walletRecord')}" class="fs24">明细</a>
                     </div>
                     <div class="money">
                         <span class="fs24">￥</span><p class="color_w fw_b">5.00</p>
@@ -55,9 +55,10 @@
         <include file="common/chuangke_footer_nav" />
     </div>
 
-    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);

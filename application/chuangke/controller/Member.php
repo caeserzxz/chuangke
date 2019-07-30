@@ -6,6 +6,20 @@ use think\Db;
 
 class Member extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $userId   = Session('user_id');
+        if(empty($userId)){
+            $this->redirect('chuangke/Login/index');
+        }else{
+            $userInfo =Db::name('users')
+                ->where('user_id',$userId)
+                ->find();
+            $this->userInfo = $userInfo;
+        }
+    }
+
     /**
      * 首页
      */

@@ -7,11 +7,11 @@
                 <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
                 <div class="fs26">
                     <p>刘德辉</p>
-                    <span>申请代理</span>
+                    <span onclick="applicationAgency();">申请代理</span>
                 </div>
             </div>
             <div class="weui-cells">
-                <a href="#" class="weui-cell weui-cell_access">
+                <a href="#" class="weui-cell weui-cell_access" onclick="Authentication();">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my01.png" alt="">
                         <span class="fs30">实名认证</span>
@@ -32,21 +32,21 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a href="#" class="weui-cell weui-cell_access">
+                <a href="#" class="weui-cell weui-cell_access" onclick="paymentMethod();">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my04.png" alt="">
                         <span class="fs30">收款方式</span>
                     </div>
                     <div class="weui-cell__ft">已设置</div>
                 </a>
-                <a href="#" class="weui-cell weui-cell_access">
+                <a href="{:U('chuangke/Member/myGoodFriend')}" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my05.png" alt="">
                         <span class="fs30">我的好友</span>
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a href="#" class="weui-cell weui-cell_access">
+                <a href="{:U('chuangke/Member/callMeBaby')}" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my06.png" alt="">
                         <span class="fs30">联系客服</span>
@@ -61,7 +61,7 @@
                     <div class="weui-cell__ft">0K</div>
                 </a>
             </div>
-            <button class="fs30 color_w fw_b button_btn">我已付款</button>
+            <button class="fs30 color_w fw_b button_btn" type="button" onclick="layout();">退出登录</button>
         </div>
         <include file="common/chuangke_footer_nav" />
     </div>
@@ -69,11 +69,44 @@
     <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
-    <script>
+<script>
+    //申请代理
+    function applicationAgency(){
+        window.location.href = "{:U('chuangke/Member/applicationAgency')}";
+    }
 
-    </script>
+    //收款方式
+    function paymentMethod(){
+        window.location.href = "{:U('chuangke/Member/paymentMethod')}";
+    }
+
+    //实名认证
+    function Authentication(){
+        window.location.href = "{:U('chuangke/Member/realNameAuthentication')}";
+    }
+
+    //退出登录
+    function layout(){
+        $.ajax({
+            'url':"{:U('chuangke/Login/layOut')}",
+            'type':'post',
+            'data':'',
+            'dataType':'json',
+            'success':function(data){
+                if(data.status==1){
+                    layer.msg(data.msg,{time:2000},function(){
+                        window.location.href = "{:U('chuangke/Index/index')}";
+                    });
+                }else{
+                    layer.msg(data.msg,{time:2000});
+                }
+            }
+        });
+    }
+</script>
