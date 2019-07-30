@@ -82,6 +82,8 @@ class Plan extends MobileBase
             $surplus_rece -= $need_money;
         }
         $text = ['一','二','三','四','五','六','七','八','九'];
+        // 是否有等级正在审核
+        $apply = M('ck_apply')->where(['user_id' => $this->user_id,'apply_status' => 0])->find();
 
         $this->assign('user',$user);                // 用户数据
         $this->assign('debt',$debt);                // 负债类型
@@ -89,6 +91,7 @@ class Plan extends MobileBase
         $this->assign('all_debt',$all_debt);        // 负债总额
         $this->assign('stage',$stage);              // 阶段数据
         $this->assign('ratio',json_encode($ratio)); // 各阶段还款百分比
+        $this->assign('apply',$apply);  // 审核中等级申请数量
 
 		return $this->fetch();
 	}

@@ -31,10 +31,14 @@
                     <div class="fs26">
                         <p>可还款总额：</p><span>￥{$all_debt}</span><img src="__PUBLIC__/static/chuangke//images/plan02.png" alt="">
                     </div>
-                    <if condition="$user.level eq 1">
-                        <a href="javascript:go_use();" class="fs26">去激活</a>
-                    <else if condtion="$user.level lt 10"/>
-                        <a href="javascript:go_use();" class="fs26">去升级</a>
+                    <if condition="$apply['id'] GT 0">
+                        <a href="{:U('chuangke/CkUser/applying',['id' => $apply['id']])}" class="fs26 level_text">去付款</a>
+                    <else/>
+                        <if condition="$user.level eq 1">
+                            <a href="javascript:go_use();" class="fs26 level_text">去激活</a>
+                        <else if condtion="$user.level lt 10"/>
+                            <a href="javascript:go_use();" class="fs26 level_text">去升级</a>
+                        </if>
                     </if>
                 </div>
                 <div class="planList">
@@ -86,11 +90,10 @@
         $.toast.prototype.defaults.duration=1500//提示消失秒数
         // var arr=[30,50,80,100];
         var arr = {$ratio};
-        console.log(arr)
         $('.line div').each(function(index){
             $(this).animate({
-            'width': arr[index]+'%'
-        },1000)
+                'width': arr[index]+'%'
+            },1000)
         })
 
         $('.cancel').on('click', function () {
@@ -102,10 +105,12 @@
                 type : "POST",
                 url:"{:U('chuangke/CkUser/apply_handle')}",//+tab,
                 dataType:'JSON',
-                data : {'money':money,'type':"{$type}"},
+                data : {},
                 success: function(data) {
                     if (data.code == 1) {
-                        window.location.href = data.url;
+                        // window.location.href = data.url;
+                        $('.level_text').text(data.text);
+                        $('#level_text').attr('href',data.url);
                     } else {
                         $.toast(data.msg, "text");
                     }
@@ -115,7 +120,7 @@
 
                 }
             });
-            $.toast("有钱还：请现在个人中心绑定收款方式！", "text");
+            // $.toast("有钱还：请现在个人中心绑定收款方式！", "text");
         })
         $('.selectNav span').on('click', function () {
             var _index = $(this).index()

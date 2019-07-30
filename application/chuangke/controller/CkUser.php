@@ -66,8 +66,18 @@ class CkUser extends MobileBase
         $next_level = Db::name('user_level')->where('level_id',$user['level'] + 1)->field('level_id,level_name,need_num,recom_condition,make_money')->find();
         if(empty($next_level)) $this->ajaxReturn(['status'=>0,'msg'=>'没有下一个等级信息']);
 
+        // 是否实名认证
+        $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => 1])->count();
+        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！']);
+        // 是否绑定收款方式
+        $is_receivables = M('receipt_information')->where(['user_id' => $this->user_id])->count();
+        if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！']);
+        // 是否有众筹计划
+        $is_plan = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->count();
+        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先添加众筹计划！']);
+
         //是否已有等级在审核中
-        $count = Db::name('ck_apply')->where(['user_id'=>$user['user_id'],'level'=>$next_level['level_id'],'apply_status'=>0])->count();
+        $count = Db::name('ck_apply')->where(['user_id'=>$user['user_id'],'apply_status'=>0])->count();
         if($count) $this->ajaxReturn(['status'=>0,'msg'=>'已有等级正在审核中，请稍后再试']);
 
         // 验证推荐条件是否满足
@@ -199,7 +209,7 @@ class CkUser extends MobileBase
         $data['district']       = $district;
         $data['address']        = $address;
         $data['make_money']     = $next_level['make_money'];
-
+        dump($data);die;
         Db::startTrans();
         try {
             $resID = Db::name('ck_apply')->add($data);
@@ -449,11 +459,20 @@ class CkUser extends MobileBase
         $id = input('id');
         if(empty($id)) $this->ajaxReturn(['status'=>0,'msg'=>'请传入参数','data'=>'']);
         $apply = Db::name('ck_apply')->alias('A')
-            -> field('A.*,B.nickname as nickname_1,B.mobile as mobile_1,B.wx_number as wx_1,C.nickname as nickname_2,C.mobile as mobile_2,C.wx_number as wx_2')
+            -> field('A.*,B.nickname as nickname_1,B.mobile as mobile_1,B.wx_number as wx_1,C.nickname as nickname_2,C.mobile as mobile_2,C.wx_number as wx_2,D.id_card as id_card1,E.id_card as id_card2,D.user_name as user_name1,E.user_name as user_name2')
             -> join('users B','A.check_leader_1 = B.user_id','left')
             -> join('users C','A.check_leader_2 = C.user_id','left')
+            -> join('user_authentication D','A.check_leader_1 = D.user_id','left')
+            -> join('user_authentication E','A.check_leader_2 = E.user_id','left')
             -> where('A.id',$id)
             -> find();
+
+        $apply['user_name1']  = $this->substr_cut($apply['user_name1']);
+        $apply['user_name2']  = $this->substr_cut($apply['user_name2']);
+
+        $apply['id_card1']  = substr_replace($apply['id_card1'],'**********',4,10);
+        $apply['id_card2']  = substr_replace($apply['id_card2'],'**********',3,4);
+
         $usersModel = Db('users');
         foreach ($apply as $key => $val) {
 
@@ -511,7 +530,59 @@ class CkUser extends MobileBase
             return ['code' => 0];
         }
     }
-    
 
+    /**
+     * 替换中文汉字
+     * @author MEI
+     */
+    public function substr_cut($user_name){
+        if (!$user_name) return false;
+        $strlen = mb_strlen($user_name, 'utf-8');
+        $firstStr = mb_substr($user_name,0,1,'utf-8');
+        $lastStr = mb_substr($user_name, -1,1,'utf-8');
 
+        if ($strlen == 2) {
+            $text = $firstStr.str_repeat('*', mb_strlen($user_name,'utf-8')-1);
+        }else{
+            $text = $firstStr.str_repeat('*', $strlen-2).$lastStr;
+        }
+        return $text;
+    }
+    /**
+     * 上传打款凭证
+     * @author MEI
+     */
+    public function pay_detail($id,$type){
+
+        $apply = M('ck_apply')->where(['id' => $id])->find();
+
+        if ($type == 1) {
+            $check_leader = $apply['check_leader_1'];
+        }else{
+            $check_leader = $apply['check_leader_2'];
+        }
+        $authent = M('user_authentication')->where(['user_id' => $check_leader])->find();
+        $receipt = M('receipt_information')->where(['user_id' => $check_leader])->find();
+
+        $apply['user_name']  = $this->substr_cut($authent['user_name']);
+        $apply['id_card']  = substr_replace($authent['id_card'],'**********',4,10);
+        $apply['account_number']  = $receipt['account_number'];
+        $apply['account_code_img']  = $receipt['account_code_img'];
+
+        $this->assign('apply',$apply);
+        return $this->fetch('plan/pay_detail');
+    }
+    /**
+     * 上传打款凭证
+     * @author MEI
+     */
+    public function pay_voucher(){
+        $img = '';
+        if ($type == 1) {
+            $updata['voucher_img1'] = $img;
+        }else{
+            $updata['voucher_img2'] = $img;
+        }
+        $res = M('ck_apply')->where(['id' => $id])->updata($updata);
+    }
 }
