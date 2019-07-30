@@ -209,7 +209,7 @@ class CkUser extends MobileBase
         $data['district']       = $district;
         $data['address']        = $address;
         $data['make_money']     = $next_level['make_money'];
-        dump($data);die;
+
         Db::startTrans();
         try {
             $resID = Db::name('ck_apply')->add($data);
@@ -383,14 +383,39 @@ class CkUser extends MobileBase
             }
             if (!$updata) $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
 
-            $res = Db::name('ck_apply')->where('id',$id)->save($updata);
-            if($res){
+            Db::startTrans();
+            try {
+                $res = Db::name('ck_apply')->where('id',$id)->save($updata);
+                if (!$res) {
+                    Db::rollback();
+                    $this->ajaxReturn(['status'=>0,'msg'=>'数据更新失败']);
+                }
                 if($updata['apply_status'] == 1){
                     //审核通过 更新用户等级
                     $res1 = Db::name('users')->where('user_id',$info['user_id'])->setField('level',$info['level']);
-
+                    if (!$res1) {
+                        Db::rollback();
+                        $this->ajaxReturn(['status'=>0,'msg'=>'等级更新失败']);
+                    }
+                    # 升一星时添加对应层级激活人数
+                    if ($info['level'] == 2) {
+                        $leader_arr = explode('_',$user['leader_all']);        
+                        krsort($leader_arr);
+                        $leader = array_values($leader_arr);
+                        if (count($leader) > 1) {
+                            foreach ($leader as $key => $value) {
+                                if ($key >= 10 || $key < 1) continue;
+                                $res2 = M('users_team')->where(['user_id' => $value])->setInc('team_'.$key,1);
+                                if (!$res2) break;
+                            }
+                            if (!$res2) {
+                                Db::rollback();
+                                $this->ajaxReturn(['status'=>0,'msg'=>'激活人数更新失败']);
+                            }
+                        }                        
+                    }
+                    # 验证是否已还款完成 冻结账号
                     if (!$user['is_lock']) {
-                        // 验证是否已还款完成 冻结账号
                         $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys'); // 所有负债
                         // 已收款金额
                         $all_rece = M('ck_apply')
@@ -399,13 +424,19 @@ class CkUser extends MobileBase
                             ->sum('make_money');
 
                         if ($all_rece >= $all_debt) {
-                            M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
+                            $res3 = M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
+                            if (!$res3) {
+                                Db::rollback();
+                                $this->ajaxReturn(['status'=>0,'msg'=>'账号冻结失败']);
+                            }
                         }
                     }
                 }
+                Db::commit();
                 $this->ajaxReturn(['status'=>1,'msg'=>'审核成功']);
-            }
-            $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
+            } catch (\Exception $e){
+                $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);
+            }   
         }else{
             $check_user = Db::name('ck_apply')->alias('A')
                 -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name,D.user_name,D.id_card')
@@ -612,7 +643,7 @@ class CkUser extends MobileBase
         }else{
             $updata['voucher_img2'] = $img;
         }
-        $res = M('ck_apply')->where(['id' => $id])->updata($updata);
+        $res = M('ck_apply')->where(['id' => $id])->update($updata);
     }
     /**
      * 收款信息

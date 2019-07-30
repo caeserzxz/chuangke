@@ -99,8 +99,15 @@ class Plan extends MobileBase
     public function add_debt(){
 
         if($this->request->isPost()){
-            $user = M('users')->field('is_lock')->where(['user_id' => $user_id])->find();
+            $user = M('users')->field('is_lock')->where(['user_id' => $this->user_id])->find();
             if ($user['is_lock'] == 1) $this->error('账号已被冻结,请联系管理员');
+
+            // 是否实名认证
+            $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => 1])->count();
+            if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！']);
+            // 是否绑定收款方式
+            $is_receivables = M('receipt_information')->where(['user_id' => $this->user_id])->count();
+            if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！']);
 
             $money = input('post.money');
             $type = input('post.type');
@@ -142,5 +149,11 @@ class Plan extends MobileBase
             $this->assign('debt_name',$debt_name);
             return $this->fetch();
         }
+    }
+    // 我的团队
+    public function users_team(){
+        $team = M('users_team')->where(['user_id' =>$this->user_id])->find();
+        $this->assign('team',$team);
+        return $this->fetch();
     }
 }

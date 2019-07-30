@@ -215,12 +215,52 @@
             </dl>
             <dl class="row">
                 <dt class="tit">
-                    <label for="minimum_money">人工审核最小额度</label>
+                    <label for="artificial_min1">人工审核最小额度_信用卡</label>
                 </dt>
                 <dd class="opt">
-                    <input id="minimum_money"  name="minimum_money" value="{$config.minimum_money}" class="input-txt" type="text">
+                    <input id="artificial_min1"  name="artificial_min1" value="{$config.artificial_min1}" class="input-txt" type="text">
                     <span class="err"></span>
                     <p class="notic">单次债务金额超过此额度需人工审核,不足自动审核</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="artificial_min2">人工审核最小额度_房贷</label>
+                </dt>
+                <dd class="opt">
+                    <input id="artificial_min2"  name="artificial_min2" value="{$config.artificial_min2}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">单次债务金额超过此额度需人工审核,不足自动审核</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="artificial_min3">人工审核最小额度_车贷</label>
+                </dt>
+                <dd class="opt">
+                    <input id="artificial_min3"  name="artificial_min3" value="{$config.artificial_min3}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">单次债务金额超过此额度需人工审核,不足自动审核</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="artificial_min4">人工审核最小额度_其他</label>
+                </dt>
+                <dd class="opt">
+                    <input id="artificial_min4"  name="artificial_min4" value="{$config.artificial_min4}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">单次债务金额超过此额度需人工审核,不足自动审核</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="autoTime">自动审核时间</label>
+                </dt>
+                <dd class="opt">
+                    <input id="autoTime"  name="autoTime" value="{$config.autoTime}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">单位:分钟</p>
                 </dd>
             </dl>
      <!--        <dl class="row">
