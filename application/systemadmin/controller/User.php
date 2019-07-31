@@ -143,6 +143,8 @@ class User extends Base {
 			if($res['status'] == 1){
                 $code = getWelcode();
                 Db::name('tuijian_code')->save(['user_id'=>$res['user_id'],'code'=>$code]);
+                //添加团队
+                Db::name('users_team')->save(['user_id'=>$res['user_id']]);
 				$this->success('添加成功',U('User/index'));exit;
 			}else{
 				$this->error('添加失败,'.$res['msg'],U('User/index'));
