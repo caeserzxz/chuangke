@@ -132,13 +132,13 @@ class Member extends  MobileBase
         if($this->request->isPost()){
             $data = I('post.');
             //验证验证码
-            $mobile_captcha = db('n_mobile_captcha')->where('mobile', $userInfo['mobile'])->order('id desc')->find();
-            if ($mobile_captcha['expire_in'] < time()) {
-                return array('status' => 500, 'msg' => '验证码已过期', 'result' => '');
-            }
-            if ($mobile_captcha['captcha'] != $data['verify_code']) {
-                return array('status' => 500, 'msg' => '验证码不正确', 'result' => '');
-            }
+//            $mobile_captcha = db('n_mobile_captcha')->where('mobile', $userInfo['mobile'])->order('id desc')->find();
+//            if ($mobile_captcha['expire_in'] < time()) {
+//                return array('status' => 500, 'msg' => '验证码已过期', 'result' => '');
+//            }
+//            if ($mobile_captcha['captcha'] != $data['verify_code']) {
+//                return array('status' => 500, 'msg' => '验证码不正确', 'result' => '');
+//            }
             if(empty($_FILES['account_code_img']['tmp_name'])&&empty($data['account_code_img'])){
                 return array('status' => 500, 'msg' => '请上传收款码', 'result' => '');
             }

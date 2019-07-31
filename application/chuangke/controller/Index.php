@@ -24,7 +24,8 @@ class Index extends Controller
      * 首页
      */
     public function index(){
-
+        $userInfo = $this->userInfo;
+        $unread_message = M('message_board')->where(array('user_id'=>$userInfo['user_id']))->count();
         return $this->fetch();
     }
 

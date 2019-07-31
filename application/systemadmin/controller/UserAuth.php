@@ -73,9 +73,11 @@ class UserAuth extends Base {
 
                 //自己获得保证金
                  $model->earnestMoney($user['user_id'],$config['earnest_money']);
+                add_message($user['user_id'],'实名认证成功,获得'.$config['earnest_money'].'保证金');
                 //推荐人获得保证金
                 if(!empty($user['first_leader'])){
                     $model->earnestMoney($user['first_leader'],$config['safe_money']);
+                    add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['earnest_money'].'保证金');
                 }
             }
         }catch (Exception $e){

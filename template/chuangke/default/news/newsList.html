@@ -1,4 +1,17 @@
-<layout name="common/layout_nav" />
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all.css"/>
+<script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+
+    <title> 我的消息</title>
+</head>
+
+<body>
     <div class="page ">
         <div class="page-hd">
             <div class="header">
@@ -13,7 +26,8 @@
         </div>
         <div class="page-bd message">
             <!-- 页面内容-->
-            <div class="box_t ">
+      <if condition="$list eq null">
+            <div class="box_t " >
                 <img src="__PUBLIC__/static/chuangke/images/message_no.png" alt="" class="mess_img">
                 <div class="heng">
                     <p>——————</p>
@@ -21,17 +35,40 @@
                     <p>——————</p>
                 </div>
             </div>
+      <else />
+          <volist name="list" id="vol">
+            <div class="listBox">
+                <div class="list" onclick="details(this);">
+                    <div class="cell"><p class="fs26 color_a">实名验证不通过</p>
+                        <span class="fs24 color_8">2019.07.29 00:00:00</span></div>
+                    <div class="details fs26 color_8">实名验证不通过实名验证不通过实名验证不通过实名验证不通过实名验证不通过的原因：是因为不够帅！</div>
+                </div>
+            </div>
+          </volist>
+      </if>
         </div>
     </div>
 
-    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
     <script>
+        $('.list').on('click',function(){
+            console.log( $('.details'))
+            $('.details').toggle()
+        })
+        function  details(obj){
+            // $(obj).children('.details').
+            // console.log($(obj))
+            // console.log($(obj).children('.details'));
+            //  console.log(obj)('.details').toggle();
+        }
     </script>
+</body>
+
+</html>

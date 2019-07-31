@@ -24,7 +24,11 @@ class News extends Controller
      * 消息列表
      */
     public function newsList(){
+        $userInfo = $this->userInfo;
 
+        $list = M('message_board')->where(array('user_id'=>$userInfo['user_id']))->select();
+
+        $this->assign('list',$list);
         return $this->fetch();
     }
 }

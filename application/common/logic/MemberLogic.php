@@ -57,4 +57,6 @@ class MemberLogic extends Model
         $res = M('users')->where(array('user_id'=>$user_id))->update($map);
         return  $res;
     }
+
+    
 }
