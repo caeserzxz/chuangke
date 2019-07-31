@@ -38,9 +38,9 @@
       <else />
           <volist name="list" id="vol">
             <div class="listBox">
-                <div class="list" onclick="details(this);">
-                    <div class="cell"><p class="fs26 color_a">实名验证不通过</p>
-                        <span class="fs24 color_8">2019.07.29 00:00:00</span></div>
+                <div class="list" onclick="details($(this));">
+                    <div class="cell"><p class="fs26 color_a">{$vol.content}</p>
+                        <span class="fs24 color_8"><?php echo date('Y-m-d H:i:s',$vol['create_time']);?></span></div>
                     <div class="details fs26 color_8">实名验证不通过实名验证不通过实名验证不通过实名验证不通过实名验证不通过的原因：是因为不够帅！</div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
         function  details(obj){
             // $(obj).children('.details').
             // console.log($(obj))
-            // console.log($(obj).children('.details'));
+            // console.log(obj.children('.details'));
             //  console.log(obj)('.details').toggle();
         }
     </script>
