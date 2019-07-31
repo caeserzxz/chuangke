@@ -90,7 +90,7 @@
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">审核时间</div>
                         </th>
-                        <th align="center" axis="col6" class="">
+                        <!-- <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 100px;" class="">发货方式</div>
                         </th>
                         <th align="center" axis="col6" class="">
@@ -101,7 +101,7 @@
                         </th>
                         <th align="center" axis="col1" class="handle">
                             <div style="text-align: center; width: 250px;">收货地址</div>
-                        </th>
+                        </th> -->
                         <th style="width:100%" axis="col7">
                             <div></div>
                         </th>
@@ -132,7 +132,7 @@
                                     <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
-                                    <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname_2}</div>
+                                    <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname_2|default='/'}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">
@@ -148,7 +148,7 @@
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class=""><if condition="$v[check_time_1]">{$v.check_time_1|date='Y-m-d H:i',###}<else></if></div>
                                 </td>
-                                 <td align="center" axis="col6" class="">
+                                 <!-- <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">
                                         <if condition="$v[shopping_type]==1">
                                             快递配送
@@ -165,7 +165,7 @@
                                 </td>
                                 <td align="left" axis="col6" class="">
                                     <div style="text-align: left; width: 250px;" class="">{$v.province}&nbsp;{$v.city}&nbsp;{$v.district}&nbsp;{$v.address}</div>
-                                </td>
+                                </td> -->
                                 <td align="" class="" style="width: 100%;">
                                     <div>&nbsp;</div>
                                 </td>

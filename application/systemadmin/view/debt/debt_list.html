@@ -76,7 +76,7 @@
                             <div style="text-align: center; width: 120px;" class="">金额</div>
                         </th>
                         <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 150px;" class="">债务凭证</div>
+                            <div style="text-align: center; width: 200px;" class="">债务凭证</div>
                         </th>
                         <th align="center" axis="col5" class="">
                             <div style="text-align: center; width: 100px;" class="">债务类型</div>
@@ -117,7 +117,11 @@
                                     <div style="text-align: center; width: 120px;" class="">{$v.moneys}</div>
                                 </td>
                                 <td align="center" axis="col4" class="">
-                                    <div style="text-align: center; width: 150px;" class="">{$v.imgsrc}</div>
+                                    <a href="{$v.imgsrc}">
+                                        <div style="text-align: center; width: 200px;height: 30px;" class="">
+                                            <img src="{$v.imgsrc}" style="height: 30px;width: 200px" >
+                                        </div>
+                                    </a>
                                 </td>
                                 <td align="center" axis="col5" class="">
                                     <div style="text-align: center; width: 100px;" class="">{$type[$v['type']]}</div>

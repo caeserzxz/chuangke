@@ -107,12 +107,12 @@
                 dataType:'JSON',
                 data : {},
                 success: function(data) {
-                    if (data.code == 1) {
-                        // window.location.href = data.url;
-                        $('.level_text').text(data.text);
-                        $('#level_text').attr('href',data.url);
-                    } else {
-                        $.toast(data.msg, "text");
+                    console.log(data);
+                    $.toast(data.msg, "text");
+
+                    if (data.status == 1) {
+                        $('.level_text').text('去付款');
+                        $('.level_text').attr('href',"/index.php?m=chuangke&c=CkUser&a=applying&id="+data.data);
                     }
                 },
                 error:function(){

@@ -5,6 +5,7 @@ use think\Controller;
 use think\Db;
 use app\mobile\controller\MobileBase;
 use app\common\logic\MemberLogic;
+use think\Page;
 
 class Member extends  MobileBase
 {
@@ -187,16 +188,16 @@ class Member extends  MobileBase
      */
     public function goodFriendList(){
         $userInfo = $this->userInfo;
-        $list = M('users')->field('mobile,reg_time,head_pic,nickname')->where(['first_leader' => $userInfo['user_id']])->select();
+        $count = M('users')->where("first_leader", $userInfo['user_id'])->count();
+        $Page = new Page($count, 12);
+        
+        $list = M('users')
+            ->field('mobile,reg_time,head_pic,nickname')
+            ->where(['first_leader' => $userInfo['user_id']])
+            ->limit($Page->firstRow . ',' . $Page->listRows)->select();
+
         $this->assign('list',$list);
-        return $this->fetch();
-    }
-
-    /**
-     * 我的团队
-     */
-    public function myTeam(){
-
+        if (IS_AJAX) return $this->fetch('ajax_friend_list');
         return $this->fetch();
     }
 
