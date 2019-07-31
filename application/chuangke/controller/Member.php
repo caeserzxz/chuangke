@@ -178,7 +178,6 @@ class Member extends  MobileBase
      * 我的好友
      */
     public function myGoodFriend(){
-
         return $this->fetch();
     }
 
@@ -186,7 +185,9 @@ class Member extends  MobileBase
      * 好友列表
      */
     public function goodFriendList(){
-
+        $userInfo = $this->userInfo;
+        $list = M('users')->field('mobile,reg_time,head_pic,nickname')->where(['first_leader' => $userInfo['user_id']])->select();
+        $this->assign('list',$list);
         return $this->fetch();
     }
 

@@ -8,6 +8,8 @@ use app\common\logic\UsersLogic;
 use app\common\model\Users;
 use think\Db;
 use app\mobile\controller\MobileBase;
+use app\common\logic\MemberLogic;
+
 
 class Plan extends MobileBase
 {
@@ -47,7 +49,7 @@ class Plan extends MobileBase
             ->whereOR(['check_leader_2' => $this->user_id,'apply_status' => 1])
             ->sum('make_money');
 
-        if (($all_rece >= $all_debt) && ($user['is_lock'] != 1)) {
+        if (($all_debt > 0) && ($all_rece >= $all_debt) && ($user['is_lock'] != 1)) {
             M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
         }
         $surplus_debt = $all_debt;
@@ -111,6 +113,7 @@ class Plan extends MobileBase
 
             $money = input('post.money');
             $type = input('post.type');
+            $imgsrc = input('post.imgsrc');
 
             // 是否有已上传或正在审核的同类型债务
             $status1 = M('user_debt')->where(['user_id' => $this->user_id,'type' => $type,'status' => 1])->count();
@@ -118,7 +121,17 @@ class Plan extends MobileBase
 
             $status2 = M('user_debt')->where(['user_id' => $this->user_id,'type' => $type,'status' => 2])->count();
             if ($status1) $this->error('已有同类型债务众筹中');
-
+            
+            if(empty($imgsrc) && empty($_FILES['imgsrc']['tmp_name'])){
+                $this->error('请上传债务凭证');
+            }
+            $MemberLogic  = new MemberLogic();
+            if($_FILES['imgsrc']['tmp_name']){//上传身份证正面
+                $imgsrc = $MemberLogic->upload_img('imgsrc','plan');
+                if($imgsrc){
+                    $img_src = '/'.UPLOAD_PATH.'plan/'.$imgsrc;
+                }
+            }
             if ($money <= 0) $this->error('金额错误');
             // 金额是否是200整数倍
             $shop_info = tpCache('shop_info');
@@ -129,7 +142,7 @@ class Plan extends MobileBase
             $data = [
                 'user_id'    => $this->user_id,
                 'moneys'     => $money,
-                'imgsrc'     => $imgsrc,
+                'imgsrc'     => $img_src,
                 'type'       => $type,
                 'createtime' => time(),
             ];
