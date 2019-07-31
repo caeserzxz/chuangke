@@ -45,16 +45,23 @@ class Plan extends MobileBase
         $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys');
         // 已收款金额
         $all_rece = M('ck_apply')
-            ->where(['check_leader_1' => $this->user_id,'apply_status' => 1])
-            ->whereOR(['check_leader_2' => $this->user_id,'apply_status' => 1])
+            ->where(['check_leader_1' => $this->user_id,'check_status_1' => 1])
+            ->whereOR('check_leader_2='. $this->user_id.' and check_status_2=1')
             ->sum('make_money');
 
         if (($all_debt > 0) && ($all_rece >= $all_debt) && ($user['is_lock'] != 1)) {
             M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
         }
+        // 是否有审核订单
+        $is_check = M('ck_apply')
+            ->where(['check_leader_1' => $this->user_id,'check_status_1' => 0])
+            ->whereOR('check_leader_2='.$this->user_id.' and check_status_2=0')
+            ->count();
+
         $surplus_debt = $all_debt;
         $surplus_rece = $all_rece;
 
+        $check = 0;
         for($i=1;$i<10;$i++){
             $ratio_now = $rece_money = 0;
             if ($surplus_debt <= 0) continue;
@@ -70,19 +77,21 @@ class Plan extends MobileBase
                 $ratio_now = 100;
                 $rece_money = $need_money;
             }else{
+                if ($is_check) $check ++;
+
                 // 剩余还款金额不够,比例四舍五入
                 if ($surplus_rece > 0) {
                     $ratio_now = round($surplus_rece*100 / $need_money);
                     $rece_money = $surplus_rece;
                 }
             }
-
-            $stage[] = ['need_money' => $need_money,'rece_money' => $rece_money];
+            $stage[] = ['need_money' => $need_money,'rece_money' => $rece_money,'check' => $check];
             $ratio[] = $ratio_now;
 
             $surplus_debt -= $need_money;
             $surplus_rece -= $need_money;
         }
+
         $text = ['一','二','三','四','五','六','七','八','九'];
         // 是否有等级正在审核
         $apply = M('ck_apply')->where(['user_id' => $this->user_id,'apply_status' => 0])->find();
@@ -105,11 +114,11 @@ class Plan extends MobileBase
             if ($user['is_lock'] == 1) $this->error('账号已被冻结,请联系管理员');
 
             // 是否实名认证
-            $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => 1])->count();
-            if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！']);
+            $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => ['IN',[0,1]]])->count();
+            if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！','url' => U('chuangke/Member/realNameAuthentication')]);
             // 是否绑定收款方式
             $is_receivables = M('receipt_information')->where(['user_id' => $this->user_id])->count();
-            if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！']);
+            if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
 
             $money = input('post.money');
             $type = input('post.type');

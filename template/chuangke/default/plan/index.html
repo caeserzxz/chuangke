@@ -50,7 +50,11 @@
                                 <div class="line">
                                     <div style="width: 80%"></div>
                                 </div>
-                                <span class="fs24">{$vo.rece_money}/{$vo.need_money}</span>
+                                <if condition="$vo.check EQ 1">
+                                    <a href="{:U('chuangke/CkUser/check_level')}"><span class="fs24">去审核</span></a>
+                                <else/>
+                                    <span class="fs24">{$vo.rece_money}/{$vo.need_money}</span>
+                                </if>
                             </div>
                         </div>
                     </volist>
@@ -107,9 +111,12 @@
                 dataType:'JSON',
                 data : {},
                 success: function(data) {
-                    console.log(data);
                     $.toast(data.msg, "text");
-
+                    if (data.status == 0) {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        }
+                    }
                     if (data.status == 1) {
                         $('.level_text').text('去付款');
                         $('.level_text').attr('href',"/index.php?m=chuangke&c=CkUser&a=applying&id="+data.data);

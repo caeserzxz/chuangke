@@ -67,14 +67,14 @@ class CkUser extends MobileBase
         if(empty($next_level)) $this->ajaxReturn(['status'=>0,'msg'=>'您已是最高等级']);
 
         // 是否实名认证
-        $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => 1])->count();
-        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！']);
+        $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => ['IN',[0,1]]])->count();
+        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！','url' => U('chuangke/Member/realNameAuthentication')]);
         // 是否绑定收款方式
         $is_receivables = M('receipt_information')->where(['user_id' => $this->user_id])->count();
-        if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！']);
+        if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
         // 是否有众筹计划
         $is_plan = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->count();
-        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先添加众筹计划！']);
+        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先添加众筹计划！','url' => U('chuangke/Plan/add_debt')]);
 
         //是否已有等级在审核中
         $count = Db::name('ck_apply')->where(['user_id'=>$user['user_id'],'apply_status'=>0])->count();
@@ -603,8 +603,10 @@ class CkUser extends MobileBase
 
         if ($strlen == 2) {
             $text = $firstStr.str_repeat('*', mb_strlen($user_name,'utf-8')-1);
+        }elseif ($strlen == 3) {
+            $text = $firstStr.str_repeat('*', $strlen-($strlen-1)).$lastStr;
         }else{
-            $text = $firstStr.str_repeat('*', $strlen-2).$lastStr;
+            $text = $firstStr.str_repeat('**', $strlen-($strlen-1)).$lastStr;
         }
         return $text;
     }
