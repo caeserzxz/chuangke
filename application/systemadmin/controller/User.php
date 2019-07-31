@@ -384,6 +384,8 @@ class User extends Base {
 
                 if(empty($user_first)){
                     $this->ajaxReturn(array('status' => 0, 'message' => 'ID不存在', 'data' => ''));
+                }else{
+                    $leader_all = $user_first['leader_all'].'_'.$list['user_id'];
                 }
             }
 
@@ -391,7 +393,7 @@ class User extends Base {
                 $this->ajaxReturn(array('status' => 0, 'message' => '修改失败,不能填自己的ID', 'data' => ''));
             }
 
-            $r = M('users')->where(array('user_id'=>$uid))->update(['first_leader'=>$first_leader]);
+            $r = M('users')->where(array('user_id'=>$uid))->update(['first_leader'=>$first_leader,'leader_all'=>$leader_all]);
 
             if($r){
                 $this->ajaxReturn(array('status' => 1, 'message' => '更改成功'));
