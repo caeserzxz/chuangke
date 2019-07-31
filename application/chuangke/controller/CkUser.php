@@ -74,7 +74,7 @@ class CkUser extends MobileBase
         if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
         // 是否有众筹计划
         $is_plan = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->count();
-        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先添加众筹计划！','url' => U('chuangke/Plan/add_debt')]);
+        if (!$is_plan) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先添加众筹计划！','url' => U('chuangke/Plan/add_debt')]);
 
         //是否已有等级在审核中
         $count = Db::name('ck_apply')->where(['user_id'=>$user['user_id'],'apply_status'=>0])->count();
