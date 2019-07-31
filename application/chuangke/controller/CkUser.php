@@ -603,8 +603,10 @@ class CkUser extends MobileBase
 
         if ($strlen == 2) {
             $text = $firstStr.str_repeat('*', mb_strlen($user_name,'utf-8')-1);
+        }elseif ($strlen == 3) {
+            $text = $firstStr.str_repeat('*', $strlen-($strlen-1)).$lastStr;
         }else{
-            $text = $firstStr.str_repeat('*', $strlen-2).$lastStr;
+            $text = $firstStr.str_repeat('**', $strlen-($strlen-1)).$lastStr;
         }
         return $text;
     }
