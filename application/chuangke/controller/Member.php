@@ -180,6 +180,36 @@ class Member extends  MobileBase
      * 我的好友
      */
     public function myGoodFriend(){
+        $user = $this->userInfo;
+
+        //加载第三方类库
+        vendor('phpqrcode.phpqrcode');
+
+        //获取个人
+        $url = request()->domain().U('contactleader',['id'=>$user['user_id']]);
+        $after_path = 'public/qrcode/'.md5($url).'.png';
+        //保存路径
+        $path =  ROOT_PATH.$after_path;
+
+        //判断是该文件是否存在
+        if(!is_file($path))
+        {
+            //实例化
+            $qr = new \QRcode();
+            //1:url,3: 容错级别：L、M、Q、H,4:点的大小：1到10
+            $qr::png($url,'./'.$after_path, "M", 6,TRUE);
+        }
+        $img = request()->domain().'/'.$after_path;
+
+        $code = M('tuijian_code')->where(['user_id' => $user['user_id']])->value('code');
+
+        $data['url'] = $url;
+        $data['img'] = $img;
+        $data['code'] = $code;
+
+        $this->assign('user',$user);
+        $this->assign('data',$data);
+
         return $this->fetch();
     }
 

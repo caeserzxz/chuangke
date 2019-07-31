@@ -1,26 +1,27 @@
 <layout name="common/layout_nav" />
     <div class="page friend">
-            <div class="page-hd">
-                    <div class="header">
-    <div class="header-left">
-        <a href="javascript:history.go(-1)" class="left-arrow"></a>
-    </div>
-    <div class="header-title">我的好友</div>
-    <div class="header-right">
-        <a href="{:U('chuangke/Member/goodFriendList')}">好友列表</a>
-    </div>
-</div>
+        <div class="page-hd">
+            <div class="header">
+                <div class="header-left">
+                    <a href="javascript:history.go(-1)" class="left-arrow"></a>
                 </div>
+                <div class="header-title">我的好友</div>
+                <div class="header-right">
+                    <a href="{:U('chuangke/Member/goodFriendList')}">好友列表</a>
+                </div>
+            </div>
+        </div>
         <div class="page-bd">
             <!-- 页面内容-->
 
             <div class="block">
-                <img src="__PUBLIC__/static/chuangke/images/code.png" alt="">
-                <p class="fs26 color_8">邀请码：<span>NV8PMC</span></p>
+                <img src="{$data.img}" alt="">
+                <p class="fs26 color_8">邀请码：<span>{$data.code}</span></p>
                 <div class="btncCell">
-                    <button class="fs28 color_w">复制邀请链接</button>
-                    <button class="fs28 color_w">保存为图片</button>
+                    <button class="fs28 color_w" id="Copy" data-clipboard-action="copy" data-clipboard-target="#copyUrl" >复制邀请链接</button>
+                    <button class="fs28 color_w" onclick="preserveImg()">保存为图片</button>
                 </div>
+                <div id="copyUrl" style="opacity: 0">{$data.url}</div>
             </div>
             <div class="tips fs26 color_8">
                 1、每推荐一个用户注册可得50元保证金，可提现<br/>
@@ -29,16 +30,21 @@
             </div>
         </div>
     </div>
-
-    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
-    <script>
-
-    </script>
+<script>
+    window.onload=function (){
+        var clipboard = new Clipboard('#Copy');
+        clipboard.on('success', function(e) {
+            $.toptip("复制成功！", 1500, 'success');
+            e.clearSelection();
+        });
+    }
+    function preserveImg(argument) {
+        // downloadPicturetToBase64(String base64DataStr)
+    }
+</script>
