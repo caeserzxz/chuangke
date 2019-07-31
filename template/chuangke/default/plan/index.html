@@ -107,9 +107,12 @@
                 dataType:'JSON',
                 data : {},
                 success: function(data) {
-                    console.log(data);
                     $.toast(data.msg, "text");
-
+                    if (data.status == 0) {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        }
+                    }
                     if (data.status == 1) {
                         $('.level_text').text('去付款');
                         $('.level_text').attr('href',"/index.php?m=chuangke&c=CkUser&a=applying&id="+data.data);
