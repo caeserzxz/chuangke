@@ -808,7 +808,9 @@ exit("功能正在开发中。。。");
             $list[$key]['city']     = M('region')->where('id',$value['city'])->value('name');
             $list[$key]['district'] = M('region')->where('id',$value['district'])->value('name');
         }
-        // var_dump($list);die;
+        $status = ['-1' => '审核不通过','0' => '审核中','1' => '审核成功'];
+        $this->assign('status',$status);
+
         $show  = $Page->show();
         $this->assign('show',$show);
         $this->assign('list',$list);

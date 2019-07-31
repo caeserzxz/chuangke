@@ -49,9 +49,9 @@
                     <div class="sDiv2">
                         <select name="apply_status" class="select sDiv3">
                             <option value="">审核状态</option>
-                            <option value="0">审核中</option>
-                            <option value="1">审核通过</option>
-                            <option value="-1">审核不通过</option>
+                            <volist name="status" id="vo">
+                                <option value="{$key}">{$vo}</option>
+                            </volist>
                         </select>
                     </div>
                     
@@ -67,22 +67,28 @@
                     <thead>
                     <tr>
                         <th align="center" axis="col3" class="">
-                            <div style="text-align: center; width: 70px;" class="">申请记录ID</div>
+                            <div style="text-align: center; width: 70px;" class="">记录ID</div>
                         </th>
                         <th align="center" axis="col3" class="">
-                            <div style="text-align: center; width: 70px;" class="">申请会员ID</div>
+                            <div style="text-align: center; width: 70px;" class="">会员ID</div>
                         </th>
                         <th align="center" axis="col4" class="">
-                            <div style="text-align: center; width: 150px;" class="">申请升级会员昵称</div>
+                            <div style="text-align: center; width: 150px;" class="">会员昵称</div>
                         </th>
                         <th align="center" axis="col5" class="">
-                            <div style="text-align: center; width: 100px;" class="">申请升级的等级</div>
+                            <div style="text-align: center; width: 100px;" class="">申请等级</div>
                         </th>
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">审核人(1)用户昵称</div>
                         </th>
                         <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 100px;" class="">审核状态(1)</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">审核人(2)用户昵称</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 100px;" class="">审核状态(2)</div>
                         </th>
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 100px;" class="">审核状态</div>
@@ -132,18 +138,18 @@
                                     <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 100px;" class="">{$status[$v['check_status_1']]}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname_2|default='/'}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">
-                                        <if condition="$v[apply_status]==-1">
-                                            审核不通过
-                                        <elseif condition="$v[apply_status]==0">
-                                            审核中
-                                        <elseif condition="$v[apply_status]==1">
-                                            审核通过
-                                        </if>
+                                        <if condition="$v.check_leader_2">{$status[$v['check_status_2']]}<else/> / </if>
                                     </div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 100px;" class="">{$status[$v['apply_status']]}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class=""><if condition="$v[check_time_1]">{$v.check_time_1|date='Y-m-d H:i',###}<else></if></div>
