@@ -545,7 +545,6 @@ class CkUser extends MobileBase
                 $apply['check_leader2_level']  = $check_leader2_level['level_name'];
             }
         }
-
         return $this->fetch('user/applying',[
             'apply' => $apply,
         ]);
@@ -618,8 +617,10 @@ class CkUser extends MobileBase
 
         if ($type == 1) {
             $check_leader = $apply['check_leader_1'];
+            $apply['img'] = $apply['voucher_img1'];
         }else{
             $check_leader = $apply['check_leader_2'];
+            $apply['img'] = $apply['voucher_img2'];
         }
         $authent = M('user_authentication')->where(['user_id' => $check_leader])->find();
         $receipt = M('receipt_information')->where(['user_id' => $check_leader])->find();
@@ -630,6 +631,7 @@ class CkUser extends MobileBase
         $apply['account_code_img']  = $receipt['account_code_img'];
 
         $this->assign('apply',$apply);
+        $this->assign('type',$type);
         return $this->fetch('plan/pay_detail');
     }
     /**
@@ -637,13 +639,31 @@ class CkUser extends MobileBase
      * @author MEI
      */
     public function pay_voucher(){
-        $img = '';
+        $upload_img = input('post.upload_img');
+        $type = input('post.type');
+        $id = input('post.id');
+
+        if(empty($upload_img) && empty($_FILES['upload_img']['tmp_name'])){
+            $this->error('请上传打款凭证');
+        }
+        $MemberLogic  = new \app\common\logic\MemberLogic();
+        if($_FILES['upload_img']['tmp_name']){//上传身份证正面
+            $upload_img = $MemberLogic->upload_img('upload_img','plan');
+            if($upload_img){
+                $img_src = '/'.UPLOAD_PATH.'plan/'.$upload_img;
+            }
+        }
         if ($type == 1) {
-            $updata['voucher_img1'] = $img;
+            $updata['voucher_img1'] = $img_src;
         }else{
-            $updata['voucher_img2'] = $img;
+            $updata['voucher_img2'] = $img_src;
         }
         $res = M('ck_apply')->where(['id' => $id])->update($updata);
+        if ($res) {
+            $this->success('上传成功',U('chuangke/CkUser/applying',['id' => $id]));
+        }else{
+            $this->error('上传失败');
+        }
     }
     /**
      * 收款信息

@@ -29,7 +29,7 @@
                 </div>
                 <div class="planMoney">
                     <div class="fs26">
-                        <p>可还款总额：</p><span>￥{$all_debt}</span><img src="__PUBLIC__/static/chuangke//images/plan02.png" alt="">
+                        <p>可还款总额：</p><span>￥{$all_debt|default=0}</span><img src="__PUBLIC__/static/chuangke//images/plan02.png" alt="">
                     </div>
                     <if condition="$apply['id'] GT 0">
                         <a href="{:U('chuangke/CkUser/applying',['id' => $apply['id']])}" class="fs26 level_text">去付款</a>

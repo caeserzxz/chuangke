@@ -13,23 +13,29 @@
         </div>
     </div>
     <div class="page-bd">
+        <form id="form" method="post" enctype="multipart/form-data">
         <!-- 页面内容-->
-        <div class="inputBox">
-            <span class="fs28">债务类型</span>
-            <input type="text" class="weui-input fs28 color_w" placeholder="{$debt_name[$type]}" disabled>
-        </div>
-        <div class="inputBox">
-            <span class="fs28">债务金额</span>
-            <input type="text" class="weui-input fs28 color_w" placeholder="请输入金额" id="money">
-        </div>
-        <div class="title fs26">上传债务凭证</div>
-        <div class="uploader__input-box">
-        <img src="__PUBLIC__/static/chuangke//images/upload2.png" alt="">
-            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
-        </div>
-        <button class="fs30 color_w fw_b button_btn" onclick="add_debt();">提交审核</button>
+            <div class="inputBox">
+                <span class="fs28">债务类型</span>
+                <input type="text" class="weui-input fs28 color_w" placeholder="{$debt_name[$type]}" disabled>
+            </div>
+            <div class="inputBox">
+                <span class="fs28">债务金额</span>
+                <input type="text" class="weui-input fs28 color_w" placeholder="请输入金额" id="money" name="money">
+            </div>
+            <div class="title fs26">上传债务凭证</div>
+            <div class="uploader__input-box">
+                <img src="__PUBLIC__/static/chuangke//images/upload2.png" alt="" class="imgsrc">
+                <input id="imgsrc" name="imgsrc" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+            </div>
+            <div class="images-list"></div><!--上传图片列表-->
+            <input type="hidden" name="type" value="{$type}">
+            <button class="fs30 color_w fw_b button_btn" type="button" onclick="add_debt();">提交审核</button>
+        </form>
     </div>
 </div>
+<script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
+
 <script>
     $(function() {
         FastClick.attach(document.body);
@@ -38,27 +44,74 @@
 <script>
     function add_debt() {
         var money = $("#money").val();
+        var imgsrc = $('#imgsrc').val();
+        if (imgsrc == '') {
+            $.toast("请上传债务凭证", "text");
+            return false;
+        }
         if (money < 1) {
             $.toast("请输入金额", "text");
             return false;
         }
         $.ajax({
-            type : "POST",
-            url:"{:U('chuangke/Plan/add_debt')}",//+tab,
-            dataType:'JSON',
-            data : {'money':money,'type':"{$type}"},
-            success: function(data) {
+            url: "{:url('/chuangke/Plan/add_debt')}",
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#form')[0]),
+            processData: false,
+            contentType: false,
+            dataType:"json",
+            success : function(data) {
                 if (data.code == 1) {
                     window.location.href = data.url;
                 } else {
                     $.toast(data.msg, "text");
                 }
-            },
-            error:function(){
-                $.toast('请稍后再试', "text");
-
             }
         });
+    }
+    $("input[name=imgsrc]").change(function() {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                $(".imgsrc").attr("src", e.target.result); //e.target.result就是最后的路径地址
+            };
+        }
+    });
+
+    function AppReturnBase64Image(base64imag) {
+        $.ajax({
+            'url': "{:url('Member/uploadimage')}",
+            'type': 'post',
+            'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
+            'dataType': 'json',
+            'success': function (data) {
+                // layer.msg(data.image_path, { icon: 5, time: 5000 });
+                if (data) {
+                    if (data.img_name == 'imgsrc') {
+                        $('.imgsrc').attr('src',  data.image_path);
+                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="imgsrc" class="imagesinput"/>';
+                    } else if (data.img_name == 'card_back') {
+                        $('.card_back').attr('src', data.image_path);
+                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                    }
+                    $('.images-list').append(str);
+                } else {
+                    layer.msg('二维码上传失败', {icon: 5, time: 3000});
+                    return false;
+                }
+            }
+        });
+    }
+
+    function loadimg(uploadfile){
+        img_type = uploadfile;
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
+            window.app.Photo();
+        }
     }
 </script>
 </body>

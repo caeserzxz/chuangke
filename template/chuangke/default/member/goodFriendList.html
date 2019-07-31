@@ -2,104 +2,45 @@
     <div class="page friend">
         <div class="page-hd">
             <div class="header">
-    <div class="header-left">
-        <a href="javascript:history.go(-1)" class="left-arrow"></a>
-    </div>
-    <div class="header-title">好友列表</div>
-    <div class="header-right">
-        <a href="#">我的团队</a>
-    </div>
-</div>
+                <div class="header-left">
+                    <a href="javascript:history.go(-1)" class="left-arrow"></a>
+                </div>
+                <div class="header-title">好友列表</div>
+                <div class="header-right">
+                    <a href="{:U('chuangke/Plan/users_team')}">我的团队</a>
+                </div>
+            </div>
         </div>
         <div class="page-bd">
             <!-- 页面内容-->
             <div class="weui-cells">
-                <div class="weui-cell">
-                    <div class="weui-cell__bd fs24">
-                        <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                        <p class="color_w">181****7939</p>
-                        <span>18154127939</span>
-                    </div>
-                    <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                </div>
-                <div class="weui-cell">
-                        <div class="weui-cell__bd fs24">
-                            <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                            <p class="color_w">181****7939</p>
-                            <span>18154127939</span>
-                        </div>
-                        <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                    </div>
+                <volist name="list" id="vo">
                     <div class="weui-cell">
-                            <div class="weui-cell__bd fs24">
-                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                                <p class="color_w">181****7939</p>
-                                <span>18154127939</span>
-                            </div>
-                            <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
+                        <div class="weui-cell__bd fs24">
+                            <img src="{$vo.head_pic|default='__PUBLIC__/static/chuangke/images/userImg.png'}" alt="">
+                            <p class="color_w">{$vo.nickname}</p>
+                            <span>{:substr_replace($vo['mobile'],'****',3,4)}</span>
                         </div>
-                        <div class="weui-cell">
-                                <div class="weui-cell__bd fs24">
-                                    <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                                    <p class="color_w">181****7939</p>
-                                    <span>18154127939</span>
-                                </div>
-                                <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                            </div>
-                            <div class="weui-cell">
-                                    <div class="weui-cell__bd fs24">
-                                        <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                                        <p class="color_w">181****7939</p>
-                                        <span>18154127939</span>
-                                    </div>
-                                    <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                                </div>
-                                <div class="weui-cell">
-                                        <div class="weui-cell__bd fs24">
-                                            <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                                            <p class="color_w">181****7939</p>
-                                            <span>18154127939</span>
-                                        </div>
-                                        <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                                    </div>
-                                    <div class="weui-cell">
-                                            <div class="weui-cell__bd fs24">
-                                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                                                <p class="color_w">181****7939</p>
-                                                <span>18154127939</span>
-                                            </div>
-                                            <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                                        </div>
-                                        <div class="weui-cell">
-                                                <div class="weui-cell__bd fs24">
-                                                    <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
-                                                    <p class="color_w">181****7939</p>
-                                                    <span>18154127939</span>
-                                                </div>
-                                                <div class="weui-cell__ft color_a">2019-07-17 13:25:12</div>
-                                            </div>
+                        <div class="weui-cell__ft color_a">{$vo.reg_time|date='Y-m-d H:i',###}</div>
+                    </div>
+                </volist>
             </div>
         </div>
     </div>
-
-    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
-<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
-    <script>
-        var loading = false;  //状态标记
-        $('.page-bd').infinite().on("infinite", function() {
-        if(loading) return;
-        loading = true;
-        setTimeout(function() {
-            $(".weui-cells").append("<p> 我是新加载的内容 </p>");
-            loading = false;
-        }, 1500);   //模拟延迟
-        });
-    </script>
+<script>
+    var loading = false;  //状态标记
+    $('.page-bd').infinite().on("infinite", function() {
+    if(loading) return;
+    loading = true;
+    setTimeout(function() {
+        $(".weui-cells").append("<p> 我是新加载的内容 </p>");
+        loading = false;
+    }, 1500);   //模拟延迟
+    });
+</script>
