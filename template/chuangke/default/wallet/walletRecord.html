@@ -5,7 +5,7 @@
     <div class="header-left">
         <a href="javascript:history.go(-1)" class="left-arrow"></a>
     </div>
-    <div class="header-title">收款方式</div>
+    <div class="header-title">流水记录</div>
     <div class="header-right">
         <a href="#"></a>
     </div>
@@ -14,48 +14,20 @@
         <div class="page-bd">
             <!-- 页面内容-->
             <div class="weui-cells">
+                <volist name="record_list" id="vol">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <p class="fs26">推荐奖励</p>
-                        <span class="fs22">2019-07-17 14:30:26</span>
+                        <p class="fs26">{$vol.content}</p>
+                        <span class="fs22"><?php echo date('Y-m-d H:i:s',$vol['create_time']);?></span>
                     </div>
-                    <div class="weui-cell__ft fs26">+50.00</div>
+                    <if condition="$vol.money lt 0">
+                        <div class="weui-cell__ft fs26">{$vol.money}</div>
+                    <else />
+                        <div class="weui-cell__ft fs26">+{$vol.money}</div>
+                    </if>
+
                 </div>
-                <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <p class="fs26">推荐奖励</p>
-                            <span class="fs22">2019-07-17 14:30:26</span>
-                        </div>
-                        <div class="weui-cell__ft fs26">+50.00</div>
-                    </div>
-                    <div class="weui-cell">
-                            <div class="weui-cell__bd">
-                                <p class="fs26">推荐奖励</p>
-                                <span class="fs22">2019-07-17 14:30:26</span>
-                            </div>
-                            <div class="weui-cell__ft fs26">+50.00</div>
-                        </div>
-                        <div class="weui-cell">
-                                <div class="weui-cell__bd">
-                                    <p class="fs26">推荐奖励</p>
-                                    <span class="fs22">2019-07-17 14:30:26</span>
-                                </div>
-                                <div class="weui-cell__ft fs26">+50.00</div>
-                            </div>
-                            <div class="weui-cell">
-                                    <div class="weui-cell__bd">
-                                        <p class="fs26">推荐奖励</p>
-                                        <span class="fs22">2019-07-17 14:30:26</span>
-                                    </div>
-                                    <div class="weui-cell__ft fs26">+50.00</div>
-                                </div>
-                                <div class="weui-cell">
-                                        <div class="weui-cell__bd">
-                                            <p class="fs26">推荐奖励</p>
-                                            <span class="fs22">2019-07-17 14:30:26</span>
-                                        </div>
-                                        <div class="weui-cell__ft fs26">+50.00</div>
-                                    </div>
+                </volist>
             </div>
 
         </div>
@@ -70,13 +42,67 @@
     });
 </script>
     <script>
+        var p =2;
         var loading = false;  //状态标记
         $('.page-bd').infinite().on("infinite", function() {
-        if(loading) return;
-        loading = true;
-        setTimeout(function() {
-            $(".weui-cells").append("<p> 我是新加载的内容 </p>");
-            loading = false;
-        }, 1500);   //模拟延迟
+            if(loading) return;
+            loading = true;
+            $.ajax({
+                'url':"{:url('/chuangke/Wallet/walletRecord')}",
+                'type':'post',
+                'data':{'p':p},
+                'dataType':'json',
+                'success':function(data){
+                    if(data.length>0){
+                        loading =false;
+                        p = p+1;
+
+                        var str = '';
+                        $.each(data, function (k, v){
+                            if(v.money<0){
+                                var money = v.money;
+                            }else{
+                                var money = '+'+v.money;
+                            }
+                            str += ' <div class="weui-cell">'
+                                +     '<div class="weui-cell__bd">'
+                                +        '<p class="fs26">'+v.content+'</p>'
+                                +        '<span class="fs22">'+Format(v.create_time) +'</span>'
+                                +     '</div>'
+                                +     '<div class="weui-cell__ft fs26">'+money+'</div>'
+                                +   '</div>';
+                        });
+                        $(".weui-cells").append(str);
+                    }else{
+                        $(".weui-cells").append("<p> 已加载全部</p>");
+                    }
+                }
+            });
+
+            //     setTimeout(function() {
+            //     $(".weui-cells").append("<p> 我是新加载的内容 </p>");
+            //     loading = false;
+            // }, 1500);   //模拟延迟
         });
+
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, // 月份
+                "d+": this.getDate(), // 日
+                "h+": this.getHours(), // 小时
+                "m+": this.getMinutes(), // 分
+                "s+": this.getSeconds(), // 秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+                "S": this.getMilliseconds() // 毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + ""));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        function Format(shijianchuo){
+            var time= new Date(shijianchuo*1000).Format('yy-MM-dd hh:mm:ss');
+            return time;
+        }
     </script>

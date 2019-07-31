@@ -18,7 +18,11 @@
                 </form>
 
                 <div class="fs26">
-                    <p>刘德辉</p>
+                    <if condition="$userInfo.nickname neq ''">
+                        <p>{$userInfo.nickname}</p>
+                    <else />
+                        <p>{$userInfo.mobile}</p>
+                    </if>
                     <span onclick="applicationAgency();">申请代理</span>
                 </div>
             </div>

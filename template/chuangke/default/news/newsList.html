@@ -38,10 +38,10 @@
       <else />
           <volist name="list" id="vol">
             <div class="listBox">
-                <div class="list" onclick="details($(this));">
+                <div class="list" data-id="{$vol.id}">
                     <div class="cell"><p class="fs26 color_a">{$vol.content}</p>
                         <span class="fs24 color_8"><?php echo date('Y-m-d H:i:s',$vol['create_time']);?></span></div>
-                    <div class="details fs26 color_8">实名验证不通过实名验证不通过实名验证不通过实名验证不通过实名验证不通过的原因：是因为不够帅！</div>
+                    <div class="details fs26 color_8">{$vol.content}</div>
                 </div>
             </div>
           </volist>
@@ -59,15 +59,28 @@
 </script>
     <script>
         $('.list').on('click',function(){
-            console.log( $('.details'))
-            $('.details').toggle()
+            $(this).children(".details").toggle();
+            var id = $(this).attr('data-id');
+
+            $.ajax({
+                'url':"{:url('/chuangke/News/save_news')}",
+                'type':'post',
+                'data':{'id':id},
+                'dataType':'json',
+                'success':function(data){
+
+                }
+            });
         })
-        function  details(obj){
-            // $(obj).children('.details').
-            // console.log($(obj))
-            // console.log(obj.children('.details'));
-            //  console.log(obj)('.details').toggle();
-        }
+
+
+        $('.fs26').each(function(){
+            var maxwidth=15;
+            if( $(this).text().length>maxwidth){
+                $(this).text($(this).text().substring(0,maxwidth));
+                $(this).html($(this).html()+'...')
+            }
+        });
     </script>
 </body>
 

@@ -58,5 +58,29 @@ class MemberLogic extends Model
         return  $res;
     }
 
-    
+    /**
+     * 添加流水记录
+     * @param $user_id 用户id $source_id 来源id  $content描述 $money金额 $type类型
+     * @return
+     */
+    public function addRecord($user_id,$source_id,$content,$money,$type){
+            $map['user_id'] = $user_id;
+            $map['source_id'] = $source_id;
+            $map['content'] = $content;
+            $map['money'] = $money;
+            $map['type'] = $type;
+            $map['create_time'] = time();
+            $res =  M('record')->add($map);
+            return $res;
+    }
+
+    //获取流水记录
+    public function getRecord($user_id,$p){
+        $count = M('record')->where(array('user_id'=>$user_id))->count();
+        $pagesize = 12;
+        $pagestart = ($p-1)*$pagesize;
+        $list = M('record')->where(array('user_id'=>$user_id))->order('create_time desc')->limit($pagestart,$pagesize)->select();
+        return  $list;
+    }
+
 }

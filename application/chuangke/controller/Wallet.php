@@ -3,6 +3,7 @@
 namespace app\chuangke\controller;
 use think\Controller;
 use think\Db;
+use app\common\logic\MemberLogic;
 
 class Wallet extends Controller
 {
@@ -24,7 +25,9 @@ class Wallet extends Controller
      * 钱包
      */
     public function wallet(){
+        $userInfo = $this->userInfo;
 
+        $this->assign('userInfo',$userInfo);
         return $this->fetch();
     }
 
@@ -32,7 +35,17 @@ class Wallet extends Controller
      * 钱包明细
      */
     public function walletRecord(){
+        $userInfo = $this->userInfo;
+        $model = new MemberLogic();
+        $p = I('p')?I('p'):1;
+        if(IS_POST){
+            $record_list = $model->getRecord($userInfo['user_id'],$p);
+            return $record_list;
+        }else{
+            $record_list = $model->getRecord($userInfo['user_id'],$p);
+            $this->assign('record_list',$record_list);
+            return $this->fetch();
+        }
 
-        return $this->fetch();
     }
 }

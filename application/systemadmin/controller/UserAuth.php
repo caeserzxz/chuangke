@@ -60,33 +60,52 @@ class UserAuth extends Base {
         }
 
         M('users')->startTrans();
+        M('record')->startTrans();
         M('user_authentication')->startTrans();
         try {
             $data['status'] = $status;
             $data['save_time'] = time();
+            //更新实名认证状态
             $res = M('user_authentication')->where(array('id'=>$id))->update($data);
-            if($status==1){
-                $model = new MemberLogic();
-                $config = tpCache('shop_info');
-
-                $user = M('users')->where(array('user_id'=>$auth['user_id']))->find();
+            $user = M('users')->where(array('user_id'=>$auth['user_id']))->find();
+            $model = new MemberLogic();
+            $config = tpCache('shop_info');
+            if($status==1){  //通过
 
                 //自己获得保证金
                  $model->earnestMoney($user['user_id'],$config['earnest_money']);
-                add_message($user['user_id'],'实名认证成功,获得'.$config['earnest_money'].'保证金');
+                 //添加消息
+                 add_message($user['user_id'],'实名认证成功,获得'.$config['earnest_money'].'保证金');
+                 //添加保证金流水
+                 $model->addRecord($user['user_id'],'','实名认证成功,获得'.$config['earnest_money'].'保证金',$config['earnest_money'],1);
+
+
                 //推荐人获得保证金
                 if(!empty($user['first_leader'])){
+                    //更新账户保证金
                     $model->earnestMoney($user['first_leader'],$config['safe_money']);
-                    add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['earnest_money'].'保证金');
+                    //添加消息
+                    add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金');
+                    //添加保证金流水
+                    $model->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金',$config['safe_money'],1);
                 }
+
+                //更新用户的昵称
+                M('users')->where(array('user_id'=>$auth['user_id']))->update(array('nickname'=>$auth['user_name']));
+
+            }elseif($status==2){//不通过
+                //添加消息
+                add_message($user['user_id'],'实名认证失败');
             }
         }catch (Exception $e){
             M('users')->rollback();
+            M('record')->rollback();
             M('user_authentication')->rollback();
             return  array('status'=>-1,'msg'=>'操作失败');
             exit;
         }
         M('users')->commit();
+        M('record')->commit();
         M('user_authentication')->commit();
         return  array('status'=>1,'msg'=>'操作成功');
 

@@ -20,7 +20,7 @@
                         <p class="fs26">冻结：<span>￥0.00</span></p>
                         <p class="fs26">可用：<span>￥0.00</span></p>
                     </div>
-                    <button class="fs22 color_w">提现</button>
+                    <button class="fs22 color_w" onclick="commission();">提现</button>
                 </div>
             </div>
             <div class="block">
@@ -29,11 +29,11 @@
                         <a href="{:U('chuangke/Wallet/walletRecord')}" class="fs24">明细</a>
                     </div>
                     <div class="money">
-                        <span class="fs24">￥</span><p class="color_w fw_b">0.00</p>
+                        <span class="fs24">￥</span><p class="color_w fw_b">{$userInfo.earnest_money}</p>
                     </div>
                     <div class="info">
                         <div>
-                            <p class="fs26">可用：<span>￥0.00</span></p>
+                            <p class="fs26">可用：<span>￥{$userInfo.earnest_money}</span></p>
                         </div>
                         <button class="fs22 color_w" onclick="bzj();">提现</button>
                     </div>
@@ -66,6 +66,9 @@
 </script>
     <script>
         function bzj(){
+            layer.msg('正在努力开发中')
+        }
+        function commission(){
             layer.msg('正在努力开发中')
         }
     </script>

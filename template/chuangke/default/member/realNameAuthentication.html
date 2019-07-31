@@ -76,19 +76,16 @@
 
     function sub(){
 
+        var regName = /^[\u4E00-\u9FA5]{2,4}$/;
         var idcardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
         var user_name = $('#user_name').val();
         var id_card = $('#id_card').val();
         var card_positive = $('#card_positive').val();
         var card_back = $('#card_back').val();
 
-        console.log(user_name);
-        console.log(id_card);
-        console.log(card_positive);
-        console.log(card_back);
 
-        if(user_name==''||user_name==null){
-            layer.msg('请填写姓名',{icon: 5,time:3000});
+        if(!regName.test(user_name)){
+            layer.msg('请填写正确姓名',{icon: 5,time:3000});
             return false;
         }else if(!(idcardReg.test(id_card))){
             layer.msg('请输入正确身份证号',{icon: 5,time:3000});
