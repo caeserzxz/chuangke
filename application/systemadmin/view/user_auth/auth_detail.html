@@ -1,0 +1,126 @@
+<include file="public/layout" />
+<style>
+    td{height:40px;line-height:40px; padding-left:20px;}
+    .span_1{
+        float:left;
+        margin-left:0px;
+        height:130px;
+        line-height:130px;
+    }
+    .span_1 ul{list-style:none;padding:0px;}
+    .span_1 ul li{
+        border:1px solid #CCC;
+        height:40px;
+        padding:0px 10px;
+        margin-left:-1px;
+        margin-top:-1px;
+        line-height:40px;
+    }
+</style>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <div class="subject">
+                <h3>会员管理 - 会员信息</h3>
+                <h5>网站系统会员管理会员信息</h5>
+            </div>
+        </div>
+    </div>
+    <form class="form-horizontal" id="user_form" method="post">
+        <div class="ncap-form-default">
+             <dl class="row">
+                <dt class="tit">
+                    <label>id</label>
+                </dt>
+                <dd class="opt"><strong class="red">{$auth_info.id}</strong>&nbsp;</dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>用户id</label>
+                </dt>
+                <dd class="opt"><strong class="red">{$auth_info.user_id}</strong>&nbsp; </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>真实姓名</label>
+                </dt>
+                <dd class="opt"><strong class="red">{$auth_info.user_name}</strong>&nbsp; </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>身份证号</label>
+                </dt>
+                <dd class="opt"><strong class="red">{$auth_info.id_card}</strong>&nbsp; </dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="tit">
+                    <label>注册时间</label>
+                </dt>
+                <dd class="opt"><strong class="red"><?php  echo date('Y-m-d H:i:s',$auth_info["create_time"]);?></strong>&nbsp;</dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>身份证正面</label>
+                </dt>
+                <dd class="opt">
+                    <img style="width:400px;heigth:280px; " src="{$auth_info.card_positive}" alt="">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>身份证正面</label>
+                </dt>
+                <dd class="opt">
+                    <img style="width:400px;heigth:280px; " src="{$auth_info.card_back}" alt="">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>状态</label>
+                </dt>
+                <dd class="opt"><strong class="red">
+                    <if condition="$auth_info.status eq 0">
+                        待审核
+                    <elseif condition="$auth_info.status eq 1" />
+                        已通过
+                    <elseif condition="$auth_info.status eq 2" />
+                        未通过
+                    </if>
+                </strong>&nbsp; </dd>
+            </dl>
+            <div class="bot">
+                <a href="JavaScript:void(0);" onclick="operation(1,{$auth_info.id});" class="ncap-btn-big ncap-btn-green">通过</a>
+                <a href="JavaScript:void(0);" onclick="operation(2,{$auth_info.id});" class="ncap-btn-big ncap-btn-gray">拒绝</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function operation(status,id){
+        console.log(status);
+        console.log(id);
+        $.ajax({
+            'url':"{:U('UserAuth/save_status')}",
+            'type':'post',
+            'data':{'status':status,'id':id},
+            'dataType':'json',
+            'success':function(data){
+                console.log(data);
+                if(data.status==1){
+                    layer.msg(data.msg,function(){
+                        window.location.href = "{:U('UserAuth/auth_list')}";
+                    })
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

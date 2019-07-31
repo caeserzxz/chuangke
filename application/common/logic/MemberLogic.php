@@ -30,6 +30,12 @@ class MemberLogic extends Model
         }
     }
 
+    //获取个人信息
+    public function getUsers($user_id){
+        $users = Db::name('users')->where(array('user_id'=>$user_id))->find();
+        return $users;
+    }
+
     //获取实名认证结果
     public function getAuthenticationResult($user_id){
         if($user_id) $where['user_id'] = $user_id;
@@ -42,5 +48,13 @@ class MemberLogic extends Model
         if($user_id) $where['user_id'] = $user_id;
         $data = Db::name('receipt_information')->where($where)->find();
         return $data;
+    }
+
+    //保证金操作
+    public function earnestMoney($user_id,$money){
+        $users = $this->getUsers($user_id);
+        $map['earnest_money'] = $users['earnest_money'] + $money;
+        $res = M('users')->where(array('user_id'=>$user_id))->update($map);
+        return  $res;
     }
 }

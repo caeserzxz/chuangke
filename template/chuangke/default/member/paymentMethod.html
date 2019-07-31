@@ -31,6 +31,7 @@
                         <img src="__PUBLIC__/static/chuangke/images/upload.png" class="account_code_img" alt="">
                     </if>
                     <input id="uploaderInput" class="weui-uploader__input" name="account_code_img" type="file" accept="image/*" multiple="">
+                    <input type="hidden" name="account_code_img" value="{$account.account_code_img}">
                 </div>
             <div class="inputBox">
                     <span class="fs28">验证码</span>
@@ -143,7 +144,7 @@
             dataType:"json",
             success : function(data) {
                 console.log(data);
-                return false;
+                // return false;
                 if(data.status==1){
                     layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
                         window.location = "{:url('/chuangke/Member/index')}";

@@ -26,6 +26,7 @@ return	array(
 						//array('name'=>'会员整合','act'=>'integrate','op'=>'User'),
 						//array('name'=>'会员签到','act'=>'signList','op'=>'User'),
 						array('name'=>'债务列表','act'=>'debt_list','op'=>'Debt'),
+                        array('name'=>'实名认证','act'=>'auth_list','op'=>'UserAuth'),
 				)),
 				// array('name' => '广告','child' => array(
 				// 		array('name'=>'广告列表','act'=>'adList','op'=>'Ad'),

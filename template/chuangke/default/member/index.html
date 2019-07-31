@@ -1,9 +1,4 @@
 <layout name="common/layout_nav" />
-<style>
-    .uploader__input-box{
-        
-    }
-</style>
     <div class="page my">
 
         <div class="page-bd">
@@ -11,8 +6,14 @@
             <div class="userInfo">
                 <form id="form"  method="post" enctype="multipart/form-data">
                     <div class="uploader__input-box">
-                        <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
-                        <!--<input id="uploaderInput" class="weui-uploader__input" id="head_pic" name="head_pic" type="file" accept="image/*" multiple="">-->
+                        <if condition="$userInfo.head_pic eq ''">
+                            <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                        <else />
+                            <img src="{$userInfo.head_pic}" class="head_pic" alt="">
+                        </if>
+
+
+                        <input id="uploaderInput" class="weui-uploader__input" style="width: auto;height: auto" id="head_pic" name="head_pic" type="file" accept="image/*" multiple="">
                     </div>
                 </form>
 
@@ -169,6 +170,7 @@
                         console.log(data);
                         // return false;
                         if(data.status==1){
+                            $(".head_pic").attr("src", e.target.result); //e.target.result就是最后的路径地址
                             layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
                                 window.location = "{:url('/chuangke/Member/index')}";
                             });

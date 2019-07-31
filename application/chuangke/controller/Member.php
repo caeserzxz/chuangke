@@ -49,6 +49,7 @@ class Member extends  MobileBase
         $this->assign('is_account',$is_account);
         $this->assign('is_auth',$is_auth);
         $this->assign('auth_status',$auth_status);
+        $this->assign('userInfo',$userInfo);
         return $this->fetch();
     }
 
@@ -243,6 +244,9 @@ class Member extends  MobileBase
         $userInfo = $this->userInfo;
         $model  = new MemberLogic();
         $data['head_pic'] = I('head_pic');
+        if(empty($data['head_pic'])&&empty($_FILES['head_pic']['tmp_name'])){
+            return array('status' => -1, 'msg' => '请添加头像', 'result' => '');
+        }
         //上传图片
         if($_FILES['head_pic']['tmp_name']){//上传收款码
             $card_positive = $model->upload_img('head_pic','head_pic');
@@ -252,6 +256,13 @@ class Member extends  MobileBase
             }
         }
 
-
+        if($data['head_pic']){
+            $res = M('users')->where(array('user_id'=>$userInfo['user_id']))->update($data);
+            if($res){
+                return array('status' => 1, 'msg' => '操作成功', 'result' => '');
+            }else{
+                return array('status' => -1, 'msg' => '操作失败', 'result' => '');
+            }
+        }
     }
 }

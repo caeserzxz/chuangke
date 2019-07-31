@@ -1,0 +1,193 @@
+<include file="public/layout"/>
+<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>用户债务记录</h3>
+            </div>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div id="explanation" class="explanation" style="color: rgb(44, 188, 163); background-color: rgb(237, 251, 248); width: 99%; height: 100%;">
+        <div id="checkZoom" class="title"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+            <span title="收起提示" id="explanationZoom" style="display: block;"></span>
+        </div>
+        <ul>
+            <li>负债金额(单次金额)小于后台设置的金额自动审核,超过将由平台审核</li>
+        </ul>
+    </div>
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>实名认证</h3>
+                <h5>(共{$pager->totalRows}条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" method="post" action="{:U('UserAuth/auth_list')}" name="search-form2" id="search-form2">
+                <input type="hidden" name="order_by" value="order_id">
+                <input type="hidden" name="sort" value="desc">
+                <input type="hidden" name="user_id" value="{$Request.param.user_id}">
+                <div class="sDiv">
+                    <div class="sDiv2">
+                        <input type="text" size="30" name="user_id" class="qsbox" value="{$user_id}" placeholder="搜索会员ID">
+                    </div>
+                    <div class="sDiv2">
+                        <select name="status" class="select sDiv3">
+                            <option value="0" selected>请选择状态</option>
+                            <option value="1">未审核</option>
+                            <option value="2">已通过</option>
+                            <option value="3">未通过</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sDiv2">
+                        <input type="submit" class="btn" value="搜索">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox" id="ajax_return">
+                <table cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th align="center" axis="col3" class="">
+                            <div style="text-align: center; width: 70px;" class="">会员ID</div>
+                        </th>
+                        <th align="center" axis="col4" class="">
+                            <div style="text-align: center; width: 150px;" class="">真实姓名</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">身份证</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">身份证正面</div>
+                        </th>
+                        <th align="center" axis="col5" class="">
+                            <div style="text-align: center; width: 100px;" class="">身份证背面</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">当前状态</div>
+                        </th>
+                        <th align="center" axis="col5" class="">
+                            <div style="text-align: center; width: 120px;" class="">添加时间</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">操作</div>
+                        </th>
+                        <th style="width:100%" axis="col7">
+                            <div></div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid">
+                <table>
+                    <tbody>
+                        <volist name="authList" id="v">
+                            <tr data-order-id="{$v.id}">
+                                <td align="center" axis="col3" class="">
+                                    <div style="text-align: center; width: 70px;" class="">{$v.user_id}</div>
+                                </td>
+                                <td align="center" axis="col4" class="">
+                                    <div style="text-align: center; width: 150px;" class="">{$v.user_name}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 150px;" class="">{$v.id_card}</div>
+                                </td>
+                                <td align="center" axis="col4" class="">
+                                    <div style="text-align: center; width: 150px;" class="">{$v.card_positive}</div>
+                                </td>
+                                <td align="center" axis="col5" class="">
+                                    <div style="text-align: center; width: 150px;" class="">{$v.card_back}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 120px;" class="">
+                                        <if condition="$v.status eq 0">
+                                            <span >待审核</span>
+                                        <elseif condition="$v.status eq 1" />
+                                            <span style="coclor:green;">已通过</span>
+                                        <elseif condition="$v.status eq 2" />
+                                            <span style="coclor:red;">未通过</span>
+                                        </if>
+                                    </div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 120px;" class=""><if condition="$v[create_time]">{$v.create_time|date='Y-m-d H:i',###}<else></if></div>
+                                </td>
+
+                                <td align="left" class="handle">
+                                <div style="text-align: center; width: 150px; max-width:250px;">
+                                    <!--<if condition="$v[status] eq 0">-->
+                                        <!--<a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>2))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>通过</a>-->
+                                        <!--<a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>3))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>拒绝</a>-->
+                                    <!--</if>-->
+                                    <a href="{:url('UserAuth/auth_detail',array('id'=>$v['id']))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>查看</a>
+                                </div>
+                            </td>
+                                <td align="" class="" style="width: 100%;">
+                                    <div>&nbsp;</div>
+                                </td>
+                            </tr>
+                        </volist>
+               
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-sm-6 text-left"></div>
+                    <div class="col-sm-6 text-right">{$show}</div>
+                </div>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <!--分页位置-->
+        {$page}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+    });
+
+    $(document).ready(function(){
+        $('#add_time_begin').layDate();
+        $('#add_time_end').layDate();
+    });
+    // 点击刷新数据
+    $('.fa-refresh').click(function () {
+        location.href = location.href;
+    });
+
+    $('.ico-check ', '.hDivBox').click(function () {
+        $('tr', '.hDivBox').toggleClass('trSelected', function (index, currentclass) {
+            var hasClass = $(this).hasClass('trSelected');
+            $('tr', '#flexigrid').each(function () {
+                if (hasClass) {
+                    $(this).addClass('trSelected');
+                } else {
+                    $(this).removeClass('trSelected');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
