@@ -27,7 +27,7 @@ class Plan extends MobileBase
 	}
 	// 计划页面
 	public function index(){
-        $user = M('users')->where(['user_id' => $user_id])->find();
+        $user = M('users')->where(['user_id' => $this->user_id])->find();
         $debt[] = ['code' => '1','name' => '信用卡'];
         $debt[] = ['code' => '2','name' => '房贷'];
         $debt[] = ['code' => '3','name' => '车贷'];

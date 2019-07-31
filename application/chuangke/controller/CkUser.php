@@ -64,7 +64,7 @@ class CkUser extends MobileBase
 
         //获取下一个等级信息
         $next_level = Db::name('user_level')->where('level_id',$user['level'] + 1)->field('level_id,level_name,need_num,recom_condition,make_money')->find();
-        if(empty($next_level)) $this->ajaxReturn(['status'=>0,'msg'=>'没有下一个等级信息']);
+        if(empty($next_level)) $this->ajaxReturn(['status'=>0,'msg'=>'您已是最高等级']);
 
         // 是否实名认证
         $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => 1])->count();
@@ -144,17 +144,16 @@ class CkUser extends MobileBase
         }
 
         //升级一星 需要增加一个九星星身份的审核
-        if($next_level['level_id'] == 3){
+        if($next_level['level_id'] == 2){
             //满足审核条件的用户
             $check_id_2 = 0;
             foreach ($leader as $k=>$v){
-                if($k < 10) continue;//从第十层开始找
+                if($k < 9) continue;//从第九层开始找
 
                 $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
-
-                if ($k == 10) {
-                    //如果第九层有九星以上身份则选择该身份，否则直接退出循环
-                    if($now_user['level'] >= 11 && $now_user['is_lock'] != 1){
+                if ($k == 9) {
+                    //如果第九层有九星以上身份则选择该身份，否则继续往上找有没有链上管理员
+                    if($now_user['level'] >= 10 && $now_user['is_lock'] != 1){
                         $check_id_2 = $v;
                         // 添加订单记录
                         $team_data[$v]['team_order_'.$k] = 1;
@@ -171,6 +170,7 @@ class CkUser extends MobileBase
                     break;
                 }
             }
+
             //特殊情况 第九层没有九星以上身份 则分配管理员
             if(empty($check_id_2)){
                 //关系链最近的九星管理员
@@ -219,7 +219,7 @@ class CkUser extends MobileBase
             }
             if (!$team_data) {
                 Db::commit();
-                $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$res]);
+                $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$resID]);
             }
             # 添加团队统计记录
             foreach ($team_data as $key => $value) {
@@ -381,7 +381,7 @@ class CkUser extends MobileBase
             }else{
                 $this->ajaxReturn(['status'=>0,'msg'=>'数据错误']);
             }
-            if (!$updata) $this->ajaxReturn(['status'=>0,'msg'=>'审核失败']);
+            if (!$updata) $this->ajaxReturn(['status'=>0,'msg'=>'数据错误']);
 
             Db::startTrans();
             try {
