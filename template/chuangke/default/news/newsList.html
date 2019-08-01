@@ -52,7 +52,7 @@
                             <img class="my06" src="__PUBLIC__/static/chuangke/images/my06.png" alt="">
                         </if>
 
-                        <p class="fs26 color_a">{$vol.content}</p>
+                        <p class="fs26 color_a title" id="title">{$vol.content}</p>
                         <span class="fs24 color_8"><?php echo date('Y-m-d H:i:s',$vol['create_time']);?></span></div>
                     <div class="details fs26 color_8">{$vol.content}</div>
                 </div>
@@ -91,7 +91,7 @@
         })
 
 
-        $('.fs26').each(function(){
+        $('.title').each(function(){
             var maxwidth=15;
             if( $(this).text().length>maxwidth){
                 $(this).text($(this).text().substring(0,maxwidth));

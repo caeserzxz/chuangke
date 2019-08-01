@@ -71,31 +71,11 @@ class UserAuth extends Base {
             $model = new MemberLogic();
             $config = tpCache('shop_info');
             if($status==1){  //通过
-
-                //自己获得保证金
-                 $model->earnestMoney($user['user_id'],$config['earnest_money']);
-                 //添加消息
-                 add_message($user['user_id'],'实名认证成功,获得'.$config['earnest_money'].'保证金');
-                 //添加保证金流水
-                 $model->addRecord($user['user_id'],'','实名认证成功,获得'.$config['earnest_money'].'保证金',$config['earnest_money'],1);
-
-
-                //推荐人获得保证金
-                if(!empty($user['first_leader'])){
-                    //更新账户保证金
-                    $model->earnestMoney($user['first_leader'],$config['safe_money']);
-                    //添加消息
-                    add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金');
-                    //添加保证金流水
-                    $model->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金',$config['safe_money'],1);
-                }
-
                 //更新用户的昵称
                 M('users')->where(array('user_id'=>$auth['user_id']))->update(array('nickname'=>$auth['user_name']));
-
+                $model->earnestSend($auth['user_id'],1);
             }elseif($status==2){//不通过
-                //添加消息
-                add_message($user['user_id'],'实名认证失败');
+                $model->earnestSend($auth['user_id'],2);
             }
         }catch (Exception $e){
             M('users')->rollback();

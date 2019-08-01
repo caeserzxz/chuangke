@@ -83,4 +83,51 @@ class MemberLogic extends Model
         return  $list;
     }
 
+
+    //实名认证通过后分佣保证金
+    public function earnestSend($user_id,$status){
+        $user = M('users')->where(array('user_id'=>$user_id))->find();
+        $config = tpCache('shop_info');
+
+        if($status==1){
+            //自己获得保证金
+            $this->earnestMoney($user['user_id'],$config['earnest_money']);
+            //添加消息
+            add_message($user['user_id'],'实名认证成功');
+            add_message($user['user_id'],'实名认证成功,获得'.$config['earnest_money'].'保证金');
+            //添加保证金流水
+            $this->addRecord($user['user_id'],'','实名认证成功,获得'.$config['earnest_money'].'保证金',$config['earnest_money'],1);
+
+
+            //推荐人获得保证金
+            if(!empty($user['first_leader'])){
+                //更新账户保证金
+                $this->earnestMoney($user['first_leader'],$config['safe_money']);
+                //添加消息
+                add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金');
+                //添加保证金流水
+                $this->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金',$config['safe_money'],1);
+            }
+        }else if($status == 2){
+            //自己获得保证金
+            $this->earnestMoney($user['user_id'],-$config['earnest_money']);
+            //添加消息
+            add_message($user['user_id'],'实名认证失败');
+            add_message($user['user_id'],'实名认证失败,扣除'.$config['earnest_money'].'保证金');
+            //添加保证金流水
+            $this->addRecord($user['user_id'],'','实名认证失败,扣除'.$config['earnest_money'].'保证金',$config['earnest_money'],1);
+
+
+            //推荐人获得保证金
+            if(!empty($user['first_leader'])){
+                //更新账户保证金
+                $this->earnestMoney($user['first_leader'],-$config['safe_money']);
+                //添加消息
+                add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证失败,扣除'.$config['safe_money'].'保证金');
+                //添加保证金流水
+                $this->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证失败,扣除'.$config['safe_money'].'保证金',-$config['safe_money'],1);
+            }
+        }
+
+    }
 }

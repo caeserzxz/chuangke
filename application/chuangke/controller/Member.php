@@ -89,6 +89,7 @@ class Member extends  MobileBase
                 }
             }
 
+            $data['status'] = 1;
             $data['user_id'] = $userInfo['user_id'];
             $data['create_time'] = time();
 
@@ -100,6 +101,11 @@ class Member extends  MobileBase
                 $res = Db::name('user_authentication')->insert($data);
             }
             if($res){
+                //更新用户的昵称
+                M('users')->where(array('user_id'=>$auth['user_id']))->update(array('nickname'=>$auth['user_name']));
+                //分佣保证金
+                $model->earnestSend($userInfo['user_id'],1);
+
                 $return['status'] = 1;
                 $return['msg'] = '提交成功';
                 return $return;
