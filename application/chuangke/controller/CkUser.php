@@ -233,15 +233,16 @@ class CkUser extends MobileBase
                     end($value);
                     // 添加漏单消息记录
                     $res = add_message($key,'亲爱的有钱还用户:你错过了审核'.substr_replace($user['mobile'],'****',3,4).'用户升级的订单');
-                    if (!$res) break;
+                    // if (!$res) break;
                 }
+                // 升一星时9星用户没有层级限制,可能会有team_order_10情况
                 $res = M('users_team')->where(['id' => $users_team['id']])->setInc(key($value),1);
-                if (!$res) break;
+                // if (!$res) break;
             }
-            if (!$res) {
+            /*if (!$res) {
                 Db::rollback();
                 $this->ajaxReturn(['status'=>0,'msg'=>'添加审核失败']);
-            }
+            }*/
             Db::commit();
             $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$resID]);
         } catch (\Exception $e){
