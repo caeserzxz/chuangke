@@ -5,6 +5,7 @@ use app\common\logic\CartLogic;
 use app\common\logic\UsersLogic;
 use think\Controller;
 use think\Session;
+use think\Db;
 
 class MobileBase extends Controller {
     public $session_id;
@@ -31,6 +32,21 @@ class MobileBase extends Controller {
             cookie('is_mobile', '0', 3600);
         }
 
+        //更新缓存
+        $userId   = Session('user_id');
+        if($userId){
+            $userInfo =M('users')->where('user_id',$userId)->find();
+            //更新缓存
+            if((time()-$userInfo['cache_time'])>600){
+                if(empty($userInfo['cache'])){
+                    M('users')->where(array('user_id'=>$userInfo['user_id']))->update(array('cache'=>rand(300,600),'cache_time'=>time()));
+                }else{
+                    $cache_arr['cache'] =$userInfo['cache']+rand(30,100);
+                    $cache_arr['cache_time'] = time();
+                    M('users')->where(array('user_id'=>$userInfo['user_id']))->update($cache_arr);
+                }
+            }
+        }
         $appType = I('appType');
         if($appType){
             if(empty(session('appType'))||$appType!=session('appType')){

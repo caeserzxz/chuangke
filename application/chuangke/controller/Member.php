@@ -46,7 +46,10 @@ class Member extends  MobileBase
         }else{
             $is_account = 2;
         }
+        //缓存
+        $cache = sprintf("%.2f",$userInfo['cache']/1024);
 
+        $this->assign('cache',$cache);
         $this->assign('appType',session('appType'));
         $this->assign('is_account',$is_account);
         $this->assign('is_auth',$is_auth);
@@ -306,5 +309,22 @@ class Member extends  MobileBase
                 return array('status' => -1, 'msg' => '操作失败', 'result' => '');
             }
         }
+    }
+
+    //清除缓存
+    public function clear_m(){
+        $userInfo = $this->userInfo;
+        if(empty($userInfo['cache'])){
+            return array('status'=>1,'msg'=>'清除成功');
+        }else{
+            $map['cache'] = 0;
+            $res = M('users')->where(array('user_id'=>$userInfo['user_id']))->update($map);
+            if($res){
+                return array('status'=>1,'msg'=>'清除成功');
+            }else{
+                return array('status'=>-1,'msg'=>'清除失败');
+            }
+        }
+
     }
 }

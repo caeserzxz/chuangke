@@ -102,7 +102,7 @@
                         <img src="__PUBLIC__/static/chuangke/images/my07.png" alt="">
                         <span class="fs30">清除缓存</span>
                     </div>
-                    <div class="weui-cell__ft">0K</div>
+                    <div class="weui-cell__ft cache">{$cache}M</div>
                 </a>
             </div>
             <button class="fs30 color_w fw_b button_btn" type="button" onclick="layout();">退出登录</button>
@@ -233,7 +233,21 @@
     }
 
     function clear_m(){
-
+        $.ajax({
+            'url':"{:url('Member/clear_m')}",
+            'type':'post',
+            'data':'',
+            'dataType':'json',
+            'success':function(data){
+                if(data.status==1){
+                    layer.msg(data.msg,function(){
+                        $('.cache').html('0M');
+                    })
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
     }
     function credit_card(){
         layer.msg('正在努力开发中')
