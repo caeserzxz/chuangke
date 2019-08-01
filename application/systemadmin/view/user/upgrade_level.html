@@ -99,6 +99,9 @@
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">审核时间</div>
                         </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">操作</div>
+                        </th>
                         <!-- <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 100px;" class="">发货方式</div>
                         </th>
@@ -159,6 +162,11 @@
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class=""><if condition="$v[check_time_1]">{$v.check_time_1|date='Y-m-d H:i',###}<else></if></div>
+                                </td>
+                                <td align="center" class="handle">
+                                    <div style="text-align: center; width: 120px; max-width:120px;">
+                                        <a class="btn blue" href="javascript:manual_check({$v.id});"><i class="fa fa-pencil-square-o"></i>手动通过</a>
+                                    </div>
                                 </td>
                                  <!-- <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">
@@ -225,6 +233,31 @@
             });
         });
     });
+    // 手动通过审核
+    function manual_check(id) {
+        // 删除按钮
+        layer.confirm('确认操作？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                type: 'post',
+                url: "{:U('User/manual_check')}",
+                data : {id:id},
+                dataType: 'json',
+                success: function (data) {
+                    layer.closeAll();
+                    if (data.status == 1) {
+                        layer.msg(data.msg, {icon: 1});
+                        location.reload();
+                    } else {
+                        layer.alert(data.msg, {icon: 2});
+                    }
+                }
+            })
+        }, function () {
+            layer.closeAll();
+        });
+    }
 </script>
 </body>
 </html>
