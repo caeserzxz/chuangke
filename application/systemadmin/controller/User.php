@@ -12,6 +12,7 @@ use think\Loader;
 class User extends Base {
 
     public function index(){
+        $this->assign('level',M('user_level')->getField('level_id,level_name'));
         return $this->fetch();
     }
 
@@ -24,6 +25,7 @@ class User extends Base {
         I('mobile') ? $condition['mobile'] = I('mobile') : false;
         I('wx_number') ? $condition['wx_number'] = I('wx_number') : false;
         I('is_lock') ? $condition['is_lock'] = I('is_lock') : false;
+        I('level') ? $condition['level'] = I('level') : false;
 
         $user_id=I('user_id'); 
         $tier=I('tier'); 
