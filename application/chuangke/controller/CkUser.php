@@ -148,12 +148,12 @@ class CkUser extends MobileBase
             //满足审核条件的用户
             $check_id_2 = 0;
             foreach ($leader as $k=>$v){
-                if($k < 9) continue;//从第九层开始找
-
+                // if($k < 9) continue;//从第九层开始找
                 $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
-                if ($k == 9) {
-                    //如果第九层有九星以上身份则选择该身份，否则继续往上找有没有链上管理员
-                    if($now_user['level'] >= 10 && $now_user['is_lock'] != 1){
+                // if ($k == 9) {
+                    //找最近的九星
+                if($now_user['level'] >= 10 ){
+                    if ($now_user['is_lock'] != 1) {
                         $check_id_2 = $v;
                         // 添加订单记录
                         $team_data[$v]['team_order_'.$k] = 1;
@@ -164,22 +164,26 @@ class CkUser extends MobileBase
                         $team_data[$v]['team_order_out_'.$k] = 1;
                     }
                 }
+                // }
                 // 对应层级不满足找最近的链上管理员 不分等级
-                if (($now_user['user_type'] == 1) && ($v != $check_id) && ($now_user['is_lock'] != 1)) {
+                /*if (($now_user['user_type'] == 1) && ($v != $check_id) && ($now_user['is_lock'] != 1)) {
                     $check_id_2 = $v;
                     break;
-                }
+                }*/
             }
-
-            //特殊情况 第九层没有九星以上身份 则分配管理员
+            //特殊情况 关系链没有九星以上身份 则分配管理员
             if(empty($check_id_2)){
-                //关系链最近的九星管理员
-                /*$check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
+                //关系链最近的管理员
+                // $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
+                $leaders = implode(',',$leader);
+                $where_admin = "user_id in ($leaders) and user_type=1 and is_lock=0 and user_id <> ".$check_id;
+                $check_user = Db::name('users')->where($where_admin)->value('user_id');
+
                 if($check_user){
                     $check_id_2 = $check_user;
-                }else{*/
+                }else{
                     $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id > ' . $this->user_id . ' and is_lock = 0';
-                    //关系链上没有九星管理员则选择平台的九星管理员
+                    //关系链上没有管理员则选择平台管理员
                     $check_user = Db::name('users')->where($where_id2)->value('user_id');
                     if (!$check_user) {
                         $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id <> ' . $this->user_id . ' and is_lock = 0';
@@ -190,7 +194,7 @@ class CkUser extends MobileBase
                     }else{
                         $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
                     }
-                // }
+                }
             }
         }
 
