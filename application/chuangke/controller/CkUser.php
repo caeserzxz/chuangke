@@ -443,8 +443,8 @@ class CkUser extends MobileBase
                 -> join('users B','A.user_id = B.user_id','left')
                 -> join('user_level C','A.level = C.level_id','left')
                 -> join('user_authentication D','A.user_id = D.user_id','left')
-                // -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
-                -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
+                -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
+                // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
                 ->order('A.apply_status ASC')
                 -> select();
             foreach ($check_user as $key => $value) {
@@ -489,8 +489,11 @@ class CkUser extends MobileBase
             -> where('A.check_leader_1 = '.$this->user_id.' and A.check_status_1 != 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 != 0')
             -> order('A.id desc')
             -> select();
-
-        return $this->fetch('user/old_check',[
+        foreach ($check_user as $key => $value) {
+            $check_user[$key]['is_check'] = 1;
+        }
+        // return $this->fetch('user/old_check',[
+        return $this->fetch('user/check_level',[
             'check_user' => $check_user,
             'user_id'    => $this->user_id,
         ]);
@@ -631,6 +634,7 @@ class CkUser extends MobileBase
         $apply['id_card']  = substr_replace($authent['id_card'],'**********',4,10);
         $apply['account_number']  = $receipt['account_number'];
         $apply['account_code_img']  = $receipt['account_code_img'];
+        $apply['receivables_name']  = $receipt['receivables_name'];
 
         $this->assign('apply',$apply);
         $this->assign('type',$type);
@@ -673,7 +677,7 @@ class CkUser extends MobileBase
      */
     public function rece_detail($id){
         $apply = M('ck_apply')->alias('A')
-            ->field('A.*,B.user_name,B.id_card,C.account_number')
+            ->field('A.*,B.user_name,B.id_card,C.account_number,C.receivables_name')
             ->join('user_authentication B','A.user_id = B.user_id')
             ->join('receipt_information C','A.user_id = C.user_id')
             ->where(['A.id' => $id])
