@@ -40,8 +40,12 @@
                 <div class="weui-flex__item">
                     <div class="sfz_box">
                             <div class="uploader__input-box">
-                                <img src="__PUBLIC__/static/chuangke/images/bg01.png" class="card_positive" alt="">
-                                <input id="uploaderInput" class="weui-uploader__input" id="card_positive" name="card_positive" type="file" accept="image/*" multiple="">
+                                <if condition="$appType eq 'IOS'">
+                                    <img src="__PUBLIC__/static/chuangke/images/bg01.png"  onclick="loadimg('card_positive');" class="card_positive" alt="">
+                                <else />
+                                    <img src="__PUBLIC__/static/chuangke/images/bg01.png" class="card_positive" alt="">
+                                    <input id="uploaderInput" class="weui-uploader__input" id="card_positive" name="card_positive" type="file" accept="image/*" multiple="">
+                                </if>
                             </div>
                         <sapn class="upload_btn fs26">上传身份证正面</span>
                     </div>
@@ -49,8 +53,13 @@
                 <div class="weui-flex__item">
                     <div class="sfz_box">
                             <div class="uploader__input-box">
-                                <img src="__PUBLIC__/static/chuangke/images/bg02.png" class="card_back" alt="">
-                                <input id="uploaderInput" class="weui-uploader__input" id="card_back" name="card_back" type="file" accept="image/*" multiple="">
+                                <if condition="$appType eq 'IOS'">
+                                    <img src="__PUBLIC__/static/chuangke/images/bg02.png" onclick="loadimg('card_back');" class="card_back" alt="">
+                                <else />
+                                    <img src="__PUBLIC__/static/chuangke/images/bg02.png" class="card_back" alt="">
+                                    <input id="uploaderInput" class="weui-uploader__input" id="card_back" name="card_back" type="file" accept="image/*" multiple="">
+                                </if>
+
                             </div>
                         <span class="upload_btn fs26">上传身份证反面</span>
                     </div>
@@ -73,7 +82,7 @@
     $(function() {
         FastClick.attach(document.body);
     });
-
+    var img_name = '';
     function sub(){
 
         var regName = /^[\u4E00-\u9FA5]{2,4}$/;
@@ -155,11 +164,11 @@
                 // layer.msg(data.image_path, { icon: 5, time: 5000 });
                 if (data) {
                     if (data.img_name == 'card_positive') {
-                        $('.card_positive').attr('src',  data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_positive" class="imagesinput"/>';
+                        $('.card_positive').attr('src',  data.path);
+                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="card_positive" class="imagesinput"/>';
                     } else if (data.img_name == 'card_back') {
-                        $('.card_back').attr('src', data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                        $('.card_back').attr('src', data.path);
+                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
                     }
                     $('.images-list').append(str);
                 } else {
@@ -171,7 +180,7 @@
     }
 
     function loadimg(uploadfile){
-        img_type = uploadfile;
+        img_name = uploadfile;
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
             window.app.Photo();
         }

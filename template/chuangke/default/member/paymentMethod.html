@@ -25,12 +25,21 @@
             <div class="title fs26">收款二维码</div>
 
                 <div class="uploader__input-box">
-                    <if condition="$account.account_code_img neq ''">
-                        <img src="{$account.account_code_img}" class="account_code_img" alt="">
-                    <else />
-                        <img src="__PUBLIC__/static/chuangke/images/upload.png" class="account_code_img" alt="">
+                    <if condition="appType eq 'IOS'">
+                        <if condition="$account.account_code_img neq ''">
+                            <img src="{$account.account_code_img}" class="account_code_img"  onclick="loadimg('account_code_img');" alt="">
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/upload.png" onclick="loadimg('account_code_img');" class="account_code_img" alt="">
+                        </if>
+                    </else>
+                        <if condition="$account.account_code_img neq ''">
+                            <img src="{$account.account_code_img}" class="account_code_img" alt="">
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/upload.png" class="account_code_img" alt="">
+                        </if>
+                        <input id="uploaderInput" class="weui-uploader__input" name="account_code_img" type="file" accept="image/*" multiple="">
                     </if>
-                    <input id="uploaderInput" class="weui-uploader__input" name="account_code_img" type="file" accept="image/*" multiple="">
+
                     <input type="hidden" name="account_code_img" value="{$account.account_code_img}">
                 </div>
             <div class="inputBox">
@@ -41,6 +50,7 @@
                             <span class="color_9 fs28  time" style="display:none"></span>
                         </div> 
                 </div>
+                <div class="images-list"><!--上传图片列表--></div>
                 <button class="fs30 color_w fw_b button_btn" type="button" onclick="sub();">保存</button>
             </form>
         </div>
@@ -59,6 +69,7 @@
 </script>
 <script>
     var mobile = {$userInfo.mobile};
+    var img_name = '';
     function codeButton(){
         var reg = /(1[3-9]\d{9}$)/;
         if (!reg.test(mobile)) {
@@ -175,17 +186,14 @@
         $.ajax({
             'url': "{:url('Member/uploadimage')}",
             'type': 'post',
-            'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
+            'data': {'img': base64imag, 'img_type': 'account_code_img','img_name':img_name},
             'dataType': 'json',
             'success': function (data) {
                 // layer.msg(data.image_path, { icon: 5, time: 5000 });
                 if (data) {
-                    if (data.img_name == 'card_positive') {
-                        $('.card_positive').attr('src',  data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_positive" class="imagesinput"/>';
-                    } else if (data.img_name == 'card_back') {
-                        $('.card_back').attr('src', data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                    if (data.img_name == 'account_code_img') {
+                        $('.card_positive').attr('src',  data.path);
+                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="account_code_img" class="imagesinput"/>';
                     }
                     $('.images-list').append(str);
                 } else {
@@ -197,7 +205,7 @@
     }
 
     function loadimg(uploadfile){
-        img_type = uploadfile;
+        img_name = uploadfile;
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
             window.app.Photo();
         }

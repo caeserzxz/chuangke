@@ -15,7 +15,7 @@
             <!-- 页面内容-->
 
             <div class="block">
-                <img src="{$data.img}" alt="">
+                <img src="{$data.img}" class="code_img" alt="">
                 <p class="fs26 color_8">邀请码：<span>{$data.code}</span></p>
                 <div class="btncCell">
                     <button class="fs28 color_w" id="Copy" data-clipboard-action="copy" data-clipboard-target="#copyUrl" >复制邀请链接</button>
@@ -37,6 +37,7 @@
     });
 </script>
 <script>
+    var code = "{$data.code}";
     window.onload=function (){
         var clipboard = new Clipboard('#Copy');
         clipboard.on('success', function(e) {
@@ -46,5 +47,21 @@
     }
     function preserveImg(argument) {
         // downloadPicturetToBase64(String base64DataStr)
+        downloadIamge('.code_img',code);
     }
+    function downloadIamge(selector, name) {
+        // 通过选择器获取img元素
+        var img = document.querySelector(selector)
+        // 将图片的src属性作为URL地址
+        var url = img.src
+        var a = document.createElement('a')
+        var event = new MouseEvent('click')
+
+        a.download = name || '下载图片名称'
+        a.href = url
+
+        a.dispatchEvent(event)
+    }
+
+
 </script>

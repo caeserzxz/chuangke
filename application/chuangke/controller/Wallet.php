@@ -4,8 +4,9 @@ namespace app\chuangke\controller;
 use think\Controller;
 use think\Db;
 use app\common\logic\MemberLogic;
+use app\mobile\controller\MobileBase;
 
-class Wallet extends Controller
+class Wallet extends MobileBase
 {
     public function __construct()
     {

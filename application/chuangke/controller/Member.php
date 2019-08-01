@@ -47,6 +47,7 @@ class Member extends  MobileBase
             $is_account = 2;
         }
 
+        $this->assign('appType',session('appType'));
         $this->assign('is_account',$is_account);
         $this->assign('is_auth',$is_auth);
         $this->assign('auth_status',$auth_status);
@@ -108,6 +109,7 @@ class Member extends  MobileBase
                 return $return;
             }
         }else{
+            $this->assign('appType',session('appType'));
             return $this->fetch();
         }
     }
@@ -170,6 +172,7 @@ class Member extends  MobileBase
         }else{
             $account = $model->getAccount($userInfo['user_id']);
 
+            $this->assign('appType',session('appType'));
             $this->assign('account',$account);
             $this->assign('userInfo',$userInfo);
             return $this->fetch();

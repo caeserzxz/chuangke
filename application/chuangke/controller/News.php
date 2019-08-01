@@ -3,8 +3,9 @@
 namespace app\chuangke\controller;
 use think\Controller;
 use think\Db;
+use app\mobile\controller\MobileBase;
 
-class News extends Controller
+class News extends MobileBase
 {
     public function __construct()
     {

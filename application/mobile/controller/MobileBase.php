@@ -31,6 +31,17 @@ class MobileBase extends Controller {
             cookie('is_mobile', '0', 3600);
         }
 
+        $appType = I('appType');
+        if($appType){
+            if(empty(session('appType'))||$appType!=session('appType')){
+                session('appType',$appType);
+            }
+        }else{
+            if(empty(session('appType'))){
+                session('appType','other');
+            }
+        }
+
         $wx_qr = M('wx_user')->cache(true)->value('qr'); //获取微信配置
         $this->assign('wx_qr',$wx_qr);
         $signPackage = getwxconfig(); //获取微信配置

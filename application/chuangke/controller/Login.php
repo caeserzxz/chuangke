@@ -9,7 +9,20 @@ use app\systemadmin\logic\UsersLogic;
 use think\Verify;
 class Login extends Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $appType = I('appType');
+        if($appType){
+            if(empty(session('appType'))||$appType!=session('appType')){
+                session('appType',$appType);
+            }
+        }else{
+            if(empty(session('appType'))){
+                session('appType','other');
+            }
+        }
+    }
     /**
      * 登录
      */

@@ -14,14 +14,21 @@
             <div class="userInfo">
                 <form id="form"  method="post" enctype="multipart/form-data">
                     <div class="uploader__input-box">
-                        <if condition="$userInfo.head_pic eq ''">
-                            <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                        <if condition="$appType eq 'IOS'">
+                            <if condition="$userInfo.head_pic eq ''">
+                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" onclick="loadimg('head_pic');" class="head_pic" alt="">
+                                <else />
+                                <img src="{$userInfo.head_pic}" class="head_pic"  onclick="loadimg('head_pic');" alt="">
+                            </if>
                         <else />
-                            <img src="{$userInfo.head_pic}" class="head_pic" alt="">
+                            <if condition="$userInfo.head_pic eq ''">
+                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                            <else />
+                                <img src="{$userInfo.head_pic}" class="head_pic" alt="">
+                            </if>
+                            <input id="uploaderInput" class="weui-uploader__input" style="width: 13.86667vw;height: 13.86667vw;border-radius: 50%;" id="head_pic" name="head_pic" type="file" accept="image/*" multiple="">
                         </if>
-
-
-                        <input id="uploaderInput" class="weui-uploader__input" style="width: 13.86667vw;height: 13.86667vw;border-radius: 50%;" id="head_pic" name="head_pic" type="file" accept="image/*" multiple="">
+                        <div class="images-list"><!--上传图片列表--></div>
                     </div>
                 </form>
 
@@ -90,7 +97,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a href="#" class="weui-cell weui-cell_access">
+                <a href="#" class="weui-cell weui-cell_access" onclick="clear_m();">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my07.png" alt="">
                         <span class="fs30">清除缓存</span>
@@ -115,7 +122,7 @@
 <script>
     var auth_status = {$auth_status};
     var is_auth = {$is_auth};
-
+    var img_name = '';
 
     //申请代理
     function applicationAgency(){
@@ -195,4 +202,37 @@
             };
         }
     });
+
+    function AppReturnBase64Image(base64imag) {
+        $.ajax({
+            'url': "{:url('Member/uploadimage')}",
+            'type': 'post',
+            'data': {'img': base64imag, 'img_type': 'head_pic','img_name':img_name},
+            'dataType': 'json',
+            'success': function (data) {
+                // layer.msg(data.image_path, { icon: 5, time: 5000 });
+                if (data) {
+                    if (data.img_name == 'head_pic') {
+                        $('.head_pic').attr('src',  data.path);
+                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="head_pic" class="imagesinput"/>';
+                    }
+                    $('.images-list').append(str);
+                } else {
+                    layer.msg('二维码上传失败', {icon: 5, time: 3000});
+                    return false;
+                }
+            }
+        });
+    }
+
+    function loadimg(uploadfile){
+        img_name = uploadfile;
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
+            window.app.Photo();
+        }
+    }
+
+    function clear_m(){
+
+    }
 </script>
