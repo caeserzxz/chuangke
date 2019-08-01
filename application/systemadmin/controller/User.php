@@ -104,7 +104,12 @@ class User extends Base {
                 $c = M('users')->where("user_id != $uid and mobile = '$mobile'")->count();
                 $c && exit($this->error('手机号不得和已有用户重复'));
             }
-
+            // 是否更改等级
+            if ($_POST['level'] != $user['level']) {
+                // 是否有正在审核的等级
+                $is_check = M('ck_apply')->where(['user_id' => $uid,'apply_status' => 0])->count();
+                if ($is_check > 0) $this->error('该用户有申请正在审核中');
+            }
             $row = M('users')->where(array('user_id'=>$uid))->save($_POST);
             if($row)
                 exit($this->success('修改成功'));

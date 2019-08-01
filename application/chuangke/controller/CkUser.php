@@ -493,7 +493,7 @@ class CkUser extends MobileBase
                 -> join('user_level C','A.level = C.level_id','left')
                 -> join('user_authentication D','A.user_id = D.user_id','left')
                 -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 != 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 != 0')
-                ->order('A.apply_status ASC')
+                ->order('A.id DESC')
                 -> select();
 
         foreach ($check_user as $key => $value) {
