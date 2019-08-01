@@ -23,6 +23,7 @@ class User extends Base {
         $condition = array();
         I('mobile') ? $condition['mobile'] = I('mobile') : false;
         I('wx_number') ? $condition['wx_number'] = I('wx_number') : false;
+        I('is_lock') ? $condition['is_lock'] = I('is_lock') : false;
 
         $user_id=I('user_id'); 
         $tier=I('tier'); 
@@ -61,6 +62,13 @@ class User extends Base {
             $userList[$key]['direct_sum'] = $usersModel->where(['first_leader'=>$val['user_id']])->count();
             $userList[$key]['leader_mobile'] = $usersModel->where(['user_id'=>$val['first_leader']])->value('mobile');
             $userList[$key]['tuijian_code'] = $tuijianCodeModel->where(['user_id'=>$val['user_id']])->value('code');
+            // 是否有实名认证
+            $is_real = M('user_authentication')->where(['user_id' => $val['user_id'],'status' => 1])->find();
+            if ($is_real) {
+                $userList[$key]['nickname'] = $is_real['user_name'];
+            }else{
+                $userList[$key]['nickname'] = $val['mobile'];
+            }
         }
         $show = $Page->show();
         $this->assign('userList',$userList);

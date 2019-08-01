@@ -163,11 +163,13 @@
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class=""><if condition="$v[check_time_1]">{$v.check_time_1|date='Y-m-d H:i',###}<else></if></div>
                                 </td>
-                                <td align="center" class="handle">
-                                    <div style="text-align: center; width: 120px; max-width:120px;">
-                                        <a class="btn blue" href="javascript:manual_check({$v.id});"><i class="fa fa-pencil-square-o"></i>手动通过</a>
-                                    </div>
-                                </td>
+                                <if condition="$v.apply_status eq 0">
+                                    <td align="center" class="handle">
+                                        <div style="text-align: center; width: 120px; max-width:120px;">
+                                            <a class="btn blue" href="javascript:manual_check({$v.id});"><i class="fa fa-pencil-square-o"></i>手动通过</a>
+                                        </div>
+                                    </td>
+                                </if>
                                  <!-- <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">
                                         <if condition="$v[shopping_type]==1">

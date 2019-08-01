@@ -37,7 +37,15 @@
                 <!--分销时查看下级人数都有哪些-->
                 <input type="hidden" name="user_id" value="{$_GET['user_id']}">
                 <input type="hidden" name="tier" value="{$_GET['tier']}">
+
                 <div class="sDiv">
+                    <div class="sDiv2">
+                        <select name="is_lock" class="select sDiv3">
+                            <option value="">冻结状态</option>
+                            <!-- <option value="0">否</option> -->
+                            <option value="1">是</option>
+                        </select>
+                    </div>
                     <div class="sDiv2">
                         <input type="text" id="search_key" size="30" class="qsbox" placeholder="手机号码">
                         <input type="submit" class="btn" onclick="ajax_get_table('search-form2',1)" value="搜索">
@@ -74,6 +82,7 @@
                         <th align="center" abbr="reg_time" axis="col6" class=""><div style="text-align: center; width: 120px;" class="">上级手机号码</div></th>
                         <th align="center" abbr="reg_time" axis="col6" class=""><div style="text-align: center; width: 80px;" class="">推荐码</div></th>
                         <th align="center" abbr="reg_time" axis="col6" class=""><div style="text-align: center; width: 120px;" class="">会员身份</div></th>
+                        <th align="center" abbr="reg_time" axis="col6" class=""><div style="text-align: center; width: 120px;" class="">是否冻结</div></th>
                         <th align="center" axis="col1" class="handle"><div style="text-align: center; width: 150px;">操作</div></th>
                         <th style="width:100%" axis="col7"><div></div></th>
                     </tr>
