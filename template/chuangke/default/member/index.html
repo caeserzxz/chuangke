@@ -33,7 +33,7 @@
                 </form>
 
                 <div class="fs26">
-                    <if condition="$userInfo.nickname neq ''">
+                    <if condition="$userInfo.nickname neq '' AND $auth_status eq 1">
                         <p>{$userInfo.nickname}</p>
                     <else />
                         <p>{$userInfo.mobile}</p>
