@@ -16,11 +16,12 @@
 
             <div class="block">
                 <img src="{$data.img}" class="code_img" alt="">
-                <p class="fs26 color_8">邀请码：<span>{$data.code}</span></p>
+                <p class="fs26 color_8" >邀请码：<span class="code">{$data.code}</span></p>
                 <div class="btncCell">
-                    <button class="fs28 color_w" id="Copy" data-clipboard-action="copy" data-clipboard-target="#copyUrl" >复制邀请链接</button>
+                    <button class="fs28 color_w" onclick="copyUrl2()" id="Copy" data-clipboard-action="copy" data-clipboard-target="#copyUrl" >复制邀请链接</button>
                     <button class="fs28 color_w" onclick="preserveImg()">保存为图片</button>
                 </div>
+                <textarea  id="biao1" style="z-index: -1;" >{$data.url}</textarea>
                 <div id="copyUrl" style="opacity: 0">{$data.url}</div>
             </div>
             <div class="tips fs26 color_8">
@@ -31,6 +32,10 @@
         </div>
     </div>
 <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
@@ -38,13 +43,24 @@
 </script>
 <script>
     var code = "{$data.code}";
-    window.onload=function (){
-        var clipboard = new Clipboard('#Copy');
-        clipboard.on('success', function(e) {
-            $.toptip("复制成功！", 1500, 'success');
-            e.clearSelection();
-        });
+    // window.onload=function (){
+    //     var clipboard = new Clipboard('#Copy');
+    //     clipboard.on('success', function(e) {
+    //         $.toptip("复制成功！", 1500, 'success');
+    //         e.clearSelection();
+    //     });
+    // }
+
+    function copyUrl2(obj)
+    {
+        var Url2=document.getElementById("biao1");
+        Url2.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        // alert("已复制好，可贴粘。");
+        layer.msg("已复制好，可贴粘。");
+
     }
+
     function preserveImg(argument) {
         // downloadPicturetToBase64(String base64DataStr)
         downloadIamge('.code_img',code);
