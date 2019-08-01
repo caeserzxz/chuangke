@@ -186,7 +186,8 @@ class Member extends  MobileBase
         vendor('phpqrcode.phpqrcode');
 
         //获取个人
-        $url = request()->domain().U('contactleader',['id'=>$user['user_id']]);
+        //$url = request()->domain().U('contactleader',['id'=>$user['user_id']]);
+        $url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/register?rec_id='.$user['user_id'];
         $after_path = 'public/qrcode/'.md5($url).'.png';
         //保存路径
         $path =  ROOT_PATH.$after_path;

@@ -45,7 +45,15 @@ class Login extends Controller
      * 注册
      */
     public function register(){
+        $recommendId = I('rec_id') ? I('rec_id') : 0;  //扫码分享的推荐人id
+        if($recommendId!=0){
+            session('recommendId',$recommendId);
+        }else{
+            $recommendId = session('recommendId');
+        }
 
+        $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
+        $this->assign('tuijian_code',$tuijian_code);
         return $this->fetch();
     }
 

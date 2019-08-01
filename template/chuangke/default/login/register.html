@@ -28,7 +28,12 @@
                     </div>
                 </div>
                 <input type="password" class="fs28 pwd1" name="password" placeholder="密码">
-                <input type="text" name="tuijian_code" class="fs28" placeholder="邀请码(必填）">
+                <if condition="$tuijian_code eq ''">
+                    <input type="text" name="tuijian_code" class="fs28" placeholder="邀请码(必填）">
+                <else />
+                    <input type="text" name="tuijian_code" disabled="true" value="{$tuijian_code}" class="fs28" placeholder="邀请码(必填）">
+                </if>
+
                 <p class="fs24 see ">注册并同意<a href="javascript:;" class="fs24">《注册协议》</a></p>
                 <a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>
             </div>
