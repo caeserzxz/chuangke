@@ -35,7 +35,9 @@ class Plan extends MobileBase
 
         foreach ($debt as $key => $value) {
             $money = M('user_debt')->where(['user_id' => $this->user_id,'type' => $value['code'],'status' => 2])->sum('moneys');
-            $debt[$key]['money'] = $money;
+            $debt[$key]['money'] = $money ? $money : 0;
+            $debt_count = M('user_debt')->where(['user_id' => $this->user_id,'type' => $value['code'],'status' => 1])->count(); // 是否有计划正在审核
+            $debt[$key]['debt_count'] = $debt_count;
         }
 
         # 阶段及百分比计算
@@ -158,7 +160,7 @@ class Plan extends MobileBase
             // 添加记录
             $res = M('user_debt')->add($data);
             if ($res) {
-                $this->success('添加成功',U('chuangke/Plan/index'));
+                $this->success('提交成功，等待审核',U('chuangke/Plan/index'));
             }else{
                 $this->error('添加失败');
             }

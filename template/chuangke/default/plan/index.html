@@ -15,7 +15,7 @@
             <div class="Box">
                 <div class="planType">
                     <volist name="debt" id="vo">
-                        <a href="<if condition="$vo.money GT 0"> # <else/> {:U('chuangke/Plan/add_debt',['type' => $vo.code])} </if>">
+                        <a href="javascript:debt_url({$vo.money},{$vo.code},{$vo.debt_count});">
                             <div class="fs26">
                                 <if condition="$vo.money GT 0">
                                     <p>{$vo.money}</p>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="planMoney">
                     <div class="fs26">
-                        <p>可还款总额：</p><span>￥{$all_debt|default=0}</span><img src="__PUBLIC__/static/chuangke//images/plan02.png" alt="">
+                        <p>可还款总额：</p><span>￥{$all_debt|default=0}</span><img src="__PUBLIC__/static/chuangke/images/level{$user.level}.png" alt="">
                     </div>
                     <if condition="$apply['id'] GT 0">
                         <a href="{:U('chuangke/CkUser/applying',['id' => $apply['id']])}" class="fs26 level_text">去付款</a>
@@ -47,9 +47,8 @@
                         <div class="list">
                             <div class="left">
                                 <p class="fs26">第{$text[$key]}阶段</p>
-                                <div class="line">
-                                    <div style="width: 80%"></div>
-                                </div>
+                                <a href="<if condition='$key eq 0'> {:U('chuangke/CkUser/old_check')} <else/> # </if>"><div class="line"></div></a>
+                                
                                 <if condition="$vo.check EQ 1">
                                     <a href="{:U('chuangke/CkUser/check_level')}"><span class="fs24">去审核</span></a>
                                 <else/>
@@ -140,6 +139,15 @@
     function go_use(){
         $('.model').show()
     }
+    function debt_url(money,code,debt_count){
+        if (money > 0) return;
+        if (debt_count > 0) {
+            $.toast('审核中，请等待', "text");
+            return;
+        }
+        window.location.href = "/index.php?m=chuangke&c=Plan&a=add_debt&type="+code;
+    }
+    
 </script>
 
 </body>

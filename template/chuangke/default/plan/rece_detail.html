@@ -1,5 +1,13 @@
 <layout name="common/layout_nav" />
-
+<style type="text/css">
+    .button_btn2 {
+    width: 92.53333vw;
+    height: 10.93333vw;
+    background-image: linear-gradient(0deg, #d5d5d6 0%, #d5d5d6 100%); 
+    border-radius: 1.33333vw;
+    margin: 8vw auto 2.66667vw;
+}
+</style>
     <div class="page collectionInfo">
         <div class="page-hd">
             <div class="header">
@@ -22,13 +30,17 @@
             <div class="codeInfo fs26">
                 <img src="{$apply.img}" alt="" style="width: 90%;height:auto">
                 <p class="name">打款凭证</p>
-                <p>支付账号：<span>{$apply.account_number}</span></p>
+                <p>{$apply['receivables_name']}账号：<span>{$apply.account_number}</span></p>
                 <p>付款金额：<span>{$apply.make_money}</span> 元</p>
             </div>
             <div class="tipsBox">
                 <p class="fs26">请确认收到款后再点击“我已收款”操作</p>
             </div>
-            <button class="fs30 color_w fw_b button_btn" onclick="change_status()">我已收款</button>
+            <if condition="$apply.img">
+                <button class="fs30 color_w fw_b button_btn" onclick="change_status()">我已收款</button>
+            <else/>
+                <button class="fs30 color_w fw_b button_btn2" style="">我已收款</button>
+            </if>
         </div>
     </div>
 <script>

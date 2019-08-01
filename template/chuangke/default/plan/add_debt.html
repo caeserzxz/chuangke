@@ -62,10 +62,10 @@
             contentType: false,
             dataType:"json",
             success : function(data) {
+                $.toast(data.msg, "text");
                 if (data.code == 1) {
                     window.location.href = data.url;
                 } else {
-                    $.toast(data.msg, "text");
                     if (data.url) {
                         window.location.href = data.url;
                     }
