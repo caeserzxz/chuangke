@@ -482,14 +482,18 @@ class CkUser extends MobileBase
      * 历史审核记录
      */
     public function old_check(){
-
         $check_user = Db::name('ck_apply')->alias('A')
-            -> field('A.*,B.nickname,B.mobile,B.wx_number')
-            -> join('users B','A.user_id = B.user_id','left')
-            -> where('A.check_leader_1 = '.$this->user_id.' and A.check_status_1 != 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 != 0')
-            -> order('A.id desc')
-            -> select();
+                -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name,D.user_name,D.id_card')
+                -> join('users B','A.user_id = B.user_id','left')
+                -> join('user_level C','A.level = C.level_id','left')
+                -> join('user_authentication D','A.user_id = D.user_id','left')
+                -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 != 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 != 0')
+                ->order('A.apply_status ASC')
+                -> select();
+
         foreach ($check_user as $key => $value) {
+            $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
+            $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
             $check_user[$key]['is_check'] = 1;
         }
         // return $this->fetch('user/old_check',[
