@@ -60,7 +60,9 @@ class UsersLogic extends Model
 		}
         $user['password'] = encrypt($user['password']);
         $user['reg_time'] = time();
-        $user['nickname'] = $user['mobile'];
+        if(empty($user['nickname'])){
+            $user['nickname'] = $user['mobile'];
+        }
         $user_id = M('users')->add($user);
         if(!$user_id){
     		return array('status'=>-1,'msg'=>'注册');

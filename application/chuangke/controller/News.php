@@ -40,7 +40,10 @@ class News extends Controller
         $info = M('message_board')->where(array('id'=> $id ))->find();
         if($info['status']==0){
             $map['status'] = 1;
-            M('message_board')->where(array('id'=> $id ))->update($map);
+            $res = M('message_board')->where(array('id'=> $id ))->update($map);
+            if($res){
+                return array('status'=>1,'msg'=>'已阅');
+            }
         }else{
 
         }

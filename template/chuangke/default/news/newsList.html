@@ -7,7 +7,14 @@
 <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
 <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all.css"/>
 <script src="__PUBLIC__/static/chuangke/js/page.js"></script>
-
+    <style>
+        .my06{
+            width: 1.5rem;
+            height: 1.5rem;
+            padding-top: 1%;
+            padding-right: 0%;
+        }
+    </style>
     <title> 我的消息</title>
 </head>
 
@@ -38,8 +45,14 @@
       <else />
           <volist name="list" id="vol">
             <div class="listBox">
-                <div class="list" data-id="{$vol.id}">
-                    <div class="cell"><p class="fs26 color_a">{$vol.content}</p>
+                <div class="list" data-id="{$vol.id}" status="{$vol.status}">
+
+                    <div class="cell">
+                        <if condition="$vol.status eq 0">
+                            <img class="my06" src="__PUBLIC__/static/chuangke/images/my06.png" alt="">
+                        </if>
+
+                        <p class="fs26 color_a">{$vol.content}</p>
                         <span class="fs24 color_8"><?php echo date('Y-m-d H:i:s',$vol['create_time']);?></span></div>
                     <div class="details fs26 color_8">{$vol.content}</div>
                 </div>
@@ -61,13 +74,17 @@
         $('.list').on('click',function(){
             $(this).children(".details").toggle();
             var id = $(this).attr('data-id');
-
+            var status=$(this).attr('status');
+            if(status){
+                $(this).children(".cell").children(".my06").remove();
+            }
             $.ajax({
                 'url':"{:url('/chuangke/News/save_news')}",
                 'type':'post',
                 'data':{'id':id},
                 'dataType':'json',
                 'success':function(data){
+                    console.log(data);
 
                 }
             });

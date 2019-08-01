@@ -25,7 +25,9 @@ class Index extends Controller
      */
     public function index(){
         $userInfo = $this->userInfo;
-        $unread_message = M('message_board')->where(array('user_id'=>$userInfo['user_id']))->count();
+        $unread_message = M('message_board')->where(array('user_id'=>$userInfo['user_id'],'status'=>0))->count();
+
+        $this->assign('unread_message',$unread_message);
         return $this->fetch();
     }
 
