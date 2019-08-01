@@ -70,7 +70,7 @@
             // }, 1000);
 
             var mobile = $("#mobile").val();
-            console.log(mobile);
+            // console.log(mobile);
             //验证手机格式
             var reg = /(1[3-9]\d{9}$)/;
             if (!reg.test(mobile)) {
@@ -90,11 +90,11 @@
                     type:'reg_user',
                 },
                 success: function (data1) {
-                    console.log(data1);
+                    // console.log(data1);
 
                     if (data1.status == 200) {
                         res_data = data1.result;
-                        console.log(res_data);
+                        // console.log(res_data);
                         layer.msg('发送成功');
                     }
                     else {
