@@ -74,6 +74,14 @@
 }
 .nameVerify .sfz_box {
   width: 44.8vw;
+
+}
+.uploadimageBox{
+    margin: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 .nameVerify .uploader__input-box {
   position: relative;
