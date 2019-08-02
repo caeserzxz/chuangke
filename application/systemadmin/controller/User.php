@@ -12,6 +12,7 @@ use think\Loader;
 class User extends Base {
 
     public function index(){
+        $this->assign('level',M('user_level')->getField('level_id,level_name'));
         return $this->fetch();
     }
 
@@ -23,6 +24,8 @@ class User extends Base {
         $condition = array();
         I('mobile') ? $condition['mobile'] = I('mobile') : false;
         I('wx_number') ? $condition['wx_number'] = I('wx_number') : false;
+        I('is_lock') ? $condition['is_lock'] = I('is_lock') : false;
+        I('level') ? $condition['level'] = I('level') : false;
 
         $user_id=I('user_id'); 
         $tier=I('tier'); 
@@ -61,6 +64,13 @@ class User extends Base {
             $userList[$key]['direct_sum'] = $usersModel->where(['first_leader'=>$val['user_id']])->count();
             $userList[$key]['leader_mobile'] = $usersModel->where(['user_id'=>$val['first_leader']])->value('mobile');
             $userList[$key]['tuijian_code'] = $tuijianCodeModel->where(['user_id'=>$val['user_id']])->value('code');
+            // 是否有实名认证
+            $is_real = M('user_authentication')->where(['user_id' => $val['user_id'],'status' => 1])->find();
+            if ($is_real) {
+                $userList[$key]['nickname'] = $is_real['user_name'];
+            }else{
+                $userList[$key]['nickname'] = $val['mobile'];
+            }
         }
         $show = $Page->show();
         $this->assign('userList',$userList);
@@ -104,7 +114,12 @@ class User extends Base {
                 $c = M('users')->where("user_id != $uid and mobile = '$mobile'")->count();
                 $c && exit($this->error('手机号不得和已有用户重复'));
             }
-
+            // 是否更改等级
+            if ($_POST['level'] != $user['level']) {
+                // 是否有正在审核的等级
+                $is_check = M('ck_apply')->where(['user_id' => $uid,'apply_status' => 0])->count();
+                if ($is_check > 0) $this->error('该用户有申请正在审核中');
+            }
             $row = M('users')->where(array('user_id'=>$uid))->save($_POST);
             if($row)
                 exit($this->success('修改成功'));
@@ -789,7 +804,7 @@ exit("功能正在开发中。。。");
         return $this->fetch();
     }
 
-        /**
+    /**
      *  审核升级记录
      */
     public function upgrade_level(){
@@ -823,7 +838,65 @@ exit("功能正在开发中。。。");
         return $this->fetch();
     }
 
-        /**
+    /**
+     *  手动审核升级
+     */
+    public function manual_check(){
+        $id = I('id');
+        $info = M('ck_apply')->where(['id' => $id])->find();
+        $user = M('users')->where(['user_id' => $info['user_id']])->find();
+        if ($info['apply_status'] != 0) $this->ajaxReturn(['status'=>0,'msg'=>"非审核中状态,无法操作"]);
+        if ($info['check_leader_2'] && !$info['check_status_2']) {
+            $updata['check_status_2'] = 1;
+            $updata['check_time_2'] = time();
+        }
+        if (!$info['check_status_1']) {
+            $updata['check_status_1'] = 1;
+            $updata['check_time_1'] = time();
+        }
+        $updata['apply_status'] = 1;
+        $updata['apply_time'] = time();
+
+        Db::startTrans();
+        try {
+            $res = Db::name('ck_apply')->where('id',$id)->save($updata);
+            if (!$res) {
+                Db::rollback();
+                $this->ajaxReturn(['status'=>0,'msg'=>'数据更新失败']);
+            }
+            if($updata['apply_status'] == 1){
+                //审核通过 更新用户等级
+                $res1 = Db::name('users')->where('user_id',$info['user_id'])->setField('level',$info['level']);
+                if (!$res1) {
+                    Db::rollback();
+                    $this->ajaxReturn(['status'=>0,'msg'=>'等级更新失败']);
+                }
+                # 升一星时添加对应层级激活人数
+                if ($info['level'] == 2) {
+                    $leader_arr = explode('_',$user['leader_all']);        
+                    krsort($leader_arr);
+                    $leader = array_values($leader_arr);
+                    if (count($leader) > 1) {
+                        foreach ($leader as $key => $value) {
+                            if ($key >= 10 || $key < 1) continue;
+                            $res2 = M('users_team')->where(['user_id' => $value])->setInc('team_'.$key,1);
+                            if (!$res2) break;
+                        }
+                        if (!$res2) {
+                            Db::rollback();
+                            $this->ajaxReturn(['status'=>0,'msg'=>'激活人数更新失败']);
+                        }
+                    }                        
+                }
+            }
+            Db::commit();
+            $this->ajaxReturn(['status'=>1,'msg'=>'审核成功']);
+        } catch (\Exception $e){
+            $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);
+        }
+    }
+
+    /**
      * 签到列表
      * @date 2017/09/28
      */
