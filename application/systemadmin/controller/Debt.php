@@ -45,9 +45,15 @@ class Debt extends Base {
     public function edit_debt(){
         $id = I('get.id');
         $status = I('get.status');
+        $data =  M('user_debt')->where(['id' => $id])->find();
+        if (!$data) $this->error('数据不存在');
+
         $res = M('user_debt')->where(['id' => $id])->save(['status' => $status,'update_time' => time()]);
-        if (!$res) {
-            $this->error('操作失败');
+        if (!$res) $this->error('操作失败');
+        if ($status == 2) {
+            $mobile = M('users')->where(['user_id' => $data['user_id']])->value('mobile');
+            // 发送短信
+            $msg = jh_message($mobile,176933,'');
         }
         $this->success('操作成功');
     }
