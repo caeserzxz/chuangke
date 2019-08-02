@@ -8,6 +8,7 @@ use app\common\logic\UsersLogic;
 use app\common\model\Users;
 use think\Db;
 use app\mobile\controller\MobileBase;
+use think\Page;
 
 class CkUser extends MobileBase
 {
@@ -442,67 +443,95 @@ class CkUser extends MobileBase
             } catch (\Exception $e){
                 $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);
             }   
-        }else{
-            $check_user = Db::name('ck_apply')->alias('A')
-                -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name,D.user_name,D.id_card')
-                -> join('users B','A.user_id = B.user_id','left')
-                -> join('user_level C','A.level = C.level_id','left')
-                -> join('user_authentication D','A.user_id = D.user_id','left')
-                -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
-                // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
-                ->order('A.apply_status ASC')
-                -> select();
-            foreach ($check_user as $key => $value) {
-                $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
-                $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
-
-                if ($value['check_leader_1'] == $this->user_id) {
-                    $check_user[$key]['type'] = 1;
-                }else{
-                    $check_user[$key]['type'] = 2;
-                }
-                // 当前用户是否审核
-                if ($value['apply_status'] != 0) {
-                    $check_user[$key]['is_check'] = 1;
-                    continue;
-                }
-                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
-                    $check_user[$key]['is_check'] = 1;
-                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
-                    $check_user[$key]['is_check'] = 1;
-                }else{
-                    $check_user[$key]['is_check'] = 0;
-                }
-            }
-            $content = Db::name('article')->where('cat_id = 3')->value('content');
-
-            return $this->fetch('user/check_level',[
-                'check_user' => $check_user,
-                'content'    => htmlspecialchars_decode($content),
-            ]);
         }
     }
+    public function check_level_list(){
+        $count = Db::name('ck_apply')->alias('A')
+            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
+            -> count();
+        $Page = new Page($count, 10);
+
+        $check_user = Db::name('ck_apply')->alias('A')
+            -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name,D.user_name,D.id_card')
+            -> join('users B','A.user_id = B.user_id','left')
+            -> join('user_level C','A.level = C.level_id','left')
+            -> join('user_authentication D','A.user_id = D.user_id','left')
+            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
+            // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
+            ->order('A.apply_time ASC')
+            ->limit($Page->firstRow . ',' . $Page->listRows)
+            -> select();
+
+        foreach ($check_user as $key => $value) {
+            $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
+            $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
+
+            if ($value['check_leader_1'] == $this->user_id) {
+                $check_user[$key]['type'] = 1;
+            }else{
+                $check_user[$key]['type'] = 2;
+            }
+            // 当前用户是否审核
+            if ($value['apply_status'] != 0) {
+                $check_user[$key]['is_check'] = 1;
+                continue;
+            }
+            if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
+                $check_user[$key]['is_check'] = 1;
+            }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
+                $check_user[$key]['is_check'] = 1;
+            }else{
+                $check_user[$key]['is_check'] = 0;
+            }
+        }
+        $content = Db::name('article')->where('cat_id = 3')->value('content');
+
+        if (IS_AJAX) {
+            return $this->fetch('user/ajax_check_list',[
+                'check_user' => $check_user,
+                'user_id'    => $this->user_id,
+            ]);
+        }
+        return $this->fetch('user/check_level',[
+            'check_user' => $check_user,
+            'content'    => htmlspecialchars_decode($content),
+        ]);
+        
+    }
+    
 
     /**
      * 历史审核记录
      */
     public function old_check(){
+
+        $count = Db::name('ck_apply')->alias('A')
+                -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 != 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 != 0')
+                -> count();
+        $Page = new Page($count, 10);
+
         $check_user = Db::name('ck_apply')->alias('A')
                 -> field('A.*,B.nickname,B.mobile,B.wx_number,C.level_name,D.user_name,D.id_card')
                 -> join('users B','A.user_id = B.user_id','left')
                 -> join('user_level C','A.level = C.level_id','left')
                 -> join('user_authentication D','A.user_id = D.user_id','left')
                 -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 != 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 != 0')
-                ->order('A.id DESC')
-                -> select();
+                ->order('A.apply_time DESC')
+                ->limit($Page->firstRow . ',' . $Page->listRows)
+                ->select();
 
         foreach ($check_user as $key => $value) {
             $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
             $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
             $check_user[$key]['is_check'] = 1;
         }
-        // return $this->fetch('user/old_check',[
-        return $this->fetch('user/check_level',[
+        if (IS_AJAX) {
+            return $this->fetch('user/ajax_check_list',[
+                'check_user' => $check_user,
+                'user_id'    => $this->user_id,
+            ]);
+        }
+        return $this->fetch('user/old_check',[
             'check_user' => $check_user,
             'user_id'    => $this->user_id,
         ]);
