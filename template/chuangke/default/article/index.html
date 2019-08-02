@@ -1,0 +1,33 @@
+<layout name="common/layout_nav" />
+    <div class="page ">
+        <div class="page-hd">
+            <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">{$article.title}</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+        </div>
+        <div class="page-bd lianxi">
+            <!-- 页面内容-->
+            <div class="box_t " style="padding: 10px 20px;">
+                {$article.content}
+                <!--<p class="fs28">{$config['qq2']}</p>-->
+            </div>
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+    <script>
+    </script>
