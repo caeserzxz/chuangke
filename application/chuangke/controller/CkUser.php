@@ -466,22 +466,37 @@ class CkUser extends MobileBase
             $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
             $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
 
-            if ($value['check_leader_1'] == $this->user_id) {
-                $check_user[$key]['type'] = 1;
+            if ($value['check_leader_1'] == $value['check_leader_2']) {
+                // 审核人1和审核人2是同一个人 type取决于哪一个没有审核
+                if (!$value['check_status_1']) {
+                    $check_user[$key]['type'] = 1;
+                }else{
+                    $check_user[$key]['type'] = 2;
+                }
             }else{
-                $check_user[$key]['type'] = 2;
+                if ($value['check_leader_1'] == $this->user_id) {
+                    $check_user[$key]['type'] = 1;
+                }else{
+                    $check_user[$key]['type'] = 2;
+                }
             }
+            
             // 当前用户是否审核
             if ($value['apply_status'] != 0) {
                 $check_user[$key]['is_check'] = 1;
                 continue;
             }
-            if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
-                $check_user[$key]['is_check'] = 1;
-            }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
-                $check_user[$key]['is_check'] = 1;
-            }else{
+            if ($value['check_leader_1'] == $value['check_leader_2']) {
+                // 审核人1和审核人2是同一个人 状态为未审核
                 $check_user[$key]['is_check'] = 0;
+            }else{
+                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
+                    $check_user[$key]['is_check'] = 1;
+                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
+                    $check_user[$key]['is_check'] = 1;
+                }else{
+                    $check_user[$key]['is_check'] = 0;
+                }
             }
         }
         $content = Db::name('article')->where('cat_id = 3')->value('content');
@@ -720,13 +735,24 @@ class CkUser extends MobileBase
             ->join('receipt_information C','A.user_id = C.user_id')
             ->where(['A.id' => $id])
             ->find();
-        if ($apply['check_leader_1'] == $this->user_id) {
-            $apply['img'] = $apply['voucher_img1'];
-        }elseif ($apply['check_leader_2'] == $this->user_id) {
-            $apply['img'] = $apply['voucher_img2'];
+        if ($apply['check_leader_1'] == $apply['check_leader_2'] ) {
+            if (!$apply['check_status_1']) {
+                $apply['img'] = $apply['voucher_img1'];
+            }elseif (!$apply['check_status_2']) {
+                $apply['img'] = $apply['voucher_img2'];
+            }else{
+                $this->error('数据错误');
+            }
         }else{
-            $this->error('数据错误');
+            if ($apply['check_leader_1'] == $this->user_id) {
+            $apply['img'] = $apply['voucher_img1'];
+            }elseif ($apply['check_leader_2'] == $this->user_id) {
+                $apply['img'] = $apply['voucher_img2'];
+            }else{
+                $this->error('数据错误');
+            }
         }
+        
         $apply['user_name']  = $this->substr_cut($apply['user_name']);
         $apply['id_card']  = substr_replace($apply['id_card'],'**********',4,10);
 
