@@ -41,6 +41,8 @@
                     <td align="left" class=""><div style="text-align: center; width: 80px;">{$list.tuijian_code}</div></td>
                     <td align="left" class=""><div style="text-align: center; width: 120px;"><if $list.user_type eq 0 >普通会员<else><span style="color:red">管理员</span></if></div></td>
                     <td align="left" class=""><div style="text-align: center; width: 120px;"><if $list.is_lock eq 0 >正常<else><span style="color:red">冻结</span></if></div></td>
+                    <td align="left" class=""><div style="text-align: center; width: 120px;">{$list.direct_num}</div></td>
+                    <td align="left" class=""><div style="text-align: center; width: 120px;">{$list.team_num}</div></td>
                     <td align="center" class="handle">
                         <div style="text-align: center; width: 170px; max-width:250px;">
                             <a class="btn blue" href="{:U('user/detail',array('id'=>$list['user_id']))}"><i class="fa fa-pencil-square-o"></i>会员编辑</a>

@@ -71,6 +71,15 @@ class User extends Base {
             }else{
                 $userList[$key]['nickname'] = $val['mobile'];
             }
+            // 直推人数
+            $userList[$key]['direct_num'] = $usersModel->where(['first_leader'=>$val['user_id']])->count();
+            // 团队达标人数
+            $all_sub = get_team_all_user($val['user_id'],0,[]);    
+            $all_subs = []; // 二维数组合并成一维数组
+            array_walk_recursive($all_sub, function($value2) use (&$all_subs) {
+                array_push($all_subs, $value2);
+            });
+            $userList[$key]['team_num'] = count($all_subs);
         }
         $show = $Page->show();
         $this->assign('userList',$userList);
