@@ -57,17 +57,17 @@
         function codeButton() {
             var timeObj = $('.time')
             var getCodeObj = $('.getCode')
-            // getCodeObj.hide();
-            // timeObj.show();
-            // var time = 60;
-            // var set = setInterval(function () {
-            //     timeObj.text("" + --time + "s");
-            //     if (time <= 0) {
-            //         timeObj.hide();
-            //         getCodeObj.show();
-            //         clearInterval(set);
-            //     }
-            // }, 1000);
+            getCodeObj.hide();
+            timeObj.show();
+            var time = 60;
+            var set = setInterval(function () {
+                timeObj.text("" + --time + "s");
+                if (time <= 0) {
+                    timeObj.hide();
+                    getCodeObj.show();
+                    clearInterval(set);
+                }
+            }, 1000);
 
             var mobile = $("#mobile").val();
             // console.log(mobile);
@@ -98,23 +98,12 @@
                         layer.msg('发送成功');
                     }
                     else {
+                        getCodeObj.show();
+                        timeObj.hide();
                         layer.msg(data1.msg);
                         $("button").attr('has-click', '0');
                         return;
                     }
-
-                    getCodeObj.hide();
-                    timeObj.show();
-                    var time = 60;
-                    var set = setInterval(function () {
-                        timeObj.text("" + --time + "s");
-                        if (time <= 0) {
-                            timeObj.hide();
-                            getCodeObj.show();
-                            clearInterval(set);
-                        }
-                    }, 1000);
-
 
                 },
                 error: function () {

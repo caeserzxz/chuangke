@@ -79,7 +79,20 @@
             });
             return false;
         }
+        var timeObj = $('.time')
+        var getCodeObj = $('.getCode')
 
+        getCodeObj.hide();
+        timeObj.show();
+        var time = 60;
+        var set = setInterval(function () {
+            timeObj.text("" + --time + "s");
+            if (time <= 0) {
+                timeObj.hide();
+                getCodeObj.show();
+                clearInterval(set);
+            }
+        }, 1000);
         //发送验证码
         $.ajax({
             url: '/chuangke/login/captcha',
@@ -92,28 +105,12 @@
                 if (data1.status == 200) {
                     res_data = data1.result;
                     console.log(res_data);
-
-                    var time = 60;
-                    var timeObj=$('.time')
-                    var getCodeObj=$('.getCode')
-                    timeObj.text(""+time+"s后重新点击");
-                    getCodeObj.hide();
-                    timeObj.show();
-
-                    var set=setInterval(function(){
-                        timeObj.text(""+--time+"s后重新点击");
-                        if (time<=0) {
-                            timeObj.hide();
-                            getCodeObj.show();
-                            clearInterval(set);
-                        }
-                    }, 1000);
-
-
                     layer.msg('发送成功');
 
                 }
                 else {
+                    getCodeObj.show();
+                    timeObj.hide();
                     layer.msg(data1.msg);
                     $("button").attr('has-click', '0');
                     return;
