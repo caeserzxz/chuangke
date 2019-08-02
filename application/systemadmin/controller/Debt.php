@@ -51,4 +51,43 @@ class Debt extends Base {
         }
         $this->success('操作成功');
     }
+    /**
+     * 还款情况
+     */
+    public function repayment_list(){
+        I('user_id') ? $where['u.user_id'] = I('user_id') : false;
+
+        $count = Db::name('users')->alias('u')->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')->where($where)->count();
+        $Page  = new Page($count,20);
+        $list = Db::name('users')->alias('u')->field('u.user_id,u.mobile,u.nickname')
+            ->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')
+            ->where($where)->order("u.user_id desc")
+            ->limit($Page->firstRow.','.$Page->listRows)->select();
+
+        foreach ($list as $key => $value) {
+            // 众筹总额
+            $uid = $value['user_id'];
+            $debt_money = M('user_debt')->where(['user_id' => $uid,'status' => 2])->sum('moneys');
+            // 已收款
+            $where = 'check_leader_1='.$uid.' and check_status_1=1 or check_leader_2='.$uid.' and check_status_2=1';
+            $enter_money = M('ck_apply')->where($where)->sum('make_money');
+
+            // 已付款
+            $out_money = M('ck_apply')->where('user_id='.$uid.' and apply_status=1')->sum('make_money');
+            // 审核次数
+            $check_num = M('ck_apply')->where($where)->count();
+
+            $list[$key]['debt_money'] = $debt_money;
+            $list[$key]['enter_money'] = $enter_money;
+            $list[$key]['out_money'] = $out_money;
+            $list[$key]['check_num'] = $check_num;
+        }
+        $show  = $Page->show();
+        $this->assign('show',$show);
+        $this->assign('list',$list);
+        $this->assign('pager',$Page);
+
+        return $this->fetch();
+    }
+    
 }

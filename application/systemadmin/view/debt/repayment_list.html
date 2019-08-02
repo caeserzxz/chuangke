@@ -1,0 +1,191 @@
+<include file="public/layout"/>
+<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>用户债务记录</h3>
+            </div>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div id="explanation" class="explanation" style="color: rgb(44, 188, 163); background-color: rgb(237, 251, 248); width: 99%; height: 100%;">
+        <div id="checkZoom" class="title"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+            <span title="收起提示" id="explanationZoom" style="display: block;"></span>
+        </div>
+        <ul>
+            <li>众筹金额为所有通过审核的负债金额累加</li>
+            <li>收款金额为所有通过审核的金额累加</li>
+            <li>打款金额为所有通过审核的金额累加</li>
+            <li>审核次数为所有通过审核的次数累加</li>
+            <li>若同一条审核记录两位审核人为同一个人,收款金额和审核次数都只累加一次</li>
+        </ul>
+    </div>
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>会员债务列表</h3>
+                <h5>(共{$pager->totalRows}条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+            <form class="navbar-form form-inline" method="post" action="{:U('Debt/repayment_list')}" name="search-form2" id="search-form2">
+                <input type="hidden" name="order_by" value="order_id">
+                <input type="hidden" name="sort" value="desc">
+                <input type="hidden" name="user_id" value="{$Request.param.user_id}">
+                <div class="sDiv">
+                    <div class="sDiv2">
+                        <input type="text" size="30" name="user_id" class="qsbox" placeholder="搜索会员ID">
+                    </div>
+                    <!-- <div class="sDiv2">
+                        <select name="type" class="select sDiv3">
+                            <volist name="type" id="v">
+                                <option value="{$key}">{$v}</option>
+                            </volist>
+                        </select>
+                    </div>
+                    <div class="sDiv2">
+                        <select name="status" class="select sDiv3">
+                            <volist name="status" id="v">
+                                <option value="{$key}">{$v}</option>
+                            </volist>
+                        </select>
+                    </div> -->
+                    <div class="sDiv2">
+                        <input type="submit" class="btn" value="搜索">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox" id="ajax_return">
+                <table cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th align="center" axis="col3" class="">
+                            <div style="text-align: center; width: 70px;" class="">会员ID</div>
+                        </th>
+                        <th align="center" axis="col4" class="">
+                            <div style="text-align: center; width: 150px;" class="">会员昵称</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">手机号</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">众筹总额</div>
+                        </th>
+                        <th align="center" axis="col5" class="">
+                            <div style="text-align: center; width: 120px;" class="">收款金额</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">打款金额</div>
+                        </th>
+                        <th align="center" axis="col5" class="">
+                            <div style="text-align: center; width: 120px;" class="">审核次数</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">操作</div>
+                        </th>
+                        <th style="width:100%" axis="col7">
+                            <div></div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid">
+                <table>
+                    <tbody>
+                        <volist name="list" id="v">
+                            <tr data-order-id="{$v.id}">
+                                <td align="center" axis="col3" class="">
+                                    <div style="text-align: center; width: 70px;" class="">{$v.user_id}</div>
+                                </td>
+                                <td align="center" axis="col4" class="">
+                                    <div style="text-align: center; width: 150px;" class="">{$v.nickname}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 120px;" class="">{$v.mobile}</div>
+                                </td>
+                                <td align="center" axis="col5" class="">
+                                    <div style="text-align: center; width: 120px;" class="">{$v.debt_money|default=0}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 120px;" class="">{$v.enter_money|default=0}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 120px;" class="">{$v.out_money|default=0}</div>
+                                </td>
+                                <td align="center" axis="col6" class="">
+                                    <div style="text-align: center; width: 120px;" class="">{$v.check_num|default=0}</div>
+                                </td>
+
+                                <!-- <td align="left" class="handle">
+                                    <div style="text-align: center; width: 150px; max-width:250px;">
+                                        <if condition="$v[status] eq 1">
+                                            <a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>2))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>通过</a>
+                                            <a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>3))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>拒绝</a>
+                                        </if>
+                                    </div>
+                                </td> -->
+                                <td align="" class="" style="width: 100%;">
+                                    <div>&nbsp;</div>
+                                </td>
+                            </tr>
+                        </volist>
+               
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-sm-6 text-left"></div>
+                    <div class="col-sm-6 text-right">{$show}</div>
+                </div>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <!--分页位置-->
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+    });
+
+    $(document).ready(function(){
+        $('#add_time_begin').layDate();
+        $('#add_time_end').layDate();
+    });
+    // 点击刷新数据
+    $('.fa-refresh').click(function () {
+        location.href = location.href;
+    });
+
+    $('.ico-check ', '.hDivBox').click(function () {
+        $('tr', '.hDivBox').toggleClass('trSelected', function (index, currentclass) {
+            var hasClass = $(this).hasClass('trSelected');
+            $('tr', '#flexigrid').each(function () {
+                if (hasClass) {
+                    $(this).addClass('trSelected');
+                } else {
+                    $(this).removeClass('trSelected');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
