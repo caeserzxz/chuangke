@@ -7,6 +7,7 @@
 .upload_box {
   background-color: #3b4375;
   padding: 4vw 3.73333vw;
+  width: 100vw;
 }
 .upload_title {
   color: #aac2dd;
