@@ -36,9 +36,8 @@
         </div>
         <div class="upload_box tc">
             <span class="upload_title fs28">拍摄并上传您的证件照片</span>
-            <div class="weui-flex">
-                <div class="weui-flex__item">
-                    <div class="sfz_box">
+            <div class="uploadimageBox">
+                                                <div class="sfz_box">
                             <div class="uploader__input-box">
                                 <if condition="$appType eq 'IOS'">
                                     <img src="__PUBLIC__/static/chuangke/images/bg01.png"  onclick="loadimg('card_positive');" class="card_positive" alt="">
@@ -49,9 +48,7 @@
                             </div>
                         <sapn class="upload_btn fs26">上传身份证正面</span>
                     </div>
-                </div>
-                <div class="weui-flex__item">
-                    <div class="sfz_box">
+                                        <div class="sfz_box">
                             <div class="uploader__input-box">
                                 <if condition="$appType eq 'IOS'">
                                     <img src="__PUBLIC__/static/chuangke/images/bg02.png" onclick="loadimg('card_back');" class="card_back" alt="">
@@ -63,8 +60,8 @@
                             </div>
                         <span class="upload_btn fs26">上传身份证反面</span>
                     </div>
-                </div>
             </div>
+
         </div>
             <div class="images-list"><!--上传图片列表--></div>
         <button class="fs30 color_w fw_b button_btn" type="button" onclick="sub();">确认</button>
