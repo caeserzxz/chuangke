@@ -71,6 +71,15 @@ class User extends Base {
             }else{
                 $userList[$key]['nickname'] = $val['mobile'];
             }
+            // 直推人数
+            $userList[$key]['direct_num'] = $usersModel->where(['first_leader'=>$val['user_id']])->count();
+            // 团队达标人数
+            $all_sub = get_team_all_user($val['user_id'],0,[]);    
+            $all_subs = []; // 二维数组合并成一维数组
+            array_walk_recursive($all_sub, function($value2) use (&$all_subs) {
+                array_push($all_subs, $value2);
+            });
+            $userList[$key]['team_num'] = count($all_subs);
         }
         $show = $Page->show();
         $this->assign('userList',$userList);
@@ -811,13 +820,17 @@ exit("功能正在开发中。。。");
 
         I('user_id') ? $where['u.user_id']  =   I('user_id') : false; 
         I('apply_status') ? $where['w.apply_status']  =   I('apply_status') : false; 
-        I('shopping_type') ? $where['w.shopping_type']  =   I('shopping_type') : false; 
-        // var_dump($where);die;
-        // $user_id && $where['u.user_id'] = $user_id;
-
-        $count = Db::name('ck_apply')->alias('w')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->count();
+        I('shopping_type') ? $where['w.shopping_type']  =   I('shopping_type') : false;
+        if (I('leader_id')) {
+            $where2 = ' w.check_leader_1='.I('leader_id').' or w.check_leader_2='.I('leader_id');
+        }
+        $count = Db::name('ck_apply')->alias('w')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->where($where2)->count();
         $Page  = new Page($count,20);
-        $list = Db::name('ck_apply')->alias('w')->field('w.*,u.nickname')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->order("w.id desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list = Db::name('ck_apply')
+            ->alias('w')->field('w.*,u.nickname')
+            ->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')
+            ->where($where)->where($where2)->order("w.id desc")
+            ->limit($Page->firstRow.','.$Page->listRows)->select();
 
         foreach ($list as $key => $value) {
             $list[$key]['level_name'] = Db::name('user_level')->where('level_id',$value['level'])->value('level_name');
@@ -843,18 +856,19 @@ exit("功能正在开发中。。。");
      */
     public function manual_check(){
         $id = I('id');
+        $status = I('status');
         $info = M('ck_apply')->where(['id' => $id])->find();
         $user = M('users')->where(['user_id' => $info['user_id']])->find();
         if ($info['apply_status'] != 0) $this->ajaxReturn(['status'=>0,'msg'=>"非审核中状态,无法操作"]);
         if ($info['check_leader_2'] && !$info['check_status_2']) {
-            $updata['check_status_2'] = 1;
+            $updata['check_status_2'] = $status;
             $updata['check_time_2'] = time();
         }
         if (!$info['check_status_1']) {
-            $updata['check_status_1'] = 1;
+            $updata['check_status_1'] = $status;
             $updata['check_time_1'] = time();
         }
-        $updata['apply_status'] = 1;
+        $updata['apply_status'] = $status;
         $updata['apply_time'] = time();
 
         Db::startTrans();

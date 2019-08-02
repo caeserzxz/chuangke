@@ -40,12 +40,15 @@
                         <input type="text" size="30" name="user_id" class="qsbox" placeholder="搜索申请会员ID">
                     </div>
                     <div class="sDiv2">
+                        <input type="text" size="30" name="leader_id" class="qsbox" placeholder="搜索收款会员ID">
+                    </div>
+                    <!-- <div class="sDiv2">
                         <select name="shopping_type" class="select sDiv3">
                             <option value="">发货方式</option>
                             <option value="1">快递配送</option>
                             <option value="2">自提</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="sDiv2">
                         <select name="apply_status" class="select sDiv3">
                             <option value="">审核状态</option>
@@ -166,7 +169,8 @@
                                 <if condition="$v.apply_status eq 0">
                                     <td align="center" class="handle">
                                         <div style="text-align: center; width: 120px; max-width:120px;">
-                                            <a class="btn blue" href="javascript:manual_check({$v.id});"><i class="fa fa-pencil-square-o"></i>手动通过</a>
+                                            <a class="btn blue" href="javascript:manual_check({$v.id},1);"><i class="fa fa-check"></i>手动通过</a>
+                                            <!-- <a class="btn blue" href="javascript:manual_check({$v.id},-1);"><i class="fa fa-close"></i>手动拒绝</a> -->
                                         </div>
                                     </td>
                                 </if>
@@ -236,7 +240,7 @@
         });
     });
     // 手动通过审核
-    function manual_check(id) {
+    function manual_check(id,status) {
         // 删除按钮
         layer.confirm('确认操作？', {
             btn: ['确定', '取消'] //按钮
@@ -244,7 +248,7 @@
             $.ajax({
                 type: 'post',
                 url: "{:U('User/manual_check')}",
-                data : {id:id},
+                data : {id:id,status:status},
                 dataType: 'json',
                 success: function (data) {
                     layer.closeAll();
