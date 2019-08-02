@@ -21,8 +21,6 @@
                     <button class="fs28 color_w" onclick="copyUrl2()" id="Copy" data-clipboard-action="copy" data-clipboard-target="#copyUrl" >复制邀请链接</button>
                     <button class="fs28 color_w" onclick="preserveImg()">保存为图片</button>
                 </div>
-                <textarea  id="biao1" style="z-index: -1;" >{$data.url}</textarea>
-                <div id="copyUrl" style="opacity: 0">{$data.url}</div>
             </div>
             <div class="tips fs26 color_8">
                 1、每推荐一个用户注册可得50元保证金，可提现<br/>
@@ -30,6 +28,7 @@
                 3、好友每次众筹可获得3%-8%收益分成
             </div>
         </div>
+        <textarea  id="biao1" style="z-index: -1;" >{$data.url}</textarea>
     </div>
 <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
