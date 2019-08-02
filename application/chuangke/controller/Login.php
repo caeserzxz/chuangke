@@ -101,6 +101,11 @@ class Login extends Controller
             }
         }
 
+        $is_user = M('users')->where(array('mobile'=>$data['mobile']))->find();
+        if($is_user){
+            return array('status' => 500, 'msg' => '手机号已被注册', 'result' => '');
+        }
+
         $p_res = $this->checkPwd($data['password']);//验证密码强度
         if ($p_res !== true) {
             return array('status' => 500, 'msg' => $p_res, 'result' => '');
