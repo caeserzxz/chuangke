@@ -5,3 +5,4 @@ runtime
 
 public/upload/
 /application/database.php
+/application/systemadmin/view/systems/download_setting.html

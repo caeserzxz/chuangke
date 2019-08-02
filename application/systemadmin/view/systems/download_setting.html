@@ -1,0 +1,118 @@
+<include file="public/layout" />
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>APP下载页设置</h3>
+            </div>
+            <ul class="tab-base nc-row">
+                <foreach name="group_list" item="v" key="k">
+                    <li><a href="{:U('Systems/index',['inc_type'=> $k])}" <if condition="$k==$inc_type">class="current"</if>><span>{$v}</span></a></li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div class="explanation" id="explanation">
+        <div class="title" id="checkZoom"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+            <span id="explanationZoom" title="收起提示"></span> </div>
+        <ul>
+            <li>填写下载链接会自动生成二维码</li>
+        </ul>
+    </div>
+    <form method="post" id="handlepost" action="{:U('Systems/download_setting')}" enctype="multipart/form-data" name="form1">
+        <input type="hidden" name="form_submit" value="ok" />
+        <div class="ncap-form-default">
+
+            <dl class="row">
+                <dt class="tit">
+                    <label for="qq3">安卓下载链接</label>
+                </dt>
+                <dd class="opt">
+                    <input id="qq3"  name="android_link" value="{$config.android_link}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">安卓下载链接</p>
+                </dd>
+
+                <if condition="$config.android_qrcode neq ''">
+                    <dd>
+                        <p class="notic">安卓下载二维码</p>
+                        <img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.android_qrcode}" alt="">
+                    </dd>
+                </if>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="debt_based">IOS下载链接</label>
+                </dt>
+                <dd class="opt">
+                    <input id="debt_based"  name="ios_link" value="{$config.ios_link}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">IOS下载链接</p>
+                </dd>
+                <if condition="$config.ios_qrcode neq ''">
+                    <dd>
+                        <p class="notic">IOS下载二维码</p>
+                        <img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.ios_qrcode}" alt="">
+                    </dd>
+                </if>
+
+            </dl>
+            <div class="bot">
+                <input type="hidden" name="inc_type" value="{$inc_type}">
+                <a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green" onclick="document.form1.submit()">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="goTop"> <a href="JavaScript:void(0);" id="btntop"><i class="fa fa-angle-up"></i></a><a href="JavaScript:void(0);" id="btnbottom"><i class="fa fa-angle-down"></i></a></div>
+</body>
+<script>
+var url="{:url('Ueditor/index',array('savePath'=>'goods'))}";
+var ue = UE.getEditor('help_content',{
+         serverUrl :url,
+         zIndex: 999,
+         initialFrameWidth: "100%", //初化宽度
+         initialFrameHeight: 200, //初化高度            
+         focus: false, //初始化时，是否让编辑器获得焦点true或false
+         maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+         pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+         autoHeightEnabled: true
+     });
+</script>
+<script>
+var url="{:url('Ueditor/index',array('savePath'=>'goods'))}";
+var ue = UE.getEditor('Notice_content',{
+         serverUrl :url,
+         zIndex: 999,
+         initialFrameWidth: "100%", //初化宽度
+         initialFrameHeight: 200, //初化高度            
+         focus: false, //初始化时，是否让编辑器获得焦点true或false
+         maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+         pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+         autoHeightEnabled: true
+     });
+</script>
+<script type="text/javascript">
+    //网站首页logo
+    function img_call_back(fileurl_tmp)
+    {
+        $("#store_logo").val(fileurl_tmp);
+        $("#img_a").attr('href', fileurl_tmp);
+        $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //网站用户中心logo
+    function user_img_call_back(fileurl_tmp)
+    {
+        $("#store_user_logo").val(fileurl_tmp);
+        $("#userimg_a").attr('href', fileurl_tmp);
+        $("#userimg_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+</script>
+</html>

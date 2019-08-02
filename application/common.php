@@ -1648,4 +1648,84 @@ function hidestr($string, $start = 0, $length = 0, $re = '*') {
     if ($begin >= $end || $begin >= $last || $end > $last) return false;
     return implode('', $strarr);
 }
+#################################
+/**
+ * 聚合数据短信
+ * $result 返回参数
+ * 失败示例
+        {
+            "reason": "错误的短信模板ID,请通过后台确认!!!",
+            "result": [],
+            "error_code": 205402
+        }
+ * 成功
+  {
+    "reason": "短信发送成功",
+    "result": {
+            "count": 1, 发送数量
+            "fee": 1, 扣除条数
+            "sid": "23d6bc4913614919a823271d820662af" 短信ID
+        },
+    "error_code": 0 发送成功
+  }
+ *
+ *
+ *
+*/
+#################################
+function jh_message($mobile,$tpl_id,$captcha){
 
+    $url = "http://v.juhe.cn/sms/send";
+    $params = array(
+        'key'   => 'dd90377b051c624965820f7dae4c633e', //您申请的APPKEY
+        'mobile'    => $mobile, //接受短信的用户手机号码
+        'tpl_id'    => $tpl_id, //您申请的短信模板ID，根据实际情况修改
+        'tpl_value' =>urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
+    );
+
+    $paramstring = http_build_query($params);
+    $content = juheCurl($url, $paramstring);
+    $result = json_decode($content, true);
+    return $result;
+}
+
+/**
+ * 聚合数据
+ * 请求接口返回内容
+ * @param  string $url [请求的URL地址]
+ * @param  string $params [请求的参数]
+ * @param  int $ipost [是否采用POST形式]
+ * @return  string
+ */
+function juheCurl($url, $params = false, $ispost = 0)
+{
+    $httpInfo = array();
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'JuheData');
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    if ($ispost) {
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_URL, $url);
+    } else {
+        if ($params) {
+            curl_setopt($ch, CURLOPT_URL, $url.'?'.$params);
+        } else {
+            curl_setopt($ch, CURLOPT_URL, $url);
+        }
+    }
+    $response = curl_exec($ch);
+    if ($response === FALSE) {
+        //echo "cURL Error: " . curl_error($ch);
+        return false;
+    }
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $httpInfo = array_merge($httpInfo, curl_getinfo($ch));
+    curl_close($ch);
+    return $response;
+}

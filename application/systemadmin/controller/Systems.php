@@ -439,5 +439,54 @@ class Systems extends Base
         }
     }
 
+    //下载设置
+    public function download_setting(){
+         if(IS_POST){
+             $param = I('post.');
+             $inc_type = $param['inc_type'];
+             if($param['android_link']){
+                 $param['android_qrcode'] = $this->qr_code($param['android_link']);
+             }
+             if($param['ios_link']){
+                 $param['ios_qrcode'] = $this->qr_code($param['ios_link']);
+             }
+             unset($param['inc_type']);
+             unset($param['form_submit']);
+             tpCache($inc_type,$param);
+             $this->success("操作成功",U('Systems/download_setting',array('inc_type'=>$inc_type)));
+         }else{
+             $config = tpCache('shop_info');
+
+             $inc_type =  I('get.inc_type','shop_info');
+             $this->assign('inc_type',$inc_type);
+             $this->assign('config',$config);
+             return $this->fetch();
+    }
+    }
+
+    public function qr_code($url){
+        //加载第三方类库
+        vendor('phpqrcode.phpqrcode');
+
+        //获取个人
+        //$url = request()->domain().U('contactleader',['id'=>$user['user_id']]);
+        //$url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/register?rec_id='.$user['user_id'];
+        $after_path = 'public/qrcode/'.md5($url).'.png';
+        //保存路径
+        $path =  ROOT_PATH.$after_path;
+
+        //判断是该文件是否存在
+        if(!is_file($path))
+        {
+            //实例化
+            $qr = new \QRcode();
+            //1:url,3: 容错级别：L、M、Q、H,4:点的大小：1到10
+            $qr::png($url,'./'.$after_path, "M", 6,TRUE);
+        }
+
+        $img = request()->domain().'/'.$after_path;
+        return  $img;
+    }
+
 
 }

@@ -156,33 +156,25 @@ class Login extends Controller
         #################################
         //聚合数据短信
         #################################
-        $url = "http://v.juhe.cn/sms/send";
-        $params = array(
-            'key'   => 'f17d1ac1e5250f3a29b7badd80ffb093', //您申请的APPKEY
-            'mobile'    => $input['mobile'], //接受短信的用户手机号码
-            'tpl_id'    => '151146', //您申请的短信模板ID，根据实际情况修改
-            'tpl_value' =>urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
-        );
+        $send = jh_message($input['mobile'],'176927',$captcha);
 
-        $paramstring = http_build_query($params);
-        $content = $this->juheCurl($url, $paramstring);
-        $result = json_decode($content, true);
-        if ($result) {
+        if ($send['error_code']==0) {
+            //验证码入库
+            $res = db('n_mobile_captcha')->insert([
+                'mobile' => $input['mobile'],
+                'expire_in' => (time() + 1200),
+                'captcha' => $captcha,
+                'create_time' => time(),
+            ]);
+
+            return array('status' => 200, 'msg' => '发送成功', 'result' => $captcha);
         } else {
-            return array('status' => 500, 'msg' => '发送失败', 'result' => "");
+            return array('status' => 500, 'msg' =>$send['reason'] , 'result' => "");
             //请求异常
         }
         ################################
 
-        //验证码入库
-        $res = db('n_mobile_captcha')->insert([
-            'mobile' => $input['mobile'],
-            'expire_in' => (time() + 1200),
-            'captcha' => $captcha,
-            'create_time' => time(),
-        ]);
 
-        return array('status' => 200, 'msg' => '发送成功', 'result' => $captcha);
 
     }
 
