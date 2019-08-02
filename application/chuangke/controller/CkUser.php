@@ -46,6 +46,7 @@ class CkUser extends MobileBase
 	//申请升级处理
     public function apply_handle(){
         $shopping   = input('shopping');//快递方式 1快递 2自提
+        $text = tpCache('shop_info.shop_text');
 
         //获取用户等级信息
         $user = Users::get($this->user_id);
@@ -69,13 +70,13 @@ class CkUser extends MobileBase
 
         // 是否实名认证
         $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => ['IN',[0,1]]])->count();
-        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心实名认证！','url' => U('chuangke/Member/realNameAuthentication')]);
+        if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>$text.'：请先在个人中心实名认证！','url' => U('chuangke/Member/realNameAuthentication')]);
         // 是否绑定收款方式
         $is_receivables = M('receipt_information')->where(['user_id' => $this->user_id])->count();
-        if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
+        if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>$text.'：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
         // 是否有众筹计划
         $is_plan = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->count();
-        if (!$is_plan) $this->ajaxReturn(['status'=>0,'msg'=>'有钱还：请先添加众筹计划！']);
+        if (!$is_plan) $this->ajaxReturn(['status'=>0,'msg'=>$text.'：请先添加众筹计划！']);
 
         //是否已有等级在审核中
         $count = Db::name('ck_apply')->where(['user_id'=>$user['user_id'],'apply_status'=>0])->count();
@@ -233,7 +234,7 @@ class CkUser extends MobileBase
                 if ($value['is_out'] == 1) {
                     end($value);
                     // 添加漏单消息记录
-                    $res = add_message($key,'亲爱的有钱还用户:你错过了审核'.substr_replace($user['mobile'],'****',3,4).'用户升级的订单');
+                    $res = add_message($key,'亲爱的'.$text.'用户:你错过了审核'.substr_replace($user['mobile'],'****',3,4).'用户升级的订单');
                     // if (!$res) break;
                 }
                 // 升一星时9星用户没有层级限制,可能会有team_order_10情况
