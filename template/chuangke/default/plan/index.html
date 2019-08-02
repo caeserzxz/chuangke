@@ -47,10 +47,10 @@
                         <div class="list">
                             <div class="left">
                                 <p class="fs26">第{$text[$key]}阶段</p>
-                                <a href="<if condition='$key eq 0'> {:U('chuangke/CkUser/old_check')} <else/> # </if>"><div class="line"><div></div></div></a>
+                                <a href="{:U('chuangke/CkUser/old_check')}"><div class="line"><div></div></div></a>
                                 
                                 <if condition="$vo.check EQ 1">
-                                    <a href="{:U('chuangke/CkUser/check_level')}"><span class="fs24">去审核</span></a>
+                                    <a href="{:U('chuangke/CkUser/check_level_list')}"><span class="fs24">去审核</span></a>
                                 <else/>
                                     <span class="fs24">{$vo.rece_money}/{$vo.need_money}</span>
                                 </if>

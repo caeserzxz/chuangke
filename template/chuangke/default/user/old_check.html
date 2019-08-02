@@ -1,84 +1,67 @@
-<!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
-    <link rel="stylesheet" href="__STATIC__/assets3/css/zpui.css"/>
-    <link rel="stylesheet" href="__STATIC__/assets3/css/all.css"/>
-    <script src="__STATIC__/assets3/js/page.js"></script>
-
-    <title> 历史订单 </title>
-    <style>
-        .weui-btn {
-            color: #ffffff;
-            background-color: #fff;
-            height: .3rem;
-            min-width: .65rem;
-            background-color: #d0d0d0;
-            padding:0px .1rem;
-            line-height:.3rem;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-<div class="page">
-    <div class="page-hd">
-        <div class="header">
-            <div class="header-left">
-                <a href="javascript:history.go(-1)" class="left-arrow"></a>
-            </div>
-            <div class="header-title">历史订单</div>
-            <div class="header-right">
-                <div class="right_menu">
-
+<layout name="common/layout_nav" />
+    <div class="page collectionMen">
+        <div class="page-hd">
+            <div class="header">
+                <div class="header-left">
+                    <a href="javascript:history.go(-1)" class="left-arrow"></a>
+                </div>
+                <div class="header-title">打款人</div>
+                <div class="header-right">
+                    <a href="#"></a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="page-bd">
-        <!-- 页面内容-->
-        <div class="weui-cells pd30 mt0 border-after_none" style="background: none;">
+        <div class="page-bd">
+            <!-- 页面内容-->
             <volist name="check_user" id="vo">
-                <div class="weui-cell bg-fff border-radius15 mb20" style="align-items: center;">
-                    <div class="weui-cell__bd">
-                        <p>对方ID：<span>{$vo.user_id}</span></p>
-                        <p class="mt10">姓名：<span>{$vo.nickname}</span></p>
-                        <p class="mt10">手机号：<span>{$vo.mobile}</span></p>
-                        <p class="mt10">微信号：<span>{$vo.wx_number}</span></p>
-                    </div>
-                    <div class="weui-cell__ft" style="justify-content: space-between;align-items: center;">
-                        <a href="#" class="weui-btn weui-btn_plain-default border-radius10 fs24">
-                            <if condition="$vo.check_leader_1 eq $user_id">
-                                <if condition="$vo.check_status_1 == 1">
-                                    同意
-                                    <else/>
-                                    拒绝
-                                </if>
-                                <elseif condition="$vo.check_leader_2 eq $user_id"/>
-                                <if condition="$vo.check_status_2 == 1">
-                                    同意
-                                    <else/>
-                                    拒绝
-                                </if>
-                                <else/>
-                                未定义
-                            </if>
-
-                        </a>
-                    </div>
+                 <div class="block">
+                     <div class="info">
+                        <p class="fs26">姓名：<span>{$vo.user_name}</span></p>
+                        <p class="fs26">身份证：<span>{$vo.id_card}</span></p>
+                     </div>
+                     <div class="btnBox">
+                        <p class="fs26 fw_b">打款金额：<span>{$vo.make_money}</span></p>
+                        <if condition="$vo.is_check eq 1">
+                            <a href="JavaScript:;" class="fs24 color_w check_end">已审核</a>
+                        <else/>
+                            <a href="{:U('chuangke/CkUser/rece_detail',['id' => $vo.id])}" class="fs24 color_w">去审核</a>
+                        </if>
+                     </div>
                 </div>
             </volist>
         </div>
     </div>
-</div>
-<script src="__STATIC__/assets3/js/lib/jquery-2.1.4.js"></script>
-<script src="__STATIC__/assets3/js/jquery-weui.min.js"></script>
-
 <script>
-    $(function () {
-
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    var loading = false;  //状态标记
+    var page = 1;
+    $('.page-bd').infinite().on("infinite", function() {
+        if(loading) return;
+        loading = true;
+        page ++;
+        $.ajax({
+            type : "POST",
+            url:"/index.php?m=chuangke&c=CkUser&a=old_check&is_ajax=1&p="+page,//+tab,
+            dataType:'JSON',
+            data : {p:page},
+            success: function(data) {
+                if (data == '') {
+                    $.toast('加载完成', "text");
+                    return;
+                }
+                $(".page-bd").append(data);
+                loading = false;
+            },
+            error:function(){
+                $.toast('请稍后再试', "text");
+            }
+        });
     });
 </script>
 </body>
+
 </html>

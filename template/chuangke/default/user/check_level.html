@@ -37,6 +37,30 @@
     });
 </script>
 <script>
+    var loading = false;  //状态标记
+    var page = 1;
+    $('.page-bd').infinite().on("infinite", function() {
+        if(loading) return;
+        loading = true;
+        page ++;
+        $.ajax({
+            type : "POST",
+            url:"/index.php?m=chuangke&c=CkUser&a=check_level_list&is_ajax=1&p="+page,//+tab,
+            dataType:'JSON',
+            data : {p:page},
+            success: function(data) {
+                if (data == '') {
+                    $.toast('加载完成', "text");
+                    return;
+                }
+                $(".page-bd").append(data);
+                loading = false;
+            },
+            error:function(){
+                $.toast('请稍后再试', "text");
+            }
+        });
+    });
 </script>
 </body>
 
