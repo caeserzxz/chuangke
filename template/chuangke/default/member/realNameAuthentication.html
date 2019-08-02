@@ -83,8 +83,8 @@
         FastClick.attach(document.body);
     });
     var img_name = '';
+    var is_real = 1;
     function sub(){
-
         var regName = /^[\u4E00-\u9FA5]{2,4}$/;
         var idcardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
         var user_name = $('#user_name').val();
@@ -100,28 +100,32 @@
             layer.msg('请输入正确身份证号',{icon: 5,time:3000});
             return false;
         }
-
-        $.ajax({
-            url: "{:url('/chuangke/Member/realNameAuthentication')}",
-            type: 'POST',
-            cache: false,
-            data: new FormData($('#form')[0]),
-            processData: false,
-            contentType: false,
-            dataType:"json",
-            success : function(data) {
-                console.log(data);
-                // return false;
-                if(data.status==1){
-                    layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
-                        window.location = "{:url('/chuangke/Member/index')}";
-                    });
-                }else{
-                    layer.msg(data.msg, { icon: 5, time: 2000 });
-                    return false;
+        if(is_real==1){
+            is_real = 2;
+            $.ajax({
+                url: "{:url('/chuangke/Member/realNameAuthentication')}",
+                type: 'POST',
+                cache: false,
+                data: new FormData($('#form')[0]),
+                processData: false,
+                contentType: false,
+                dataType:"json",
+                success : function(data) {
+                    console.log(data);
+                    // return false;
+                    if(data.status==1){
+                        layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                            window.location = "{:url('/chuangke/Member/index')}";
+                        });
+                    }else{
+                        layer.msg(data.msg, { icon: 5, time: 2000 });
+                        is_real = 1;
+                        return false;
+                    }
                 }
-            }
-        });
+            });
+        }
+
 
 
     }
