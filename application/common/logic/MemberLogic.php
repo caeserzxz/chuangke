@@ -115,7 +115,7 @@ class MemberLogic extends Model
             add_message($user['user_id'],'实名认证失败');
             add_message($user['user_id'],'实名认证失败,扣除'.$config['earnest_money'].'保证金');
             //添加保证金流水
-            $this->addRecord($user['user_id'],'','实名认证失败,扣除'.$config['earnest_money'].'保证金',$config['earnest_money'],1);
+            $this->addRecord($user['user_id'],'','实名认证失败,扣除'.$config['earnest_money'].'保证金',-$config['earnest_money'],1);
 
 
             //推荐人获得保证金

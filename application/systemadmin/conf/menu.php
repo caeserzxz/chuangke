@@ -21,7 +21,7 @@ return	array(
 						// array('name'=>'充值记录','act'=>'recharge','op'=>'User'),
 						// array('name'=>'提现申请','act'=>'withdrawals','op'=>'User'),
 						// array('name'=>'汇款记录','act'=>'remittance','op'=>'User'),
-						array('name'=>'投诉内容','act'=>'messageBoard','op'=>'User'),
+//						array('name'=>'投诉内容','act'=>'messageBoard','op'=>'User'),
 						array('name'=>'审核升级','act'=>'upgrade_level','op'=>'User'),
 						//array('name'=>'会员整合','act'=>'integrate','op'=>'User'),
 						//array('name'=>'会员签到','act'=>'signList','op'=>'User'),

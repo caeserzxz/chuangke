@@ -256,7 +256,8 @@ class Member extends  MobileBase
      * 联系我们
      */
     public function callMeBaby(){
-
+        $config = tpCache('shop_info');
+        $this->assign('config',$config);
         return $this->fetch();
     }
 

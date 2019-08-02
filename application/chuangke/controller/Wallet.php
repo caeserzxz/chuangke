@@ -49,4 +49,12 @@ class Wallet extends MobileBase
         }
 
     }
+
+    /**
+     * 佣金明细
+     */
+    public function commission_list(){
+        return $this->fetch();
+    }
+
 }

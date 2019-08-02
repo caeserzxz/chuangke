@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+<link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all.css"/>
+<script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+
+
+    <title> 有钱还 </title>
+</head>
+
+<body>
+    <div class="page walletLog">
+            <div class="page-hd">
+                    <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">佣金明细</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+                </div>
+        <div class="page-bd message">
+            <div class="box_t " >
+                <img src="__PUBLIC__/static/chuangke/images/message_no.png" alt="" class="mess_img">
+                <div class="heng">
+                    <p>——————</p>
+                    <p class="fs24 wen">暂无相关数据</p>
+                    <p>——————</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <div class="weui-cells">
+
+                <!--<div class="weui-cell">-->
+                    <!--<div class="weui-cell__bd">-->
+                        <!--<p class="fs26">推荐奖励</p>-->
+                        <!--<span class="fs22">2019-07-17 14:30:26</span>-->
+                    <!--</div>-->
+                    <!--<div class="weui-cell__ft fs26">+50.00</div>-->
+                <!--</div>-->
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+    <script>
+        var loading = false;  //状态标记
+        $('.page-bd').infinite().on("infinite", function() {
+        if(loading) return;
+        loading = true;
+        setTimeout(function() {
+            $(".weui-cells").append("<p> 我是新加载的内容 </p>");
+            loading = false;
+        }, 1500);   //模拟延迟
+        });
+    </script>
+</body>
+
+</html>
