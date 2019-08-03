@@ -10,7 +10,7 @@ class Task extends Controller {
         parent::__construct();
         $userId   = Session('user_id');
         if(empty($userId)){
-            $this->redirect('chuangke/Login/index');
+            // $this->redirect('chuangke/Login/index');
         }else{
             $userInfo =Db::name('users')
                 ->where('user_id',$userId)
@@ -23,11 +23,6 @@ class Task extends Controller {
      * 首页
      */
     public function index(){
-        $userInfo = $this->userInfo;
-        $unread_message = M('message_board')->where(array('user_id'=>$userInfo['user_id'],'status'=>0))->count();
-
-        $this->assign('unread_message',$unread_message);
-        return $this->fetch();
     }
     /**
      * 自动审核计划任务
@@ -57,5 +52,4 @@ class Task extends Controller {
         // $data = M('user_debt')->where($where)->select();
         // M('user_debt')->where($where)->update(['status' => 2,'update_time' =>time()]);
     }
-
 }
