@@ -67,6 +67,16 @@ class MobileBase extends Controller {
             }
         }
 
+        //登录检测
+        $userId   = Session('user_id');
+        if(empty($userId)){
+            $this->redirect('chuangke/Login/index');
+        }else{
+            $userInfo =Db::name('users')
+                ->where('user_id',$userId)
+                ->find();
+            $this->userInfo = $userInfo;
+        }
 
         $wx_qr = M('wx_user')->cache(true)->value('qr'); //获取微信配置
         $this->assign('wx_qr',$wx_qr);
