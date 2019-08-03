@@ -178,7 +178,7 @@ class CkUser extends MobileBase
                 //关系链最近的管理员
                 // $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
                 $leaders = implode(',',$leader);
-                $where_admin = "user_id in ($leaders) and user_type=1 and is_lock=0 and user_id <> ".$check_id;
+                $where_admin = "user_id in ($leaders) and user_type=1 and is_lock=0 and user_id <> ".$check_id." and user_id <>".$this->user_id;
                 $check_user = Db::name('users')->where($where_admin)->value('user_id');
 
                 if($check_user){
