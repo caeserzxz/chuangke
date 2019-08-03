@@ -1,0 +1,67 @@
+<layout name="common/layout_nav" />
+<style>
+    .wapandroidicon {
+        font-size: 20px;
+        padding-right: 12px;
+    }
+    .download-btn {
+        color: white;
+        font-size: 18px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        background-color: #35BFFD;
+        width: 180px;
+        border-radius: 4px;
+        padding: 8px 12px;
+    }
+    .android-btn {
+        margin-top: 36px;
+    }
+    .ios-btn {
+        margin-top: 12px;
+    }
+    .iconfont {
+        font-family:"iconfont" !important;
+        font-size:16px;
+        font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .icon-anzhuo:before { content: "\e677"; }
+    .icon-ios:before { content: "\e60c"; }
+    .iostext{ text-align: center; color: #F8F8F8;}
+</style>
+    <div class="page login">
+        <div class="page-bd">
+            <div class="logoimg">
+                    <img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">
+            </div>
+            <div class="downbotton">
+                <a class="download-btn android-btn" href="http://youqianhuan.oss-cn-hongkong.aliyuncs.com/app/android/youqianhuan.apk"><i class="iconfont icon-anzhuo wapandroidicon"></i>Android版下载</a>
+                <a class="download-btn ios-btn" href="http://youqianhuan.oss-cn-hongkong.aliyuncs.com/app/android/youqianhuan.apk"><i class="iconfont icon-ios wapandroidicon"></i>IOS版本下载</a>
+            </div>
+            <div class="iostext">
+                <p style="margin-top:12px; ">
+                <h5 style="line-height:32px;font-size:15px; ">IOS用户安装指南</h5>
+                <span style="font-size:12px; ">1.由于IOS的安全机制，首次安装【有钱还 App】的用户需要进入系统“设置”</span> <br />
+                <span style="font-size:12px; ">2.选择“通用” / "设备管理 "</span> <br />
+                <span style="font-size:12px; ">3.选择“一个英文的公司名称.”，设置为信任</span> <br />
+                <span style="font-size:12px; ">4.点击“信任”完成验证</span> <br />
+            </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+
+</script>
