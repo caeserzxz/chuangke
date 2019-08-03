@@ -1,4 +1,10 @@
 <layout name="common/layout_nav" />
+<style>
+    #remember_password{
+        height: 14px;
+        line-height: 14px;
+    }
+</style>
     <div class="page login forgetPwd zhuce">
         <div class="page-hd">
             <div class="header">
@@ -34,7 +40,7 @@
                     <input type="text" name="tuijian_code" disabled="true" value="{$tuijian_code}" class="fs28" placeholder="邀请码(必填）">
                 </if>
 
-                <p class="fs24 see ">注册并同意<a href="{:U('chuangke/article/index')}?id=4" class="fs24">《注册协议》</a></p>
+                <p class="fs24 see "> <input id="remember_password" type="checkbox" />注册并同意<a href="{:U('chuangke/article/index')}?id=5" class="fs24">《注册协议》</a></p>
                 <a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>
             </div>
             <if condition="$appType eq 'other'">
@@ -127,8 +133,13 @@
             var verify_code = $('input[name=verify_code]').val();
             var password = $('input[name=password]').val();
             var tuijian_code = $('input[name=tuijian_code]').val();
+            var isSave = document.getElementById('remember_password').checked;
 
-            if(mobile==''||mobile==null){
+            if(isSave==false){
+                layer.msg('请阅读注册协议并同意',{icon:5,time:2000});
+                return false;
+            }
+            if(!(/^1[3456789]\d{9}$/.test(mobile))){
                 layer.msg('请填写手机号',{icon:5,time:2000});
                 return false;
             }else if(verify_code==''||verify_code==null){
@@ -138,7 +149,7 @@
                 layer.msg('请填写密码',{icon:5,time:2000});
                 return false;
             }else if(tuijian_code==''||tuijian_code==null){
-                layer.msg('请填些邀请码',{icon:5,time:2000});
+                layer.msg('请填写邀请码',{icon:5,time:2000});
                 return false;
             }
 

@@ -6,7 +6,7 @@ use think\Db;
 use app\common\logic\MemberLogic;
 use app\mobile\controller\MobileBase;
 
-class Article extends MobileBase
+class Article extends Controller
 {
     public function __construct()
     {
