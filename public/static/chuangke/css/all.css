@@ -280,6 +280,8 @@
   color: #23bafd;
   text-align: right;
   margin-top: 3.73333vw;
+  width: 50%;
+  margin-left: 50%;
 }
 .login .form_box .loading_btn {
   height: 12vw;

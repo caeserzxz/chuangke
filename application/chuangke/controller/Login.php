@@ -326,7 +326,7 @@ class Login extends Controller
      * APP下载页
      */
     public function AppDownload(){
-        
+
         return $this->fetch();
     }
 

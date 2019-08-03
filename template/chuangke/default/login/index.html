@@ -1,4 +1,21 @@
 <layout name="common/layout_nav" />
+<style>
+    .remember_password{
+        width: 50%;
+        height: 3rem;
+        line-height: 3rem;
+        /*display:block;*/
+        /*display: inline;*/
+        vertical-align:middle;
+        display: inline-block;
+    }
+    #remember_password{
+        height: 4vw;
+        line-height: 4vw;
+        border: none;
+        outline: none;
+    }
+</style>
     <div class="page login">
         <div class="page-bd">
         <div class="logoimg">
@@ -9,7 +26,7 @@
             <p class="tou ">登录</p>
             <input type="number" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">
             <input type="password" id="password" class="fs28 pwd" placeholder="请输入密码(6-20位字符)">
-
+            <div class="remember_password">   <input id="remember_password" type="checkbox" />记住密码</div>
             <a href="{:U('chuangke/login/forgotPassword')}" class="rember">忘记密码</a>
             <a href="javascript:;" class="weui-btn loading_btn fs30" onclick="loginBtn();">登录</a>
         </div>
@@ -30,6 +47,8 @@
 </script>
     <script>
         $(function() {
+            getCookie();
+
             $(".tel").val()
             $(".pwd").val()
         })
@@ -55,14 +74,71 @@
                 console.log(data);
                 // return false;
                 if(data.status==1){
+                    saveInfo();
                     layer.msg(data.msg,{time:2000},function(){
                         window.location.href = "{:U('chuangke/index/index')}";
                     })
+
                 }else{
                     layer.msg(data.msg,{icon:5,time:2000});
                 }
             }
         });
 
+    }
+
+    // 保存Cookie
+    function saveInfo() {
+        try {
+            // 保存按键是否选中
+            var isSave = document.getElementById('remember_password').checked;
+
+            if (isSave) {
+                var username = $('#mobile').val();
+                var password = $('#password').val();
+                if (username != "" && password != "") {
+                    SetCookie(username, password);
+                }
+            } else {
+                SetCookie("", "");
+            }
+
+        } catch (e) {}
+    }
+
+    // 保存Cookie
+    function SetCookie(username, password) {
+        var Then = new Date();
+        Then.setTime(Then.getTime() + 1866240000000);
+        document.cookie = ("username=" + username + "%%" + password + ";expires=" + Then.toGMTString());
+    }
+    // 获取登陆的用户名和密码
+    function getCookie() {
+        var nmpsd;
+        var nm;
+        var psd;
+        var cookieString = new String(document.cookie);
+        var cookieHeader = "username=";
+        var beginPosition = cookieString.indexOf(cookieHeader);
+        cookieString = cookieString.substring(beginPosition);
+        var ends = cookieString.indexOf(";");
+        if (ends != -1) {
+            cookieString = cookieString.substring(0, ends);
+        }
+        if (beginPosition > -1) {
+            nmpsd = cookieString.substring(cookieHeader.length);
+
+            if (nmpsd != "") {
+                beginPosition = nmpsd.indexOf("%%");
+                nm = nmpsd.substring(0, beginPosition);
+                psd = nmpsd.substring(beginPosition + 2);
+                $('#mobile').val(nm)
+                $('#password').val(psd)
+
+                if (nm != "" && psd != "") {
+                    document.getElementById('remember_password').checked = true;
+                }
+            }
+        }
     }
 </script>
