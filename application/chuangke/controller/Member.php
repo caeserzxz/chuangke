@@ -143,14 +143,15 @@ class Member extends  MobileBase
         $model  = new MemberLogic();
         if($this->request->isPost()){
             $data = I('post.');
-            //验证验证码
-            $mobile_captcha = db('n_mobile_captcha')->where('mobile', $userInfo['mobile'])->order('id desc')->find();
-            if ($mobile_captcha['expire_in'] < time()) {
-                return array('status' => 500, 'msg' => '验证码已过期', 'result' => '');
+            $config = tpCache('shop_info');
+            if($config['check_verify_code']==1){
+                //验证验证码
+                $check = check_verify_code($userInfo['mobile'],$data['verify_code']);
+                if($check){
+                    return  $check;
+                }
             }
-            if ($mobile_captcha['captcha'] != $data['verify_code']) {
-                return array('status' => 500, 'msg' => '验证码不正确', 'result' => '');
-            }
+
             if(empty($_FILES['account_code_img']['tmp_name'])&&empty($data['account_code_img'])){
                 return array('status' => 500, 'msg' => '请上传收款码', 'result' => '');
             }
@@ -181,6 +182,8 @@ class Member extends  MobileBase
         }else{
             $account = $model->getAccount($userInfo['user_id']);
 
+            $config = tpCache('shop_info');
+            $this->assign('config',$config);
             $this->assign('appType',session('appType'));
             $this->assign('account',$account);
             $this->assign('userInfo',$userInfo);

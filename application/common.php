@@ -1674,7 +1674,11 @@ function hidestr($string, $start = 0, $length = 0, $re = '*') {
 */
 #################################
 function jh_message($mobile,$tpl_id,$captcha){
-
+    $config = tpCache('shop_info');
+    if($config['check_verify_code']==0){
+        return array('error_code'=>500,'reason'=>'无需验证码','result'=>'');
+        exit;
+    }
     $url = "http://v.juhe.cn/sms/send";
     $params = array(
         'key'   => 'dd90377b051c624965820f7dae4c633e', //您申请的APPKEY
@@ -1728,4 +1732,21 @@ function juheCurl($url, $params = false, $ispost = 0)
     $httpInfo = array_merge($httpInfo, curl_getinfo($ch));
     curl_close($ch);
     return $response;
+}
+
+
+//验证验证码
+function check_verify_code($mobile,$verify_code){
+    $mobile_captcha = db('n_mobile_captcha')->where('mobile',$mobile)->order('id desc')->find();
+
+    if ($mobile_captcha['expire_in'] < time()) {
+        return array('status' => 500, 'msg' => '验证码已过期', 'result' => '');
+    }
+
+    if ($mobile_captcha['captcha'] != $verify_code) {
+        return array('status' => 500, 'msg' => '验证码不正确', 'result' => '');
+    }
+    if ($mobile_captcha['mobile'] != $mobile) {
+        return array('status' => 500, 'msg' => '手机号码有误', 'result' => '');
+    }
 }

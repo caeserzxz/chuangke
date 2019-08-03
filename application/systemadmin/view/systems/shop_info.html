@@ -305,6 +305,18 @@
                     <p class="notic">是否允许网页登录网站</p>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">是否开启验证码</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="check_verify_code1" class="cb-enable <if condition='$config[check_verify_code] eq 1'>selected</if>">开启</label>
+                        <label for="check_verify_code0" class="cb-disable <if condition='$config[check_verify_code] eq 0'>selected</if>">关闭</label>
+                        <input id="check_verify_code1" name="check_verify_code" <if condition="$config['check_verify_code'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="check_verify_code0" name="check_verify_code" <if condition="$config['check_verify_code'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭验证码后将不检测验证码</p>
+                </dd>
+            </dl>
      <!--        <dl class="row">
                 <dt class="tit">
                     <label for="help_title">帮助标题</label>

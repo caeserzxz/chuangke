@@ -22,6 +22,8 @@ class Login extends Controller
                 session('appType','other');
             }
         }
+        $config = tpCache('shop_info');
+        $this->assign('config',$config);
     }
     /**
      * 登录
@@ -65,9 +67,7 @@ class Login extends Controller
             $recommendId = session('recommendId');
         }
         $appType = session('appType');
-
-        $config = tpCache('shop_info');
-        $this->assign('config',$config);
+        
         $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
         $this->assign('tuijian_code',$tuijian_code);
         $this->assign('appType',$appType);
@@ -79,19 +79,13 @@ class Login extends Controller
         $data = I('post.');
         $user_obj = new UsersLogic();
 
-        //2、校验验证码表的手机号跟验证码是否是准确的， 是否过期了
-        $mobile_captcha = db('n_mobile_captcha')->where('mobile', $data['mobile'])->order('id desc')->find();
-
-        if ($mobile_captcha['expire_in'] < time()) {
-            return array('status' => 500, 'msg' => '验证码已过期', 'result' => '');
-        }
-
-        if ($mobile_captcha['captcha'] != $data['verify_code']) {
-            return array('status' => 500, 'msg' => '验证码不正确', 'result' => '');
-        }
-
-        if ($mobile_captcha['mobile'] != $data['mobile']) {
-            return array('status' => 500, 'msg' => '手机号码有误', 'result' => '');
+        $config = tpCache('shop_info');
+        if($config['check_verify_code']==1){
+            //验证验证码
+            $check = check_verify_code($data['mobile'],$data['verify_code']);
+            if($check){
+                return  $check;
+            }
         }
 
         if(empty($data['tuijian_code'])){
@@ -229,21 +223,14 @@ class Login extends Controller
         if(IS_POST){
             $data = I('post.');
             $user_obj = new UsersLogic();
-
-            //2、校验验证码表的手机号跟验证码是否是准确的， 是否过期了
-            $mobile_captcha = db('n_mobile_captcha')->where('mobile', $data['mobile'])->order('id desc')->find();
-
-        if ($mobile_captcha['expire_in'] < time()) {
-            return array('status' => 500, 'msg' => '验证码已过期', 'result' => '');
-        }
-
-        if ($mobile_captcha['captcha'] != $data['verify_code']) {
-            return array('status' => 500, 'msg' => '验证码不正确', 'result' => '');
-        }
-
-        if ($mobile_captcha['mobile'] != $data['mobile']) {
-            return array('status' => 500, 'msg' => '手机号码有误', 'result' => '');
-        }
+            $config = tpCache('shop_info');
+            if($config['check_verify_code']==1){
+                //验证验证码
+                $check = check_verify_code($data['mobile'],$data['verify_code']);
+                if($check){
+                    return  $check;
+                }
+            }
             $users = Db::name('users')->where('mobile',$data['mobile'])->find();
             if(empty($users)){
                 return array('status' => 500, 'msg' => '用户不存在', 'result' => '');

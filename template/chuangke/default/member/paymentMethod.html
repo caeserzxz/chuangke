@@ -69,6 +69,7 @@
 </script>
 <script>
     var mobile = {$userInfo.mobile};
+    var check_verify_code = {$config.check_verify_code};
     var img_name = '';
     function codeButton(){
         var reg = /(1[3-9]\d{9}$)/;
@@ -137,7 +138,7 @@
         }else if(account_number==''||account_number==null){
             layer.msg('请填写收款账号',{icon: 5,time:3000});
             return false;
-        }else if(verify_code==''||verify_code==null){
+        }else if((verify_code==''||verify_code==null)&&check_verify_code==1){
             layer.msg('请填写验证码',{icon: 5,time:3000});
             return false;
         }

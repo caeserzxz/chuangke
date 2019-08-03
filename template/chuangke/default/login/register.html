@@ -67,6 +67,7 @@
 </script>
     <script>
     var appType = "{$appType}";
+    var check_verify_code = {$config.check_verify_code};
         function codeButton() {
             var timeObj = $('.time')
             var getCodeObj = $('.getCode')
@@ -142,7 +143,7 @@
             if(!(/^1[3456789]\d{9}$/.test(mobile))){
                 layer.msg('请填写手机号',{icon:5,time:2000});
                 return false;
-            }else if(verify_code==''||verify_code==null){
+            }else if((verify_code==''||verify_code==null)&&check_verify_code==1){
                 layer.msg('请填写验证码',{icon:5,time:2000});
                 return false;
             }else if(password==''||password==null){
