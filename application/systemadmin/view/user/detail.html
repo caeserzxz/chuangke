@@ -109,10 +109,10 @@
                 </dt>
                 <dd class="opt">
                     <div class="onoff">
-                        <label for="is_lock1" class="cb-enable <if condition="$user['user_type'] eq 1">selected</if>"><span>开启</span></label>
-                        <label for="is_lock2" class="cb-disable <if condition="$user['user_type'] eq 0">selected</if>"><span>关闭</span></label>
-                        <input id="is_lock1" name="user_type" value="1" type="radio" <if condition="$user['user_type'] eq 1">checked</if>>
-                        <input id="is_lock2" name="user_type" value="0" type="radio" <if condition="$user['user_type'] eq 0">checked</if>>
+                        <label for="user_type1" class="cb-enable <if condition="$user['user_type'] eq 1">selected</if>"><span>开启</span></label>
+                        <label for="user_type0" class="cb-disable <if condition="$user['user_type'] eq 0">selected</if>"><span>关闭</span></label>
+                        <input id="user_type1" name="user_type" value="1" type="radio" <if condition="$user['user_type'] eq 1">checked</if>>
+                        <input id="user_type0" name="user_type" value="0" type="radio" <if condition="$user['user_type'] eq 0">checked</if>>
                     </div>
                     <!-- <p class="notic">如果冻结会员，会员将不能操作资金。</p> -->
                 </dd>
@@ -167,9 +167,9 @@
                 <dd class="opt">
                     <div class="onoff">
                         <label for="is_lock1" class="cb-enable <if condition="$user['is_lock'] eq 1">selected</if>"><span>开启</span></label>
-                        <label for="is_lock2" class="cb-disable <if condition="$user['is_lock'] eq 0">selected</if>"><span>关闭</span></label>
+                        <label for="is_lock0" class="cb-disable <if condition="$user['is_lock'] eq 0">selected</if>"><span>关闭</span></label>
                         <input id="is_lock1" name="is_lock" value="1" type="radio" <if condition="$user['is_lock'] eq 1">checked</if>>
-                        <input id="is_lock2" name="is_lock" value="0" type="radio" <if condition="$user['is_lock'] eq 0">checked</if>>
+                        <input id="is_lock0" name="is_lock" value="0" type="radio" <if condition="$user['is_lock'] eq 0">checked</if>>
                     </div>
                     <p class="notic">如果冻结会员，会员将不能操作资金。</p>
                 </dd>
