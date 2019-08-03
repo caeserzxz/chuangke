@@ -326,7 +326,9 @@ class Login extends Controller
      * APP下载页
      */
     public function AppDownload(){
+        $config = tpCache('shop_info');
 
+        $this->assign('config',$config);
         return $this->fetch();
     }
 
