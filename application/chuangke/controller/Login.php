@@ -321,4 +321,13 @@ class Login extends Controller
         }
         return true;
     }
+
+    /**
+     * APP下载页
+     */
+    public function AppDownload(){
+        
+        return $this->fetch();
+    }
+
 }
