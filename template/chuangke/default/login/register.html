@@ -37,7 +37,14 @@
                 <p class="fs24 see ">注册并同意<a href="{:U('chuangke/article/index')}?id=4" class="fs24">《注册协议》</a></p>
                 <a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>
             </div>
-            <a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
+            <if condition="$appType eq 'other'">
+                <if condition="$config.is_other_login eq 1">
+                    <a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
+                </if>
+            <else />
+                <a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
+            </if>
+
         </div>
 
 
@@ -53,7 +60,7 @@
     });
 </script>
     <script>
-
+    var appType = "{$appType}";
         function codeButton() {
             var timeObj = $('.time')
             var getCodeObj = $('.getCode')
@@ -143,7 +150,11 @@
                 'success':function(data){
                    if(data.status==1){
                         layer.msg(data.msg,{time:2000},function(){
-                            window.location.href = "{:U('chuangke/login/index')}";
+                            if(appType=='other'){
+                                window.location.href = "{:U('chuangke/login/AppDownload')}";
+                            }else{
+                                window.location.href = "{:U('chuangke/login/index')}";
+                            }
                         })
                    }else{
                        layer.msg(data.msg,{icon:5,time:2000});

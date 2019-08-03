@@ -64,9 +64,13 @@ class Login extends Controller
         }else{
             $recommendId = session('recommendId');
         }
+        $appType = session('appType');
 
+        $config = tpCache('shop_info');
+        $this->assign('config',$config);
         $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
         $this->assign('tuijian_code',$tuijian_code);
+        $this->assign('appType',$appType);
         return $this->fetch();
     }
 
@@ -327,7 +331,6 @@ class Login extends Controller
      */
     public function AppDownload(){
         $config = tpCache('shop_info');
-
         $this->assign('config',$config);
         return $this->fetch();
     }

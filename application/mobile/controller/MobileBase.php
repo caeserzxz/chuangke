@@ -47,6 +47,7 @@ class MobileBase extends Controller {
                 }
             }
         }
+        //获取安装包的参数
         $appType = I('appType');
         if($appType){
             if(empty(session('appType'))||$appType!=session('appType')){
@@ -57,6 +58,15 @@ class MobileBase extends Controller {
                 session('appType','other');
             }
         }
+
+        //判断是否允许网页登录
+        $config = tpCache('shop_info');
+        if(session('appType')=='other'){
+            if($config['is_other_login']==0){
+                $this->redirect('chuangke/Login/AppDownload');
+            }
+        }
+
 
         $wx_qr = M('wx_user')->cache(true)->value('qr'); //获取微信配置
         $this->assign('wx_qr',$wx_qr);
