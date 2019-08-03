@@ -19,8 +19,7 @@
                 <p class="fs26 color_8" >邀请码：<span class="code">{$data.code}</span></p>
                 <div class="btncCell">
                     <button class="fs28 color_w" onclick="copyUrl2()" id="Copy" data-clipboard-action="copy" data-clipboard-target="#copyUrl" >复制邀请链接</button>
-                    <!--<button class="fs28 color_w" onclick="preserveImg()">保存为图片</button>-->
-                    <button class="fs28 color_w" onclick="savePicture()">保存为图片</button>
+                    <button class="fs28 color_w" onclick="preserveImg()">保存为图片</button>
                 </div>
             </div>
             <div class="tips fs26 color_8">
@@ -79,28 +78,5 @@
         a.dispatchEvent(event)
     }
 
-    function savePicture() {
-
-        // 创建下载任务
-        // picurl="http://chuangke1.qingsongshow.cn/public/upload/head_pic/20190801/286395c7380967d492803c50eac7677f.jpg";
-        picurl="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564823307816&di=dc34cd7babf2808549ef8208be5fc85f&imgtype=0&src=http%3A%2F%2F03.imgmini.eastday.com%2Fmobile%2F20180107%2F20180107005236_d76c662ebbddad358fbedb159202df76_2.jpeg";
-        //图片保存到手机后的路径
-        picname="_downloads/erwei.png";
-        var dtask = plus.downloader.createDownload(picurl, {}, function ( d, status ) {
-        // 下载完成
-            if ( status == 200 ) {
-        //	alert( "Download success: " + d.filename );
-                plus.gallery.save(picname,function() {//保存到相册方法
-                    mui.toast('已保存到手机相册');
-                }, function() {
-                    mui.toast('保存失败，请重试！');
-                });
-            } else {
-        //	alert( "Download failed: " + status ); 
-            }
-        });
-        //dtask.addEventListener( "statechanged", onStateChanged, false );
-        dtask.start();//开始下载
-    }
 
 </script>
