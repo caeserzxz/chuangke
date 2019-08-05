@@ -1,0 +1,127 @@
+<layout name="common/layout_nav" />
+    <div class="page collection">
+        <div class="page-hd">
+            <div class="header">
+    <div class="header-left">
+        <a href="javascript:history.go(-1)" class="left-arrow"></a>
+    </div>
+    <div class="header-title">留言</div>
+    <div class="header-right">
+        <a href="#"></a>
+    </div>
+</div>
+        </div>
+        <div class="page-bd">
+            <!-- 页面内容-->
+            <form id="form"  method="post" enctype="multipart/form-data">
+            <div class="textareaBox">
+                <span class="fs28">留言</span>
+                <textarea  class="weui-textarea fs28 color_w" name="content" id="content" placeholder="请输入留言"></textarea>
+            </div>
+            <div class="title fs26">上传图片</div>
+
+                <div class="uploader__input-box textareaImg">
+                    <if condition="$appType eq 'IOS'">
+                        <img src="__PUBLIC__/static/chuangke/images/upload3.png" onclick="loadimg('qrcode_url');" class="qrcode_url" alt="">
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/upload3.png" class="qrcode_url" alt="">
+                        <input id="uploaderInput" class="weui-uploader__input" name="qrcode_url" id="qrcode_url" type="file" accept="image/*" multiple="">
+
+                    </if>
+
+                </div>
+                <div class="images-list"><!--上传图片列表--></div>
+                <button class="fs30 color_w fw_b button_btn" type="button" onclick="sub();">留言</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+    $("input[name=qrcode_url]").change(function() {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                // console.log(e.target.result+"路径")
+                // console.log(file);
+                $(".qrcode_url").attr("src", e.target.result); //e.target.result就是最后的路径地址
+            };
+        }
+    });
+</script>
+    <script>
+        var img_name = '';
+        function sub(){
+            var content =$('#content').val();
+            var qrcode_url = $('#qrcode_url').val();
+
+            if(content==''||content==null){
+                layer.msg('请填写留言内容',{icon: 5,time:3000});
+                return false;
+            }
+
+            $.ajax({
+                url: "{:url('/chuangke/Member/complaint')}",
+                type: 'POST',
+                cache: false,
+                data: new FormData($('#form')[0]),
+                processData: false,
+                contentType: false,
+                dataType:"json",
+                success : function(data) {
+                    console.log(data);
+                    // return false;
+                    if(data.status==1){
+                        layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                            window.location = "{:url('/chuangke/Member/index')}";
+                        });
+                    }else{
+                        layer.msg(data.msg, { icon: 5, time: 2000 });
+                        is_real = 1;
+                        return false;
+                    }
+                }
+            });
+
+        }
+
+        function AppReturnBase64Image(base64imag) {
+            $.ajax({
+                'url': "{:url('Member/uploadimage')}",
+                'type': 'post',
+                'data': {'img': base64imag, 'img_type': 'qrcode_url','img_name':img_name},
+                'dataType': 'json',
+                'success': function (data) {
+                    // layer.msg(data.image_path, { icon: 5, time: 5000 });
+                    if (data) {
+                        if (data.img_name == 'qrcode_url') {
+                            $('.card_positive').attr('src',  data.path);
+                            var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="qrcode_url" class="imagesinput"/>';
+                        }
+                        $('.images-list').append(str);
+                    } else {
+                        layer.msg('二维码上传失败', {icon: 5, time: 3000});
+                        return false;
+                    }
+                }
+            });
+        }
+
+        function loadimg(uploadfile){
+            img_name = uploadfile;
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
+                window.app.Photo();
+            }
+        }
+    </script>
