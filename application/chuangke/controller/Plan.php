@@ -25,8 +25,94 @@ class Plan extends MobileBase
 			exit;
 		}
 	}
+    // 计划页面
+    public function index(){
+        $user = M('users')->where(['user_id' => $this->user_id])->find();
+        $debt[] = ['code' => '1','name' => '信用卡'];
+        $debt[] = ['code' => '2','name' => '房贷'];
+        $debt[] = ['code' => '3','name' => '车贷'];
+        $debt[] = ['code' => '4','name' => '其他'];
+
+        foreach ($debt as $key => $value) {
+            $money = M('user_debt')->where(['user_id' => $this->user_id,'type' => $value['code'],'status' => 2])->sum('moneys');
+            $debt[$key]['money'] = $money ? $money : 0;
+            $debt_count = M('user_debt')->where(['user_id' => $this->user_id,'type' => $value['code'],'status' => 1])->count(); // 是否有计划正在审核
+            $debt[$key]['debt_count'] = $debt_count;
+        }
+
+        # 阶段及百分比计算
+        $stage = [];
+        $shop_info = tpCache('shop_info');
+        // 所有负债
+        $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys');
+        // 已收款金额
+        $all_rece = M('ck_apply')
+            ->where(['check_leader_1' => $this->user_id,'check_status_1' => 1])
+            ->whereOR('check_leader_2='. $this->user_id.' and check_status_2=1')
+            ->sum('make_money');
+        $user['all_rece'] = $all_rece;
+        $user['all_debt'] = $all_debt;
+        
+        if (($all_debt > 0) && ($all_rece >= $all_debt) && ($user['is_lock'] != 1)) {
+            M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
+        }
+        // 是否有审核订单
+        $is_check = M('ck_apply')
+            ->where(['check_leader_1' => $this->user_id,'check_status_1' => ['LT',1]])
+            ->whereOR('check_leader_2='.$this->user_id.' and check_status_2<1')
+            ->count();
+
+        $surplus_debt = $all_debt;
+        $surplus_rece = $all_rece;
+
+        $check = 0;
+        for($i=1;$i<10;$i++){
+            $ratio_now = $rece_money = 0;
+            if ($surplus_debt <= 0) continue;
+            // 第N阶段所需金额
+            $need_money = $shop_info['debt_based']*pow(3,$i);
+            if ($need_money > $surplus_debt) {
+                // 最后一阶段,取剩余所有金额
+                $need_money = $surplus_debt;
+            }
+
+            if ($surplus_rece >= $need_money) {
+                // 剩余还款金额足够,比例100
+                $ratio_now = 100;
+                $rece_money = $need_money;
+            }else{
+                if ($is_check) $check ++;
+
+                // 剩余还款金额不够,比例四舍五入
+                if ($surplus_rece > 0) {
+                    $ratio_now = round($surplus_rece*100 / $need_money);
+                    $rece_money = $surplus_rece;
+                }
+            }
+            $stage[] = ['need_money' => $need_money,'rece_money' => $rece_money,'check' => $check];
+            $ratio[] = $ratio_now;
+
+            $surplus_debt -= $need_money;
+            $surplus_rece -= $need_money;
+        }
+
+        $text = ['一','二','三','四','五','六','七','八','九'];
+        // 是否有等级正在审核
+        $apply = M('ck_apply')->where(['user_id' => $this->user_id,'apply_status' => 0])->find();
+
+        $this->assign('user',$user);                // 用户数据
+        $this->assign('debt',$debt);                // 负债类型
+        $this->assign('text',$text);                // 阶段文字
+        $this->assign('all_debt',$all_debt);        // 负债总额
+        $this->assign('stage',$stage);              // 阶段数据
+        $this->assign('ratio',json_encode($ratio)); // 各阶段还款百分比
+        $this->assign('apply',$apply);              // 审核中等级申请数量
+
+        return $this->fetch();
+    }
+
 	// 计划页面
-	public function index(){
+	public function index2(){
         $user = M('users')->where(['user_id' => $this->user_id])->find();
         $debt[] = ['code' => '1','name' => '信用卡'];
         $debt[] = ['code' => '2','name' => '房贷'];
@@ -112,7 +198,7 @@ class Plan extends MobileBase
     public function add_debt(){
 
         if($this->request->isPost()){
-            $user = M('users')->field('is_lock')->where(['user_id' => $this->user_id])->find();
+            $user = M('users')->field('is_lock,level')->where(['user_id' => $this->user_id])->find();
             if ($user['is_lock'] == 1) $this->error('账号已被冻结,请联系管理员');
             $shop_info = tpCache('shop_info');
             $text = $shop_info['shop_text'];
@@ -122,7 +208,7 @@ class Plan extends MobileBase
             if (!$is_authent) $this->ajaxReturn(['status'=>0,'msg'=>$text.'：请先在个人中心实名认证！','url' => U('chuangke/Member/realNameAuthentication')]);
             // 是否绑定收款方式
             $is_receivables = M('receipt_information')->where(['user_id' => $this->user_id])->count();
-            if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>$text.'：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
+            // if (!$is_receivables) $this->ajaxReturn(['status'=>0,'msg'=>$text.'：请先在个人中心绑定收款方式！','url' => U('chuangke/Member/paymentMethod')]);
 
             $money = input('post.money');
             $type = input('post.type');

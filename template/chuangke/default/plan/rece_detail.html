@@ -34,12 +34,13 @@
                 <p>付款金额：<span>{$apply.make_money}</span> 元</p>
             </div>
             <div class="tipsBox">
-                <p class="fs26">请确认收到款后再点击“我已收款”操作</p>
+                <p class="fs26">请确认收到款后再点击“通过审核”操作</p>
             </div>
             <if condition="$apply.img">
-                <button class="fs30 color_w fw_b button_btn" onclick="change_status()">我已收款</button>
+                <button class="fs30 color_w fw_b button_btn" onclick="change_status(1)">通过审核</button>
+                <button class="fs30 color_w fw_b button_btn2" style="margin-top: -4vw;" onclick="change_status(-1)">拒绝审核</button>
             <else/>
-                <button class="fs30 color_w fw_b button_btn2" style="">我已收款</button>
+                <button class="fs30 color_w fw_b button_btn2" style="">等待凭证</button>
             </if>
         </div>
     </div>
@@ -49,9 +50,9 @@
     });
 </script>
 <script>
-    function change_status() {
+    function change_status(status) {
         var id = "{$apply.id}";
-        var status = 1;
+        var status = status;
         $.ajax({
             type : 'POST',
             url  : "{:Url('CkUser/check_level')}",
