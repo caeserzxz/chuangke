@@ -346,7 +346,7 @@ class Member extends  MobileBase
             $data['qrcode_url']=I('qrcode_url');
             $data['create_time'] = time();
             $data['user_id'] =  $userInfo['user_id'];
-            if(empty($data['qrcode_url'])&&empty($_FILES['qrcode_url']['tmp_name']&&empty($data['content']))){
+            if(empty($data['qrcode_url'])&&empty($_FILES['qrcode_url']['tmp_name'])&&empty($data['content'])){
                 return array('status' => -1, 'msg' => '提交内容不能为空', 'result' => '');
             }
 
