@@ -97,6 +97,15 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+                <if condition="$config.complaint eq 1">
+                <a href="{:U('chuangke/Member/complaint')}" class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <img src="__PUBLIC__/static/chuangke/images/my08.png" alt="">
+                        <span class="fs30">留言</span>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                </if>
                 <a href="#" class="weui-cell weui-cell_access" onclick="clear_m();">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my07.png" alt="">

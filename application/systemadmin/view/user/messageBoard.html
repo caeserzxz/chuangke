@@ -31,7 +31,7 @@
 		</div>
 		<div class="hDiv">
 			<div class="hDivBox">
-				<table cellspacing="0" cellpadding="0">
+				<table cellspacing="0" cellpadding="0" style="word-wrap:break-word; word-break:break-all;">
 					<thead>
 					<tr>
 						<th class="sign" axis="col0">
@@ -55,7 +55,7 @@
 						<!-- <th align="center" abbr="article_show" axis="col5" class="">
 							<div style="text-align: center; width: 200px;" class="">地址</div>
 						</th> -->
-						<th align="center" abbr="article_time" axis="col6" class="">
+						<th align="center" abbr="article_time" axis="col6" class="" >
 							<div style="text-align: center; width: 700px;" class="">投诉内容</div>
 						</th>
 
@@ -105,11 +105,16 @@
 								<div style="text-align: center; width: 200px;">{$team.address|default='--'}</div> -->
 							</td>
 							<td align="left" class="">
-								<div style="text-align: center; width: 700px;">{$team.content}</div>
+								<div style="text-align: center; width: 700px;" onclick="reading('{$team.content}');">{$team.content}</div>
 							</td>
+
 							<td align="left" class="">
-								<div style="text-align: center; width: 200px; height: 50px;"><img src="{$team.qrcode_url}" style="height: 50px;width: 200px" ></div>
+								<a href=" {$team.qrcode_url}" class="btn blue" target="_blank"></a>
+								<div style="text-align: center; width: 200px; height: 50px;">
+										<img src="{$team.qrcode_url}" onclick="lookimg(this.src);" style="height: 50px;width: 200px" >
+								</div>
 							</td>
+
 							<td align="left" class="">
 								<div style="text-align: center; width: 80px;">
 									<if condition='$team[status] eq 1'>
@@ -208,6 +213,20 @@
 			});
 		})
 	})
+    function lookimg(str)
+    {
+        var newwin=window.open()
+        newwin.document.write("<img src="+str+" />")
+    }
+
+    function reading(content){
+
+		//第三方扩展皮肤
+        layer.alert(content, {
+            icon: 1,
+            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+        })
+	}
 </script>
 </body>
 </html>

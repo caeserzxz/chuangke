@@ -54,7 +54,7 @@ class Debt extends Base {
         if ($status == 2) {
             $mobile = M('users')->where(['user_id' => $data['user_id']])->value('mobile');
             // 发送短信
-            $msg = jh_message($mobile,Config::get('message.type_examine'),'');
+            $msg = jh_message($mobile,Config::get('database.type_examine'),'');
             if ($msg['error_code'] > 0) {
                 $this->error($msg['reason']);
             }

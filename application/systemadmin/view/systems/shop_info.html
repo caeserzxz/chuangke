@@ -48,6 +48,36 @@
                     <p class="notic">网站名称，将显示在前台顶部欢迎信息等位置</p>
                 </dd>
             </dl>
+            <!--<dl class="row">-->
+                <!--<dt class="tit">-->
+                    <!--<label for="store_name">App名称</label>-->
+                <!--</dt>-->
+                <!--<dd class="opt">-->
+                    <!--<input id="app_name" name="app_name" value="{$config.app_name}" class="input-txt" type="text" />-->
+                    <!--<p class="notic">App名称</p>-->
+                <!--</dd>-->
+            <!--</dl>-->
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">网站首页Logo</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="img_a" class="nyroModal" rel="gal" href="{$config.store_logo}">
+                                <i id="img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.store_logo}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="store_logo" name="store_logo" value="{$config.store_logo}" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','img_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">默认网站首页LOGO,通用头部显示，最佳显示尺寸为240*60像素</p>
+                </dd>
+            </dl>
 <!--             <dl class="row">
                 <dt class="tit">
                     <label for="store_logo">网站首页Logo</label>
@@ -293,16 +323,16 @@
                     <p class="notic"></p>
                 </dd>
             </dl>
-            <dl class="row">
-                <dt class="tit">
-                    <label for="shop_text">有钱还前台文字</label>
-                </dt>
-                <dd class="opt">
-                    <input id="shop_text"  name="shop_text" value="{$config.shop_text}" class="input-txt" type="text">
-                    <span class="err"></span>
-                    <p class="notic"></p>
-                </dd>
-            </dl>
+            <!--<dl class="row">-->
+                <!--<dt class="tit">-->
+                    <!--<label for="shop_text">有钱还前台文字</label>-->
+                <!--</dt>-->
+                <!--<dd class="opt">-->
+                    <!--<input id="shop_text"  name="shop_text" value="{$config.shop_text}" class="input-txt" type="text">-->
+                    <!--<span class="err"></span>-->
+                    <!--<p class="notic"></p>-->
+                <!--</dd>-->
+            <!--</dl>-->
             <dl class="row">
                 <dt class="tit">是否允许网页登录网站</dt>
                 <dd class="opt">
@@ -325,6 +355,18 @@
                         <input id="check_verify_code0" name="check_verify_code" <if condition="$config['check_verify_code'] eq 0">checked="checked"</if> value="0" type="radio">
                     </div>
                     <p class="notic">关闭验证码后将不检测验证码</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">是否开启留言</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="complaint1" class="cb-enable <if condition='$config[complaint] eq 1'>selected</if>">开启</label>
+                        <label for="complaint0" class="cb-disable <if condition='$config[complaint] eq 0'>selected</if>">关闭</label>
+                        <input id="complaint1" name="complaint" <if condition="$config['complaint'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="complaint0" name="complaint" <if condition="$config['complaint'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭留言后将不显示留言板</p>
                 </dd>
             </dl>
      <!--        <dl class="row">

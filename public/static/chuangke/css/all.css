@@ -7,7 +7,6 @@
 .upload_box {
   background-color: #3b4375;
   padding: 4vw 3.73333vw;
-  width: 100vw;
 }
 .upload_title {
   color: #aac2dd;
@@ -74,14 +73,6 @@
 }
 .nameVerify .sfz_box {
   width: 44.8vw;
-
-}
-.uploadimageBox{
-    margin: 0.8rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
 }
 .nameVerify .uploader__input-box {
   position: relative;
@@ -917,6 +908,7 @@ img {
 }
 .collection .uploader__input-box {
   width: 92vw;
+  height: 56.53333vw;
   background-color: #3b4375;
   border-radius: 1.33333vw;
   margin: 0 4vw;
@@ -926,12 +918,33 @@ img {
   opacity: 0;
 }
 .collection .uploader__input-box img {
-  width: 48.3vw;
-  height: 48.3vw;
+  width: 53.33333vw;
+  height: 53.33333vw;
   margin: auto;
 }
 .collection .codeBox span {
   color: #3ed7ff;
+}
+.collection .textareaBox {
+  padding: 4vw;
+}
+.collection .textareaBox span {
+  color: #c5d5ee;
+}
+.collection .textareaBox textarea {
+  width: 100%;
+  height: 26.66667vw;
+  background-color: #3b4375;
+  border-radius: 1.33333vw;
+  padding: 2.66667vw;
+  position: relative;
+  margin-top: 2.66667vw;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.collection .textareaImg img {
+  width: 100%;
+  height: 100%;
 }
 .walletLog .weui-cells {
   background-color: #343c6d;
@@ -1596,7 +1609,7 @@ img {
 }
 .plan .planList .list {
   width: 100%;
-  height: 13.33333vw;
+  height: 10.66667vw;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -1609,7 +1622,7 @@ img {
 }
 .plan .planList .list p {
   color: #c5d5ee;
-  margin-right: 1.33333vw;
+  margin-right: 8vw;
 }
 .plan .planList .list span {
   color: #36d1ff;
@@ -1675,6 +1688,60 @@ img {
   -webkit-box-align: center;
           -webkit-align-items: center;
           align-items: center;
+}
+.plan .chunk {
+  width: 92.26667vw;
+  height: 25.33333vw;
+  background-color: #343c6d;
+  margin: 4vw auto 0;
+}
+.plan .chunk .info {
+  height: 16.26667vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+  padding: 0 3.2vw;
+}
+.plan .chunk p {
+  color: #95adc8;
+}
+.plan .chunk .btnBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background-color: #3b4375;
+  padding: 0 3.2vw;
+  -webkit-box-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          -webkit-justify-content: space-between;
+          justify-content: space-between;
+  height: 9.06667vw;
+}
+.plan .chunk .btnBox span {
+  color: #36d1ff;
+}
+.plan .chunk .btnBox a {
+  width: 19.46667vw;
+  height: 6.13333vw;
+  background-color: #35bffd;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
 }
 .plan .model {
   position: fixed;

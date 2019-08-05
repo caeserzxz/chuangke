@@ -155,7 +155,7 @@ class Login extends Controller
         #################################
         //聚合数据短信
         #################################
-        $send = jh_message($input['mobile'],Config::get('message.type_code'),$captcha);
+        $send = jh_message($input['mobile'],Config::get('database.type_code'),$captcha);
         if ($send['error_code']==0) {
             //验证码入库
             $res = db('n_mobile_captcha')->insert([

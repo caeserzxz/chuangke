@@ -22,6 +22,7 @@ class Member extends  MobileBase
                 ->find();
             $this->userInfo = $userInfo;
         }
+
     }
 
     /**
@@ -29,7 +30,7 @@ class Member extends  MobileBase
      */
     public function index(){
         $userInfo = $this->userInfo;
-        
+
         $model  = new MemberLogic();
         //判断是否实名
         $auth = $model->getAuthenticationResult($userInfo['user_id']);
@@ -51,6 +52,8 @@ class Member extends  MobileBase
         //缓存
         $cache = sprintf("%.2f",$userInfo['cache']/1024);
 
+
+        $this->assign('config', tpCache('shop_info'));
         $this->assign('cache',$cache);
         $this->assign('appType',session('appType'));
         $this->assign('is_account',$is_account);
@@ -334,15 +337,28 @@ class Member extends  MobileBase
 
     }
 
-    /*投诉界面*/
+    /*留言*/
     public function complaint(){
-        $user_id = $this->user_id;
+        $userInfo = $this->userInfo;
         if(IS_AJAX){
 
             $data['content'] = I('content');
-            $data['qrcode_url']=I('head_pic');
+            $data['qrcode_url']=I('qrcode_url');
             $data['create_time'] = time();
-            $data['user_id'] = $user_id;
+            $data['user_id'] =  $userInfo['user_id'];
+            if(empty($data['qrcode_url'])&&empty($_FILES['qrcode_url']['tmp_name'])){
+                return array('status' => -1, 'msg' => '请添加图片', 'result' => '');
+            }
+
+            //上传图片
+            $model  = new MemberLogic();
+            if($_FILES['qrcode_url']['tmp_name']){//上传留言图片
+                $card_positive = $model->upload_img('qrcode_url','qrcode_url');
+
+                if($card_positive){
+                    $data['qrcode_url'] = '/'.UPLOAD_PATH.'qrcode_url/'.$card_positive;
+                }
+            }
 
             if (M('complaint_log')->add($data)) {
 
@@ -352,6 +368,8 @@ class Member extends  MobileBase
                 $this->ajaxReturn(['status' => 1, 'msg' => '网络异常！']);
             }
         }
+
+        $this->assign('appType',session('appType'));
         return $this->fetch();
     }
 }
