@@ -375,18 +375,29 @@ class CkUser extends MobileBase
 
             //第一层领导审核
             $updata = array();
-            if($info['check_leader_1'] == $this->user_id){
-                if(empty($info['check_leader_2']))  $updata['apply_status'] = $status;
-                if(!empty($info['check_status_2'])) $updata['apply_status'] = $status;
-                $updata['check_status_1'] = $status;
-                $updata['check_time_1']   = time();
-            }elseif($info['check_leader_2'] == $this->user_id){
-                //第二层领导审核
-                if(!empty($info['check_status_1'])) $updata['apply_status'] = $status;
-                $updata['check_status_2'] = $status;
-                $updata['check_time_2']   = time();
+            if ($info['check_leader_1'] == $info['check_leader_2'] == $this->user_id) {
+                if (empty($info['check_status_1'])) {
+                    $updata['check_status_1'] = $status;
+                    $updata['check_time_1']   = time();
+                }else{
+                    $updata['apply_status'] = $status;
+                    $updata['check_status_2'] = $status;
+                    $updata['check_time_2']   = time();
+                }
             }else{
-                $this->ajaxReturn(['status'=>0,'msg'=>'数据错误']);
+                if($info['check_leader_1'] == $this->user_id){
+                    if(empty($info['check_leader_2']))  $updata['apply_status'] = $status;
+                    if(!empty($info['check_status_2'])) $updata['apply_status'] = $status;
+                    $updata['check_status_1'] = $status;
+                    $updata['check_time_1']   = time();
+                }elseif($info['check_leader_2'] == $this->user_id){
+                    //第二层领导审核
+                    if(!empty($info['check_status_1'])) $updata['apply_status'] = $status;
+                    $updata['check_status_2'] = $status;
+                    $updata['check_time_2']   = time();
+                }else{
+                    $this->ajaxReturn(['status'=>0,'msg'=>'数据错误']);
+                }
             }
             if (!$updata) $this->ajaxReturn(['status'=>0,'msg'=>'数据错误']);
 

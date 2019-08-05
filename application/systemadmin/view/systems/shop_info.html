@@ -255,6 +255,16 @@
             </dl>
             <dl class="row">
                 <dt class="tit">
+                    <label for="max_quota">负债总额不能超过</label>
+                </dt>
+                <dd class="opt">
+                    <input id="max_quota" name="max_quota" value="{$config.max_quota}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">所有负债不能超过此额度,超过将无法添加额度</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
                     <label for="autoTime">自动审核时间</label>
                 </dt>
                 <dd class="opt">
