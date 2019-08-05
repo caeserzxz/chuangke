@@ -22,10 +22,14 @@
 
              <div class="btnBox">
                 <p class="fs26 fw_b">打款金额：<span>{$apply.make_money}</span></p>
-                <if condition="$apply.voucher_img1">
-                    <a href="#" class="fs24 color_w check_end">已打款</a>
+                <if condition="$apply.check_status_1 eq -1">
+                    <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'2'])}" class="fs24 color_w check_end">已拒绝</a>
                 <else/>
-                    <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'1'])}" class="fs24 color_w">去打款</a>
+                    <if condition="$apply.voucher_img1">
+                        <a href="#" class="fs24 color_w check_end">已打款</a>
+                    <else/>
+                        <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'1'])}" class="fs24 color_w">去打款</a>
+                    </if>
                 </if>
              </div>
         </div>
@@ -37,10 +41,14 @@
                 </div>
                 <div class="btnBox">
                     <p class="fs26 fw_b">打款金额：<span>{$apply.make_money}</span></p>
-                    <if condition="$apply.voucher_img2">
-                        <a href="#" class="fs24 color_w check_end">已打款</a>
+                    <if condition="$apply.check_status_2 eq -1">
+                        <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'2'])}" class="fs24 color_w check_end">已拒绝</a>
                     <else/>
-                        <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'2'])}" class="fs24 color_w">去打款</a>
+                        <if condition="$apply.voucher_img2">
+                            <a href="#" class="fs24 color_w check_end">已打款</a>
+                        <else/>
+                            <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'2'])}" class="fs24 color_w">去打款</a>
+                        </if>
                     </if>
                 </div>
             </div>

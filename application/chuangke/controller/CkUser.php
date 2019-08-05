@@ -380,7 +380,7 @@ class CkUser extends MobileBase
                     $updata['check_status_1'] = $status;
                     $updata['check_time_1']   = time();
                 }else{
-                    $updata['apply_status'] = $status;
+                    if($status == 1) $updata['apply_status'] = $status;
                     $updata['check_status_2'] = $status;
                     $updata['check_time_2']   = time();
                 }
@@ -392,7 +392,7 @@ class CkUser extends MobileBase
                     $updata['check_time_1']   = time();
                 }elseif($info['check_leader_2'] == $this->user_id){
                     //第二层领导审核
-                    if(!empty($info['check_status_1'])) $updata['apply_status'] = $status;
+                    if(!empty($info['check_status_1']) && $status == 1) $updata['apply_status'] = $status;
                     $updata['check_status_2'] = $status;
                     $updata['check_time_2']   = time();
                 }else{
@@ -451,7 +451,7 @@ class CkUser extends MobileBase
                     }
                 }
                 Db::commit();
-                $this->ajaxReturn(['status'=>1,'msg'=>'审核成功']);
+                $this->ajaxReturn(['status'=>1,'msg'=>'操作成功']);
             } catch (\Exception $e){
                 $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);
             }   
@@ -459,7 +459,7 @@ class CkUser extends MobileBase
     }
     public function check_level_list(){
         $count = Db::name('ck_apply')->alias('A')
-            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
+            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1')
             -> count();
         $Page = new Page($count, 10);
 
@@ -468,7 +468,7 @@ class CkUser extends MobileBase
             -> join('users B','A.user_id = B.user_id','left')
             -> join('user_level C','A.level = C.level_id','left')
             -> join('user_authentication D','A.user_id = D.user_id','left')
-            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 = 0')
+            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1')
             // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
             ->order('A.apply_time ASC')
             ->limit($Page->firstRow . ',' . $Page->listRows)
@@ -748,9 +748,9 @@ class CkUser extends MobileBase
             ->where(['A.id' => $id])
             ->find();
         if ($apply['check_leader_1'] == $apply['check_leader_2'] ) {
-            if (!$apply['check_status_1']) {
+            if ($apply['check_status_1'] < 1) {
                 $apply['img'] = $apply['voucher_img1'];
-            }elseif (!$apply['check_status_2']) {
+            }elseif (!$apply['check_status_2'] < 1) {
                 $apply['img'] = $apply['voucher_img2'];
             }else{
                 $this->error('数据错误');
