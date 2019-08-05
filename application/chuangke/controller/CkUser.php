@@ -589,7 +589,7 @@ class CkUser extends MobileBase
         $apply['user_name2']  = $this->substr_cut($apply['user_name2']);
 
         $apply['id_card1']  = substr_replace($apply['id_card1'],'**********',4,10);
-        $apply['id_card2']  = substr_replace($apply['id_card2'],'**********',3,4);
+        $apply['id_card2']  = substr_replace($apply['id_card2'],'**********',4,10);
 
         $usersModel = Db('users');
         foreach ($apply as $key => $val) {
