@@ -111,7 +111,9 @@
 							<td align="left" class="">
 								<a href=" {$team.qrcode_url}" class="btn blue" target="_blank"></a>
 								<div style="text-align: center; width: 200px; height: 50px;">
+									<if condition="$team.qrcode_url neq ''">
 										<img src="{$team.qrcode_url}" onclick="lookimg(this.src);" style="height: 50px;width: 200px" >
+									</if>
 								</div>
 							</td>
 
