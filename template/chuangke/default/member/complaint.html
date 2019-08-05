@@ -66,10 +66,10 @@
             var content =$('#content').val();
             var qrcode_url = $('#qrcode_url').val();
 
-            if(content==''||content==null){
-                layer.msg('请填写留言内容',{icon: 5,time:3000});
-                return false;
-            }
+            // if(content==''||content==null){
+            //     layer.msg('请填写留言内容',{icon: 5,time:3000});
+            //     return false;
+            // }
 
             $.ajax({
                 url: "{:url('/chuangke/Member/complaint')}",
