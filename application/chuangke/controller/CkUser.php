@@ -375,7 +375,7 @@ class CkUser extends MobileBase
 
             //第一层领导审核
             $updata = array();
-            if ($info['check_leader_1'] == $info['check_leader_2'] == $this->user_id) {
+            if ($info['check_leader_1'] == $info['check_leader_2']) {
                 if (empty($info['check_status_1'])) {
                     $updata['check_status_1'] = $status;
                     $updata['check_time_1']   = time();
@@ -600,7 +600,7 @@ class CkUser extends MobileBase
         $apply['user_name2']  = $this->substr_cut($apply['user_name2']);
 
         $apply['id_card1']  = substr_replace($apply['id_card1'],'**********',4,10);
-        $apply['id_card2']  = substr_replace($apply['id_card2'],'**********',3,4);
+        $apply['id_card2']  = substr_replace($apply['id_card2'],'**********',4,10);
 
         $usersModel = Db('users');
         foreach ($apply as $key => $val) {

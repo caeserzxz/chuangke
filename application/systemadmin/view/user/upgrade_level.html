@@ -88,10 +88,16 @@
                             <div style="text-align: center; width: 120px;" class="">审核人(1)用户昵称</div>
                         </th>
                         <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">打款凭证(1)</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 100px;" class="">审核状态(1)</div>
                         </th>
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">审核人(2)用户昵称</div>
+                        </th>
+                        <th align="center" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">打款凭证(2)</div>
                         </th>
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 100px;" class="">审核状态(2)</div>
@@ -103,20 +109,8 @@
                             <div style="text-align: center; width: 120px;" class="">审核时间</div>
                         </th>
                         <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 120px;" class="">操作</div>
+                            <div style="text-align: center; width: 160px;" class="">操作</div>
                         </th>
-                        <!-- <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 100px;" class="">发货方式</div>
-                        </th>
-                        <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 80px;" class="">收货人</div>
-                        </th>
-                        <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 100px;" class="">收货人手机</div>
-                        </th>
-                        <th align="center" axis="col1" class="handle">
-                            <div style="text-align: center; width: 250px;">收货地址</div>
-                        </th> -->
                         <th style="width:100%" axis="col7">
                             <div></div>
                         </th>
@@ -149,11 +143,34 @@
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname}</div>
                                 </td>
+                                <td align="center" axis="col4" class="">
+                                    <if condition="$v.voucher_img1">
+                                    <a href="{$v.voucher_img1}" target="_blank">
+                                        <div style="text-align: center; width: 120px;height: 30px;" class=""><i class="fa fa-pencil-square-o"></i>点击查看
+                                        </div>
+                                    </a>
+                                    <else/>
+                                        <div style="text-align: center; width: 120px;height: 30px;" class="">/</div>
+                                    </a>
+                                    </if>
+                                </td>
+
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">{$status[$v['check_status_1']]}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class="">{$v.leader_nickname_2|default='/'}</div>
+                                </td>
+                                <td align="center" axis="col4" class="">
+                                    <if condition="$v.voucher_img2">
+                                    <a href="{$v.voucher_img2}" target="_blank">
+                                        <div style="text-align: center; width: 120px;height: 30px;" class=""><i class="fa fa-pencil-square-o"></i>点击查看
+                                        </div>
+                                    </a>
+                                    <else/>
+                                        <div style="text-align: center; width: 120px;height: 30px;" class="">/</div>
+                                    </a>
+                                    </if>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 100px;" class="">
