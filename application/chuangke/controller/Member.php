@@ -346,9 +346,9 @@ class Member extends  MobileBase
             $data['qrcode_url']=I('qrcode_url');
             $data['create_time'] = time();
             $data['user_id'] =  $userInfo['user_id'];
-            if(empty($data['qrcode_url'])&&empty($_FILES['qrcode_url']['tmp_name'])){
-                return array('status' => -1, 'msg' => '请添加图片', 'result' => '');
-            }
+            //            if(empty($data['qrcode_url'])&&empty($_FILES['qrcode_url']['tmp_name'])){
+            //                return array('status' => -1, 'msg' => '请添加图片', 'result' => '');
+            //            }
 
             //上传图片
             $model  = new MemberLogic();
