@@ -3,6 +3,7 @@
 namespace app\systemadmin\controller;
 use app\systemadmin\logic\OrderLogic;
 use think\AjaxPage;
+use think\Config;
 use think\Page;
 use think\Verify;
 use think\Db;
@@ -53,7 +54,7 @@ class Debt extends Base {
         if ($status == 2) {
             $mobile = M('users')->where(['user_id' => $data['user_id']])->value('mobile');
             // 发送短信
-            $msg = jh_message($mobile,176933,'');
+            $msg = jh_message($mobile,Config::get('message.type_examine'),'');
             if ($msg['error_code'] > 0) {
                 $this->error($msg['reason']);
             }

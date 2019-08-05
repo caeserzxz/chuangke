@@ -2,6 +2,7 @@
 
 namespace app\chuangke\controller;
 use think\Controller;
+use think\Config;
 use think\Db;
 use app\mobile\controller\MobileBase;
 use app\common\logic\MemberLogic;
@@ -28,6 +29,7 @@ class Member extends  MobileBase
      */
     public function index(){
         $userInfo = $this->userInfo;
+        
         $model  = new MemberLogic();
         //判断是否实名
         $auth = $model->getAuthenticationResult($userInfo['user_id']);

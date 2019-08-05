@@ -5,6 +5,7 @@ namespace app\chuangke\controller;
 use think\Controller;
 use think\Session;
 use think\Db;
+use think\Config;
 use app\systemadmin\logic\UsersLogic;
 use think\Verify;
 class Login extends Controller
@@ -154,8 +155,8 @@ class Login extends Controller
         #################################
         //聚合数据短信
         #################################
-        $send = jh_message($input['mobile'],'176927',$captcha);
-
+        $send = jh_message($input['mobile'],Config::get('message.type_code'),$captcha);
+        return $send;
         if ($send['error_code']==0) {
             //验证码入库
             $res = db('n_mobile_captcha')->insert([

@@ -3,6 +3,7 @@
 namespace app\chuangke\controller;
 use think\Controller;
 use think\Db;
+use think\Config;
 
 class Task extends Controller {
     public function __construct()
@@ -45,7 +46,7 @@ class Task extends Controller {
 
             if ($res) {
                 // 发送短信
-                $msg = jh_message($mobile,176933,'');
+                $msg = jh_message($mobile,Config::get('message.type_examine'),'');
             }
         }
         echo "执行成功";
