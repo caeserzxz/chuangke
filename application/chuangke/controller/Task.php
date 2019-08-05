@@ -46,7 +46,7 @@ class Task extends Controller {
 
             if ($res) {
                 // 发送短信
-                $msg = jh_message($mobile,Config::get('message.type_examine'),'');
+                // $msg = jh_message($mobile,Config::get('message.type_examine'),'');
             }
         }
         echo "执行成功";

@@ -114,7 +114,8 @@ class Plan extends MobileBase
         if($this->request->isPost()){
             $user = M('users')->field('is_lock')->where(['user_id' => $this->user_id])->find();
             if ($user['is_lock'] == 1) $this->error('账号已被冻结,请联系管理员');
-            $text = tpCache('shop_info.shop_text');
+            $shop_info = tpCache('shop_info');
+            $text = $shop_info['shop_text'];
 
             // 是否实名认证
             $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => ['IN',[0,1]]])->count();
@@ -133,7 +134,19 @@ class Plan extends MobileBase
 
             $status2 = M('user_debt')->where(['user_id' => $this->user_id,'type' => $type,'status' => 2])->count();
             if ($status1) $this->error('已有同类型债务众筹中');
-            
+
+            // 是否超过最大额度
+            $all_adopt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys');
+            if ($all_adopt+$money > $shop_info['max_quota']) {
+                $this->error('所有债务总额不得超过'.$shop_info['max_quota']);
+            }
+            $all_check = M('user_debt')->where(['user_id' => $this->user_id,'status' => 1])->sum('moneys');
+            if ($all_check+$all_adopt+$money > $shop_info['max_quota']) {
+                $this->error('所有债务总额不得超过'.$shop_info['max_quota']);
+            }
+            // 一旦激活就不能再添加负债
+            if ($user['level'] > 1) $this->error('账号已激活,无法添加负债');
+
             if(empty($imgsrc) && empty($_FILES['imgsrc']['tmp_name'])){
                 $this->error('请上传债务凭证');
             }
@@ -146,7 +159,6 @@ class Plan extends MobileBase
             }
             if ($money <= 0) $this->error('金额错误');
             // 金额是否是200整数倍
-            $shop_info = tpCache('shop_info');
             $debt_based = $shop_info['debt_based'];
             if ($money % $debt_based > 0) {
                 $this->error('请输入' . $debt_based . '整数倍');

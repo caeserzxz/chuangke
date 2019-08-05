@@ -43,19 +43,15 @@
                     <td align="left" class=""><div style="text-align: center; width: 120px;"><if $list.is_lock eq 0 >正常<else><span style="color:red">冻结</span></if></div></td>
                     <td align="left" class=""><div style="text-align: center; width: 120px;">{$list.direct_num}</div></td>
                     <td align="left" class=""><div style="text-align: center; width: 120px;">{$list.team_num}</div></td>
-                    <td align="center" class="handle">
+                    <td align="left" class="handle">
                         <div style="text-align: center; width: 170px; max-width:250px;">
                             <a class="btn blue" href="{:U('user/detail',array('id'=>$list['user_id']))}"><i class="fa fa-pencil-square-o"></i>会员编辑</a>
-                            <!-- <a class="btn blue" href="{:U('user/account_log',array('id'=>$list['user_id']))}"><i class="fa fa-search"></i>资金管理</a> -->
                             <a class="btn blue" href="javascript:void(0)" data-id="{$list['user_id']}" onClick="change_leader({$list['user_id']})"><i class="fa fa-pencil-square-o"></i>更改上级</a>
 
                             <a class="btn blue" href="{:U('User/upgrade_level',['user_id' => $list['user_id']])}"><i class="fa fa-share"></i>打款记录</a>
                             <a class="btn blue" href="{:U('User/upgrade_level',['leader_id' => $list['user_id']])}"><i class="fa fa-share"></i>收款记录</a>
-                            <!-- <a class="btn blue" href="{:U('user/address',array('id'=>$list['user_id']))}"><i class="fa fa-steam"></i>收货地址</a> -->
-                            <!-- <a class="btn red"  href="javascript:void(0)" data-id="{$list['user_id']}"  data-url="{:U('user/ajax_delete')}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a> -->
                         </div>
                     </td>
-                    <td align="" class="" style="width: 100%;"><div>&nbsp;</div></td>
                 </tr>
             </volist>
         </tbody>
