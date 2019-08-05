@@ -67,7 +67,7 @@ class Login extends Controller
             $recommendId = session('recommendId');
         }
         $appType = session('appType');
-        
+
         $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
         $this->assign('tuijian_code',$tuijian_code);
         $this->assign('appType',$appType);

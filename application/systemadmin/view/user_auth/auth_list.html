@@ -105,10 +105,25 @@
                                     <div style="text-align: center; width: 150px;" class="">{$v.id_card}</div>
                                 </td>
                                 <td align="center" axis="col4" class="">
-                                    <div style="text-align: center; width: 150px;" class="">{$v.card_positive}</div>
+                                    <div style="text-align: center; width: 150px;" class="">
+                                        <if condition="$v.card_positive neq ''">
+                                            <a href=" {$v.card_positive}" class="btn blue" target="_blank"><i class="fa fa-pencil-square-o"></i>查看</a>
+                                        <else />
+                                            未上传
+                                        </if>
+
+
+                                    </div>
                                 </td>
                                 <td align="center" axis="col5" class="">
-                                    <div style="text-align: center; width: 150px;" class="">{$v.card_back}</div>
+                                    <div style="text-align: center; width: 150px;" class="">
+                                        <if condition="$v.card_back neq ''">
+                                            <a href="{$v.card_back}" class="btn blue" target="_blank"><i class="fa fa-pencil-square-o"></i>查看</a>
+                                        <else />
+                                            未上传
+                                        </if>
+
+                                    </div>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class="">

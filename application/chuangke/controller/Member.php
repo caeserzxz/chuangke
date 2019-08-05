@@ -331,4 +331,25 @@ class Member extends  MobileBase
         }
 
     }
+
+    /*投诉界面*/
+    public function complaint(){
+        $user_id = $this->user_id;
+        if(IS_AJAX){
+
+            $data['content'] = I('content');
+            $data['qrcode_url']=I('head_pic');
+            $data['create_time'] = time();
+            $data['user_id'] = $user_id;
+
+            if (M('complaint_log')->add($data)) {
+
+                $this->ajaxReturn(['status' => 1, 'msg' => '提交成功','url'=>U('User/index')]);
+            } else {
+
+                $this->ajaxReturn(['status' => 1, 'msg' => '网络异常！']);
+            }
+        }
+        return $this->fetch();
+    }
 }
