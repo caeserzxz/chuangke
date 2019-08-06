@@ -369,6 +369,18 @@
                     <p class="notic">关闭留言后将不显示留言板</p>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">是否允许审核人拒绝审核</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="is_refuse_check1" class="cb-enable <if condition='$config[is_refuse_check] eq 1'>selected</if>">开启</label>
+                        <label for="is_refuse_check0" class="cb-disable <if condition='$config[is_refuse_check] eq 0'>selected</if>">关闭</label>
+                        <input id="is_refuse_check1" name="is_refuse_check" <if condition="$config['is_refuse_check'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="is_refuse_check0" name="is_refuse_check" <if condition="$config['is_refuse_check'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">是否允许审核人拒绝审核</p>
+                </dd>
+            </dl>
      <!--        <dl class="row">
                 <dt class="tit">
                     <label for="help_title">帮助标题</label>

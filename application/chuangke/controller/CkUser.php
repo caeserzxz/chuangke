@@ -376,18 +376,19 @@ class CkUser extends MobileBase
             //第一层领导审核
             $updata = array();
             if ($info['check_leader_1'] == $info['check_leader_2']) {
-                if (empty($info['check_status_1'])) {
+                if ($info['check_status_1'] < 1) {
                     $updata['check_status_1'] = $status;
                     $updata['check_time_1']   = time();
                 }else{
-                    if($status == 1) $updata['apply_status'] = $status;
+                    if($status == 1 && $info['check_status_1'] == 1) $updata['apply_status'] = $status;
                     $updata['check_status_2'] = $status;
                     $updata['check_time_2']   = time();
                 }
             }else{
                 if($info['check_leader_1'] == $this->user_id){
                     if(empty($info['check_leader_2']))  $updata['apply_status'] = $status;
-                    if(!empty($info['check_status_2'])) $updata['apply_status'] = $status;
+                    // if(!empty($info['check_status_2'])) $updata['apply_status'] = $status;
+                    if($info['check_status_2'] == 1) $updata['apply_status'] = $status;
                     $updata['check_status_1'] = $status;
                     $updata['check_time_1']   = time();
                 }elseif($info['check_leader_2'] == $this->user_id){
@@ -470,7 +471,7 @@ class CkUser extends MobileBase
             -> join('user_authentication D','A.user_id = D.user_id','left')
             -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1')
             // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
-            ->order('A.apply_time ASC')
+            ->order('A.apply_time DESC')
             ->limit($Page->firstRow . ',' . $Page->listRows)
             -> select();
 
@@ -502,9 +503,9 @@ class CkUser extends MobileBase
                 // 审核人1和审核人2是同一个人 状态为未审核
                 $check_user[$key]['is_check'] = 0;
             }else{
-                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
+                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] == 1) {
                     $check_user[$key]['is_check'] = 1;
-                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
+                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] == 1) {
                     $check_user[$key]['is_check'] = 1;
                 }else{
                     $check_user[$key]['is_check'] = 0;
@@ -750,7 +751,7 @@ class CkUser extends MobileBase
         if ($apply['check_leader_1'] == $apply['check_leader_2'] ) {
             if ($apply['check_status_1'] < 1) {
                 $apply['img'] = $apply['voucher_img1'];
-            }elseif (!$apply['check_status_2'] < 1) {
+            }elseif ($apply['check_status_2'] < 1) {
                 $apply['img'] = $apply['voucher_img2'];
             }else{
                 $this->error('数据错误');
