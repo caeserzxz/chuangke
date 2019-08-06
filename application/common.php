@@ -1682,7 +1682,7 @@ function jh_message($mobile,$tpl_id,$captcha){
     }
     $url = "http://v.juhe.cn/sms/send";
     $params = array(
-        'key'   => Config::get('message.key'), //您申请的APPKEY
+        'key'   => Config::get('database.key'), //您申请的APPKEY
         'mobile'    => $mobile, //接受短信的用户手机号码
         'tpl_id'    => $tpl_id, //您申请的短信模板ID，根据实际情况修改
         'tpl_value' =>urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
