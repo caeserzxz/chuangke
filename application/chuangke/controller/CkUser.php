@@ -376,7 +376,7 @@ class CkUser extends MobileBase
             //第一层领导审核
             $updata = array();
             if ($info['check_leader_1'] == $info['check_leader_2']) {
-                if (empty($info['check_status_1'])) {
+                if ($info['check_status_1'] < 1) {
                     $updata['check_status_1'] = $status;
                     $updata['check_time_1']   = time();
                 }else{
