@@ -471,7 +471,7 @@ class CkUser extends MobileBase
             -> join('user_authentication D','A.user_id = D.user_id','left')
             -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1')
             // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
-            ->order('A.apply_time ASC')
+            ->order('A.apply_time DESC')
             ->limit($Page->firstRow . ',' . $Page->listRows)
             -> select();
 
