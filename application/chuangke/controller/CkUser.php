@@ -503,9 +503,9 @@ class CkUser extends MobileBase
                 // 审核人1和审核人2是同一个人 状态为未审核
                 $check_user[$key]['is_check'] = 0;
             }else{
-                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] != 0) {
+                if ($value['check_leader_1'] == $this->user_id && $value['check_status_1'] == 1) {
                     $check_user[$key]['is_check'] = 1;
-                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] != 0) {
+                }elseif ($value['check_leader_2'] == $this->user_id && $value['check_status_2'] == 1) {
                     $check_user[$key]['is_check'] = 1;
                 }else{
                     $check_user[$key]['is_check'] = 0;
