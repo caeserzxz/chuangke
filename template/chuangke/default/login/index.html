@@ -1,23 +1,33 @@
 <layout name="common/layout_nav" />
-<style>
-    .remember_password{
-        width: 50%;
-        height: 3rem;
-        line-height: 3rem;
-        /*display:block;*/
-        /*display: inline;*/
-        vertical-align:middle;
-        display: inline-block;
-    }
-    #remember_password{
-        height: 4vw;
-        line-height: 4vw;
-        border: none;
-        outline: none;
-    }
-</style>
-    <div class="page login">
-        <div class="page-bd">
+    <!--<div class="page login">-->
+        <!--<div class="page-bd">-->
+        <!--<div class="logoimg">-->
+            <!--<if condition="$config.store_logo neq ''">-->
+                <!--<img src="{$config.store_logo}" alt="" class="login_img">-->
+            <!--<else/>-->
+                <!--<img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">-->
+            <!--</if>-->
+        <!--</div>-->
+
+        <!--<div class="form_box">-->
+            <!--<p class="tou ">登录</p>-->
+            <!--<input type="number" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">-->
+            <!--<input type="password" id="password" class="fs28 pwd" placeholder="请输入密码(6-20位字符)">-->
+
+            <!--<label for="remember_pwd" class="remember_password"><input id="remember_password" id="remember_pwd" type="checkbox" class="weui-agree__checkbox" />记住密码</label>-->
+
+            <!--<a href="{:U('chuangke/login/forgotPassword')}" class="rember">忘记密码</a>-->
+            <!--<a href="javascript:;" class="weui-btn loading_btn fs30" onclick="loginBtn();">登录</a>-->
+        <!--</div>-->
+
+
+        <!--<a href="{:U('chuangke/login/register')}" class="weui-btn zhuce fs26">快速注册</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<div class="page login">
+
+    <div class="page-bd">
+        <!-- 页面内容-->
         <div class="logoimg">
             <if condition="$config.store_logo neq ''">
                 <img src="{$config.store_logo}" alt="" class="login_img">
@@ -25,22 +35,39 @@
                 <img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">
             </if>
         </div>
-        
-        <div class="form_box">
-            <p class="tou ">登录</p>
-            <input type="number" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">
-            <input type="password" id="password" class="fs28 pwd" placeholder="请输入密码(6-20位字符)">
-            <a  href="#" class="remember_password">   <input id="remember_password" type="checkbox" />记住密码</a>
-            <a href="{:U('chuangke/login/forgotPassword')}" class="rember">忘记密码</a>
-            <a href="javascript:;" class="weui-btn loading_btn fs30" onclick="loginBtn();">登录</a>
+        <div class="weui-cells weui-cells_form">
+            <div class="title">登录</div>
+            <div class="weui-cell noline">
+
+                <label for='tel' class="weui-cell__bd">
+                    <input id="tel" class="weui-input fs28 color_3"  type="number" pattern="[0-9]*"
+                           placeholder="请输入您的手机号">
+                </label>
+            </div>
+            <div class="weui-cell">
+
+                <label for='pwd' class="weui-cell__bd">
+                    <input id="pwd" class="weui-input fs28 color_3"   type="password" placeholder="请输入密码(6-20位字符)">
+                </label>
+            </div>
+            <div class="weui-cell">
+                <label for="weuiAgree" class="weui-agree weui-cell__bd">
+                    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                    <span class="weui-agree__text fs24">
+                            记住密码
+                        </span>
+                </label>
+
+                <a href="{:U('chuangke/login/forgotPassword')}" class="fs24 weui-cell__ft">忘记密码</a>
+            </div>
+            <button class="fs30 fw_b color_w" onclick="loginBtn();">登录</button>
         </div>
 
-
-        <a href="{:U('chuangke/login/register')}" class="weui-btn zhuce fs26">快速注册</a>
-        </div>
+        <a href="{:U('chuangke/login/register')}" class="goLink fs26">快速注册</a>
     </div>
+</div>
 
-    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
@@ -59,8 +86,8 @@
     </script>
 <script>
     function loginBtn(){
-        var mobile = $('#mobile').val();
-        var password = $('#password').val();
+        var mobile = $('#tel').val();
+        var password = $('#pwd').val();
         if(mobile==''||mobile==null){
             layer.msg('请填写手机号',{icon:5,time:2000});
             return false;
@@ -95,11 +122,11 @@
     function saveInfo() {
         try {
             // 保存按键是否选中
-            var isSave = document.getElementById('remember_password').checked;
+            var isSave = document.getElementById('weuiAgree').checked;
 
             if (isSave) {
-                var username = $('#mobile').val();
-                var password = $('#password').val();
+                var username = $('#tel').val();
+                var password = $('#pwd').val();
                 if (username != "" && password != "") {
                     SetCookie(username, password);
                 }
@@ -136,11 +163,11 @@
                 beginPosition = nmpsd.indexOf("%%");
                 nm = nmpsd.substring(0, beginPosition);
                 psd = nmpsd.substring(beginPosition + 2);
-                $('#mobile').val(nm)
-                $('#password').val(psd)
+                $('#tel').val(nm)
+                $('#pwd').val(psd)
 
                 if (nm != "" && psd != "") {
-                    document.getElementById('remember_password').checked = true;
+                    document.getElementById('weuiAgree').checked = true;
                 }
             }
         }

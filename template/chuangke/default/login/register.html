@@ -1,65 +1,120 @@
 <layout name="common/layout_nav" />
-<style>
-    #remember_password{
-        height: 14px;
-        line-height: 14px;
-    }
-</style>
-    <div class="page login forgetPwd zhuce">
-        <div class="page-hd">
-            <div class="header">
-    <div class="header-left">
-        <a href="javascript:history.go(-1)" class="left-arrow"></a>
-    </div>
-    <div class="header-title"></div>
-    <div class="header-right">
-        <a href="#"></a>
+    <!--<div class="page login forgetPwd zhuce">-->
+        <!--<div class="page-hd">-->
+            <!--<div class="header">-->
+    <!--<div class="header-left">-->
+        <!--<a href="javascript:history.go(-1)" class="left-arrow"></a>-->
+    <!--</div>-->
+    <!--<div class="header-title"></div>-->
+    <!--<div class="header-right">-->
+        <!--<a href="#"></a>-->
+    <!--</div>-->
+<!--</div>-->
+        <!--</div>-->
+        <!--<div class="page-bd">-->
+            <!--<div class="logoimg">-->
+                <!--<if condition="$config.store_logo neq ''">-->
+                    <!--<img src="{$config.store_logo}" alt="" class="login_img">-->
+                <!--<else />-->
+                    <!--<img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">-->
+                <!--</if>-->
+            <!--</div>-->
+            <!--<div class="form_box">-->
+                <!--<p class="tou ">注册</p>-->
+                <!--<input type="number"  name="mobile" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">-->
+                <!--<div class="yanzheng">-->
+                    <!--<div class="left">-->
+                        <!--<input class="input fs28" name="verify_code" type="number" pattern="[0-9]*" placeholder="验证码">-->
+                    <!--</div>-->
+                    <!--<div class="right">-->
+                        <!--<span class="fs26  getCode" onclick="codeButton()">获取验证码</span>-->
+                        <!--<span class="fs26  time" style="display: none">60s</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<input type="password" class="fs28 pwd1" name="password" placeholder="密码">-->
+                <!--<if condition="$tuijian_code eq ''">-->
+                    <!--<input type="text" name="tuijian_code" class="fs28" placeholder="邀请码(必填）">-->
+                <!--<else />-->
+                    <!--<input type="text" name="tuijian_code" disabled="true" value="{$tuijian_code}" class="fs28" placeholder="邀请码(必填）">-->
+                <!--</if>-->
+
+                <!--<p class="fs24 see "> <input id="remember_password" type="checkbox" />注册并同意<a href="{:U('chuangke/article/index')}?id=5" class="fs24">《注册协议》</a></p>-->
+                <!--<a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>-->
+            <!--</div>-->
+            <!--<if condition="$appType eq 'other'">-->
+                <!--<if condition="$config.is_other_login eq 1">-->
+                    <!--<a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>-->
+                <!--</if>-->
+            <!--<else />-->
+                <!--<a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>-->
+            <!--</if>-->
+
+        <!--</div>-->
+
+
+    <!--</div>-->
+<div class="page login">
+
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="logoimg">
+            <if condition="$config.store_logo neq ''">
+                <img src="{$config.store_logo}" alt="" class="login_img">
+            <else />
+                <img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">
+            </if>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="title">注册</div>
+            <div class="weui-cell noline">
+
+                <label for='tel' class="weui-cell__bd">
+                    <input id="tel" class="weui-input fs28 color_3" name="mobile" type="number" pattern="[0-9]*"
+                           placeholder="请输入您的手机号">
+                </label>
+            </div>
+            <div class="weui-cell">
+
+                <label for='pwd' class="weui-cell__bd">
+                    <input id="pwd" class="weui-input fs28 color_3" name="verify_code" type="text" placeholder="验证码">
+                </label>
+                <div class="weui-cell__ft code">
+                    <span class="fs26  getCode" onclick="codeButton()">获取验证码</span>
+                    <span class="fs26  time" style="display: none">60s</span>
+                </div>
+            </div>
+            <div class="weui-cell">
+
+                <label for='code' class="weui-cell__bd">
+                    <input id="code" class="weui-input fs28 color_3" name="password" type="password" placeholder="请输入密码(6-20位字符)">
+                </label>
+            </div>
+            <div class="weui-cell">
+
+                <label for='invitationCode' class="weui-cell__bd">
+                    <input id="invitationCode" class="weui-input fs28 color_3" name="tuijian_code" type="text" placeholder="邀请码(必填)">
+                </label>
+            </div>
+            <div class="weui-cell">
+                <label for="weuiAgree" class="weui-agree weui-cell__bd">
+                    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                    <span class="weui-agree__text fs24">
+                                注册并同意<a href="javascript:;" class="fs24">《注册协议》</a>
+                        </span>
+                </label>
+            </div>
+            <button class="fs30 fw_b color_w loading_btn">注册</button>
+        </div>
+
+        <if condition="$appType eq 'other'">
+        <if condition="$config.is_other_login eq 1">
+        <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
+        </if>
+        <else />
+        <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
+        </if>
     </div>
 </div>
-        </div>
-        <div class="page-bd">
-            <div class="logoimg">
-                <if condition="$config.store_logo neq ''">
-                    <img src="{$config.store_logo}" alt="" class="login_img">
-                <else />
-                    <img src="__PUBLIC__/static/chuangke/images/logo.png" alt="" class="login_img">
-                </if>
-            </div>
-            <div class="form_box">
-                <p class="tou ">注册</p>
-                <input type="number"  name="mobile" id="mobile" class="fs28 tel" placeholder="请输入您的手机号">
-                <div class="yanzheng">
-                    <div class="left">
-                        <input class="input fs28" name="verify_code" type="number" pattern="[0-9]*" placeholder="验证码">
-                    </div>
-                    <div class="right">
-                        <span class="fs26  getCode" onclick="codeButton()">获取验证码</span>
-                        <span class="fs26  time" style="display: none">60s</span>
-                    </div>
-                </div>
-                <input type="password" class="fs28 pwd1" name="password" placeholder="密码">
-                <if condition="$tuijian_code eq ''">
-                    <input type="text" name="tuijian_code" class="fs28" placeholder="邀请码(必填）">
-                <else />
-                    <input type="text" name="tuijian_code" disabled="true" value="{$tuijian_code}" class="fs28" placeholder="邀请码(必填）">
-                </if>
-
-                <p class="fs24 see "> <input id="remember_password" type="checkbox" />注册并同意<a href="{:U('chuangke/article/index')}?id=5" class="fs24">《注册协议》</a></p>
-                <a href="javascript:;" class="weui-btn loading_btn fs30">注册</a>
-            </div>
-            <if condition="$appType eq 'other'">
-                <if condition="$config.is_other_login eq 1">
-                    <a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
-                </if>
-            <else />
-                <a href="{:U('chuangke/login/index')}" class="weui-btn zhuce kuailogin  fs26">快速登录</a>
-            </if>
-
-        </div>
-
-
-    </div>
-
     <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
@@ -73,6 +128,18 @@
     var appType = "{$appType}";
     var check_verify_code = {$config.check_verify_code};
         function codeButton() {
+            var mobile = $("#tel").val();
+            // console.log(mobile);
+            //验证手机格式
+            var reg = /(1[3-9]\d{9}$)/;
+            if (!reg.test(mobile)) {
+                $("#tel").focus();
+                layer.msg('请输入正确的手机号码', function () {
+                    $("button").attr('has-click', '0');
+                });
+                return false;
+            }
+
             var timeObj = $('.time')
             var getCodeObj = $('.getCode')
             getCodeObj.hide();
@@ -87,17 +154,7 @@
                 }
             }, 1000);
 
-            var mobile = $("#mobile").val();
-            // console.log(mobile);
-            //验证手机格式
-            var reg = /(1[3-9]\d{9}$)/;
-            if (!reg.test(mobile)) {
-                $("#mobile").focus();
-                layer.msg('请输入正确的手机号码', function () {
-                    $("button").attr('has-click', '0');
-                });
-                return false;
-            }
+
 
             //发送验证码
             $.ajax({
@@ -138,7 +195,7 @@
             var verify_code = $('input[name=verify_code]').val();
             var password = $('input[name=password]').val();
             var tuijian_code = $('input[name=tuijian_code]').val();
-            var isSave = document.getElementById('remember_password').checked;
+            var isSave = document.getElementById('weuiAgree').checked;
 
             if(isSave==false){
                 layer.msg('请阅读注册协议并同意',{icon:5,time:2000});

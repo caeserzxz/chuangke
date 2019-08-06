@@ -36,8 +36,29 @@
     style.innerHTML = styleStr;
     body.appendChild(style);
   }
+
   window.onload = function () {
    //  theme();
+    var oldScrollTop = getScrollTop() || 0; 
+    document.body.addEventListener('focusout',function(){ //软键盘关闭事件
+      var ua = window.navigator.userAgent;
+      if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPad') > 0) { //键盘收起页面空白问题
+          document.body.scrollTop = oldScrollTop;
+          document.documentElement.scrollTop = oldScrollTop;
+      }
+    });
   }
 
 })(document, window);
+function getScrollTop(){  
+  var scrollTop=0;  
+  if(document.documentElement&&document.documentElement.scrollTop){  
+      scrollTop=document.documentElement.scrollTop;  
+  }else if(document.body){  
+      scrollTop=document.body.scrollTop;  
+  }  
+  return scrollTop;  
+};
+
+  
+
