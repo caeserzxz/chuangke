@@ -751,7 +751,7 @@ class CkUser extends MobileBase
         if ($apply['check_leader_1'] == $apply['check_leader_2'] ) {
             if ($apply['check_status_1'] < 1) {
                 $apply['img'] = $apply['voucher_img1'];
-            }elseif (!$apply['check_status_2'] < 1) {
+            }elseif ($apply['check_status_2'] < 1) {
                 $apply['img'] = $apply['voucher_img2'];
             }else{
                 $this->error('数据错误');
