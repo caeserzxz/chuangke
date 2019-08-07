@@ -33,11 +33,15 @@
             <img src="__PUBLIC__/static/chuangke/images/shareBG.png?v=1" alt="" class="bgimg">
             <div class="info">
                 <div class="logo">
-                    <img src="__PUBLIC__/static/chuangke/images/logo.png?v=1" alt="">
+                    <if condition="$config.store_logo neq ''">
+                        <img src="{$config.store_logo}" alt="" class="login_img">
+                    <else/>
+                        <img src="__PUBLIC__/static/chuangke/images/logo.png?v=1" alt="" >
+                    </if>
                 </div>
                 <div class="code">
-                    <img src="__PUBLIC__/static/chuangke/images/code.png?v=1" alt="">
-                    <span class="color_w">加微信：4145621</span>
+                    <img src="{$data.img}?v=1" alt="">
+                    <span class="color_w">加微信：<span id="wx_number">{$userInfo.wx_number}</span></span>
                 </div>
             </div>
 
@@ -60,6 +64,11 @@
     $(function () {
         $.toast.prototype.defaults.duration=1500
         $('.saveImg').on('click',function(){
+            var wx_number = $('#wx_number').html();
+            console.log(wx_number);
+            return false;
+
+
             $('.page-bd').hide()
             $('.page-hd').hide()
             $('.shareImg').show()
