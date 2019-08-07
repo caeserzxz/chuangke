@@ -29,7 +29,7 @@
                 3、好友每次众筹可获得3%-8%收益分成
             </div>
         </div>
-        <a href="#" download="img" id="img"></a>
+        <!--<a href="#" download="img" id="img"></a>-->
         <div class="shareImg" >
             <img src="__PUBLIC__/static/chuangke/images/shareBG.png?v=1" alt="" class="bgimg">
             <div class="info">
@@ -95,12 +95,12 @@
                 //     $('.page-hd').show()
                 //     $('.shareImg').hide()
                 // });
-                $('#img').attr('href',url);
-                $('#img')[0].click();
+                // $('#img').attr('href',url);
+                // $('#img')[0].click();
                 console.log(url)
                 console.log(new Date().getTime());
                 // return url
-                /*var u = navigator.userAgent, app = navigator.appVersion;
+                var u = navigator.userAgent, app = navigator.appVersion;
                 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 
                 if (isIOS){
@@ -111,7 +111,7 @@
                     var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
                     triggerDownload[0].click();
                     triggerDownload.remove();
-                }*/
+                }
             }
         });
     }
