@@ -7,9 +7,13 @@
                     {$vo.nickname}
                     <else />
                     {$vo.mobile}
+                    <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
                 </if>
             </p>
-            <span>{$vo.mobile}</span>
+            <span>
+                {$vo.mobile}
+                <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
+            </span>
         </div>
         <div class="weui-cell__ft color_a">{$vo.reg_time|date='Y-m-d H:i',###}</div>
     </div>
