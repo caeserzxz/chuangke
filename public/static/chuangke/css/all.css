@@ -1214,7 +1214,7 @@ img {
 }
 .friend .weui-cells span {
   margin-left: 4vw;
-  color: #c3d8f1;
+  color: #c3d8f1 !important;
 }
 .friend .tab {
   margin-top: 2.66667vw;
