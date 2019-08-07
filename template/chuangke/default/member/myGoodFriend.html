@@ -45,9 +45,9 @@
                     <span class="color_w">加微信：<span id="wx_number">{$user.wx_number}</span></span>
                 </div>
             </div>
-
         </div>
     </div>
+<div class="invitationBtn"  style="display: none;">我的邀请链接<div id="invitationBtn" data-clipboard-target="#Code" >一键<br>复制</div><span id="Code" class="Code">213</span></div>
 <textarea  id="biao1" style="z-index: -1;" style="display: none;">{$data.url}</textarea>
 <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
@@ -104,9 +104,7 @@
                 // var u = navigator.userAgent, app = navigator.appVersion;
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
                 if(apptype=='Android'){
-                    var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
-                    triggerDownload[0].click();
-                    triggerDownload.remove();
+                    callMobile('SavePhoto','',url);
                 }else if(apptype=='IOS'){
 
                 }else if(apptype=='other'){
