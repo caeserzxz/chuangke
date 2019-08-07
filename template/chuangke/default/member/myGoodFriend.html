@@ -54,6 +54,7 @@
 <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
@@ -61,6 +62,7 @@
 </script>
 <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <script>
+    var apptype = "{$apptype}";
     //保存图片
     $(function () {
         $.toast.prototype.defaults.duration=1500
@@ -95,23 +97,34 @@
                 //     $('.page-hd').show()
                 //     $('.shareImg').hide()
                 // });
-                // $('#img').attr('href',url);
-                // $('#img')[0].click();
                 console.log(url)
-                console.log(new Date().getTime());
+                $('.info').hide()
+                $('.bgimg').attr('src',url);
                 // return url
-                var u = navigator.userAgent, app = navigator.appVersion;
-                var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+                // var u = navigator.userAgent, app = navigator.appVersion;
+                // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+                if(apptype=='Android'){
+                    var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
+                    triggerDownload[0].click();
+                    triggerDownload.remove();
+                }else if(apptype=='IOS'){
 
-                if (isIOS){
-                    $('.model').find('img').attr('src',url);
-                    $('.model').show()
-                }else{
-                   //以下代码为下载此图片功能
+                }else if(apptype=='other'){
+                    //以下代码为下载此图片功能
                     var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
                     triggerDownload[0].click();
                     triggerDownload.remove();
                 }
+
+                // if (isIOS){
+                //     $('.model').find('img').attr('src',url);
+                //     $('.model').show()
+                // }else{
+                //    //以下代码为下载此图片功能
+                //     var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
+                //     triggerDownload[0].click();
+                //     triggerDownload.remove();
+                // }
             }
         });
     }
