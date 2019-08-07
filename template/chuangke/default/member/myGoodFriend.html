@@ -24,12 +24,13 @@
                 </div>
             </div>
             <div class="tips fs26 color_8">
-                1、每推荐一个用户注册可得50元保证金，可提现<br/>
+                1、每推荐一个用户注册可得50元保证金，可提现{$userInfo.wx_number}<br/>
                 2、好友每次还款可获得5%-10%手续费提成<br/>
                 3、好友每次众筹可获得3%-8%收益分成
             </div>
         </div>
-        <div class="shareImg">
+        <a href="#" download="img" id="img"></a>
+        <div class="shareImg" >
             <img src="__PUBLIC__/static/chuangke/images/shareBG.png?v=1" alt="" class="bgimg">
             <div class="info">
                 <div class="logo">
@@ -41,7 +42,7 @@
                 </div>
                 <div class="code">
                     <img src="{$data.img}?v=1" alt="">
-                    <span class="color_w">加微信：<span id="wx_number">{$userInfo.wx_number}</span></span>
+                    <span class="color_w">加微信：<span id="wx_number">{$user.wx_number}</span></span>
                 </div>
             </div>
 
@@ -66,8 +67,12 @@
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
             console.log(wx_number);
-            return false;
-
+            if(wx_number==''||wx_number==null){
+                layer.prompt({title: '请输入微信号', formType: 3}, function(text, index){
+                    save_wx_number(text);
+                });
+                return false;
+            }
 
             $('.page-bd').hide()
             $('.page-hd').hide()
@@ -85,14 +90,16 @@
                 var url = canvas.toDataURL();
                 // $('.model').find('img').attr('src', url);
                 // $('.model').show()
-                $.toast("图片已保存",'text', function() {
-                    $('.page-bd').show()
-                    $('.page-hd').show()
-                    $('.shareImg').hide()
-                });
+                // $.toast("图片已保存",'text', function() {
+                //     $('.page-bd').show()
+                //     $('.page-hd').show()
+                //     $('.shareImg').hide()
+                // });
+                $('#img').attr('href',url);
+                $('#img')[0].click();
                 console.log(url)
-
-                return url
+                console.log(new Date().getTime());
+                // return url
                 /*var u = navigator.userAgent, app = navigator.appVersion;
                 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 
@@ -149,5 +156,34 @@
         a.dispatchEvent(event)
     }
 
+    function  save_wx_number(code){
+        $.ajax({
+            'url':"{:url('Member/save_wx_number')}",
+            'type':'post',
+            'data':{'code':code},
+            'dataType':'json',
+            'success':function(data){
+                console.log(data);
+                if(data.status == -1){
+                    layer.msg(data.msg);
+                }else if(data.status == 1){
+                    window.location = "{:url('/chuangke/Member/myGoodFriend')}";
+                }
+            }
+        });
+    }
+    /**
+     * 在本地进行文件保存
+     * @param  {String} data     要保存到本地的图片数据
+     * @param  {String} filename 文件名
+     */
+    function saveFile(data, filename) {
+        const save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+        save_link.href = data;
+        save_link.download = filename;
 
+        const event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        save_link.dispatchEvent(event);
+    }
 </script>
