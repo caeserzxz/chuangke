@@ -22,7 +22,7 @@ class Member extends  MobileBase
                 ->find();
             $this->userInfo = $userInfo;
         }
-
+        $this->assign('config', tpCache('shop_info'));
     }
 
     /**
@@ -249,6 +249,7 @@ class Member extends  MobileBase
 
         $this->assign('list',$list);
         if (IS_AJAX) return $this->fetch('ajax_friend_list');
+        $this->assign('userInfo',$userInfo);
         return $this->fetch();
     }
 
@@ -371,5 +372,20 @@ class Member extends  MobileBase
 
         $this->assign('appType',session('appType'));
         return $this->fetch();
+    }
+
+    public function save_wx_number(){
+        $userInfo = $this->userInfo;
+        $code = I('code');
+        if(empty($code)){
+            $this->ajaxReturn(['status' => -1, 'msg' => '微信号不能为空']);
+        }
+        $data['wx_number'] = trim($code);
+        $res = M('users')->where(array('user_id'=>$userInfo['user_id']))->update($data);
+        if($res){
+            $this->ajaxReturn(['status' => 1, 'msg' => '提交成功']);
+        }else{
+            $this->ajaxReturn(['status' => -1, 'msg' => '修改微信失败']);
+        }
     }
 }
