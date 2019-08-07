@@ -50,6 +50,7 @@ class Task extends Controller {
                 // $msg = jh_message($mobile,Config::get('message.type_examine'),'');
             }
         }
+        $this->AutomaticAudit();
         echo "执行成功";
         // $data = M('user_debt')->where($where)->select();
         // M('user_debt')->where($where)->update(['status' => 2,'update_time' =>time()]);
