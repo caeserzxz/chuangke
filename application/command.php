@@ -1,3 +1,5 @@
 <?php
 
-return [];
+return [
+    'ThawShovel' => 'app\\chuangke\\command\\AutomaticAudit',
+];

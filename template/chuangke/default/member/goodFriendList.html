@@ -18,7 +18,14 @@
                     <div class="weui-cell">
                         <div class="weui-cell__bd fs24">
                             <img src="{$vo.head_pic|default='__PUBLIC__/static/chuangke/images/userImg.png'}" alt="">
-                            <p class="color_w">{$vo.nickname}</p>
+                            <p class="color_w">
+                                <if condition="$vo.nickname neq ''">
+                                    {$vo.nickname}
+                                <else />
+                                    {:substr_replace($vo['mobile'],'****',3,4)}
+                                </if>
+
+                            </p>
                             <span>{:substr_replace($vo['mobile'],'****',3,4)}</span>
                         </div>
                         <div class="weui-cell__ft color_a">{$vo.reg_time|date='Y-m-d H:i',###}</div>

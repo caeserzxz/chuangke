@@ -16,7 +16,7 @@
         <if condition="$auth.status eq 0">
             <div class="sh_top">
                 <img src="__PUBLIC__/static/chuangke/images/sh01.png" alt="">
-                <div class="color_8 fs28 mt20">您的实名认证审核已通过</div>
+                <div class="color_8 fs28 mt20">您的实名认证审核待审核</div>
             </div>
         <elseif condition="$auth.status eq 1" />
             <div class="sh_top">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="weui-cell__ft">
                     <if condition="$auth.status eq 0">
-                        <p class="fs28 text-green">已通过</p>
+                        <p class="fs28 color_a">待审核</p>
                     <elseif condition="$auth.status eq 1" />
                         <p class="fs28 text-green">已通过</p>
                     <elseif condition="$auth.status eq 2" />

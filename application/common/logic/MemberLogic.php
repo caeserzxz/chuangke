@@ -133,4 +133,13 @@ class MemberLogic extends Model
         }
 
     }
+
+    //获取10分钟前未审核的实名认证
+    public function getAuthList($auth_time=""){
+        $where['create_time'] = array('lt',$auth_time);
+        $where['status'] = 0;
+        $list = M('user_authentication')->where($where)->select();
+        return $list;
+    }
+
 }

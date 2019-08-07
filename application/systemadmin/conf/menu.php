@@ -5,7 +5,7 @@ return	array(
 						array('name'=>'商城设置','act'=>'index','op'=>'Systems'),
 						//array('name'=>'支付方式','act'=>'index1','op'=>'Systems'),
 						// array('name'=>'地区&配送','act'=>'region','op'=>'Tools'),
-						array('name'=>'短信模板','act'=>'index','op'=>'SmsTemplate'),
+//						array('name'=>'短信模板','act'=>'index','op'=>'SmsTemplate'),
                     	// array('name'=>'退款&售后原因','act'=>'reason_list','op'=>'Systems'),
 						//array('name'=>'接口对接','act'=>'index3','op'=>'Systems'),
 						//array('name'=>'验证码设置','act'=>'index4','op'=>'Systems'),

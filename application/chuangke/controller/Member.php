@@ -97,7 +97,7 @@ class Member extends  MobileBase
                 }
             }
 
-            $data['status'] = 1;
+            $data['status'] = 0;
             $data['user_id'] = $userInfo['user_id'];
             $data['create_time'] = time();
 
