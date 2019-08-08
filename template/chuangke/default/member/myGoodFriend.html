@@ -66,7 +66,7 @@
     console.log(apptype);
     //保存图片
     $(function () {
-        $.toast.prototype.defaults.duration=500
+        //$.toast.prototype.defaults.duration=500
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
             console.log(wx_number);
@@ -76,7 +76,6 @@
                 });
                 return false;
             }
-
             $('.page-bd').hide()
             $('.page-hd').hide()
             $('.shareImg').show()
@@ -92,12 +91,16 @@
             onrendered: function (canvas) {
                 var url = canvas.toDataURL();
                 // $('.model').show()
-                $.toast("图片已保存",'text', function() {
-                    $('.page-bd').show()
-                    $('.page-hd').show()
-                    $('.shareImg').hide()
-                });
-                console.log(url)
+                // $.toast("图片已保存",'text', function() {
+                //     $('.page-bd').show()
+                //     $('.page-hd').show()
+                //     $('.shareImg').hide()
+                // });
+                setTimeout(function(){
+                    $('.page-bd').show();
+                    $('.page-hd').show();
+                    $('.shareImg').hide();
+                },500)
                 // $('.info').hide()
                 // $('.bgimg').attr('src',url);
                 // return url
