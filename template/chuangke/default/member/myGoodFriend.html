@@ -90,7 +90,6 @@
             taintTest: false,
             onrendered: function (canvas) {
                 var url = canvas.toDataURL();
-                // $('.model').find('img').attr('src', url);
                 // $('.model').show()
                 // $.toast("图片已保存",'text', function() {
                 //     $('.page-bd').show()
@@ -104,9 +103,9 @@
                 // var u = navigator.userAgent, app = navigator.appVersion;
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
                 if(apptype=='Android'){
-                    callMobile('SavePhoto','',url);
+                    downloadPicturetToBase64(url);
                 }else if(apptype=='IOS'){
-
+                    callMobile('SavePhoto','',url);
                 }else if(apptype=='other'){
                     //以下代码为下载此图片功能
                     var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
@@ -130,14 +129,6 @@
 </script>
 <script>
     var code = "{$data.code}";
-    // window.onload=function (){
-    //     var clipboard = new Clipboard('#Copy');
-    //     clipboard.on('success', function(e) {
-    //         $.toptip("复制成功！", 1500, 'success');
-    //         e.clearSelection();
-    //     });
-    // }
-
     function copyUrl2(obj)
     {
         var Url2=document.getElementById("biao1");
@@ -183,6 +174,7 @@
             }
         });
     }
+
     /**
      * 在本地进行文件保存
      * @param  {String} data     要保存到本地的图片数据
