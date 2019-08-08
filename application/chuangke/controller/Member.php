@@ -298,9 +298,9 @@ class Member extends  MobileBase
         $userInfo = $this->userInfo;
         $model  = new MemberLogic();
         $data['head_pic'] = I('head_pic');
-        if(empty($data['head_pic'])&&empty($_FILES['head_pic']['tmp_name'])){
-            return array('status' => -1, 'msg' => '请添加头像', 'result' => '');
-        }
+//        if(empty($data['head_pic'])&&empty($_FILES['head_pic']['tmp_name'])){
+//            return array('status' => -1, 'msg' => '请添加头像', 'result' => '');
+//        }
         //上传图片
         if($_FILES['head_pic']['tmp_name']){//上传收款码
             $card_positive = $model->upload_img('head_pic','head_pic');
