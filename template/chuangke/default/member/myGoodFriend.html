@@ -66,7 +66,7 @@
     console.log(apptype);
     //保存图片
     $(function () {
-        $.toast.prototype.defaults.duration=500
+        //$.toast.prototype.defaults.duration=500
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
             console.log(wx_number);
@@ -76,7 +76,6 @@
                 });
                 return false;
             }
-
             $('.page-bd').hide()
             $('.page-hd').hide()
             $('.shareImg').show()
@@ -92,20 +91,25 @@
             onrendered: function (canvas) {
                 var url = canvas.toDataURL();
                 // $('.model').show()
-                $.toast("图片已保存",'text', function() {
-                    $('.page-bd').show()
-                    $('.page-hd').show()
-                    $('.shareImg').hide()
-                });
-                console.log(url)
+                // $.toast("图片已保存",'text', function() {
+                //     $('.page-bd').show()
+                //     $('.page-hd').show()
+                //     $('.shareImg').hide()
+                // });
+                setTimeout(function(){
+                    $('.page-bd').show();
+                    $('.page-hd').show();
+                    $('.shareImg').hide();
+                },500)
                 // $('.info').hide()
                 // $('.bgimg').attr('src',url);
                 // return url
                 // var u = navigator.userAgent, app = navigator.appVersion;
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
                 if(apptype=='Android'){
-                    downloadPicturetToBase64(url);
+                    window.auc.downloadPicturetToBase64(url);
                 }else if(apptype=='IOS'){
+                    $.toast("调起IOS",'text');
                     callMobile('SavePhoto','',url);
                 }else if(apptype=='other'){
                     console.log('other');
