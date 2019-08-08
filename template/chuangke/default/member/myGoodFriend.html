@@ -89,7 +89,8 @@
                         window.auc.downloadPicturetToBase64(share_img);
                     }else if(apptype=='IOS'){
                         $.toast("调起IOS",'text');
-                        callMobile('SavePhoto','',share_img);
+                        window.app.SavePhoto(share_img);
+                        // callMobile('SavePhoto','',share_img);
                     }else{
                         console.log('other');
                         //以下代码为下载此图片功能
