@@ -99,7 +99,6 @@
                 setTimeout(function(){
                     $('.page-bd').show();
                     $('.page-hd').show();
-                    $('.shareImg').hide();
                 },500)
                 // $('.info').hide()
                 // $('.bgimg').attr('src',url);
@@ -107,6 +106,7 @@
                 // var u = navigator.userAgent, app = navigator.appVersion;
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
                 if(apptype=='Android'){
+                    $('.shareImg').hide();
                     downloadPicturetToBase64(url);
                 }else if(apptype=='IOS'){
                     callMobile('SavePhoto','',url);
