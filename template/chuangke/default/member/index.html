@@ -231,7 +231,7 @@
                             'dataType':'json',
                             'success':function(response){
                                 if(response.status==1){
-                                    layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                                    layer.msg(response.msg, { icon: 1, time: 2000 }, function () {
                                         window.location = "{:url('/chuangke/Member/index')}";
                                     });
                                 }else{
