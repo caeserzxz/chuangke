@@ -46,7 +46,7 @@ class CkUser extends MobileBase
 	//申请升级处理
     public function apply_handle(){
         $shopping   = input('shopping');//快递方式 1快递 2自提
-        $text = tpCache('shop_info.shop_text');
+        $text = tpCache('shop_info.store_name');
 
         //获取用户等级信息
         $user = Users::get($this->user_id);
