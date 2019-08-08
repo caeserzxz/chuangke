@@ -76,19 +76,23 @@
                 });
                 return false;
             }
+            $.toast("断点1",'text');
             $('.page-bd').hide()
             $('.page-hd').hide()
             $('.shareImg').show()
+            $.toast("断点22",'text');
             var imgUrl=saveImg();
         })
     });
     function saveImg() {
+        $.toast("断点333",'text');
         html2canvas($('.shareImg'), {
             allowTaint: true,
             scale: 2,
             ureCORS: true,
             taintTest: false,
             onrendered: function (canvas) {
+                $.toast("断点4444",'text');
                 var url = canvas.toDataURL();
                 // $('.model').show()
                 // $.toast("图片已保存",'text', function() {
@@ -96,10 +100,12 @@
                 //     $('.page-hd').show()
                 //     $('.shareImg').hide()
                 // });
+                $.toast("断点55555",'text');
                 setTimeout(function(){
                     $('.page-bd').show();
                     $('.page-hd').show();
                     $('.shareImg').hide();
+                    $.toast("断点666666",'text');
                 },500)
                 if(apptype=='Android'){
                     window.auc.downloadPicturetToBase64(url);
