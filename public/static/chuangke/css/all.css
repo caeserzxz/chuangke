@@ -1800,7 +1800,6 @@ img {
   background-color: #35bffd;
   color: #fff;
 }
-
 .friend .shareImg {
   position: absolute;
   width: 100vw;
@@ -1827,20 +1826,13 @@ img {
   height: 100%;
 }
 .friend .shareImg .code {
-  margin: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  align-items: center;
   position: relative;
   top: 50%;
+  left: 50%;
   margin-top: -50%;
+  margin-left: -50%;
+  width: 100%;
+  text-align: center;
 }
 .friend .shareImg .code img {
   width: 34.66667vw;
@@ -1848,10 +1840,14 @@ img {
   background-color: #fff;
   padding: 0.53333vw;
   margin-top: 5.33333vw;
+  display: inline-block;
 }
 .friend .shareImg .code span {
   margin-top: 4vw;
   font-size: 5.06667vw;
+  display: block;
+  text-align: center;
 }
+
 
 
