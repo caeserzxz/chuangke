@@ -66,7 +66,7 @@
     console.log(apptype);
     //保存图片
     $(function () {
-        $.toast.prototype.defaults.duration=1500
+        $.toast.prototype.defaults.duration=500
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
             console.log(wx_number);
@@ -80,9 +80,9 @@
             $('.page-bd').hide()
             $('.page-hd').hide()
             $('.shareImg').show()
-            var imgUrl=saveImg()
+            var imgUrl=saveImg();
         })
-    })
+    });
     function saveImg() {
         html2canvas($('.shareImg'), {
             allowTaint: true,
@@ -92,14 +92,14 @@
             onrendered: function (canvas) {
                 var url = canvas.toDataURL();
                 // $('.model').show()
-                // $.toast("图片已保存",'text', function() {
-                //     $('.page-bd').show()
-                //     $('.page-hd').show()
-                //     $('.shareImg').hide()
-                // });
+                $.toast("图片已保存",'text', function() {
+                    $('.page-bd').show()
+                    $('.page-hd').show()
+                    $('.shareImg').hide()
+                });
                 console.log(url)
-                $('.info').hide()
-                $('.bgimg').attr('src',url);
+                // $('.info').hide()
+                // $('.bgimg').attr('src',url);
                 // return url
                 // var u = navigator.userAgent, app = navigator.appVersion;
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
