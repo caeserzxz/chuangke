@@ -106,9 +106,9 @@
                 // var u = navigator.userAgent, app = navigator.appVersion;
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
                 if(apptype=='Android'){
-                    $('.shareImg').hide();
                     window.auc.downloadPicturetToBase64(url);
                 }else if(apptype=='IOS'){
+                    $('.shareImg').hide();
                     callMobile('SavePhoto','',url);
                 }else if(apptype=='other'){
                     console.log('other');
