@@ -32,7 +32,7 @@
             </div>
             <form id="form" method="post" enctype="multipart/form-data">
                 <div class="uploader__input-box">
-                    <if condition="$apptype eq 'IOS'">
+                    <if condition="$appType eq 'IOS'">
                         <img src="{$apply.img|default='__PUBLIC__/static/chuangke/images/money02.png'}" onclick="loadimg('apply_img')" alt="" class="upload_img">
                     <else />
                         <img src="{$apply.img|default='__PUBLIC__/static/chuangke/images/money02.png'}" alt="" class="upload_img">
@@ -52,6 +52,7 @@
     });
 </script>
 <script>
+    var  img_name = '';
     function upload_voucher() {
         var upload_img = $('#upload_img').val();
         if (upload_img == '') {
@@ -110,7 +111,7 @@
     }
 
     function loadimg(uploadfile){
-        img_type = uploadfile;
+        img_name = uploadfile;
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
             window.app.Photo();
         }
