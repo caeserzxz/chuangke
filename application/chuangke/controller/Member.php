@@ -286,7 +286,7 @@ class Member extends  MobileBase
         fwrite( $ifp, base64_decode( $base_img) );
         fclose( $ifp );
         //return date(Ymd,time()).'/'.$output_file;
-        $retrun['path'] = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/'.$output_file;
+        $return['path'] = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/'.$output_file;
         $return['img_type'] = $img_type;
         $return['img_name'] = $img_name;
         $this->ajaxreturn($return);
