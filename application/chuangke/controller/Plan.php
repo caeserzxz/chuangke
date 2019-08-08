@@ -269,6 +269,7 @@ class Plan extends MobileBase
             $debt_name = ['未知','信用卡','房贷','车贷','其他'];
 
             $this->assign('config', tpCache('shop_info'));
+            $this->assign('appType',session('appType'));
             $this->assign('type',$type);
             $this->assign('debt_name',$debt_name);
             return $this->fetch();
