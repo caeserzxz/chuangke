@@ -67,15 +67,16 @@
     var share_img = '';
     //保存图片
     $(function () {
-        if(wx_number==''||wx_number==null){
-            layer.prompt({title: '请输入微信号', formType: 3}, function(text, index){
-                save_wx_number(text);
-            });
-            return false;
-        }
+
         //$.toast.prototype.defaults.duration=500
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
+            if(wx_number==''||wx_number==null){
+                layer.prompt({title: '请输入微信号', formType: 3}, function(text, index){
+                    save_wx_number(text);
+                });
+                return false;
+            }
             $.ajax({
                 'url':"{:url('Member/huahua')}",
                 'type':'post',
