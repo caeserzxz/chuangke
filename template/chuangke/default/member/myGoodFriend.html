@@ -62,7 +62,8 @@
 </script>
 <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <script>
-    var apptype = "{$apptype}";
+    var apptype = "{$appType}";
+    console.log(apptype);
     //保存图片
     $(function () {
         $.toast.prototype.defaults.duration=1500
@@ -107,6 +108,7 @@
                 }else if(apptype=='IOS'){
                     callMobile('SavePhoto','',url);
                 }else if(apptype=='other'){
+                    console.log('other');
                     //以下代码为下载此图片功能
                     var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
                     triggerDownload[0].click();
@@ -174,7 +176,6 @@
             }
         });
     }
-
     /**
      * 在本地进行文件保存
      * @param  {String} data     要保存到本地的图片数据
