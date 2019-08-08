@@ -190,7 +190,7 @@
                 // layer.msg(data.image_path, { icon: 5, time: 5000 });
                 if (data) {
                     if (data.img_name == 'account_code_img') {
-                        $('.card_positive').attr('src',  data.path);
+                        $('.account_code_img').attr('src',  data.path);
                         var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="account_code_img" class="imagesinput"/>';
                     }
                     $('.images-list').append(str);
