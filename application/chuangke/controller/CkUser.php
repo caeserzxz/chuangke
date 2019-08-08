@@ -418,6 +418,7 @@ class CkUser extends MobileBase
                     }
                     # 升一星时添加对应层级激活人数
                     if ($info['level'] == 2) {
+                        $user = M('users')->field('leader_all')->where(['user_id' => $info['user_id']])->find();
                         $leader_arr = explode('_',$user['leader_all']);        
                         krsort($leader_arr);
                         $leader = array_values($leader_arr);
