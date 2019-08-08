@@ -289,7 +289,8 @@ class Member extends  MobileBase
         $retrun['path'] = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/'.$output_file;
         $return['img_type'] = $img_type;
         $return['img_name'] = $img_name;
-        return $return;
+        $this->ajaxreturn($return);
+        //return $return;
     }
 
     //上传头像
