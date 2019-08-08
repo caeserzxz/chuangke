@@ -84,6 +84,7 @@
         })
     });
     function saveImg() {
+        var vConsole = new VConsole();
         html2canvas($('.shareImg'), {
             allowTaint: true,
             scale: 2,
@@ -91,7 +92,6 @@
             taintTest: false,
             onrendered: function (canvas) {
                 var url = canvas.toDataURL();
-                var vConsole = new VConsole();
                 console.log(url)
             }
         });
