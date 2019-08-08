@@ -5,24 +5,29 @@
     <div class="header-left">
         <a href="javascript:history.go(-1)" class="left-arrow"></a>
     </div>
-    <div class="header-title">借款人不还钱怎么办？ </div>
+    <div class="header-title">{$title}</div>
     <div class="header-right">
         <a href="#"></a>
     </div>
 </div>
         </div>
         <div class="page-bd jieqian">
+            <if condition="$image_info.noPayment2 neq ''">
+                <img src="{$image_info.noPayment2}" alt="" style="width: 100%;height: 100%;">
+            <else />
+                <img src="__PUBLIC__/static/chuangke/images/advertisement04.png" alt="" style="width: 100%;height: 100%;">
+            </if>
             <!-- 页面内容-->
-            <div class="top_hd df_col">
-                <img src="__PUBLIC__/static/chuangke/images/biao_4.png" alt="" class="hd_title">
-                <div class="fs36 col_0 hd_txt df_con">帮他人还卡</div>
-            </div>
-            <div class="bottom_ft df_col">
-                <div class="wenben">
-                    <p class="fs24 col_9">只有双方拥有足够担保金，平台才能发起借款撮合，担保金相当于平台的担保，如果借款方担保金不足和信用卡绑卡信用有问题，平台也不会进行撮合。只有双方诚信都达标了才会进行撮合借出。</p>
-                    <p class="fs24 col_9">如果借款人不还钱，平台将从借款人的担保金上进行开除，并且归还给发起众筹计划的借款方。</p>
-                </div>
-            </div>
+            <!--<div class="top_hd df_col">-->
+                <!--<img src="__PUBLIC__/static/chuangke/images/biao_4.png" alt="" class="hd_title">-->
+                <!--<div class="fs36 col_0 hd_txt df_con">帮他人还卡</div>-->
+            <!--</div>-->
+            <!--<div class="bottom_ft df_col">-->
+                <!--<div class="wenben">-->
+                    <!--<p class="fs24 col_9">只有双方拥有足够担保金，平台才能发起借款撮合，担保金相当于平台的担保，如果借款方担保金不足和信用卡绑卡信用有问题，平台也不会进行撮合。只有双方诚信都达标了才会进行撮合借出。</p>-->
+                    <!--<p class="fs24 col_9">如果借款人不还钱，平台将从借款人的担保金上进行开除，并且归还给发起众筹计划的借款方。</p>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 

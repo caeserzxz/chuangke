@@ -16,13 +16,21 @@
                     <div class="uploader__input-box">
                         <if condition="$appType eq 'IOS'">
                             <if condition="$userInfo.head_pic eq ''">
-                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" onclick="loadimg('head_pic');" class="head_pic" alt="">
+                                <if condition="$image_info.userinfo neq ''">
+                                    <img src="{$image_info.userinfo}" onclick="loadimg('head_pic');" class="head_pic" alt="">
                                 <else />
+                                    <img src="__PUBLIC__/static/chuangke/images/userImg.png" onclick="loadimg('head_pic');" class="head_pic" alt="">
+                                </if>
+                            <else />
                                 <img src="{$userInfo.head_pic}" class="head_pic"  onclick="loadimg('head_pic');" alt="">
                             </if>
                         <else />
                             <if condition="$userInfo.head_pic eq ''">
-                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                                <if condition="$image_info.userinfo neq ''">
+                                    <img src="{$image_info.userinfo}"  class="head_pic" alt="">
+                                <else />
+                                    <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                                </if>
                             <else />
                                 <img src="{$userInfo.head_pic}" class="head_pic" alt="">
                             </if>

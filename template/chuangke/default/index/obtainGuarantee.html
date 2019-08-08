@@ -5,27 +5,32 @@
     <div class="header-left">
         <a href="javascript:history.go(-1)" class="left-arrow"></a>
     </div>
-    <div class="header-title">担保金如何获取？ </div>
+    <div class="header-title">{$title}</div>
     <div class="header-right">
         <a href="#"></a>
     </div>
 </div>
         </div>
         <div class="page-bd danbao ">
+            <if condition="$image_info.obtainGuarantee2 neq ''">
+                <img src="{$image_info.obtainGuarantee2}" alt="" style="width: 100%;height: 100%;">
+            <else />
+                <img src="__PUBLIC__/static/chuangke/images/advertisement02.png" alt="" style="width: 100%;height: 100%;">
+            </if>
             <!-- 页面内容-->
-            <div class="top_hd df_col">
-                <img src="../assets/images/biao_2.png" alt="" class="hd_title">
-                <div class="fs36 col_0 hd_txt df_con">众筹帮还流程</div>
-            </div>
-            <div class="bottom_ft df_col">
-                <div class="wenben">
-                    <p class="fs24 col_9">推荐一个用户激活即可获得50保证金，简介推广的用户激活也可以获得50保证金，如直接推广A用户激活用卡或，你可以获得50保证金。简介推广用户B激活用卡，你也能获得50保证金。</p>
-                    <p class="fs24 col_9 ex">举例：</p>
-                    <p class="fs24 col_9">A推荐B, A获得50担保金推荐奖励； B推荐C，A获得50担保金奖励，B获得50担保金奖励； C推荐D, A获得50担保金奖励，B获得50担保金奖励，C获得50担保金奖励；</p>
-                    <p class="fs24 col_9">以此类推，推荐的用户越多，间接推荐的用户越多，获得的担保金就越多。</p>
-                    <p class="fs24  last_p">担保金是用来参与众筹计划的，所以必须拥有足够的担保金才能参与众筹计划。</p>
-                </div>
-            </div>
+            <!--<div class="top_hd df_col">-->
+                <!--<img src="../assets/images/biao_2.png" alt="" class="hd_title">-->
+                <!--<div class="fs36 col_0 hd_txt df_con">众筹帮还流程</div>-->
+            <!--</div>-->
+            <!--<div class="bottom_ft df_col">-->
+                <!--<div class="wenben">-->
+                    <!--<p class="fs24 col_9">推荐一个用户激活即可获得50保证金，简介推广的用户激活也可以获得50保证金，如直接推广A用户激活用卡或，你可以获得50保证金。简介推广用户B激活用卡，你也能获得50保证金。</p>-->
+                    <!--<p class="fs24 col_9 ex">举例：</p>-->
+                    <!--<p class="fs24 col_9">A推荐B, A获得50担保金推荐奖励； B推荐C，A获得50担保金奖励，B获得50担保金奖励； C推荐D, A获得50担保金奖励，B获得50担保金奖励，C获得50担保金奖励；</p>-->
+                    <!--<p class="fs24 col_9">以此类推，推荐的用户越多，间接推荐的用户越多，获得的担保金就越多。</p>-->
+                    <!--<p class="fs24  last_p">担保金是用来参与众筹计划的，所以必须拥有足够的担保金才能参与众筹计划。</p>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 

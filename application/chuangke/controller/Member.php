@@ -52,7 +52,8 @@ class Member extends  MobileBase
         //缓存
         $cache = sprintf("%.2f",$userInfo['cache']/1024);
 
-
+        $image_info = tpCache('image_info');
+        $this->assign('image_info',$image_info);
         $this->assign('config', tpCache('shop_info'));
         $this->assign('cache',$cache);
         $this->assign('appType',session('appType'));
@@ -256,7 +257,8 @@ class Member extends  MobileBase
      * 申请代理
      */
     public function applicationAgency(){
-
+        $image_info = tpCache('image_info');
+        $this->assign('image_info',$image_info);
         return $this->fetch();
     }
 

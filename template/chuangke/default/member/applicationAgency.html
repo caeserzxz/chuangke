@@ -12,55 +12,68 @@
 </div>
         </div>
         <div class="page-bd">
+            <if condition="$image_info.applicationAgency neq ''">
+                <img src="{$image_info.applicationAgency}" alt="" style="width: 100%;height: 100%;">
+            <else />
+                <img src="__PUBLIC__/static/chuangke/images/applicationAgency.png" alt="" style="width: 100%;height: 100%;">
+            </if>
             <!-- 页面内容-->
-            <div class="topimg">
-                <img src="__PUBLIC__/static/chuangke/images/upgrade01.png" alt="">
-            </div>
-            <div class="tips ">
-                <div class="typeimg color_w fw_b">无忧裂变</div>
-                <p class="fs24">
-                    推荐一个好友用卡奖励50担保金，所有间接推广的用户都能获得50担保金，只要你推荐3个好友，你直推的好友每人推3个人，10次裂变下来可以获得1476150元保证金，使用保证金帮人还款变成现金。</p>
-            </div>
-            <div class="tips tips_two">
-                <div class="typeimg color_w fw_b">VIP升级方式</div>
-                <p class="fs24"><span>佣金升级：</span>佣金金额达到199元时，点击升级按钮升级。</p>
-                <p class="fs24"><span>支付宝、微信升级：</span>使用微信和支付宝扫码支付199元，支付完成后联系客服出示付款凭证即可升级。</p>
-            </div>
-            <div class="listBox">
-                    <div class="list list_one">
-                            <div class="left">
-                                <p class="fs30 fw_b">￥<span>199</span></p>
-        
-                                </div>
-                        <div class="right color_w">
-                            <div class="fs22"><span>VIP1</span>权益：</div>
-                            <p class="fs26 fw_b">1. 信用卡还款费率：75+1</p>
-                            <p class="fs26 fw_b">2. 还款分润：10/万</p>
-                        </div>
-                    </div>
-                    <div class="list list_two">
-                        <div class="left">
-                                <p class="fs30 fw_b">￥<span>599</span></p>
-                        </div>
-                        <div class="right color_w">
-                            <div class="fs22"><span>VIP2</span>权益：</div>
-                            <p class="fs26 fw_b">1. 信用卡还款费率：75+1</p>
-                            <p class="fs26 fw_b">2. 还款分润：10/万</p>
-                            <p class="fs26 fw_b">3. 每级额外分润5元</p>
-                        </div>
-                    </div>
-                    <div class="list list_there">
-                            <div class="left">
-                                    <p class="fs30 fw_b">￥<span>999</span></p>
-                                </div>
-                        <div class="right color_w">
-                            <div class="fs22"><span>VIP3</span>权益：</div>
-                            <p class="fs26 fw_b">1. 信用卡还款费率：75+1</p>
-                            <p class="fs26 fw_b">2. 还款分润：10/万</p>
-                            <p class="fs26 fw_b">3. 每级额外分润5元</p>
-                        </div>
-                    </div>
-            </div>
+            <!--<div class="topimg">-->
+                <!--<img src="__PUBLIC__/static/chuangke/images/upgrade01.png" alt="">-->
+            <!--</div>-->
+            <!--<div class="tips ">-->
+                <!--<div class="typeimg color_w fw_b">无忧裂变</div>-->
+                <!--<p class="fs24">-->
+                    <!--推荐一个好友用卡奖励50担保金，所有间接推广的用户都能获得50担保金，只要你推荐3个好友，你直推的好友每人推3个人，10次裂变下来可以获得1476150元保证金，使用保证金帮人还款变成现金。</p>-->
+            <!--</div>-->
+            <!--<div class="tips tips_two">-->
+                <!--<div class="typeimg color_w fw_b">VIP升级方式</div>-->
+                <!--<p class="fs24"><span>佣金升级：</span>佣金金额达到199元时，点击升级按钮升级。</p>-->
+                <!--<p class="fs24"><span>支付宝、微信升级：</span>使用微信和支付宝扫码支付199元，支付完成后联系客服出示付款凭证即可升级。</p>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<if condition="$image_info.applicationAgency neq ''">-->
+                    <!--<img src="{$image_info.applicationAgency}" alt="">-->
+                <!--<else />-->
+                    <!--<img src="__PUBLIC__/static/chuangke/images/applicationAgency.png" alt="">-->
+                <!--</if>-->
+
+            <!--</div>-->
+            <!--<div class="listBox">-->
+                    <!--<div class="list list_one">-->
+                            <!--<div class="left">-->
+                                <!--<p class="fs30 fw_b">￥<span>199</span></p>-->
+
+                                <!--</div>-->
+                        <!--<div class="right color_w">-->
+                            <!--<div class="fs22"><span>VIP1</span>权益：</div>-->
+                            <!--<p class="fs26 fw_b">1. 信用卡还款费率：75+1</p>-->
+                            <!--<p class="fs26 fw_b">2. 还款分润：10/万</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="list list_two">-->
+                        <!--<div class="left">-->
+                                <!--<p class="fs30 fw_b">￥<span>599</span></p>-->
+                        <!--</div>-->
+                        <!--<div class="right color_w">-->
+                            <!--<div class="fs22"><span>VIP2</span>权益：</div>-->
+                            <!--<p class="fs26 fw_b">1. 信用卡还款费率：75+1</p>-->
+                            <!--<p class="fs26 fw_b">2. 还款分润：10/万</p>-->
+                            <!--<p class="fs26 fw_b">3. 每级额外分润5元</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="list list_there">-->
+                            <!--<div class="left">-->
+                                    <!--<p class="fs30 fw_b">￥<span>999</span></p>-->
+                                <!--</div>-->
+                        <!--<div class="right color_w">-->
+                            <!--<div class="fs22"><span>VIP3</span>权益：</div>-->
+                            <!--<p class="fs26 fw_b">1. 信用卡还款费率：75+1</p>-->
+                            <!--<p class="fs26 fw_b">2. 还款分润：10/万</p>-->
+                            <!--<p class="fs26 fw_b">3. 每级额外分润5元</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+            <!--</div>-->
         </div>
         <div class="page-ft">
                 <label for="weuiAgree" class="weui-agree">

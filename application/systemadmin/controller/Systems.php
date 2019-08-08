@@ -490,5 +490,35 @@ class Systems extends Base
         return  $img;
     }
 
+    public function image_setting(){
+        /*配置列表*/
+        $group_list = [
+            'image_info' => '图片设置',
+            // 'basic'     => '基本设置',
+//            'sms'       => '短信设置',
+            // 'shopping'  => '购物流程设置',
+            // 'smtp'      => '邮件设置',
+            // 'water'     => '水印设置',
+            //'distribut' => '分销设置',
+            // 'reward_set' => '分销设置',
+            // 'push'      => '推送设置',
+            //'oss'       => '对象存储'
+        ];
+        $this->assign('group_list',$group_list);
+        $inc_type =  I('get.inc_type','image_info');
+        $this->assign('inc_type',$inc_type);
+        $config = tpCache($inc_type);
+        if($inc_type == 'shop_info'){
+            $province = M('region')->where(array('parent_id'=>0))->select();
+            $city =  M('region')->where(array('parent_id'=>$config['province']))->select();
+            $area =  M('region')->where(array('parent_id'=>$config['city']))->select();
+            $this->assign('province',$province);
+            $this->assign('city',$city);
+            $this->assign('area',$area);
+        }
+        $this->assign('config',$config);//当前配置项
+        //C('TOKEN_ON',false);
+        return $this->fetch($inc_type);
+    }
 
 }

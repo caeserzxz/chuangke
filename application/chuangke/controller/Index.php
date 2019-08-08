@@ -28,6 +28,8 @@ class Index extends MobileBase
         $userInfo = $this->userInfo;
         $unread_message = M('message_board')->where(array('user_id'=>$userInfo['user_id'],'status'=>0))->count();
 
+        $image_info = tpCache('image_info');
+        $this->assign('image_info',$image_info);
         $this->assign('unread_message',$unread_message);
         return $this->fetch();
     }
@@ -37,6 +39,14 @@ class Index extends MobileBase
      */
     public function paymentSkills(){
 
+        $image_info = tpCache('image_info');
+        if(empty($image_info['paymentSkills_title'])){
+            $title = '0费率还款技巧';
+        }else{
+            $title = $image_info['paymentSkills_title'];
+        }
+        $this->assign('title',$title);
+        $this->assign('image_info',$image_info);
         return $this->fetch();
     }
 
@@ -45,6 +55,14 @@ class Index extends MobileBase
      */
     public function obtainGuarantee(){
 
+        $image_info = tpCache('image_info');
+        if(empty($image_info['obtainGuarantee_title'])){
+            $title = '0费率还款技巧';
+        }else{
+            $title = $image_info['obtainGuarantee_title'];
+        }
+        $this->assign('title',$title);
+        $this->assign('image_info',$image_info);
         return $this->fetch();
     }
 
@@ -52,7 +70,14 @@ class Index extends MobileBase
      * 如何帮他人还款赚利息
      */
     public function earningInterest(){
-
+        $image_info = tpCache('image_info');
+        if(empty($image_info['earningInterest_title'])){
+            $title = '如何帮他人还款赚利息';
+        }else{
+            $title = $image_info['earningInterest_title'];
+        }
+        $this->assign('title',$title);
+        $this->assign('image_info',$image_info);
         return $this->fetch();
     }
 
@@ -60,7 +85,14 @@ class Index extends MobileBase
      * 借款人不还钱怎么办
      */
     public function noPayment(){
-
+        $image_info = tpCache('image_info');
+        if(empty($image_info['noPayment_title'])){
+            $title = '借款人不还钱怎么办';
+        }else{
+            $title = $image_info['noPayment_title'];
+        }
+        $this->assign('title',$title);
+        $this->assign('image_info',$image_info);
         return $this->fetch();
     }
 }
