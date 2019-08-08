@@ -107,7 +107,7 @@
                 // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
                 if(apptype=='Android'){
                     $('.shareImg').hide();
-                    downloadPicturetToBase64(url);
+                    window.auc.downloadPicturetToBase64(url);
                 }else if(apptype=='IOS'){
                     callMobile('SavePhoto','',url);
                 }else if(apptype=='other'){
