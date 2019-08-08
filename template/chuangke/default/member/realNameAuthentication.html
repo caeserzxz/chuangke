@@ -162,7 +162,7 @@
             'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
             'dataType': 'json',
             'success': function (data) {
-                layer.msg(data.image_path, { icon: 5, time: 5000 });
+                layer.msg(data, { icon: 5, time: 5000 });
                 if (data) {
                     if (data.img_name == 'card_positive') {
                         $('.card_positive').attr('src',  data.path);
