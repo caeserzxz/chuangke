@@ -411,7 +411,7 @@ class Member extends  MobileBase
                 'text'=> array(
                     array(
                         'text'=>"$wx_code",
-                        'left'=>190,
+                        'left'=>210,
                         'top'=>850,
                         'fontSize'=>30,       //字号
                         'fontColor'=>'255,240,245', //字体颜色
