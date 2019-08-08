@@ -99,6 +99,7 @@
                 setTimeout(function(){
                     $('.page-bd').show();
                     $('.page-hd').show();
+                    $('.shareImg').hide();
                 },500)
                 // $('.info').hide()
                 // $('.bgimg').attr('src',url);
@@ -108,7 +109,7 @@
                 if(apptype=='Android'){
                     window.auc.downloadPicturetToBase64(url);
                 }else if(apptype=='IOS'){
-                    $('.shareImg').hide();
+                    $.toast("调起IOS",'text');
                     callMobile('SavePhoto','',url);
                 }else if(apptype=='other'){
                     console.log('other');
