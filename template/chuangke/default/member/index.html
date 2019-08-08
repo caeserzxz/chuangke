@@ -224,9 +224,24 @@
                 if (data) {
                     if (data.img_name == 'head_pic') {
                         $('.head_pic').attr('src',  data.path);
-                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="head_pic" class="imagesinput"/>';
+                        $.ajax({
+                            url: "{:url('/chuangke/Member/uploda_head_pic')}",
+                            'type':'post',
+                            'data':{'head_pic':data.path},
+                            'dataType':'json',
+                            'success':function(response){
+                                if(response.status==1){
+                                    layer.msg('操作成功', { icon: 1, time: 2000 }, function () {
+                                        window.location = "{:url('/chuangke/Member/index')}";
+                                    });
+                                }else{
+                                    layer.msg('操作失败');
+                                }
+                            }
+                        });
+
                     }
-                    $('.images-list').append(str);
+
                 } else {
                     layer.msg('二维码上传失败', {icon: 5, time: 3000});
                     return false;

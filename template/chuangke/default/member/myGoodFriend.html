@@ -61,23 +61,22 @@
     });
 </script>
 <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
-<script type="text/javascript" src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
 <script>
     var apptype = "{$appType}";
     var wx_qrcode = "{$data.img}";
     var share_img = '';
     //保存图片
     $(function () {
-        if(wx_number==''||wx_number==null){
-            layer.prompt({title: '请输入微信号', formType: 3}, function(text, index){
-                save_wx_number(text);
-            });
-            return false;
-        }
-        var vConsole = new VConsole();
+
         //$.toast.prototype.defaults.duration=500
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
+            if(wx_number==''||wx_number==null){
+                layer.prompt({title: '请输入微信号', formType: 3}, function(text, index){
+                    save_wx_number(text);
+                });
+                return false;
+            }
             $.ajax({
                 'url':"{:url('Member/huahua')}",
                 'type':'post',
@@ -88,8 +87,7 @@
                     if(apptype=='Android'){
                         window.auc.downloadPicturetToBase64(share_img);
                     }else if(apptype=='IOS'){
-                        $.toast("调起IOS",'text');
-                        callMobile('SavePhoto','',share_img);
+                        window.app.SavePhoto(share_img);
                     }else{
                         console.log('other');
                         //以下代码为下载此图片功能
@@ -113,12 +111,16 @@
     var code = "{$data.code}";
     function copyUrl2(obj)
     {
-        var Url2=document.getElementById("biao1");
-        Url2.select(); // 选择对象
-        document.execCommand("Copy"); // 执行浏览器复制命令
-        // alert("已复制好，可贴粘。");
-        layer.msg("已复制好，可贴粘。");
-
+        if (apptype=='IOS') { //ios
+            var link = $('#biao1').val();
+            window.app.SaveText(link);
+        }else{
+            var Url2=document.getElementById("biao1");
+            Url2.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            // alert("已复制好，可贴粘。");
+            layer.msg("已复制好，可贴粘。");
+        }
     }
 
     function preserveImg(argument) {
@@ -155,19 +157,5 @@
                 }
             }
         });
-    }
-    /**
-     * 在本地进行文件保存
-     * @param  {String} data     要保存到本地的图片数据
-     * @param  {String} filename 文件名
-     */
-    function saveFile(data, filename) {
-        const save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-        save_link.href = data;
-        save_link.download = filename;
-
-        const event = document.createEvent('MouseEvents');
-        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        save_link.dispatchEvent(event);
     }
 </script>

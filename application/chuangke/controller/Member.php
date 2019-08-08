@@ -277,7 +277,7 @@ class Member extends  MobileBase
 
         $base_img = str_replace('data:image/png;base64,', '', $base_img);
         //设置文件路径和文件前缀名称
-        $path = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/';
+        $path = './'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/';
         is_dir($path) OR mkdir($path, 0777, true);
         $prefix='nx_';
         $output_file = $prefix.time().'.png';
@@ -286,11 +286,11 @@ class Member extends  MobileBase
         fwrite( $ifp, base64_decode( $base_img) );
         fclose( $ifp );
         //return date(Ymd,time()).'/'.$output_file;
-        $retrun['path'] = $path.$output_file;
-        $return['image_path'] = date(Ymd,time()).'/'.$output_file;
+        $return['path'] = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/'.$output_file;
         $return['img_type'] = $img_type;
         $return['img_name'] = $img_name;
-        return $return;
+        $this->ajaxreturn($return);
+        //return $return;
     }
 
     //上传头像
@@ -298,9 +298,9 @@ class Member extends  MobileBase
         $userInfo = $this->userInfo;
         $model  = new MemberLogic();
         $data['head_pic'] = I('head_pic');
-        if(empty($data['head_pic'])&&empty($_FILES['head_pic']['tmp_name'])){
-            return array('status' => -1, 'msg' => '请添加头像', 'result' => '');
-        }
+//        if(empty($data['head_pic'])&&empty($_FILES['head_pic']['tmp_name'])){
+//            return array('status' => -1, 'msg' => '请添加头像', 'result' => '');
+//        }
         //上传图片
         if($_FILES['head_pic']['tmp_name']){//上传收款码
             $card_positive = $model->upload_img('head_pic','head_pic');
@@ -411,7 +411,7 @@ class Member extends  MobileBase
                 'text'=> array(
                     array(
                         'text'=>"$wx_code",
-                        'left'=>190,
+                        'left'=>210,
                         'top'=>850,
                         'fontSize'=>30,       //字号
                         'fontColor'=>'255,240,245', //字体颜色
