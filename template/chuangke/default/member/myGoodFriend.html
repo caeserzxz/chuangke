@@ -86,7 +86,16 @@
     });
     function saveImg() {
         $.toast("断点333",'text');
-        
+        html2canvas($('.shareImg'), {
+            allowTaint: true,
+            scale: 2,
+            ureCORS: true,
+            taintTest: false,
+            onrendered: function (canvas) {
+                $.toast("断点4444",'text');
+                
+            }
+        });
     }
 
 </script>
