@@ -277,7 +277,7 @@ class Member extends  MobileBase
 
         $base_img = str_replace('data:image/png;base64,', '', $base_img);
         //设置文件路径和文件前缀名称
-        $path = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/';
+        $path = './'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/';
         is_dir($path) OR mkdir($path, 0777, true);
         $prefix='nx_';
         $output_file = $prefix.time().'.png';
@@ -286,8 +286,7 @@ class Member extends  MobileBase
         fwrite( $ifp, base64_decode( $base_img) );
         fclose( $ifp );
         //return date(Ymd,time()).'/'.$output_file;
-        $retrun['path'] = $path.$output_file;
-        $return['image_path'] = date(Ymd,time()).'/'.$output_file;
+        $retrun['path'] = '/'.UPLOAD_PATH.$img_type."/".date(Ymd,time()).'/'.$output_file;
         $return['img_type'] = $img_type;
         $return['img_name'] = $img_name;
         return $return;
