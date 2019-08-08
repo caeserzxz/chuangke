@@ -37,7 +37,7 @@ class User extends Base {
                 $first_ids=M('users')->where('first_leader',$user_id)->column('user_id');
                 $user_ids=$first_ids ? M('users')->where('first_leader','in',$first_ids)->column('user_id') : 0;
                 break;
-            case 2://三级下线
+            case 3://三级下线
                 $first_ids=M('users')->where('first_leader',$user_id)->column('user_id');
                 $second_ids=$first_ids ? M('users')->where('first_leader','in',$first_ids)->column('user_id') : 0;
                 $user_ids=$second_ids ? M('users')->where('first_leader','in',$second_ids)->column('user_id') : 0;
