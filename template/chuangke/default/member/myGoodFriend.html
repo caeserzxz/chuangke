@@ -67,6 +67,8 @@
     console.log(apptype);
     //保存图片
     $(function () {
+
+        var vConsole = new VConsole();
         //$.toast.prototype.defaults.duration=500
         $('.saveImg').on('click',function(){
             var wx_number = $('#wx_number').html();
@@ -84,7 +86,6 @@
         })
     });
     function saveImg() {
-        var vConsole = new VConsole();
         html2canvas($('.shareImg'), {
             allowTaint: true,
             scale: 2,
