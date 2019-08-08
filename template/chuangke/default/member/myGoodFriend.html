@@ -76,24 +76,53 @@
                 });
                 return false;
             }
-            $.toast("断点1",'text');
             $('.page-bd').hide()
             $('.page-hd').hide()
             $('.shareImg').show()
-            $.toast("断点22",'text');
             saveImg();
         })
     });
     function saveImg() {
-        $.toast("断点333",'text');
         html2canvas($('.shareImg'), {
             allowTaint: true,
             scale: 2,
             ureCORS: true,
             taintTest: false,
             onrendered: function (canvas) {
-                $.toast("断点4444",'text');
-                
+                var url = canvas.toDataURL();
+                // $('.model').show()
+                // $.toast("图片已保存",'text', function() {
+                //     $('.page-bd').show()
+                //     $('.page-hd').show()
+                //     $('.shareImg').hide()
+                // });
+                setTimeout(function(){
+                    $('.page-bd').show();
+                    $('.page-hd').show();
+                    $('.shareImg').hide();
+                },500)
+                if(apptype=='Android'){
+                    window.auc.downloadPicturetToBase64(url);
+                }else if(apptype=='IOS'){
+                    $.toast("调起IOS",'text');
+                    callMobile('SavePhoto','',url);
+                }else{
+                    console.log('other');
+                    //以下代码为下载此图片功能
+                    var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
+                    triggerDownload[0].click();
+                    triggerDownload.remove();
+                }
+
+                // if (isIOS){
+                //     $('.model').find('img').attr('src',url);
+                //     $('.model').show()
+                // }else{
+                //    //以下代码为下载此图片功能
+                //     var triggerDownload = $("<a>").attr("href", url).attr("download",  "saveImg.png").appendTo("body");
+                //     triggerDownload[0].click();
+                //     triggerDownload.remove();
+                // }
             }
         });
     }
