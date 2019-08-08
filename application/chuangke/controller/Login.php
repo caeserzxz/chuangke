@@ -70,6 +70,13 @@ class Login extends Controller
         $appType = session('appType');
 
         $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
+        $config = tpCache('shop_info');
+        if($config['is_other_login']==1){
+            $config['is_other_login']=1;
+        }else{
+            $config['is_other_login']=2;
+        }
+        $this->assign('config',$config);
         $this->assign('tuijian_code',$tuijian_code);
         $this->assign('appType',$appType);
         return $this->fetch();
@@ -298,18 +305,18 @@ class Login extends Controller
         if (strlen($pwd) < 6) {//必须大于8个字符
             return '密码必须大于六字符';
         }
-        if (preg_match("/^[0-9]+$/", $pwd)) { //必须含有特殊字符
-            return '密码不能全是数字，请包含数字，字母大小写或者特殊字符';
-        }
-        if (preg_match("/^[a-zA-Z]+$/", $pwd)) {
-            return '密码不能全是字母，请包含数字，字母大小写或者特殊字符';
-        }
-        if (preg_match("/^[0-9A-Z]+$/", $pwd)) {
-            return '请包含数字，字母大小写或者特殊字符';
-        }
-        if (preg_match("/^[0-9a-z]+$/", $pwd)) {
-            return '请包含数字，字母大小写或者特殊字符';
-        }
+//        if (preg_match("/^[0-9]+$/", $pwd)) { //必须含有特殊字符
+//            return '密码不能全是数字，请包含数字，字母大小写或者特殊字符';
+//        }
+//        if (preg_match("/^[a-zA-Z]+$/", $pwd)) {
+//            return '密码不能全是字母，请包含数字，字母大小写或者特殊字符';
+//        }
+//        if (preg_match("/^[0-9A-Z]+$/", $pwd)) {
+//            return '请包含数字，字母大小写或者特殊字符';
+//        }
+//        if (preg_match("/^[0-9a-z]+$/", $pwd)) {
+//            return '请包含数字，字母大小写或者特殊字符';
+//        }
         return true;
     }
 

@@ -52,13 +52,12 @@
             <button class="fs30 fw_b color_w loading_btn">注册</button>
         </div>
 
-        <if condition="$appType eq 'other'">
         <if condition="$config.is_other_login eq 1">
-        <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
-        </if>
+            <a href="{:U('chuangke/Member/AppDownload')}" class="goLink fs26">下载App</a>
         <else />
-        <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
+            <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
         </if>
+
     </div>
 </div>
     <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
@@ -72,6 +71,7 @@
 </script>
     <script>
     var appType = "{$appType}";
+    var is_other_login = {$config.is_other_login};
     var check_verify_code = {$config.check_verify_code};
         function codeButton() {
             var mobile = $("#tel").val();
@@ -169,7 +169,7 @@
                 'success':function(data){
                    if(data.status==1){
                         layer.msg(data.msg,{time:2000},function(){
-                            if(appType=='other'){
+                            if(is_other_login==1){
                                 window.location.href = "{:U('chuangke/login/AppDownload')}";
                             }else{
                                 window.location.href = "{:U('chuangke/login/index')}";

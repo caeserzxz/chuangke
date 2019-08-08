@@ -458,6 +458,8 @@ class Systems extends Base
              $config = tpCache('shop_info');
 
              $inc_type =  I('get.inc_type','shop_info');
+             $url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/AppDownload';
+             $this->assign('url',$url);
              $this->assign('inc_type',$inc_type);
              $this->assign('config',$config);
              return $this->fetch();

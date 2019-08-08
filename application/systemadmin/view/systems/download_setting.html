@@ -40,12 +40,12 @@
                     <p class="notic">安卓下载链接</p>
                 </dd>
 
-                <if condition="$config.android_qrcode neq ''">
-                    <dd>
-                        <p class="notic">安卓下载二维码</p>
-                        <img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.android_qrcode}" alt="">
-                    </dd>
-                </if>
+                <!--<if condition="$config.android_qrcode neq ''">-->
+                    <!--<dd>-->
+                        <!--<p class="notic">安卓下载二维码</p>-->
+                        <!--<img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.android_qrcode}" alt="">-->
+                    <!--</dd>-->
+                <!--</if>-->
             </dl>
             <dl class="row">
                 <dt class="tit">
@@ -56,13 +56,23 @@
                     <span class="err"></span>
                     <p class="notic">IOS下载链接</p>
                 </dd>
-                <if condition="$config.ios_qrcode neq ''">
-                    <dd>
-                        <p class="notic">IOS下载二维码</p>
-                        <img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.ios_qrcode}" alt="">
-                    </dd>
-                </if>
+                <!--<if condition="$config.ios_qrcode neq ''">-->
+                    <!--<dd>-->
+                        <!--<p class="notic">IOS下载二维码</p>-->
+                        <!--<img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.ios_qrcode}" alt="">-->
+                    <!--</dd>-->
+                <!--</if>-->
 
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="debt_based">app下载页链接</label>
+                </dt>
+                <dd class="opt">
+                    <spa><a href="{$url}">{$url}</a></spa>
+                    <span class="err"></span>
+                    <p class="notic">app下载页链接</p>
+                </dd>
             </dl>
             <div class="bot">
                 <input type="hidden" name="inc_type" value="{$inc_type}">
