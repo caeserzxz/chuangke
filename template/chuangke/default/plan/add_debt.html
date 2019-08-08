@@ -25,8 +25,13 @@
             </div>
             <div class="title fs26">上传债务凭证</div>
             <div class="uploader__input-box">
-                <img src="__PUBLIC__/static/chuangke//images/upload2.png" alt="" class="imgsrc">
-                <input id="imgsrc" name="imgsrc" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                <if condition="IOS">
+                    <img src="__PUBLIC__/static/chuangke/images/upload2.png"  onclick="loadimg('imgsrc');" alt="" class="imgsrc">
+                <else/>
+                    <img src="__PUBLIC__/static/chuangke/images/upload2.png" alt="" class="imgsrc">
+                    <input id="imgsrc" name="imgsrc" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                </if>
+
             </div>
             <div class="images-list"></div><!--上传图片列表-->
             <input type="hidden" name="type" value="{$type}">
@@ -89,17 +94,14 @@
         $.ajax({
             'url': "{:url('Member/uploadimage')}",
             'type': 'post',
-            'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
+            'data': {'img': base64imag, 'img_type': 'imgsrc','img_name':img_name},
             'dataType': 'json',
             'success': function (data) {
                 // layer.msg(data.image_path, { icon: 5, time: 5000 });
                 if (data) {
                     if (data.img_name == 'imgsrc') {
-                        $('.imgsrc').attr('src',  data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="imgsrc" class="imagesinput"/>';
-                    } else if (data.img_name == 'card_back') {
-                        $('.card_back').attr('src', data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                        $('.imgsrc').attr('src',  data.path);
+                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="imgsrc" class="imagesinput"/>';
                     }
                     $('.images-list').append(str);
                 } else {

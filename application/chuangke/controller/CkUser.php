@@ -703,6 +703,7 @@ class CkUser extends MobileBase
         $apply['account_code_img']  = $receipt['account_code_img'];
         $apply['receivables_name']  = $receipt['receivables_name'];
 
+        $this->assign('appType',session('appType'));
         $this->assign('apply',$apply);
         $this->assign('type',$type);
         return $this->fetch('plan/pay_detail');

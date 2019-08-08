@@ -268,6 +268,7 @@ class Plan extends MobileBase
             if ($type < 1 || $type > 4) $this->error('债务类型错误');
             $debt_name = ['未知','信用卡','房贷','车贷','其他'];
 
+            $this->assign('config', tpCache('shop_info'));
             $this->assign('type',$type);
             $this->assign('debt_name',$debt_name);
             return $this->fetch();
