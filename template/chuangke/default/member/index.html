@@ -60,7 +60,7 @@
                     <elseif condition="$auth_status eq 0" />
                         <div class="weui-cell__ft">待审核</div>
                     <elseif condition="$auth_status eq 1" />
-                        <div class="weui-cell__ft">已通过</div>
+                        <div class="weui-cell__ft">已认证</div>
                     <elseif condition="$auth_status eq 2" />
                         <div class="weui-cell__ft">未通过</div>
                     </if>
@@ -98,13 +98,6 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a href="{:U('chuangke/article/index')}?id=6" class="weui-cell weui-cell_access">
-                    <div class="weui-cell__bd">
-                        <img src="__PUBLIC__/static/chuangke/images/my06.png" alt="">
-                        <span class="fs30">联系客服</span>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
                 <if condition="$config.complaint eq 1">
                 <a href="{:U('chuangke/Member/complaint')}" class="weui-cell weui-cell_access">
                     <div class="weui-cell__bd">
@@ -120,6 +113,13 @@
                         <span class="fs30">清除缓存</span>
                     </div>
                     <div class="weui-cell__ft cache">{$cache}M</div>
+                </a>
+                <a href="{:U('chuangke/article/index')}?id=6" class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <img src="__PUBLIC__/static/chuangke/images/my06.png" alt="">
+                        <span class="fs30">联系我们</span>
+                    </div>
+                    <div class="weui-cell__ft"></div>
                 </a>
             </div>
             <button class="fs30 color_w fw_b button_btn" type="button" onclick="layout();">退出登录</button>

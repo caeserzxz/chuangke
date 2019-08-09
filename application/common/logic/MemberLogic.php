@@ -95,9 +95,9 @@ class MemberLogic extends Model
             $this->earnestMoney($user['user_id'],$config['earnest_money']);
             //添加消息
             add_message($user['user_id'],'实名认证成功');
-            add_message($user['user_id'],'实名认证成功,获得'.$config['earnest_money'].'保证金');
+            add_message($user['user_id'],'实名认证奖励');
             //添加保证金流水
-            $this->addRecord($user['user_id'],'','实名认证成功,获得'.$config['earnest_money'].'保证金',$config['earnest_money'],1);
+            $this->addRecord($user['user_id'],'','实名认证奖励',$config['earnest_money'],1);
 
 
             //推荐人获得保证金
@@ -107,7 +107,7 @@ class MemberLogic extends Model
                 //添加消息
                 add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金');
                 //添加保证金流水
-                $this->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证成功,获得'.$config['safe_money'].'保证金',$config['safe_money'],1);
+                $this->addRecord($user['first_leader'],$user['user_id'],'推荐奖励',$config['safe_money'],1);
             }
         }else if($status == 2){
             //扣除自己获得保证金

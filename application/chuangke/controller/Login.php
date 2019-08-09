@@ -30,7 +30,24 @@ class Login extends Controller
      * 登录
      */
     public function index(){
-
+        //获取安装包的参数
+        $appType = I('appType')?I('appType'):I('apptype');
+        if($appType=='IOS'||$appType=='Android'){
+            if(empty(session('appType'))||$appType!=session('appType')){
+                session('appType',$appType);
+            }
+        }else{
+            if(empty(session('appType'))){
+                session('appType','other');
+            }
+        }
+        //判断是否允许网页登录
+        $config = tpCache('shop_info');
+        if(session('appType')=='other'){
+            if($config['is_other_login']==0){
+                $this->redirect('chuangke/Login/AppDownload');
+            }
+        }
         return $this->fetch();
     }
 
@@ -135,6 +152,11 @@ class Login extends Controller
     public function captcha()
     {
 
+        $config = tpCache('shop_info');
+        if($config['check_verify_code']==0){
+            return array('status' => 500, 'msg' => '无需验证码');
+            exit;
+        }
 
         $input = input();
 

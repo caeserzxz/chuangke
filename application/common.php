@@ -1675,11 +1675,6 @@ function hidestr($string, $start = 0, $length = 0, $re = '*') {
 */
 #################################
 function jh_message($mobile,$tpl_id,$captcha){
-    $config = tpCache('shop_info');
-    if($config['check_verify_code']==0){
-        return array('error_code'=>500,'reason'=>'无需验证码','result'=>'');
-        exit;
-    }
     $url = "http://v.juhe.cn/sms/send";
     $params = array(
         'key'   => Config::get('database.key'), //您申请的APPKEY
