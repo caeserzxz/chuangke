@@ -72,8 +72,7 @@ class Debt extends Base {
         $list = Db::name('users')->alias('u')->field('u.user_id,u.mobile,u.nickname')
             ->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')
             ->where($where)->order("u.user_id desc")
-            ->limit($Page->firstRow.','.$Page->listRows)->select();
-
+            ->limit($Page->firstRow.','.$Page->listRows)->group('u.user_id')->select();
         foreach ($list as $key => $value) {
             // 众筹总额
             $uid = $value['user_id'];
