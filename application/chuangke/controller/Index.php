@@ -32,6 +32,10 @@ class Index extends MobileBase
         $this->assign('image_info',$image_info);
         $this->assign('unread_message',$unread_message);
 
+        // 首页文章
+        $article = M('article')->where(['cat_id' => 7])->select();
+        $this->assign('article',$article);
+
         if (tpCache('shop_info.template1') == 2) {
             return $this->fetch('plan/template1');
         }else{

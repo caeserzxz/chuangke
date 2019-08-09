@@ -606,11 +606,11 @@ img {
   color: #333;
   margin-bottom: 2.66667vw;
 }
-.index .rowBox .block {
+.index .rowBox img {
   width: 100%;
   border-radius: 1.33333vw;
-  padding: 5.33333vw 4vw 8vw;
   margin-bottom: 3.2vw;
+      height: 34.5vw;
 }
 .index .rowBox .block .tips {
   display: -webkit-box;

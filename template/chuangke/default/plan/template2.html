@@ -70,9 +70,11 @@
                                 <a href="{:U('chuangke/CkUser/old_check')}"><div class="line"><div></div></div></a>
                                 
                                 <if condition="$vo.check EQ 1">
-                                    <a href="{:U('chuangke/CkUser/check_level_list')}"><span class="fs24">去审核</span></a>
+                                    <a href="{:U('chuangke/CkUser/check_level_list')}"><span class="fs24">去审核 {:tpCache('shop_info.stage_text')}</span></a>
                                 <else/>
                                     <span class="fs24">{$vo.rece_money}/{$vo.need_money}</span>
+                                    <span class="fs24">{:tpCache('shop_info.stage_text')}</span>
+
                                 </if>
                             </div>
                         </div>

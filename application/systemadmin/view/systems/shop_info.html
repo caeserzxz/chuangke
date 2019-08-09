@@ -444,6 +444,16 @@
                     <label><input type="radio"  id="template4" name="template4" value="3" <if condition="$config['template4'] eq 3">checked="checked"</if>>关闭</label>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="safe_money">各阶段后跟文字</label>
+                </dt>
+                <dd class="opt">
+                    <input id="stage_text"  name="stage_text" value="{$config.stage_text}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
      <!--        <dl class="row">
                 <dt class="tit">
                     <label for="help_title">帮助标题</label>
