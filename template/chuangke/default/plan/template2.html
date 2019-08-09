@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/js/Swiper-4.0.7/swiper.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all_template.css"/>
+    <script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+    <title> {:tpCache('shop_info.store_name')} </title>
+</head>
+<body>
+<div class="page plan">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">计划</div>
+            <div class="header-right">
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="selectNav fs26">
+            <span class="spanActive">众筹计划</span>
+            <span>还款计划</span>
+        </div>
+        <div class="block">
+            <div class="Box">
+                <div class="planType">
+                    <volist name="debt" id="vo">
+                        <a href="javascript:debt_url({$vo.money},{$vo.code},{$vo.debt_count});">
+                            <div class="fs26">
+                                <if condition="$vo.money GT 0">
+                                    <p>{$vo.money}</p>
+                                <else/>
+                                    <img src="__PUBLIC__/static/chuangke//images/plan01.png" alt="">
+                                </if>
+                                <span>{$vo.name}</span>
+                            </div>
+                        </a>
+                    </volist>
+                </div>
+                <div class="planMoney">
+                    <div class="fs26">
+                        <p>可还款总额：</p><span>￥{$all_debt|default=0}</span><img src="__PUBLIC__/static/chuangke/images/level{$user.level}.png" alt="">
+                    </div>
+                    <if condition="$apply['id'] GT 0">
+                        <a href="{:U('chuangke/CkUser/applying',['id' => $apply['id']])}" class="fs26 level_text">付款</a>
+                    <else/>
+                        <if condition="$user.level eq 1">
+                            <a href="javascript:go_use();" class="fs26 level_text">激活</a>
+                        <else if condtion="$user.level lt 10"/>
+                            <a href="javascript:go_use();" class="fs26 level_text">升级</a>
+                        </if>
+                    </if>
+                </div>
+                <div class="planList">
+                    <div class="fs26 name">还款计划</div>
+                    <volist name="stage" id="vo">
+                        <div class="list">
+                            <div class="left">
+                                <p class="fs26">第{$text[$key]}阶段</p>
+                                <a href="{:U('chuangke/CkUser/old_check')}"><div class="line"><div></div></div></a>
+                                
+                                <if condition="$vo.check EQ 1">
+                                    <a href="{:U('chuangke/CkUser/check_level_list')}"><span class="fs24">去审核</span></a>
+                                <else/>
+                                    <span class="fs24">{$vo.rece_money}/{$vo.need_money}</span>
+                                </if>
+                            </div>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+            <div class="Box" style="display: none">
+                <!-- 有数据 -->
+                <div class="planMoney">
+                    <div class="fs26">
+                        <p>已还款总额：</p><span>￥{$user.all_rece|default=0}</span>
+                    </div>
+                    <a href="{:U('chuangke/CkUser/old_check')}" class="fs26">历史记录</a>
+                </div>
+                <div class="chunk"></div>
+
+                <!-- 没有数据 -->
+                <div class="box_t " style="display: none">
+                    <img src="__PUBLIC__/static/chuangke/images/plan03.png" alt="" class="mess_img">
+                    <div class="heng">
+                        <p>——————</p>
+                        <p class="fs24 wen">暂无相关数据</p>
+                        <p>——————</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="model">
+        <div class="modelContent">
+            <div class="text fs26 color_3">是否确定激活</div>
+            <div class="cellBtn">
+                <button class="fs24 cancel">取消</button>
+                <button class="fs24 confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    <include file="common/chuangke_footer_nav" />
+</div>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+ <script>
+    $(function () {
+        $.toast.prototype.defaults.duration=1500//提示消失秒数
+        var arr = {$ratio};
+        $('.line div').each(function(index){
+            $(this).animate({
+                'width': arr[index]+'%'
+            },1000)
+        })
+
+        $('.cancel').on('click', function () {
+            $(this).parents('.model').hide()
+        })
+        $('.confirm').on('click', function () {
+            $(this).parents('.model').hide()
+            $.ajax({
+                type : "POST",
+                url:"{:U('chuangke/CkUser/apply_handle')}",//+tab,
+                dataType:'JSON',
+                data : {},
+                success: function(data) {
+                    $.toast(data.msg, "text");
+                    if (data.status == 0) {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        }
+                    }
+                    if (data.status == 1) {
+                        $('.level_text').text('去付款');
+                        $('.level_text').attr('href',"/index.php?m=chuangke&c=CkUser&a=applying&id="+data.data);
+                    }
+                },
+                error:function(){
+                    $.toast('请稍后再试', "text");
+
+                }
+            });
+        })
+        $('.selectNav span').on('click', function () {
+            var _index = $(this).index()
+            $(this).siblings().removeClass('spanActive')
+            $(this).addClass('spanActive')
+            $('.Box').eq(_index).siblings().hide()
+            $('.Box').eq(_index).show()
+        })
+    })
+    function go_use(){
+        $('.model').show()
+    }
+    function debt_url(money,code,debt_count){
+        if (money > 0) return;
+        if (debt_count > 0) {
+            $.toast('审核中，请等待', "text");
+            return;
+        }
+        window.location.href = "/index.php?m=chuangke&c=Plan&a=add_debt&type="+code;
+    }
+</script>
+<script>
+    $(function(){ 
+        check_level_list();
+    })
+    $('.page-bd').infinite().on("infinite", function() {
+        check_level_list();
+    });
+
+    var loading = false;  //状态标记
+    var page = 0;
+    function check_level_list(argument) {
+        if(loading) return;
+        loading = true;
+        page ++;
+        $.ajax({
+            type : "POST",
+            url:"/index.php?m=chuangke&c=CkUser&a=check_level_list&is_ajax=1&p="+page,//+tab,
+            dataType:'JSON',
+            data : {p:page},
+            success: function(data) {
+                if (data == '') {
+                    $.toast('加载完成', "text");
+                    return;
+                }else{
+                    $(".chunk").append(data);
+                    loading = false;
+                }
+            },
+            error:function(){
+                $.toast('请稍后再试', "text");
+            }
+        });
+    }
+</script>
+</body>
+</html>

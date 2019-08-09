@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/js/Swiper-4.0.7/swiper.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all_template.css"/>
+    <script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+    <title> {:tpCache('shop_info.store_name')} </title>
+</head>
+<body>
+<div class="page my">
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="userInfo">
+            <form id="form"  method="post" enctype="multipart/form-data">
+                <div class="uploader__input-box">
+                    <if condition="$appType eq 'IOS'">
+                        <if condition="$userInfo.head_pic eq ''">
+                            <if condition="$image_info.userinfo neq ''">
+                                <img src="{$image_info.userinfo}" onclick="loadimg('head_pic');" class="head_pic" alt="">
+                            <else />
+                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" onclick="loadimg('head_pic');" class="head_pic" alt="">
+                            </if>
+                        <else />
+                            <img src="{$userInfo.head_pic}" class="head_pic"  onclick="loadimg('head_pic');" alt="">
+                        </if>
+                    <else />
+                        <if condition="$userInfo.head_pic eq ''">
+                            <if condition="$image_info.userinfo neq ''">
+                                <img src="{$image_info.userinfo}"  class="head_pic" alt="">
+                            <else />
+                                <img src="__PUBLIC__/static/chuangke/images/userImg.png" class="head_pic" alt="">
+                            </if>
+                        <else />
+                            <img src="{$userInfo.head_pic}" class="head_pic" alt="">
+                        </if>
+                        <input id="uploaderInput" class="weui-uploader__input" style="width: 13.86667vw;height: 13.86667vw;border-radius: 50%;" id="head_pic" name="head_pic" type="file" accept="image/*" multiple="">
+                    </if>
+                    <div class="images-list"><!--上传图片列表--></div>
+                </div>
+            </form>
+            <div class="fs26">
+                <if condition="$userInfo.nickname neq '' AND $auth_status eq 1">
+                    <p>{$userInfo.nickname}</p>
+                <else />
+                    <p>{$userInfo.mobile}</p>
+                </if>
+                <span onclick="applicationAgency();">申请代理</span>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <if condition="$auth_status eq 1">
+                <a href="javascript:;" class="weui-cell weui-cell_access" >
+            <else />
+                <a href="javascript:;" class="weui-cell weui-cell_access" onclick="Authentication();">
+            </if>
+            <div class="weui-cell__bd">
+                <img src="__PUBLIC__/static/chuangke/images/my01.png" alt="">
+                <span class="fs30">实名认证</span>
+            </div>
+            <if condition="$is_auth eq 1">
+                <div class="weui-cell__ft">未认证</div>
+            <elseif condition="$auth_status eq 0" />
+                <div class="weui-cell__ft">待审核</div>
+            <elseif condition="$auth_status eq 1" />
+                <div class="weui-cell__ft">已认证</div>
+            <elseif condition="$auth_status eq 2" />
+                <div class="weui-cell__ft">未通过</div>
+            </if>
+            </a>
+            <a href="javascript:;" class="weui-cell weui-cell_access" onclick="credit_card();">
+                <div class="weui-cell__bd">
+                    <img src="__PUBLIC__/static/chuangke/images/my02.png" alt="">
+                    <span class="fs30">我的信用卡</span>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a href="javascript:;" class="weui-cell weui-cell_access" onclick="my_bank();">
+                <div class="weui-cell__bd">
+                    <img src="__PUBLIC__/static/chuangke/images/my03.png" alt="">
+                    <span class="fs30">我的储蓄卡</span>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a href="javascript:;" class="weui-cell weui-cell_access" onclick="paymentMethod();">
+                <div class="weui-cell__bd">
+                    <img src="__PUBLIC__/static/chuangke/images/my04.png" alt="">
+                    <span class="fs30">收款方式</span>
+                </div>
+                <if condition="$is_account eq 1">
+                    <div class="weui-cell__ft">已设置</div>
+                <else />
+                    <div class="weui-cell__ft">未设置</div>
+                </if>
+            </a>
+            <a href="{:U('chuangke/Member/myGoodFriend')}" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="__PUBLIC__/static/chuangke/images/my05.png" alt="">
+                    <span class="fs30">我的好友</span>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <if condition="$config.complaint eq 1">
+                <a href="{:U('chuangke/Member/complaint')}" class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <img src="__PUBLIC__/static/chuangke/images/my08.png" alt="">
+                        <span class="fs30">留言</span>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </if>
+            <a href="{:U('chuangke/article/index')}?id=6" class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="__PUBLIC__/static/chuangke/images/my06.png" alt="">
+                    <span class="fs30">联系我们</span>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a href="javascript:;" class="weui-cell weui-cell_access" onclick="clear_m();">
+                <div class="weui-cell__bd">
+                    <img src="__PUBLIC__/static/chuangke/images/my07.png" alt="">
+                    <span class="fs30">清除缓存</span>
+                </div>
+                <div class="weui-cell__ft cache">{$cache}M</div>
+            </a>
+        </div>
+        <button class="fs30 color_w fw_b button_btn" onclick="layout();">退出登录</button>
+    </div>
+    <include file="common/chuangke_footer_nav" />
+</div>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    var auth_status = {$auth_status};
+    var is_auth = {$is_auth};
+    var img_name = '';
+
+    //申请代理
+    function applicationAgency(){
+        window.location.href = "{:U('chuangke/Member/applicationAgency')}";
+    }
+
+    //收款方式
+    function paymentMethod(){
+        if(is_auth==2&&auth_status!=2){
+            window.location.href = "{:U('chuangke/Member/paymentMethod')}";
+        }else{
+            layer.msg('请先实名认证',{time:2500});
+        }
+    }
+
+    //实名认证
+    function Authentication(){
+        if(is_auth==1){
+            window.location.href = "{:U('chuangke/Member/realNameAuthentication')}";
+        }else{
+            window.location.href = "{:U('chuangke/Member/authenticationResult')}";
+        }
+
+    }
+
+    //退出登录
+    function layout(){
+        $.ajax({
+            'url':"{:U('chuangke/Login/layOut')}",
+            'type':'post',
+            'data':'',
+            'dataType':'json',
+            'success':function(data){
+                if(data.status==1){
+                    layer.msg(data.msg,{time:2000},function(){
+                        window.location.href = "{:U('chuangke/Index/index')}";
+                    });
+                }else{
+                    layer.msg(data.msg,{time:2000});
+                }
+            }
+        });
+    }
+
+    $("input[name=head_pic]").change(function() {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function(e) {
+                $.ajax({
+                    url: "{:url('/chuangke/Member/uploda_head_pic')}",
+                    type: 'POST',
+                    cache: false,
+                    data: new FormData($('#form')[0]),
+                    processData: false,
+                    contentType: false,
+                    dataType:"json",
+                    success : function(data) {
+                        console.log(data);
+                        if(data.status==1){
+                            $(".head_pic").attr("src", e.target.result); //e.target.result就是最后的路径地址
+                            layer.msg(data.msg, { icon: 1, time: 2000 }, function () {
+                                window.location = "{:url('/chuangke/Member/index')}";
+                            });
+                        }else{
+                            layer.msg(data.msg, { icon: 5, time: 2000 });
+                            return false;
+                        }
+                    }
+                });
+            };
+        }
+    });
+
+    function AppReturnBase64Image(base64imag) {
+        $.ajax({
+            'url': "{:url('Member/uploadimage')}",
+            'type': 'post',
+            'data': {'img': base64imag, 'img_type': 'head_pic','img_name':img_name},
+            'dataType': 'json',
+            'success': function (data) {
+                // layer.msg(data.image_path, { icon: 5, time: 5000 });
+                if (data) {
+                    if (data.img_name == 'head_pic') {
+                        $('.head_pic').attr('src',  data.path);
+                        $.ajax({
+                            url: "{:url('/chuangke/Member/uploda_head_pic')}",
+                            'type':'post',
+                            'data':{'head_pic':data.path},
+                            'dataType':'json',
+                            'success':function(response){
+                                if(response.status==1){
+                                    layer.msg('操作成功', { icon: 1, time: 2000 }, function () {
+                                        window.location = "{:url('/chuangke/Member/index')}";
+                                    });
+                                }else{
+                                    layer.msg('操作失败');
+                                }
+                            }
+                        });
+
+                    }
+
+                } else {
+                    layer.msg('二维码上传失败', {icon: 5, time: 3000});
+                    return false;
+                }
+            }
+        });
+    }
+
+    function loadimg(uploadfile){
+        img_name = uploadfile;
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
+            window.app.Photo();
+        }
+    }
+
+    function clear_m(){
+        $.ajax({
+            'url':"{:url('Member/clear_m')}",
+            'type':'post',
+            'data':'',
+            'dataType':'json',
+            'success':function(data){
+                if(data.status==1){
+                    layer.msg(data.msg,function(){
+                        $('.cache').html('0M');
+                    })
+                }else{
+                    layer.msg(data.msg);
+                }
+            }
+        });
+    }
+    function credit_card(){
+        layer.msg('正在努力开发中')
+    }
+    function my_bank(){
+        layer.msg('正在努力开发中')
+    }
+</script>
+</body>
+</html>

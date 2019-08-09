@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/js/Swiper-4.0.7/swiper.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all_template.css"/>
+    <script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+    <title> {:tpCache('shop_info.store_name')} </title>
+</head>
+<body>
+<div class="page index">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">首页</div>
+            <div class="header-right">
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="swiper-container swiperBox swiper1">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <if condition="$image_info.banner1 neq ''">
+                        <img src="{$image_info.banner1}" alt="" />
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                    </if>
+                </div>
+                <div class="swiper-slide">
+                    <if condition="$image_info.banner2 neq ''">
+                        <img src="{$image_info.banner2}" alt="" />
+                    <else />
+                        <img src="http://youqianhuan.oss-cn-hongkong.aliyuncs.com/banner/1.png?tdsourcetag=s_pctim_aiomsg" alt="" />
+                    </if>
+                </div>
+
+                <!-- <div class="swiper-slide">
+                    <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                </div> -->
+            </div>
+            <div class="swiper-pagination pagination1"></div>
+        </div>
+        <div class="log">
+            <div class="sign fs26 color_w">近期还款</div>
+            <div class="fs24 data color_6">
+                <p>180****5482</p>
+                <div>成功还款<span>10000元</span>
+                </div>
+                <a href="#">查看更多</a>
+            </div>
+        </div>
+        <div class="bannerBox">
+            <img src="__PUBLIC__/static/chuangke/images/indexBanner.png" alt="">
+        </div>
+        <div class="rowBox">
+            <div class="title fs26">特色产品</div>
+            <div class="block one">
+                <div class="fs36 fw_b color_w">智能还贷</div>
+                <div class="tips">
+                    <div class="left color_w">
+                        <p class="fs28 fw_b">还房贷 还车贷</p>
+                        <span class="fs24">3-5个月还清百万债务</span>
+                    </div>
+                    <a href="#" class="fs24">了解详情</a>
+                </div>
+            </div>
+            <div class="block two">
+                <div class="fs36 fw_b color_w">0费率还卡</div>
+                <div class="tips">
+                    <div class="left color_w">
+                        <p class="fs28 fw_b">随借谁还 低门槛</p>
+                        <span class="fs24">担保金抵扣利息</span>
+                    </div>
+                    <a href="#" class="fs24">了解详情</a>
+                </div>
+            </div>
+            <div class="block there">
+                <div class="fs36 fw_b color_w">帮还赚利息</div>
+                <div class="tips">
+                    <div class="left color_w">
+                        <p class="fs28 fw_b">担保抵押 平台担保</p>
+                        <span class="fs24">帮助他人还卡赚利息，轻松摆脱债务</span>
+                    </div>
+                    <a href="#" class="fs24">了解详情</a>
+                </div>
+            </div>
+            <div class="block four">
+                <div class="fs36 fw_b color_w">申请代理</div>
+                <div class="tips">
+                    <div class="left color_w">
+                        <p class="fs28 fw_b">无忧裂变计划 长期稳定高收入</p>
+                        <span class="fs24">长期稳定高收入</span>
+                    </div>
+                    <a href="#" class="fs24">了解详情</a>
+                </div>
+            </div>
+        </div>
+        <div class="columnBox">
+            <div class="title">
+                <p class="fs26">{:tpCache('shop_info.store_name')}学院</p><div class="fs22">学习更多还卡知识摆脱卡奴</div>
+            </div>
+            <div class="list">
+                <a href="{:U('chuangke/index/paymentSkills')}">
+                    <if condition="$image_info.paymentSkills neq ''">
+                        <img src="{$image_info.paymentSkills}" alt="" />
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/index04.png" alt="">
+                    </if>
+
+                    <if condition="$image_info.paymentSkills_title neq ''">
+                        <p class="fs26 fw_b">{$image_info.paymentSkills_title}</p>
+                    <else/>
+                        <p class="fs26 fw_b">0费率还款技巧</p>
+                    </if>
+
+                </a>
+                <a href="{:U('chuangke/index/obtainGuarantee')}">
+                    <if condition="$image_info.obtainGuarantee neq ''">
+                        <img src="{$image_info.obtainGuarantee}" alt="" />
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/index05.png" alt="">
+                    </if>
+
+                    <if condition="$image_info.obtainGuarantee_title neq ''">
+                        <p class="fs26 fw_b">{$image_info.obtainGuarantee_title}</p>
+                    <else/>
+                        <p class="fs26 fw_b">担保金如何获取？</p>
+                    </if>
+                </a>
+                <a href="{:U('chuangke/index/earningInterest')}">
+                    <if condition="$image_info.earningInterest neq ''">
+                        <img src="{$image_info.earningInterest}" alt="" />
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/index06.png" alt="">
+                    </if>
+
+                    <if condition="$image_info.earningInterest_title neq ''">
+                        <p class="fs26 fw_b">{$image_info.earningInterest_title}</p>
+                    <else/>
+                        <p class="fs26 fw_b">如何帮他人还款赚利息</p>
+                    </if>
+                </a>
+                <a href="{:U('chuangke/index/noPayment')}">
+                    <if condition="$image_info.noPayment neq ''">
+                        <img src="{$image_info.noPayment}" alt="" />
+                    <else />
+                        <img src="__PUBLIC__/static/chuangke/images/index07.png" alt="">
+                    </if>
+
+                    <if condition="$image_info.noPayment_title neq ''">
+                        <p class="fs26 fw_b">{$image_info.noPayment_title}</p>
+                    <else/>
+                        <p class="fs26 fw_b">借款人不还钱怎么办？</p>
+                    </if>
+
+                </a>
+            </div>
+        </div>
+    </div>
+    <include file="common/chuangke_footer_nav" />
+</div>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="__PUBLIC__/static/chuangke/js/Swiper-4.0.7/swiper.min.js"></script>
+<script>
+    var swiper1 = createSwiper(1);
+    function createSwiper(index) {
+        var swiper = new Swiper(".swiper" + index, {
+            pagination: {
+                el: ".pagination" + index
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000
+            },
+            onSlideChangeEnd: function (swiper) {
+                swiper.update(); //swiper更新
+            }
+        });
+        return swiper;
+    }
+</script>
+</body>
+</html>
