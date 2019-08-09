@@ -40,6 +40,8 @@
     </div>
 </div>
 <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
 
@@ -53,6 +55,7 @@
     function add_debt() {
         var money = $("#money").val();
         var imgsrc = $('#imgsrc').val();
+
         if (imgsrc == '') {
             $.toast("请上传债务凭证", "text");
             return false;
@@ -70,7 +73,8 @@
             contentType: false,
             dataType:"json",
             success : function(data) {
-                $.toast(data.msg, "text");
+                console.log(data);
+                $.toast(data.msg,"text");
                 if (data.code == 1) {
                     window.location.href = data.url;
                 } else {
