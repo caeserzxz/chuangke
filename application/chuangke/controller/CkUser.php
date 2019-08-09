@@ -727,6 +727,9 @@ class CkUser extends MobileBase
                 $img_src = '/'.UPLOAD_PATH.'plan/'.$upload_img;
             }
         }
+        if($upload_img){
+            $img_src = $img_src;
+        }
         if ($type == 1) {
             $updata['voucher_img1'] = $img_src;
         }else{
