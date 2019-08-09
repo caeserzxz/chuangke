@@ -243,6 +243,9 @@ class Plan extends MobileBase
                     $img_src = '/'.UPLOAD_PATH.'plan/'.$imgsrc;
                 }
             }
+            if($imgsrc){
+                $img_src =   $imgsrc;
+            }
             if ($money <= 0) $this->error('金额错误');
             // 金额是否是200整数倍
             $debt_based = $shop_info['debt_based'];
