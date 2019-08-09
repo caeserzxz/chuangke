@@ -1,33 +1,42 @@
 <div class="bottom-tabbar-wrapper">
     <div class="bottom-tabbar">
-        <a href="{:U('chuangke/Index/index')}" <if condition="CONTROLLER_NAME eq 'Index'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
-                <span class="icon">
-                    <img src="__PUBLIC__/static/chuangke/images/bottom_icon01.png"/>
-                    <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon01_lh.png"/>
-                </span>
-            <p class="label">首页</p>
-        </a>
-        <a href="{:U('chuangke/Plan/index')}"  <if condition="CONTROLLER_NAME eq 'Plan'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
-                <span class="icon">
-                    <img src="__PUBLIC__/static/chuangke/images/bottom_icon02.png"/>
-                    <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon02_lh.png"/>
-                </span>
-            <p class="label">计划</p>
-        </a>
-        <a href="{:U('chuangke/Wallet/wallet')}" <if condition="CONTROLLER_NAME eq 'Wallet'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
-                <span class="icon">
-                    <img src="__PUBLIC__/static/chuangke/images/bottom_icon03.png"/>
-                    <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon03_lh.png"/>
-                </span>
-            <p class="label">钱包</p>
-        </a>
-        <a href="{:U('chuangke/Member/index')}" <if condition="CONTROLLER_NAME eq 'Member'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
-                <span class="icon">
-                    <img src="__PUBLIC__/static/chuangke/images/bottom_icon04.png"/>
-                    <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon04_lh.png"/>
-                </span>
-            <p class="label">我的</p>
-        </a>
+        <if condition="tpCache('shop_info.template1') neq 3">
+            <a href="{:U('chuangke/Index/index')}" <if condition="CONTROLLER_NAME eq 'Index'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
+                    <span class="icon">
+                        <img src="__PUBLIC__/static/chuangke/images/bottom_icon01.png"/>
+                        <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon01_lh.png"/>
+                    </span>
+                <p class="label">首页</p>
+            </a>
+        </if>
+        <if condition="tpCache('shop_info.template2') neq 3">
+            <a href="{:U('chuangke/Plan/index')}"  <if condition="CONTROLLER_NAME eq 'Plan'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
+                    <span class="icon">
+                        <img src="__PUBLIC__/static/chuangke/images/bottom_icon02.png"/>
+                        <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon02_lh.png"/>
+                    </span>
+                <p class="label">计划</p>
+            </a>
+        </if>
+        <if condition="tpCache('shop_info.template3') neq 3">
+            <a href="{:U('chuangke/Wallet/wallet')}" <if condition="CONTROLLER_NAME eq 'Wallet'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
+                    <span class="icon">
+                        <img src="__PUBLIC__/static/chuangke/images/bottom_icon03.png"/>
+                        <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon03_lh.png"/>
+                    </span>
+                <p class="label">钱包</p>
+            </a>
+        </if>
+        <if condition="tpCache('shop_info.template4') neq 3">
+            <a href="{:U('chuangke/Member/index')}" <if condition="CONTROLLER_NAME eq 'Member'"> class="bottom-tabbar__item  active" <else /> class="bottom-tabbar__item"</if>>
+                    <span class="icon">
+                        <img src="__PUBLIC__/static/chuangke/images/bottom_icon04.png"/>
+                        <img class="lhimg" src="__PUBLIC__/static/chuangke/images/bottom_icon04_lh.png"/>
+                    </span>
+                <p class="label">我的</p>
+            </a>
+        </if>
+
     </div>
 </div>
 

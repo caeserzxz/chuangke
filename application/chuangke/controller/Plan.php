@@ -108,7 +108,11 @@ class Plan extends MobileBase
         $this->assign('ratio',json_encode($ratio)); // 各阶段还款百分比
         $this->assign('apply',$apply);              // 审核中等级申请数量
 
-        return $this->fetch();
+        if (tpCache('shop_info.template2') == 2) {
+            return $this->fetch('plan/template2');
+        }else{
+            return $this->fetch();
+        }
     }
 
 	// 计划页面

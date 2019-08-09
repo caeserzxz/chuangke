@@ -31,7 +31,12 @@ class Index extends MobileBase
         $image_info = tpCache('image_info');
         $this->assign('image_info',$image_info);
         $this->assign('unread_message',$unread_message);
-        return $this->fetch();
+
+        if (tpCache('shop_info.template1') == 2) {
+            return $this->fetch('plan/template1');
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**

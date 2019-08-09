@@ -60,7 +60,11 @@ class Member extends  MobileBase
         $this->assign('is_auth',$is_auth);
         $this->assign('auth_status',$auth_status);
         $this->assign('userInfo',$userInfo);
-        return $this->fetch();
+        if (tpCache('shop_info.template4') == 2) {
+            return $this->fetch('plan/template4');
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**
