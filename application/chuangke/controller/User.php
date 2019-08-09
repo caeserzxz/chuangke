@@ -72,7 +72,7 @@ class User extends MobileBase
     public function index()
     {
         // Session::clear();
-        $this->redirect('chuangke/Index/index');
+        $this->redirect('chuangke/Member/index');
 
         $user_id =$this->user_id;
 
