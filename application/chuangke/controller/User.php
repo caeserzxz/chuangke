@@ -72,8 +72,8 @@ class User extends MobileBase
     public function index()
     {
         // Session::clear();
-        $this->redirect('chuangke/Login/index');
-        
+        $this->redirect('chuangke/Index/index');
+
         $user_id =$this->user_id;
 
         $user_code = Db::name('tuijian_code')->where('user_id',$user_id)->value('code');
