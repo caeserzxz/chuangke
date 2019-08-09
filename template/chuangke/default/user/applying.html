@@ -8,7 +8,7 @@
             </div>
             <div class="header-title">收款人</div>
             <div class="header-right">
-                <a href="#"></a>
+                <a href="javascript:;"></a>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
                     <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'1'])}" class="fs24 color_w check_end">已拒绝</a>
                 <else/>
                     <if condition="$apply.voucher_img1">
-                        <a href="#" class="fs24 color_w check_end">已打款</a>
+                        <a href="javascript:;" class="fs24 color_w check_end">已打款</a>
                     <else/>
                         <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'1'])}" class="fs24 color_w">去打款</a>
                     </if>
@@ -45,7 +45,7 @@
                         <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'2'])}" class="fs24 color_w check_end">已拒绝</a>
                     <else/>
                         <if condition="$apply.voucher_img2">
-                            <a href="#" class="fs24 color_w check_end">已打款</a>
+                            <a href="javascript:;" class="fs24 color_w check_end">已打款</a>
                         <else/>
                             <a href="{:U('chuangke/CkUser/pay_detail',['id'=>$apply.id,'type'=>'2'])}" class="fs24 color_w">去打款</a>
                         </if>

@@ -20,7 +20,7 @@ function pwdLevel(value) {
     }
     return level;
 }
-// ÐÝÃß
+// ï¿½ï¿½ï¿½ï¿½
 function sleepm(numberMillis) {
     var now = new Date();
     var exitTime = now.getTime() + numberMillis;
@@ -39,81 +39,81 @@ function verc2() {
 }
 var validateRegExp = {
     decmal: "^([+-]?)\\d*\\.\\d+$",
-    // ¸¡µãÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     decmal1: "^[1-9]\\d*.\\d*|0.\\d*[1-9]\\d*$",
-    // Õý¸¡µãÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     decmal2: "^-([1-9]\\d*.\\d*|0.\\d*[1-9]\\d*)$",
-    // ¸º¸¡µãÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     decmal3: "^-?([1-9]\\d*.\\d*|0.\\d*[1-9]\\d*|0?.0+|0)$",
-    // ¸¡µãÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     decmal4: "^[1-9]\\d*.\\d*|0.\\d*[1-9]\\d*|0?.0+|0$",
-    // ·Ç¸º¸¡µãÊý£¨Õý¸¡µãÊý + 0£©
+    // ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + 0ï¿½ï¿½
     decmal5: "^(-([1-9]\\d*.\\d*|0.\\d*[1-9]\\d*))|0?.0+|0$",
-    // ·ÇÕý¸¡µãÊý£¨¸º¸¡µãÊý +
-    // 0£©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ +
+    // 0ï¿½ï¿½
     intege: "^-?[1-9]\\d*$",
-    // ÕûÊý
+    // ï¿½ï¿½ï¿½ï¿½
     intege1: "^[1-9]\\d*$",
-    // ÕýÕûÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     intege2: "^-[1-9]\\d*$",
-    // ¸ºÕûÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     num: "^([+-]?)\\d*\\.?\\d+$",
-    // Êý×Ö
+    // ï¿½ï¿½ï¿½ï¿½
     num1: "^[1-9]\\d*|0$",
-    // ÕýÊý£¨ÕýÕûÊý + 0£©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + 0ï¿½ï¿½
     num2: "^-[1-9]\\d*|0$",
-    // ¸ºÊý£¨¸ºÕûÊý + 0£©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + 0ï¿½ï¿½
     ascii: "^[\\x00-\\xFF]+$",
-    // ½öACSII×Ö·û
+    // ï¿½ï¿½ACSIIï¿½Ö·ï¿½
     chinese: "^[\\u4e00-\\u9fa5]+$",
-    // ½öÖÐÎÄ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     color: "^[a-fA-F0-9]{6}$",
-    // ÑÕÉ«
+    // ï¿½ï¿½É«
     date: "^\\d{4}(\\-|\\/|\.)\\d{1,2}\\1\\d{1,2}$",
-    // ÈÕÆÚ
+    // ï¿½ï¿½ï¿½ï¿½
     email: "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$",
-    // ÓÊ¼þ
+    // ï¿½Ê¼ï¿½
     idcard: "^[1-9]([0-9]{14}|[0-9]{17})$",
-    // Éí·ÝÖ¤
+    // ï¿½ï¿½ï¿½Ö¤
     ip4: "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$",
-    // ipµØÖ·
+    // ipï¿½ï¿½Ö·
     letter: "^[A-Za-z]+$",
-    // ×ÖÄ¸
+    // ï¿½ï¿½Ä¸
     letter_l: "^[a-z]+$",
-    // Ð¡Ð´×ÖÄ¸
+    // Ð¡Ð´ï¿½ï¿½Ä¸
     letter_u: "^[A-Z]+$",
-    // ´óÐ´×ÖÄ¸
+    // ï¿½ï¿½Ð´ï¿½ï¿½Ä¸
     mobile: "^0?(13|15|18|14|17)[0-9]{9}$",
-    // ÊÖ»ú
+    // ï¿½Ö»ï¿½
     notempty: "^\\S+$",
-    // ·Ç¿Õ
+    // ï¿½Ç¿ï¿½
     password: "^.*[A-Za-z0-9\\w_-]+.*$",
-    // ÃÜÂë
+    // ï¿½ï¿½ï¿½ï¿½
     fullNumber: "^[0-9]+$",
-    // Êý×Ö
+    // ï¿½ï¿½ï¿½ï¿½
     picture: "(.*)\\.(jpg|bmp|gif|ico|pcx|jpeg|tif|png|raw|tga)$",
     // Í¼Æ¬
     qq: "^[1-9]*[1-9][0-9]*$",
-    // QQºÅÂë
+    // QQï¿½ï¿½ï¿½ï¿½
     rar: "(.*)\\.(rar|zip|7zip|tgz)$",
-    // Ñ¹ËõÎÄ¼þ
-    tel: "^[0-9\-()£¨£©]{7,18}$",
-    // µç»°ºÅÂëµÄº¯Êý(°üÀ¨ÑéÖ¤¹úÄÚÇøºÅ,¹ú¼ÊÇøºÅ,·Ö»úºÅ)
+    // Ñ¹ï¿½ï¿½ï¿½Ä¼ï¿½
+    tel: "^[0-9\-()ï¿½ï¿½ï¿½ï¿½]{7,18}$",
+    // ï¿½ç»°ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ö»ï¿½ï¿½ï¿½)
     url: "^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$",
     // url
     username: "^[A-Za-z0-9_\\-\\u4e00-\\u9fa5]+$",
-    // »§Ãû
-    deptname: "^[A-Za-z0-9_()£¨£©\\-\\u4e00-\\u9fa5]+$",
-    // µ¥Î»Ãû
+    // ï¿½ï¿½ï¿½ï¿½
+    deptname: "^[A-Za-z0-9_()ï¿½ï¿½ï¿½ï¿½\\-\\u4e00-\\u9fa5]+$",
+    // ï¿½ï¿½Î»ï¿½ï¿½
     zipcode: "^\\d{6}$",
-    // ÓÊ±à
+    // ï¿½Ê±ï¿½
     realname: "^[A-Za-z\\u4e00-\\u9fa5]+$",
-    // ÕæÊµÐÕÃû
-    companyname: "^[A-Za-z0-9_()£¨£©\\-\\u4e00-\\u9fa5]+$",
-    companyaddr: "^[A-Za-z0-9_()£¨£©\\#\\-\\u4e00-\\u9fa5]+$",
+    // ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
+    companyname: "^[A-Za-z0-9_()ï¿½ï¿½ï¿½ï¿½\\-\\u4e00-\\u9fa5]+$",
+    companyaddr: "^[A-Za-z0-9_()ï¿½ï¿½ï¿½ï¿½\\#\\-\\u4e00-\\u9fa5]+$",
     companysite: "^http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&#=]*)?$"
 };
-// Ö÷º¯Êý
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 (function($) {
     $.fn.jdValidate = function(option, callback, def) {
         var ele = this;
@@ -231,7 +231,7 @@ var validateRegExp = {
     }
 })(jQuery);
 
-// ÅäÖÃ
+// ï¿½ï¿½ï¿½ï¿½
 var validateSettings = {
     onFocus: {
         state: null,
@@ -303,7 +303,7 @@ var validateSettings = {
     INPUT_style2: "highlight2"
 }
 
-// ÑéÖ¤¹æÔò
+// ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½
 var validateRules = {
     isNull: function(str) {
         return (str == "" || typeof str != "string");
@@ -366,18 +366,18 @@ var validateRules = {
         return false;
     }
 };
-// ÑéÖ¤ÎÄ±¾
+// ï¿½ï¿½Ö¤ï¿½Ä±ï¿½
 var validatePrompt = {
     regName: {
-        //onFocus: "4-20Î»×Ö·û£¬Ö§³ÖÖÐÓ¢ÎÄ¡¢Êý×Ö¼°\"-\"¡¢\"_\"×éºÏ",
-        onFocus:"4-20Î»×Ö·û,Ö§³Öºº×Ö¡¢×ÖÄ¸¡¢Êý×Ö¼°\"-\"¡¢\"_\"×éºÏ",
+        //onFocus: "4-20Î»ï¿½Ö·ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½\"-\"ï¿½ï¿½\"_\"ï¿½ï¿½ï¿½",
+        onFocus:"4-20Î»ï¿½Ö·ï¿½,Ö§ï¿½Öºï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½\"-\"ï¿½ï¿½\"_\"ï¿½ï¿½ï¿½",
         succeed: "",
-        isNull: "ÇëÊäÈëÓÃ»§Ãû",
+        isNull: "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½",
         error: {
-            beUsed: "¸ÃÓÃ»§ÃûÒÑ±»Ê¹ÓÃ£¬ÇëÖØÐÂÊäÈë¡£Èç¹ûÄúÊÇ¸ÃÓÃ»§£¬ÇëÁ¢¿Ì<a href='https://passport.jd.com/uc/login' class='flk13'>µÇÂ¼</a>",
-            badLength: "ÓÃ»§Ãû³¤¶ÈÖ»ÄÜÔÚ4-20Î»×Ö·ûÖ®¼ä",
-            badFormat: "ÓÃ»§ÃûÖ»ÄÜÓÉÖÐÎÄ¡¢Ó¢ÎÄ¡¢Êý×Ö¼°\"-\"¡¢\"_\"×é³É",
-            fullNumberName: "ÓÃ»§Ãû²»ÄÜÊÇ´¿Êý×Ö£¬ÇëÖØÐÂÊäÈë"
+            beUsed: "ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<a href='https://passport.jd.com/uc/login' class='flk13'>ï¿½ï¿½Â¼</a>",
+            badLength: "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½4-20Î»ï¿½Ö·ï¿½Ö®ï¿½ï¿½",
+            badFormat: "ï¿½Ã»ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½Ó¢ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½\"-\"ï¿½ï¿½\"_\"ï¿½ï¿½ï¿½",
+            fullNumberName: "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
         },
         onFocusExpand: function() {
             $("#morePinDiv").removeClass().addClass("intelligent-error hide");
@@ -385,39 +385,39 @@ var validatePrompt = {
     },
 
     pwd: {
-        onFocus: "<span>6-20Î»×Ö·û£¬½¨ÒéÓÉ×ÖÄ¸£¬Êý×ÖºÍ·ûºÅÁ½ÖÖÒÔÉÏ×éºÏ</span>",
+        onFocus: "<span>6-20Î»ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ÖºÍ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</span>",
         succeed: "",
-        isNull: "ÇëÊäÈëÃÜÂë",
+        isNull: "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
         error: {
-            badLength: "ÃÜÂë³¤¶ÈÖ»ÄÜÔÚ6-20Î»×Ö·ûÖ®¼ä",
-            badFormat: "ÃÜÂëÖ»ÄÜÓÉÓ¢ÎÄ¡¢Êý×Ö¼°±êµã·ûºÅ×é³É",
-            simplePwd: "<span>¸ÃÃÜÂë±È½Ï¼òµ¥£¬ÓÐ±»µÁ·çÏÕ£¬½¨ÒéÄú¸ü¸ÄÎª¸´ÔÓÃÜÂë£¬Èç×ÖÄ¸+Êý×ÖµÄ×éºÏ</span>",
-            weakPwd: "<span>¸ÃÃÜÂë±È½Ï¼òµ¥£¬ÓÐ±»µÁ·çÏÕ£¬½¨ÒéÄú¸ü¸ÄÎª¸´ÔÓÃÜÂë</span>"
+            badLength: "ï¿½ï¿½ï¿½ë³¤ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½6-20Î»ï¿½Ö·ï¿½Ö®ï¿½ï¿½",
+            badFormat: "ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
+            simplePwd: "<span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ï¼òµ¥£ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ä¸+ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½</span>",
+            weakPwd: "<span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ï¼òµ¥£ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</span>"
         },
         onFocusExpand: function() {
             $("#pwdstrength").hide();
         }
     },
     pwdRepeat: {
-        onFocus: "ÇëÔÙ´ÎÊäÈëÃÜÂë",
+        onFocus: "ï¿½ï¿½ï¿½Ù´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
         succeed: "",
-        isNull: "ÇëÈ·ÈÏÃÜÂë",
+        isNull: "ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
         error: {
-            badLength: "ÃÜÂë³¤¶ÈÖ»ÄÜÔÚ6-20Î»×Ö·ûÖ®¼ä",
-            badFormat2: "Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ",
-            badFormat1: "ÃÜÂëÖ»ÄÜÓÉÓ¢ÎÄ¡¢Êý×Ö¼°±êµã·ûºÅ×é³É"
+            badLength: "ï¿½ï¿½ï¿½ë³¤ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½6-20Î»ï¿½Ö·ï¿½Ö®ï¿½ï¿½",
+            badFormat2: "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½",
+            badFormat1: "ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
         }
     },
     phone: {
-        onFocus: "ÇëÊäÈëÊÖ»úºÅÂë",
+        onFocus: "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½",
         succeed: "",
-        isNull: "ÇëÊäÈëÊÖ»úºÅÂë",
+        isNull: "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½",
         error: ""
     },
     protocol: {
         onFocus: "",
         succeed: "",
-        isNull: "ÇëÏÈÔÄ¶Á²¢Í¬Òâ¡¶¾©¶«ÓÃ»§×¢²áÐ­Òé¡·",
+        isNull: "ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½Í¬ï¿½â¡¶ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½×¢ï¿½ï¿½Ð­ï¿½é¡·",
         error: ""
     },
     empty: {
@@ -430,7 +430,7 @@ var validatePrompt = {
 
 var nameold, morePinOld, emailResult;
 var namestate = false;
-// »Øµ÷º¯Êý
+// ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
 var validateFunction = {
     regName: function(option) {
         $("#intelligent-regName").empty().hide();
@@ -449,7 +449,7 @@ var validateFunction = {
         var regName = $("#regName").val();
         if ((validateRules.isNull(regName) == false) && (regName != '') && regName == str1) {
             $("#pwdstrength").hide();
-            validateSettings.error.run(option, "<span>ÄúµÄÃÜÂëÓëÕË»§ÐÅÏ¢Ì«ÖØºÏ£¬ÓÐ±»µÁ·çÏÕ£¬Çë»»Ò»¸öÃÜÂë</span>");
+            validateSettings.error.run(option, "<span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½Ï¢Ì«ï¿½ØºÏ£ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ£ï¿½ï¿½ë»»Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</span>");
             return;
         }
 
@@ -576,7 +576,7 @@ var validateFunction = {
     }
 };
 
-// ¼ì²éÓÃ»§Ãû
+// ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
 var checkpin = -10;
 function checkPin(option) {
     var pin = option.value;
@@ -596,7 +596,7 @@ function checkPin(option) {
     if (!namestate || nameold != pin) {
         if (nameold != pin) {
             nameold = pin;
-            option.errorEle.html("<em style='color:#999'>¼ìÑéÖÐ¡­¡­</em>");
+            option.errorEle.html("<em style='color:#999'>ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½</em>");
             $.getJSON("../validateuser/isPinEngaged?pin=" + escape(pin) + "&r=" + Math.random(),
             function(date) {
                 checkpin = date.success;
@@ -604,7 +604,7 @@ function checkPin(option) {
                     validateSettings.succeed.run(option);
                     namestate = true;
                 } else if (date.success == 2) {
-                    validateSettings.error.run(option, "ÓÃ»§Ãû°üº¬ÁË·Ç·¨´Ê");
+                    validateSettings.error.run(option, "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë·Ç·ï¿½ï¿½ï¿½");
                     namestate = false;
                 } else {
                     validateSettings.error.run(option, "<span>" + option.prompts.error.beUsed.replace("{1}", option.value) + "</span>");
@@ -624,7 +624,7 @@ function checkPin(option) {
         } else {
 
             if (checkpin == 2) {
-                validateSettings.error.run(option, "ÓÃ»§Ãû°üº¬ÁË·Ç·¨´Ê");
+                validateSettings.error.run(option, "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë·Ç·ï¿½ï¿½ï¿½");
             } else {
                 validateSettings.error.run(option, "<span>" + option.prompts.error.beUsed.replace("{1}", option.value) + "</span>");
                 if (morePinOld != null && morePinOld.length > 0) {
@@ -643,7 +643,7 @@ function selectMe(option) {
     $("#regName").val(option.value);
     $("#regName").blur();
 }
-// Ö÷Á÷³Ì·¢ËÍÊÖ»úÑéÖ¤Âë
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
 function sendMobileCode() {
     if ($("#sendMobileCode").attr("disabled")) {
         return;
@@ -651,17 +651,17 @@ function sendMobileCode() {
     mobileCodeHide();
     var mobile = $("#phone").val();
     if (validateRules.isNull(mobile)) {
-        $("#phone_error").removeClass().addClass("error").html("ÇëÊäÈëÊÖ»úºÅ");
+        $("#phone_error").removeClass().addClass("error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone_error").show();
         return;
     }
     if (!validateRules.isMobile(mobile)) {
-        $("#phone_error").removeClass().addClass("error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone_error").removeClass().addClass("error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone_error").show();
         return;
     }
     $('#mobileCode').removeClass("highlight2");
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
         if (result.success == 0) {
@@ -675,7 +675,7 @@ function sendMobileCode() {
 
         if (result.success == 1) {
             $('#phone').removeClass().addClass('text highlight3');
-            $("#phone_error").html("ÊÖ»úºÅÒÑ×¢²á£¬¼ÌÐø×¢²á½«ÓëÔ­ÕËºÅ½â°ó");
+            $("#phone_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½ï¿½×¢ï¿½á½«ï¿½ï¿½Ô­ï¿½ËºÅ½ï¿½ï¿½");
             $("#phone_error").removeClass().addClass("cue");
             $("#phone_error").show();
             $("#phone_succeed").removeClass().addClass("blank cue-ico");
@@ -690,7 +690,7 @@ function sendMobileCode() {
 
         if (result.success == 2) {
             $('#phone').removeClass().addClass('text highlight2');
-            $("#phone_error").html("¸ÃÊÖ»úºÅÒÑ±»ÆäËüÕË»§°ó¶¨£¬"+result.ub+"ÌìÄÚ²»¿É¸Ä°ó");
+            $("#phone_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ó¶¨£ï¿½"+result.ub+"ï¿½ï¿½ï¿½Ú²ï¿½ï¿½É¸Ä°ï¿½");
             $("#phone_error").removeClass().addClass("error");
             $("#phone_error").show();
             $("#phone_succeed").removeClass().addClass("");
@@ -699,7 +699,7 @@ function sendMobileCode() {
     });
 
 }
-// ÊÖ»ú×¢²á·¢ËÍÑéÖ¤Âëtarget
+// ï¿½Ö»ï¿½×¢ï¿½á·¢ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½target
 function sendmCode() {
     if ($("#sendMobileCode").attr("disabled") || delayFlag == false) {
         return;
@@ -718,15 +718,15 @@ function sendmCode() {
                 var obj = eval(result);
                 if (obj.rs == 1 || obj.remain) {
                     $("#mobileCode_error").addClass("hide");
-                    $("#dyMobileButton").html("120ÃëºóÖØÐÂ»ñÈ¡");
+                    $("#dyMobileButton").html("120ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡");
                     if (obj.remain) {
                         $("#mobileCodeSucMessage").empty().html(obj.remain);
                     } else {
                         if (state == "unbind") {
-                            $("#mobileCode_error").removeClass().addClass("cue").empty().html("Ð£ÑéÂëÒÑ·¢ËÍ,×¢²á³É¹¦ºóÊÖ»úºÅ½«ÓëÔ­ÕÊºÅ½â°ó");
+                            $("#mobileCode_error").removeClass().addClass("cue").empty().html("Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½,×¢ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Å½ï¿½ï¿½ï¿½Ô­ï¿½ÊºÅ½ï¿½ï¿½");
                             $("#mobileCode_error").show();
                         } else {
-                            $("#mobileCode_error").removeClass().empty().html("ÑéÖ¤ÂëÒÑ·¢ËÍ£¬Çë²éÊÕ¶ÌÐÅ¡£");
+                            $("#mobileCode_error").removeClass().empty().html("ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½Å¡ï¿½");
                             $("#mobileCode_error").show();
                         }
                     }
@@ -736,10 +736,10 @@ function sendmCode() {
                     $("#mobileCode").removeAttr("disabled");
                 }
                 if (obj.rs == -1) {
-                    mobileCodeError("ÍøÂç·±Ã¦£¬ÇëÉÔºóÖØÐÂ»ñÈ¡ÑéÖ¤Âë");
+                    mobileCodeError("ï¿½ï¿½ï¿½ç·±Ã¦ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½");
                 }
                 if (obj.info) {
-                    if (obj.info == "¸ÃÊÖ»úºÅÒÑ±»Ê¹ÓÃ£¬Çë¸ü»»ºÅÂë") {
+                    if (obj.info == "ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½") {
                         mobileEngagedStyle();
                     } else {
                         mobileCodeError(obj.info);
@@ -748,13 +748,13 @@ function sendmCode() {
                 }
 
                 if (obj.rs == -2) {
-                    mobileCodeError("ÍøÂç·±Ã¦£¬ÇëÉÔºóÖØÐÂ»ñÈ¡ÑéÖ¤Âë");
+                    mobileCodeError("ï¿½ï¿½ï¿½ç·±Ã¦ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½");
                 }
             }
         }
     });
 }
-// ÓÊÏäÑéÖ¤·¢ËÍÑéÖ¤Âëtarget
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½target
 function sendmCode1() {
     if ($("#sendMobileCode1").attr("disabled") || delayFlag1 == false) {
         return;
@@ -771,14 +771,14 @@ function sendmCode1() {
                 var obj = eval(result);
                 if (obj.rs == 1 || obj.remain) {
                     $("#mobileCode1_error").addClass("hide");
-                    $("#dyMobileButton1").html("120ÃëºóÖØÐÂ»ñÈ¡");
+                    $("#dyMobileButton1").html("120ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡");
                     if (obj.remain) {
                         $("#mobileCodeSucMessage1").empty().html(obj.remain);
                     } else {
                         if (state == "unbind") {
-                            $("#mobileCodeSucMessage1").removeClass().addClass("cue").empty().html("Ð£ÑéÂëÒÑ·¢ËÍ,×¢²á³É¹¦ºóÊÖ»úºÅ½«ÓëÔ­ÕÊºÅ½â°ó");
+                            $("#mobileCodeSucMessage1").removeClass().addClass("cue").empty().html("Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½,×¢ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Å½ï¿½ï¿½ï¿½Ô­ï¿½ÊºÅ½ï¿½ï¿½");
                         } else {
-                            $("#mobileCodeSucMessage1").empty().html("ÑéÖ¤ÂëÒÑ·¢ËÍ£¬Çë²éÊÕ¶ÌÐÅ¡£");
+                            $("#mobileCodeSucMessage1").empty().html("ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½Å¡ï¿½");
                         }
                     }
 
@@ -787,13 +787,13 @@ function sendmCode1() {
                     $("#mobileCode1").removeAttr("disabled");
                 }
                 if (obj.rs == -1) {
-                    $("#mobileCode1_error").html("ÍøÂç·±Ã¦£¬ÇëÉÔºóÖØÐÂ»ñÈ¡ÑéÖ¤Âë");
+                    $("#mobileCode1_error").html("ï¿½ï¿½ï¿½ç·±Ã¦ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½");
                     $("#mobileCode1_error").removeClass().addClass("error");
                     $("#mobileCode1_error").show();
                     $("#sendMobileCode1").removeClass().addClass("btn").removeAttr("disabled");
                 }
                 if (obj.info) {
-                    if (obj.info == "¸ÃÊÖ»úºÅÒÑ±»Ê¹ÓÃ£¬Çë¸ü»»ºÅÂë") {
+                    if (obj.info == "ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½") {
                         mobileEngagedStyle1();
                     } else {
                         $("#mobileCode1_error").html(obj.info);
@@ -804,7 +804,7 @@ function sendmCode1() {
                 }
 
                 if (obj.rs == -2) {
-                    $("#mobileCode1_error").html("ÍøÂç·±Ã¦£¬ÇëÉÔºóÖØÐÂ»ñÈ¡ÑéÖ¤Âë");
+                    $("#mobileCode1_error").html("ï¿½ï¿½ï¿½ç·±Ã¦ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½");
                     $("#mobileCode1_error").removeClass().addClass("error");
                     $("#mobileCode1_error").show();
                     $("#sendMobileCode1").removeClass().addClass("btn").removeAttr("disabled");
@@ -813,7 +813,7 @@ function sendmCode1() {
         }
     });
 }
-// ´ÎÁ÷³Ì·¢ËÍÊÖ»úÑéÖ¤Âë
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
 function sendMobileCode1() {
     if ($("#sendMobileCode1").attr("disabled")) {
         return;
@@ -822,12 +822,12 @@ function sendMobileCode1() {
     if (validateRules.isNull(mobile)) {
         $('#phone1').addClass('highlight2');
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
-        $("#phone1_error").removeClass().addClass("error").html("ÇëÊäÈëÊÖ»úºÅ");
+        $("#phone1_error").removeClass().addClass("error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").show();
         return;
     }
     if (!validateRules.isMobile(mobile)) {
-        $("#phone1_error").removeClass().addClass("error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone1_error").removeClass().addClass("error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").show();
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
         return;
@@ -842,7 +842,7 @@ function sendMobileCode1() {
         return;
     }
     if (!validateRules.isMobile(mobile)) {
-        $("#phone1_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone1_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").removeClass().addClass("error");
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
         $("#phone1_error").show();
@@ -853,7 +853,7 @@ function sendMobileCode1() {
     $("#mobileCode1_error").removeClass().empty();
     $("#mobileCode1_error").hide();
     $('#mobileCode1').removeClass("highlight2");
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
         if (result.success == 0) {
@@ -867,7 +867,7 @@ function sendMobileCode1() {
         }
         if (result.success == 1) {
             $('#phone1').removeClass().addClass('text highlight3');
-            $("#phone1_error").html("ÊÖ»úºÅÒÑ×¢²á£¬¼ÌÐø×¢²á½«ÓëÔ­ÕËºÅ½â°ó");
+            $("#phone1_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½ï¿½×¢ï¿½á½«ï¿½ï¿½Ô­ï¿½ËºÅ½ï¿½ï¿½");
             $("#phone1_error").removeClass().addClass("cue");
             $("#phone1_error").show();
             $("#phone1_succeed").removeClass().addClass("blank cue-ico");
@@ -882,7 +882,7 @@ function sendMobileCode1() {
         }
         if (result.success == 2) {
             $('#phone1').removeClass().addClass('text highlight2');
-            $("#phone_error").html("¸ÃÊÖ»úºÅÒÑ±»ÆäËüÕË»§°ó¶¨£¬"+result.ub+"ÌìÄÚ²»¿É¸Ä°ó");
+            $("#phone_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ó¶¨£ï¿½"+result.ub+"ï¿½ï¿½ï¿½Ú²ï¿½ï¿½É¸Ä°ï¿½");
             $("#phone1_error").removeClass().addClass("error");
             $("#phone1_error").show();
             $("#phone1_succeed").removeClass().addClass("blank error-ico");
@@ -893,12 +893,12 @@ function sendMobileCode1() {
 }
 
 var oldEmail, emailCheckResult;
-// ÓÊÏäÑéÖ¤ÐÅÏ¢ÌîÐ´
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Ï¢ï¿½ï¿½Ð´
 function sendRegMail() {
     var mail = $("#mail").val();
     var authcode1 = $("#authcode1").val();
     if (mail == "") {
-        $("#mail_error").removeClass().addClass("error").html("ÇëÊäÈëÓÊÏä");
+        $("#mail_error").removeClass().addClass("error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         $("#mail_error").show();
         $('#mail_succeed').addClass('error-ico');
         $('#mail').addClass('highlight2');
@@ -908,14 +908,14 @@ function sendRegMail() {
     var format = validateRules.isEmail(email);
     var format2 = validateRules.betweenLength(email, 0, 50);
     if (!format) {
-        $("#mail_error").html("ÓÊÏäµØÖ·²»ÕýÈ·£¬ÇëÖØÐÂÊäÈë");
+        $("#mail_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         $('#mail_succeed').addClass('error-ico');
         $('#mail').addClass('highlight2');
         return;
     } else {
         if (!format2) {
             $('#mail_error').removeClass().addClass("error");
-            $("#mail_error").html("ÓÊÏäµØÖ·³¤¶ÈÓ¦ÔÚ4-50¸ö×Ö·ûÖ®¼ä");
+            $("#mail_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½4-50ï¿½ï¿½ï¿½Ö·ï¿½Ö®ï¿½ï¿½");
             $('#mail_succeed').addClass('error-ico');
             $('#mail').removeClass("highlight1").addClass('highlight2');
             return;
@@ -936,19 +936,19 @@ function sendRegMail() {
             function(result) {
                 emailResult = result.success;
                 emailCheckResult = emailResult;
-                // ÓÊÏäÎ´±»ÑéÖ¤ ¿É×¢²á
+                // ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Ö¤ ï¿½ï¿½×¢ï¿½ï¿½
                 if (emailResult == 0) {
                     $("#emailMg").val(email);
                     $("#authcodeMg").val(authcode1);
                     jdThickBoxclose();
-                    $("#dyMobileButton1").html("»ñÈ¡¶ÌÐÅÑéÖ¤Âë");
+                    $("#dyMobileButton1").html("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
                     jQuery.jdThickBox({
                         type: "text",
                         width: 500,
                         height: 260,
                         source: $('#box01').html(),
-                        title: "ÑéÖ¤ÊÖ»ú",
-                        _close_val: "¡Á",
+                        title: "ï¿½ï¿½Ö¤ï¿½Ö»ï¿½",
+                        _close_val: "ï¿½ï¿½",
                         _con: "opinioncon",
                         _titleOn: true
                     });
@@ -970,16 +970,16 @@ function sendRegMail() {
 function emailEngagedStyle() {
     $('#mail_succeed').addClass('error-ico');
     $('#mail_error').removeClass().addClass("error");
-    $("#mail_error").html("¸ÃÓÊÏäÒÑ±»Ê¹ÓÃ£¬Çë¸ü»»ÆäËüÓÊÏä");
+    $("#mail_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 }
 
 function emailFormatErrorStyle() {
     $('#mail_succeed').addClass('error-ico');
     $('#mail_error').removeClass().addClass("error");
-    $("#mail_error").html("ÓÊÏäµØÖ·²»ÕýÈ·£¬ÇëÖØÐÂÊäÈë");
+    $("#mail_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 }
 
-// ÓÊÏäÑéÖ¤ ÑéÖ¤ÊÖ»ú Ìá½»×¢²á
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ ï¿½ï¿½Ö¤ï¿½Ö»ï¿½ ï¿½á½»×¢ï¿½ï¿½
 function mobileReg() {
     var mail = $("#emailMg").val();
     var authcode = $("#authcodeMg").val();
@@ -987,10 +987,10 @@ function mobileReg() {
     var format = validateRules.isEmail(email);
     var format2 = validateRules.betweenLength(email, 0, 50);
     if (!format) {
-        $("#mail_error").html("ÓÊÏäµØÖ·²»ÕýÈ·£¬ÇëÖØÐÂÊäÈë");
+        $("#mail_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         return;
     } else if (!format2) {
-        $("#mail_error").html("ÓÊÏäµØÖ·³¤¶ÈÓ¦ÔÚ4-50¸ö×Ö·ûÖ®¼ä");
+        $("#mail_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½4-50ï¿½ï¿½ï¿½Ö·ï¿½Ö®ï¿½ï¿½");
         return;
     }
 
@@ -999,7 +999,7 @@ function mobileReg() {
     var mobileCode = $("#mobileCode1").val();
     if (mobile == "") {
         $('#phone1').addClass('highlight2');
-        $("#phone1_error").removeClass().addClass("error").html("ÇëÊäÈëÊÖ»úºÅ");
+        $("#phone1_error").removeClass().addClass("error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").show();
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
     }
@@ -1008,19 +1008,19 @@ function mobileReg() {
         $('#mobileCode1').addClass('highlight2');
         $("#mobileCodeSucMessage1").empty();
         $("#mobileCodeSucMessage1").removeClass();
-        $("#mobileCode1_error").html("ÇëÊäÈë¶ÌÐÅÑéÖ¤Âë");
+        $("#mobileCode1_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
         $("#mobileCode1_error").removeClass().addClass("error");
         $("#mobileCode1_error").show();
         return;
     }
     if (mobile == "") {
         $('#phone1').addClass('highlight2');
-        $("#phone1_error").removeClass().addClass("error").html("ÇëÊäÈëÊÖ»úºÅ");
+        $("#phone1_error").removeClass().addClass("error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").show();
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
         return;
     } else if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
-        $("#phone1_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone1_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").removeClass().addClass("error");
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
         $("#phone1_error").show();
@@ -1053,13 +1053,13 @@ function mobileReg() {
                         type: "text",
                         width: 510,
                         height: 280,
-                        source: '<div class="thickbox-tip fz14">' + '<div class="icon-box">' + '<span class="succ-icon m-icon"></span>' + '<div class="item-fore">' + '<div class="ftx-02 info-succ">ÕË»§¸ü°²È«¹ºÎï¸ü·ÅÐÄ</div>' + '</div>' + '</div>' + '<div class="msg-txt">' + 'ÏµÍ³ÒÑÏòÄúµÄÓÊÏä&nbsp;<strong class="ftx-01">' + $("#emailMg").val() + '</strong>&nbsp;·¢ËÍÁËÒ»·âÑéÖ¤ÓÊ¼þ£¬ÇëÄúµÇÂ¼ÓÊÏä£¬µã»÷ÓÊ¼þÖÐµÄÁ´½ÓÍê³ÉÓÊÏäÑéÖ¤¡£Èç¹û³¬¹ý2·ÖÖÓÎ´ÊÕµ½ÓÊ¼þ£¬Äú¿ÉÒÔ<a href="#none" onclick="reSendEmail(\'' + $("#emailMg").val() + '\',\'' + key + '\');" class="ftx-05">ÖØÐÂ·¢ËÍ</a>' + '</div>' + '<div class="mt10 ftx-01"> <span id="reSendEmailSuccess"></span></div>' + '<div class="mt20">' + '<a href="#" id="emailLogin" class="btn-red">µÇÂ¼ÓÊÏä</a>'
+                        source: '<div class="thickbox-tip fz14">' + '<div class="icon-box">' + '<span class="succ-icon m-icon"></span>' + '<div class="item-fore">' + '<div class="ftx-02 info-succ">ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</div>' + '</div>' + '</div>' + '<div class="msg-txt">' + 'ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½&nbsp;<strong class="ftx-01">' + $("#emailMg").val() + '</strong>&nbsp;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½Î´ï¿½Õµï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<a href="#none" onclick="reSendEmail(\'' + $("#emailMg").val() + '\',\'' + key + '\');" class="ftx-05">ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½</a>' + '</div>' + '<div class="mt10 ftx-01"> <span id="reSendEmailSuccess"></span></div>' + '<div class="mt20">' + '<a href="javascript:;" id="emailLogin" class="btn-red">ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½</a>'
                         // +'<a href="#none"
                         // onclick="changeEmail();"
-                        // class="ftx-05 fr">·µ»ØÓÊÏäÐÞ¸Ä</a>'
+                        // class="ftx-05 fr">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½</a>'
                         + '<span class="clr"></span>' + '</div>' + '</div>',
-                        title: "ÎÂÜ°ÌáÊ¾",
-                        _close_val: "¡Á",
+                        title: "ï¿½ï¿½Ü°ï¿½ï¿½Ê¾",
+                        _close_val: "ï¿½ï¿½",
                         _con: "opinioncon",
                         _titleOn: true
                     });
@@ -1092,11 +1092,11 @@ var delayFlag = true;
 function countDown() {
     delayTime--;
     $("#sendMobileCode").attr("disabled", "disabled");
-    $("#dyMobileButton").html(delayTime + 'ÃëºóÖØÐÂ»ñÈ¡');
+    $("#dyMobileButton").html(delayTime + 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡');
     if (delayTime == 1) {
         delayTime = 120;
         $("#mobileCodeSucMessage").removeClass().empty();
-        $("#dyMobileButton").html("»ñÈ¡¶ÌÐÅÑéÖ¤Âë");
+        $("#dyMobileButton").html("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
         $("#mobileCode_error").addClass("hide");
         $("#sendMobileCode").removeClass().addClass("btn").removeAttr("disabled");
         delayFlag = true;
@@ -1110,11 +1110,11 @@ var delayFlag1 = true;
 function countDown1() {
     delayTime1--;
     $("#sendMobileCode1").attr("disabled", "disabled");
-    $("#dyMobileButton1").html(delayTime1 + 'ÃëºóÖØÐÂ»ñÈ¡');
+    $("#dyMobileButton1").html(delayTime1 + 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡');
     if (delayTime1 == 1) {
         delayTime1 = 120;
         $("#mobileCodeSucMessage1").removeClass().empty();
-        $("#dyMobileButton1").html("»ñÈ¡¶ÌÐÅÑéÖ¤Âë");
+        $("#dyMobileButton1").html("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
         $("#mobileCode1_error").removeClass().empty();
         $("#mobileCode1_error").hide();
         $("#sendMobileCode1").removeClass().addClass("btn").removeAttr("disabled");
@@ -1165,7 +1165,7 @@ function validateRegName() {
         $("#regName").attr({
             "class": "text highlight2"
         });
-        $("#regName_error").html("ÇëÊäÈëÓÃ»§Ãû").show().attr({
+        $("#regName_error").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½").show().attr({
             "class": "error"
         });
         return false;
@@ -1191,7 +1191,7 @@ function() {
     $(this).removeClass("hover-btn")
 })
 
-// Ö÷Á÷³ÌÊÖ»ú»ñµÃ½¹µãÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 function phoneFocus() {
     var mobile = $("#phone").val();
     if (oldMobile == mobile && mobile != "") {
@@ -1199,11 +1199,11 @@ function phoneFocus() {
     }
     $("#phone_succeed").removeClass("blank succeed");
     $('#phone').removeClass().addClass('text highlight1');
-    $("#phone_error").removeClass().addClass("focus").html("Íê³ÉÑéÖ¤ºó£¬Äú¿ÉÒÔÓÃ¸ÃÊÖ»úºÅµÇÂ¼ºÍÕÒ»ØÃÜÂë");
+    $("#phone_error").removeClass().addClass("focus").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½Ö»ï¿½ï¿½Åµï¿½Â¼ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½");
     $("#phone_error").show();
     $('#phone_succeed').removeClass('error-ico');
 }
-//Ö÷Á÷³ÌÊÖ»ú»ñµÃ½¹µãÊÂ¼þ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 function phoneOtherFocus() {
     var mobile = $("#phone").val();
     if (oldMobile == mobile && mobile != "") {
@@ -1211,11 +1211,11 @@ function phoneOtherFocus() {
     }
     $("#phone_succeed").removeClass("blank succeed");
     $('#phone').removeClass().addClass('text highlight1');
-    $("#phone_error").removeClass().addClass("focus").html("ÇëÊäÈëÊÖ»úºÅÂë");
+    $("#phone_error").removeClass().addClass("focus").html("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½");
     $("#phone_error").show();
     $('#phone_succeed').removeClass('error-ico');
 }
-// ´ÎÁ÷³ÌÊÖ»ú»ñµÃ½¹µãÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 function phone1Focus() {
     var mobile1 = $("#phone1").val();
     if (oldMobile1 == mobile1 && mobile1 != "") {
@@ -1223,13 +1223,13 @@ function phone1Focus() {
     }
     $("#phone1_succeed").removeClass();
     $('#phone1').removeClass().addClass('text highlight1');
-    $("#phone1_error").removeClass().addClass("focus").html("Íê³ÉÑéÖ¤ºó£¬Äú¿ÉÒÔÓÃ¸ÃÊÖ»úºÅµÇÂ¼ºÍÕÒ»ØÃÜÂë");
+    $("#phone1_error").removeClass().addClass("focus").html("ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½Ö»ï¿½ï¿½Åµï¿½Â¼ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½");
     $("#phone1_error").show();
     $('#phone1_succeed').removeClass('error-ico');
 }
 
 var oldMobile, mobileResult;
-// Ö÷Á÷³Ì¼ì²éÊÖ»ú
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½Ö»ï¿½
 function phoneBlur() {
     var mobile = $("#phone").val();
 
@@ -1245,14 +1245,14 @@ function phoneBlur() {
         return;
     }
     if (oldMobile == mobile && mobile != "") {
-        // Î´ÐÞ¸ÄÊÖ»úºÅ
+        // Î´ï¿½Þ¸ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
         // showMobileCheckResult(mobileResult);
         return;
     }
     oldMobile = mobile;
     if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
         $('#phone').removeClass().addClass('text highlight2');
-        $("#phone_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone_error").removeClass().addClass("error");
         $("#phone_error").show();
         $("#phone_succeed").removeClass().addClass("");
@@ -1265,7 +1265,7 @@ function phoneBlur() {
     $("#mobileCode_error").html("");
     $("#mobileCode_error").hide();
     $("#state").val("");
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
 
@@ -1291,7 +1291,7 @@ function phoneBlur() {
         }
     });
 }
-//Ö÷Á÷³Ì¼ì²éÊÖ»ú
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½Ö»ï¿½
 function phoneKeyup() {
     var mobile = $("#phone").val();
     var mobileLength=mobile.length;
@@ -1311,14 +1311,14 @@ function phoneKeyup() {
         return;
     }
     if (oldMobile == mobile && mobile != "") {
-        // Î´ÐÞ¸ÄÊÖ»úºÅ
+        // Î´ï¿½Þ¸ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
         // showMobileCheckResult(mobileResult);
         return;
     }
     oldMobile = mobile;
     if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
         $('#phone').removeClass().addClass('text highlight2');
-        $("#phone_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone_error").removeClass().addClass("error");
         $("#phone_error").show();
         $("#phone_succeed").removeClass().addClass("");
@@ -1331,7 +1331,7 @@ function phoneKeyup() {
     $("#mobileCode_error").html("");
     $("#mobileCode_error").hide();
     $("#state").val("");
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
 
@@ -1358,7 +1358,7 @@ function phoneKeyup() {
     });
 }
 
-//Ö÷Á÷³Ì¼ì²éÊÖ»ú
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½Ö»ï¿½
 function phoneOtherBlur() {
     var mobile = $("#phone").val();
 
@@ -1372,21 +1372,21 @@ function phoneOtherBlur() {
         return;
     }
     if (oldMobile == mobile && mobile != "") {
-        // Î´ÐÞ¸ÄÊÖ»úºÅ
+        // Î´ï¿½Þ¸ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
         // showMobileCheckResult(mobileResult);
         return;
     }
     oldMobile = mobile;
     if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
         $('#phone').removeClass().addClass('text highlight2');
-        $("#phone_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone_error").removeClass().addClass("error");
         $("#phone_error").show();
         $("#phone_succeed").removeClass().addClass("");
         mobileFlags = false;
         return;
     }
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
 
@@ -1404,7 +1404,7 @@ function phoneOtherBlur() {
 
         if (result.success == 1 || result.success == 2) {
         	 $('#phone').removeClass().addClass('text highlight2');
-             $("#phone_error").html("¸ÃÊÖ»úºÅÒÑ±»°ó¶¨£¬Çë¸ü»»ÊÖ»úºÅ");
+             $("#phone_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ó¶¨£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
              $("#phone_error").removeClass().addClass("error");
              $("#phone_error").show();
              $("#phone_succeed").removeClass().addClass("");
@@ -1413,7 +1413,7 @@ function phoneOtherBlur() {
 
     });
 }
-//Ö÷Á÷³Ì¼ì²éÊÖ»ú
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½Ö»ï¿½
 function phoneOtherKeyup() {
     var mobile = $("#phone").val();
     var mobileLength=mobile.length;
@@ -1431,21 +1431,21 @@ function phoneOtherKeyup() {
         return;
     }
     if (oldMobile == mobile && mobile != "") {
-        // Î´ÐÞ¸ÄÊÖ»úºÅ
+        // Î´ï¿½Þ¸ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
         // showMobileCheckResult(mobileResult);
         return;
     }
     oldMobile = mobile;
     if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
         $('#phone').removeClass().addClass('text highlight2');
-        $("#phone_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone_error").removeClass().addClass("error");
         $("#phone_error").show();
         $("#phone_succeed").removeClass().addClass("");
         mobileFlags = false;
         return;
     }
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
 
@@ -1463,7 +1463,7 @@ function phoneOtherKeyup() {
 
         if (result.success == 1 || result.success == 2) {
          	 $('#phone').removeClass().addClass('text highlight2');
-             $("#phone_error").html("¸ÃÊÖ»úºÅÒÑ±»°ó¶¨£¬Çë¸ü»»ÊÖ»úºÅ");
+             $("#phone_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ó¶¨£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
              $("#phone_error").removeClass().addClass("error");
              $("#phone_error").show();
              $("#phone_succeed").removeClass().addClass("");
@@ -1497,7 +1497,7 @@ function mobileOkStyle() {
 
 function mobileBindedStyle(ub) {
     $('#phone').removeClass().addClass('text highlight2');
-    $("#phone_error").html("¸ÃÊÖ»úºÅÒÑ±»ÆäËüÕË»§°ó¶¨£¬"+ub+"ÌìÄÚ²»¿É¸Ä°ó");
+    $("#phone_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ó¶¨£ï¿½"+ub+"ï¿½ï¿½ï¿½Ú²ï¿½ï¿½É¸Ä°ï¿½");
     $("#phone_error").removeClass().addClass("error");
     $("#phone_error").show();
     $("#phone_succeed").removeClass().addClass("");
@@ -1508,12 +1508,12 @@ function mobileBindedStyle(ub) {
 
 function mobileEngagedStyle() {
     $('#phone').removeClass().addClass('text highlight3');
-    $("#phone_error").html("ÊÖ»úºÅÒÑ×¢²á£¬¼ÌÐø×¢²á½«ÓëÔ­ÕËºÅ½â°ó");
+    $("#phone_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½ï¿½×¢ï¿½á½«ï¿½ï¿½Ô­ï¿½ËºÅ½ï¿½ï¿½");
     $("#phone_error").removeClass().addClass("cue");
     $("#phone_error").show();
     $("#phone_succeed").removeClass().addClass("blank cue-ico");
     $("#rebind").remove();
-    $('#dphone').after('<div class="item" id="rebind"> <span class="label">&nbsp;</span><div class="fl item-ifo item-ifo-extra"> <a href="javascript:;" onclick="unbind();" class="btn-comm"><span>¼ÌÐø×¢²á</span></a> </div> </div>');
+    $('#dphone').after('<div class="item" id="rebind"> <span class="label">&nbsp;</span><div class="fl item-ifo item-ifo-extra"> <a href="javascript:;" onclick="unbind();" class="btn-comm"><span>ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½</span></a> </div> </div>');
     $("#mobileCodeDiv").hide();
     mobileFlags = false;
 }
@@ -1531,7 +1531,7 @@ function showMobileCheckResult1(result) {
 function mobileOkStyle1() {
     $('#phone1').removeClass().addClass("text");
     $("#phone1_error").removeClass().addClass("success");
-    $("#phone1_error").html("´ËÊÖ»úºÅ¿ÉÓÃ");
+    $("#phone1_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Å¿ï¿½ï¿½ï¿½");
     $("#phone1_succeed").removeClass().addClass("blank succeed");
     $("#mobileCodeDiv1").show();
     $("#dmcode1").show();
@@ -1542,7 +1542,7 @@ function mobileOkStyle1() {
 
 function mobileBindedStyle1(ub) {
     $('#phone1').removeClass().addClass('text highlight2');
-    $("#phone1_error").html("¸ÃÊÖ»úºÅÒÑ±»ÆäËüÕË»§°ó¶¨£¬"+ub+"ÌìÄÚ²»¿É¸Ä°ó");
+    $("#phone1_error").html("ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ó¶¨£ï¿½"+ub+"ï¿½ï¿½ï¿½Ú²ï¿½ï¿½É¸Ä°ï¿½");
     $("#phone1_error").removeClass().addClass("error");
     $("#phone1_succeed").removeClass().addClass("blank error-ico");
     $("#phone1_error").show();
@@ -1556,17 +1556,17 @@ function mobileBindedStyle1(ub) {
 
 function mobileEngagedStyle1() {
     $('#phone1').removeClass().addClass('text highlight3');
-    $("#phone1_error").html("ÊÖ»úºÅÒÑ×¢²á£¬¼ÌÐø×¢²á½«ÓëÔ­ÕËºÅ½â°ó");
+    $("#phone1_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½á£¬ï¿½ï¿½ï¿½ï¿½×¢ï¿½á½«ï¿½ï¿½Ô­ï¿½ËºÅ½ï¿½ï¿½");
     $("#phone1_error").removeClass().addClass("cue");
     $("#phone1_succeed").removeClass().addClass("blank cue-ico");
     $("#phone1_error").show();
     $("#rebind1").remove();
-    $('#dphone1').after('<div class="item"  id="rebind1"><span class="label">&nbsp;</span><div class="fl item-ifo"><a href="javascript:void(0);" onclick="unbind1();"  class="btn btn-comm"><span>¼ÌÐø×¢²á</span></a></div></div>');
+    $('#dphone1').after('<div class="item"  id="rebind1"><span class="label">&nbsp;</span><div class="fl item-ifo"><a href="javascript:void(0);" onclick="unbind1();"  class="btn btn-comm"><span>ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½</span></a></div></div>');
     $("#mobileCodeDiv1").hide();
     mobileFlag = false;
     return;
 }
-// ´ÎÁ÷³ÌÊÖ»úÊ§È¥½¹µãÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ê§È¥ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 var mobileFlag = false;
 var oldMobile1, mobileResult1;
 function phone1Blur() {
@@ -1583,14 +1583,14 @@ function phone1Blur() {
         return;
     }
     if (oldMobile1 == mobile && mobile != "") {
-        // Î´ÐÞ¸ÄÊÖ»úºÅ
+        // Î´ï¿½Þ¸ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
         // showMobileCheckResult1(mobileResult1);
         return;
     }
     oldMobile1 = mobile;
 
     if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
-        $("#phone1_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone1_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").removeClass().addClass("error");
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
         $("#phone1_error").show();
@@ -1606,7 +1606,7 @@ function phone1Blur() {
     $("#mobileCode1_error").removeClass().empty();
     $("#mobileCode1_error").hide();
     $('#mobileCode1').removeClass("highlight2");
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
         // mobileResult1 = result.success;
@@ -1650,14 +1650,14 @@ function phone1Keyup() {
         return;
     }
     if (oldMobile1 == mobile && mobile != "") {
-        // Î´ÐÞ¸ÄÊÖ»úºÅ
+        // Î´ï¿½Þ¸ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
         // showMobileCheckResult1(mobileResult1);
         return;
     }
     oldMobile1 = mobile;
 
     if (validateRules.isNull(mobile) || !validateRules.isMobile(mobile)) {
-        $("#phone1_error").html("ÊÖ»úºÅÂë¸ñÊ½ÓÐÎó£¬ÇëÊäÈëÕýÈ·µÄÊÖ»úºÅ");
+        $("#phone1_error").html("ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½");
         $("#phone1_error").removeClass().addClass("error");
         $("#phone1_succeed").removeClass().addClass("blank error-ico");
         $("#phone1_error").show();
@@ -1673,7 +1673,7 @@ function phone1Keyup() {
     $("#mobileCode1_error").removeClass().empty();
     $("#mobileCode1_error").hide();
     $('#mobileCode1').removeClass("highlight2");
-    // ¼ì²âÊÖ»úºÅÂëÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     $.getJSON("../validateuser/isMobileEngaged?mobile=" + mobile + "&r=" + Math.random(),
     function(result) {
         // mobileResult1 = result.success;
@@ -1698,28 +1698,28 @@ function phone1Keyup() {
         }
     });
 }
-// ´ÎÁ÷³Ì¶ÌÐÅÑéÖ¤Âë»ñµÃ½¹µãÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 function mobileCodeFocus() {
     $('#mobileCode').removeClass().addClass('text text-1 highlight1');
     $("#mobileCode_error").hide();
 }
-// ´ÎÁ÷³Ì¶ÌÐÅÑéÖ¤Âë»ñµÃÊ§È¥ÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½Ê§È¥ï¿½Â¼ï¿½
 function mobileCodeBlur() {
     $('#mobileCode').removeClass().addClass("text text-1");
     $("#mobileCode_error").hide();
 }
-// ´ÎÁ÷³Ì¶ÌÐÅÑéÖ¤Âë»ñµÃ½¹µãÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 function mobileCode1Focus() {
     $('#mobileCode1').removeClass().addClass('text text-1 highlight1');
     $("#mobileCode1_error").hide();
 }
-// ´ÎÁ÷³Ì¶ÌÐÅÑéÖ¤Âë»ñµÃÊ§È¥ÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½Ê§È¥ï¿½Â¼ï¿½
 function mobileCode1Blur() {
     $('#mobileCode1').removeClass().addClass("text text-1");
     $("#mobileCode1_error").hide();
     $('#mobileCode1_succeed').removeClass('error-ico');
 }
-// ½â°ó°´Å¥ÊÂ¼þ
+// ï¿½ï¿½ï¿½Å¥ï¿½Â¼ï¿½
 function unbind() {
     $("#state").val("unbind");
     $("#mobileCodeDiv").show();
@@ -1727,110 +1727,110 @@ function unbind() {
     // sendmCode();
     sendMobileCode();
 }
-// ´ÎÁ÷³Ì½â°ó°´Å¥ÊÂ¼þ
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½Å¥ï¿½Â¼ï¿½
 function unbind1() {
     $("#state").val("unbind");
     $("#mobileCodeDiv1").show();
     $("#rebind1").remove();
     sendMobileCode1();
 }
-// ÓÃ»§Ð­Òé
+// ï¿½Ã»ï¿½Ð­ï¿½ï¿½
 $(function() {
     $('#protocol').click(function() {
         jQuery.jdThickBox({
             type: "text",
-            title: "¾©¶«ÓÃ»§×¢²áÐ­Òé",
+            title: "ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½×¢ï¿½ï¿½Ð­ï¿½ï¿½",
             width: 922,
             height: 450,
-            source: "<div class=\" regist-2013\">" + "<div class=\"regist-bor\">" + "<div class=\"mc\">" + "<div id=\"protocol-con\">" + " <h4>¾©¶«ÓÃ»§×¢²áÐ­Òé</h4>" +
+            source: "<div class=\" regist-2013\">" + "<div class=\"regist-bor\">" + "<div class=\"mc\">" + "<div id=\"protocol-con\">" + " <h4>ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½×¢ï¿½ï¿½Ð­ï¿½ï¿½</h4>" +
 
-            "    <p>" + "        ±¾Ð­ÒéÊÇÄúÓë¾©¶«ÍøÕ¾£¨¼ò³Æ\"±¾Õ¾\"£¬ÍøÖ·£ºwww.jd.com£©ËùÓÐÕß£¨ÒÔÏÂ¼ò³ÆÎª\"¾©¶«\"£©Ö®¼ä¾Í¾©¶«ÍøÕ¾·þÎñµÈÏà¹ØÊÂÒËËù¶©Á¢µÄÆõÔ¼£¬ÇëÄú×ÐÏ¸ÔÄ¶Á±¾×¢²áÐ­Òé£¬Äúµã»÷\"Í¬Òâ²¢¼ÌÐø\"°´Å¥ºó£¬±¾Ð­Òé¼´¹¹³É¶ÔË«·½ÓÐÔ¼ÊøÁ¦µÄ·¨ÂÉÎÄ¼þ¡£</p>" + "    <h5> µÚ1Ìõ ±¾Õ¾·þÎñÌõ¿îµÄÈ·ÈÏºÍ½ÓÄÉ</h5>" +
+            "    <p>" + "        ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¾©ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½\"ï¿½ï¿½Õ¾\"ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½www.jd.comï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Îª\"ï¿½ï¿½ï¿½ï¿½\"ï¿½ï¿½Ö®ï¿½ï¿½Í¾ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½Ä¶ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ð­ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½\"Í¬ï¿½â²¢ï¿½ï¿½ï¿½ï¿½\"ï¿½ï¿½Å¥ï¿½ó£¬±ï¿½Ð­ï¿½é¼´ï¿½ï¿½ï¿½É¶ï¿½Ë«ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½</p>" + "    <h5> ï¿½ï¿½1ï¿½ï¿½ ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ÏºÍ½ï¿½ï¿½ï¿½</h5>" +
 
-            "    <p>" + "        <strong>1.1</strong>±¾Õ¾µÄ¸÷Ïîµç×Ó·þÎñµÄËùÓÐÈ¨ºÍÔË×÷È¨¹é¾©¶«ËùÓÐ¡£ÓÃ»§Í¬ÒâËùÓÐ×¢²áÐ­ÒéÌõ¿î²¢Íê³É×¢²á³ÌÐò£¬²ÅÄÜ³ÉÎª±¾Õ¾µÄÕýÊ½ÓÃ»§¡£ÓÃ»§È·ÈÏ£º±¾Ð­ÒéÌõ¿îÊÇ´¦ÀíË«·½È¨ÀûÒåÎñµÄÆõÔ¼£¬Ê¼ÖÕÓÐÐ§£¬·¨ÂÉÁíÓÐÇ¿ÖÆÐÔ¹æ¶¨»òË«·½ÁíÓÐÌØ±ðÔ¼¶¨µÄ£¬ÒÀÆä¹æ¶¨¡£" + "    </p>" +
+            "    <p>" + "        <strong>1.1</strong>ï¿½ï¿½Õ¾ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½é¾©ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ã»ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½î²¢ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ò£¬²ï¿½ï¿½Ü³ï¿½Îªï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Ê½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ã»ï¿½È·ï¿½Ï£ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½Ë«ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½Ô¹æ¶¨ï¿½ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Ô¼ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>1.2</strong>ÓÃ»§µã»÷Í¬Òâ±¾Ð­ÒéµÄ£¬¼´ÊÓÎªÓÃ»§È·ÈÏ×Ô¼º¾ßÓÐÏíÊÜ±¾Õ¾·þÎñ¡¢ÏÂµ¥¹ºÎïµÈÏàÓ¦µÄÈ¨ÀûÄÜÁ¦ºÍÐÐÎªÄÜÁ¦£¬ÄÜ¹»¶ÀÁ¢³Ðµ£·¨ÂÉÔðÈÎ¡£</p>" +
+            "    <p>" + "        <strong>1.2</strong>ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Í¬ï¿½â±¾Ð­ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ã»ï¿½È·ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¡ï¿½</p>" +
 
-            "    <p>" + "        <strong>1.3</strong>Èç¹ûÄúÔÚ18ÖÜËêÒÔÏÂ£¬ÄúÖ»ÄÜÔÚ¸¸Ä¸»ò¼à»¤ÈËµÄ¼à»¤²ÎÓëÏÂ²ÅÄÜÊ¹ÓÃ±¾Õ¾¡£</p>" +
+            "    <p>" + "        <strong>1.3</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½18ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ú¸ï¿½Ä¸ï¿½ï¿½à»¤ï¿½ËµÄ¼à»¤ï¿½ï¿½ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½Ê¹ï¿½Ã±ï¿½Õ¾ï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>1.4</strong>¾©¶«±£ÁôÔÚÖÐ»ªÈËÃñ¹²ºÍ¹ú´óÂ½µØÇø·¨Ê©ÐÐÖ®·¨ÂÉÔÊÐíµÄ·¶Î§ÄÚ¶À×Ô¾ö¶¨¾Ü¾ø·þÎñ¡¢¹Ø±ÕÓÃ»§ÕË»§¡¢Çå³ý»ò±à¼­ÄÚÈÝ»òÈ¡Ïû¶©µ¥µÄÈ¨Àû¡£</p>" + "    <h5> µÚ2Ìõ ±¾Õ¾·þÎñ</h5>" +
+            "    <p>" + "        <strong>1.4</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ñ¹²ºÍ¹ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê©ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½Î§ï¿½Ú¶ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ñ¡¢¹Ø±ï¿½ï¿½Ã»ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à¼­ï¿½ï¿½ï¿½Ý»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½</p>" + "    <h5> ï¿½ï¿½2ï¿½ï¿½ ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½</h5>" +
 
-            "    <p>" + "        <strong>2.1</strong>¾©¶«Í¨¹ý»¥ÁªÍøÒÀ·¨ÎªÓÃ»§Ìá¹©»¥ÁªÍøÐÅÏ¢µÈ·þÎñ£¬ÓÃ»§ÔÚÍêÈ«Í¬Òâ±¾Ð­Òé¼°±¾Õ¾¹æ¶¨µÄÇé¿öÏÂ£¬·½ÓÐÈ¨Ê¹ÓÃ±¾Õ¾µÄÏà¹Ø·þÎñ¡£</p>" +
+            "    <p>" + "        <strong>2.1</strong>ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ã»ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½È·ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½È«Í¬ï¿½â±¾Ð­ï¿½é¼°ï¿½ï¿½Õ¾ï¿½æ¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½È¨Ê¹ï¿½Ã±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>2.2</strong>ÓÃ»§±ØÐë×ÔÐÐ×¼±¸ÈçÏÂÉè±¸ºÍ³Ðµ£ÈçÏÂ¿ªÖ§£º£¨1£©ÉÏÍøÉè±¸£¬°üÀ¨²¢²»ÏÞÓÚµçÄÔ»òÕßÆäËûÉÏÍøÖÕ¶Ë¡¢µ÷ÖÆ½âµ÷Æ÷¼°ÆäËû±Ø±¸µÄÉÏÍø×°ÖÃ£»£¨2£©ÉÏÍø¿ªÖ§£¬°üÀ¨²¢²»ÏÞÓÚÍøÂç½ÓÈë·Ñ¡¢ÉÏÍøÉè±¸×âÓÃ·Ñ¡¢ÊÖ»úÁ÷Á¿·ÑµÈ¡£" + "    </p>" + "    <h5> µÚ3Ìõ ÓÃ»§ÐÅÏ¢</h5>" +
+            "    <p>" + "        <strong>2.2</strong>ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Í³Ðµï¿½ï¿½ï¿½ï¿½Â¿ï¿½Ö§ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶Ë¡ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½Ã£ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½Ã·Ñ¡ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÑµÈ¡ï¿½" + "    </p>" + "    <h5> ï¿½ï¿½3ï¿½ï¿½ ï¿½Ã»ï¿½ï¿½ï¿½Ï¢</h5>" +
 
-            "    <p>" + "        <strong>3.1</strong>ÓÃ»§Ó¦×ÔÐÐ³ÏÐÅÏò±¾Õ¾Ìá¹©×¢²á×ÊÁÏ£¬ÓÃ»§Í¬ÒâÆäÌá¹©µÄ×¢²á×ÊÁÏÕæÊµ¡¢×¼È·¡¢ÍêÕû¡¢ºÏ·¨ÓÐÐ§£¬ÓÃ»§×¢²á×ÊÁÏÈçÓÐ±ä¶¯µÄ£¬Ó¦¼°Ê±¸üÐÂÆä×¢²á×ÊÁÏ¡£Èç¹ûÓÃ»§Ìá¹©µÄ×¢²á×ÊÁÏ²»ºÏ·¨¡¢²»ÕæÊµ¡¢²»×¼È·¡¢²»Ïê¾¡µÄ£¬ÓÃ»§Ðè³Ðµ£Òò´ËÒýÆðµÄÏàÓ¦ÔðÈÎ¼°ºó¹û£¬²¢ÇÒ¾©¶«±£ÁôÖÕÖ¹ÓÃ»§Ê¹ÓÃ¾©¶«¸÷Ïî·þÎñµÄÈ¨Àû¡£" + "    </p>" +
+            "    <p>" + "        <strong>3.1</strong>ï¿½Ã»ï¿½Ó¦ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½á¹©×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½Ã»ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½×¼È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ã»ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ä¶¯ï¿½Ä£ï¿½Ó¦ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½á¹©ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ï²ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½×¼È·ï¿½ï¿½ï¿½ï¿½ï¿½ê¾¡ï¿½Ä£ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½Ã»ï¿½Ê¹ï¿½Ã¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>3.2</strong>ÓÃ»§ÔÚ±¾Õ¾½øÐÐä¯ÀÀ¡¢ÏÂµ¥¹ºÎïµÈ»î¶¯Ê±£¬Éæ¼°ÓÃ»§ÕæÊµÐÕÃû/Ãû³Æ¡¢Í¨ÐÅµØÖ·¡¢ÁªÏµµç»°¡¢µç×ÓÓÊÏäµÈÒþË½ÐÅÏ¢µÄ£¬±¾Õ¾½«ÓèÒÔÑÏ¸ñ±£ÃÜ£¬³ý·ÇµÃµ½ÓÃ»§µÄÊÚÈ¨»ò·¨ÂÉÁíÓÐ¹æ¶¨£¬±¾Õ¾²»»áÏòÍâ½çÅûÂ¶ÓÃ»§ÒþË½ÐÅÏ¢¡£" + "    </p>" +
+            "    <p>" + "        <strong>3.2</strong>ï¿½Ã»ï¿½ï¿½Ú±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½È»î¶¯Ê±ï¿½ï¿½ï¿½æ¼°ï¿½Ã»ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Æ¡ï¿½Í¨ï¿½Åµï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ïµï¿½ç»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½ï¿½Ï¢ï¿½Ä£ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ÇµÃµï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹æ¶¨ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¶ï¿½Ã»ï¿½ï¿½ï¿½Ë½ï¿½ï¿½Ï¢ï¿½ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>3.3</strong>ÓÃ»§×¢²á³É¹¦ºó£¬½«²úÉúÓÃ»§ÃûºÍÃÜÂëµÈÕË»§ÐÅÏ¢£¬Äú¿ÉÒÔ¸ù¾Ý±¾Õ¾¹æ¶¨¸Ä±äÄúµÄÃÜÂë¡£ÓÃ»§Ó¦½÷É÷ºÏÀíµÄ±£´æ¡¢Ê¹ÓÃÆäÓÃ»§ÃûºÍÃÜÂë¡£ÓÃ»§Èô·¢ÏÖÈÎºÎ·Ç·¨Ê¹ÓÃÓÃ»§ÕËºÅ»ò´æÔÚ°²È«Â©¶´µÄÇé¿ö£¬ÇëÁ¢¼´Í¨Öª±¾Õ¾²¢Ïò¹«°²»ú¹Ø±¨°¸¡£" + "    </p>" +
+            "    <p>" + "        <strong>3.3</strong>ï¿½Ã»ï¿½×¢ï¿½ï¿½É¹ï¿½ï¿½ó£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½Ý±ï¿½Õ¾ï¿½æ¶¨ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£ï¿½Ã»ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½æ¡¢Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¡£ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎºÎ·Ç·ï¿½Ê¹ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ËºÅ»ï¿½ï¿½ï¿½Ú°ï¿½È«Â©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ò¹«°ï¿½ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>3.4</strong><strong>ÓÃ»§Í¬Òâ£¬¾©¶«ÓµÓÐÍ¨¹ýÓÊ¼þ¡¢¶ÌÐÅµç»°µÈÐÎÊ½£¬ÏòÔÚ±¾Õ¾×¢²á¡¢¹ºÎïÓÃ»§¡¢ÊÕ»õÈË·¢ËÍ¶©µ¥ÐÅÏ¢¡¢´ÙÏú»î¶¯µÈ¸æÖªÐÅÏ¢µÄÈ¨Àû¡£</strong></p>" +
+            "    <p>" + "        <strong>3.4</strong><strong>ï¿½Ã»ï¿½Í¬ï¿½â£¬ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµç»°ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾×¢ï¿½á¡¢ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ë·ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î¶¯ï¿½È¸ï¿½Öªï¿½ï¿½Ï¢ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½</strong></p>" +
 
-            "    <p>" + "        <strong>3.5</strong><strong>ÓÃ»§²»µÃ½«ÔÚ±¾Õ¾×¢²á»ñµÃµÄÕË»§½è¸øËûÈËÊ¹ÓÃ£¬·ñÔòÓÃ»§Ó¦³Ðµ£ÓÉ´Ë²úÉúµÄÈ«²¿ÔðÈÎ£¬²¢ÓëÊµ¼ÊÊ¹ÓÃÈË³Ðµ£Á¬´øÔðÈÎ¡£</strong></p>" +
+            "    <p>" + "        <strong>3.5</strong><strong>ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½Ú±ï¿½Õ¾×¢ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ó¦ï¿½Ðµï¿½ï¿½É´Ë²ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ë³Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¡ï¿½</strong></p>" +
 
-            "    <p>" + "        <strong>3.6</strong><strong>ÓÃ»§Í¬Òâ£¬¾©¶«ÓÐÈ¨Ê¹ÓÃÓÃ»§µÄ×¢²áÐÅÏ¢¡¢ÓÃ»§Ãû¡¢ÃÜÂëµÈÐÅÏ¢£¬µÇÂ¼½øÈëÓÃ»§µÄ×¢²áÕË»§£¬½øÐÐÖ¤¾Ý±£È«£¬°üÀ¨µ«²»ÏÞÓÚ¹«Ö¤¡¢¼ûÖ¤µÈ¡£</strong></p>" + "    <h5> µÚ4Ìõ ÓÃ»§ÒÀ·¨ÑÔÐÐÒåÎñ</h5>" +
+            "    <p>" + "        <strong>3.6</strong><strong>ï¿½Ã»ï¿½Í¬ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨Ê¹ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ý±ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½È¡ï¿½</strong></p>" + "    <h5> ï¿½ï¿½4ï¿½ï¿½ ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h5>" +
 
-            "    <p> ±¾Ð­ÒéÒÀ¾Ý¹ú¼ÒÏà¹Ø·¨ÂÉ·¨¹æ¹æÕÂÖÆ¶¨£¬ÓÃ»§Í¬ÒâÑÏ¸ñ×ñÊØÒÔÏÂÒåÎñ£º</p>" +
+            "    <p> ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½É·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Í¬ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨1£©</strong>²»µÃ´«Êä»ò·¢±í£ºÉ¿¶¯¿¹¾Ü¡¢ÆÆ»µÏÜ·¨ºÍ·¨ÂÉ¡¢ÐÐÕþ·¨¹æÊµÊ©µÄÑÔÂÛ£¬É¿¶¯µß¸²¹ú¼ÒÕþÈ¨£¬ÍÆ·­Éç»áÖ÷ÒåÖÆ¶ÈµÄÑÔÂÛ£¬É¿¶¯·ÖÁÑ¹ú¼Ò¡¢ÆÆ»µ¹ú¼ÒÍ³Ò»µÄµÄÑÔÂÛ£¬É¿¶¯Ãñ×å³ðºÞ¡¢Ãñ×åÆçÊÓ¡¢ÆÆ»µÃñ×åÍÅ½áµÄÑÔÂÛ£»" + "    </p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½1ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ò·¢±ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½Ü¡ï¿½ï¿½Æ»ï¿½ï¿½Ü·ï¿½ï¿½Í·ï¿½ï¿½É¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÊµÊ©ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½É¿ï¿½ï¿½ï¿½ß¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶Èµï¿½ï¿½ï¿½ï¿½Û£ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½Ò¡ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½Í³Ò»ï¿½Äµï¿½ï¿½ï¿½ï¿½Û£ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>£¨2£©</strong>´ÓÖÐ¹ú´óÂ½Ïò¾³Íâ´«Êä×ÊÁÏÐÅÏ¢Ê±±ØÐë·ûºÏÖÐ¹úÓÐ¹Ø·¨¹æ£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½2ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½â´«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½Ð¹Ø·ï¿½ï¿½æ£»</p>" +
 
-            "    <p>" + "        <strong>£¨3£©</strong>²»µÃÀûÓÃ±¾Õ¾´ÓÊÂÏ´Ç®¡¢ÇÔÈ¡ÉÌÒµÃØÃÜ¡¢ÇÔÈ¡¸öÈËÐÅÏ¢µÈÎ¥·¨·¸×ï»î¶¯£»" + "    </p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½3ï¿½ï¿½</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Ï´Ç®ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Òµï¿½ï¿½ï¿½Ü¡ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î¶¯ï¿½ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>£¨4£©</strong>²»µÃ¸ÉÈÅ±¾Õ¾µÄÕý³£ÔË×ª£¬²»µÃÇÖÈë±¾Õ¾¼°¹ú¼Ò¼ÆËã»úÐÅÏ¢ÏµÍ³£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½4ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½Å±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë±¾Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ÏµÍ³ï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨5£©</strong>²»µÃ´«Êä»ò·¢±íÈÎºÎÎ¥·¨·¸×ïµÄ¡¢É§ÈÅÐÔµÄ¡¢ÖÐÉËËûÈËµÄ¡¢ÈèÂîÐÔµÄ¡¢¿ÖÏÅÐÔµÄ¡¢ÉËº¦ÐÔµÄ¡¢Ó¹Ë×µÄ£¬Òù»àµÄ¡¢²»ÎÄÃ÷µÄµÈÐÅÏ¢×ÊÁÏ£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½5ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ò·¢±ï¿½ï¿½Îºï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½É§ï¿½ï¿½ï¿½ÔµÄ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ËµÄ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÔµÄ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÔµÄ¡ï¿½ï¿½Ëºï¿½ï¿½ÔµÄ¡ï¿½Ó¹ï¿½×µÄ£ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ï£ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨6£©</strong>²»µÃ´«Êä»ò·¢±íËðº¦¹ú¼ÒÉç»á¹«¹²ÀûÒæºÍÉæ¼°¹ú¼Ò°²È«µÄÐÅÏ¢×ÊÁÏ»òÑÔÂÛ£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½6ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ò·¢±ï¿½ï¿½ðº¦¹ï¿½ï¿½ï¿½ï¿½ï¿½á¹«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¼°ï¿½ï¿½ï¿½Ò°ï¿½È«ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ï¿½Û£ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨7£©</strong>²»µÃ½ÌËôËûÈË´ÓÊÂ±¾ÌõËù½ûÖ¹µÄÐÐÎª£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½7ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë´ï¿½ï¿½Â±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨8£©</strong>²»µÃÀûÓÃÔÚ±¾Õ¾×¢²áµÄÕË»§½øÐÐÄ²ÀûÐÔ¾­Óª»î¶¯£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½8ï¿½ï¿½</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾×¢ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½Ô¾ï¿½Óªï¿½î¶¯ï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨9£©</strong>²»µÃ·¢²¼ÈÎºÎÇÖ·¸ËûÈËÖø×÷È¨¡¢ÉÌ±êÈ¨µÈÖªÊ¶²úÈ¨»òºÏ·¨È¨ÀûµÄÄÚÈÝ£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½9ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ì±ï¿½È¨ï¿½ï¿½ÖªÊ¶ï¿½ï¿½È¨ï¿½ï¿½Ï·ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½</p>" +
 
-            "    <p>" + "        ÓÃ»§Ó¦²»Ê±¹Ø×¢²¢×ñÊØ±¾Õ¾²»Ê±¹«²¼»òÐÞ¸ÄµÄ¸÷ÀàºÏ·¨¹æÔò¹æ¶¨¡£</p>" +
+            "    <p>" + "        ï¿½Ã»ï¿½Ó¦ï¿½ï¿½Ê±ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Õ¾ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ÄµÄ¸ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½</p>" +
 
-            "    <p>" + "        <strong>±¾Õ¾±£ÓÐÉ¾³ýÕ¾ÄÚ¸÷Àà²»·ûºÏ·¨ÂÉÕþ²ß»ò²»ÕæÊµµÄÐÅÏ¢ÄÚÈÝ¶øÎÞÐëÍ¨ÖªÓÃ»§µÄÈ¨Àû¡£</strong></p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½Õ¾ï¿½Ú¸ï¿½ï¿½à²»ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß»ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½Ã»ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½</strong></p>" +
 
-            "    <p>" + "        <strong>ÈôÓÃ»§Î´×ñÊØÒÔÉÏ¹æ¶¨µÄ£¬±¾Õ¾ÓÐÈ¨×÷³ö¶ÀÁ¢ÅÐ¶Ï²¢²ÉÈ¡ÔÝÍ£»ò¹Ø±ÕÓÃ»§ÕÊºÅµÈ´ëÊ©¡£</strong>ÓÃ»§Ðë¶Ô×Ô¼ºÔÚÍøÉÏµÄÑÔÂÛºÍÐÐÎª³Ðµ£·¨ÂÉÔðÈÎ¡£</p>" + "    <h5> µÚ5Ìõ ÉÌÆ·ÐÅÏ¢</h5>" +
+            "    <p>" + "        <strong>ï¿½ï¿½ï¿½Ã»ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¹æ¶¨ï¿½Ä£ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï²ï¿½ï¿½ï¿½È¡ï¿½ï¿½Í£ï¿½ï¿½Ø±ï¿½ï¿½Ã»ï¿½ï¿½ÊºÅµÈ´ï¿½Ê©ï¿½ï¿½</strong>ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½Îªï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¡ï¿½</p>" + "    <h5> ï¿½ï¿½5ï¿½ï¿½ ï¿½ï¿½Æ·ï¿½ï¿½Ï¢</h5>" +
 
-            "    <p>" + "        ±¾Õ¾ÉÏµÄÉÌÆ·¼Û¸ñ¡¢ÊýÁ¿¡¢ÊÇ·ñÓÐ»õµÈÉÌÆ·ÐÅÏ¢ËæÊ±¶¼ÓÐ¿ÉÄÜ·¢Éú±ä¶¯£¬±¾Õ¾²»×÷ÌØ±ðÍ¨Öª¡£ÓÉÓÚÍøÕ¾ÉÏÉÌÆ·ÐÅÏ¢µÄÊýÁ¿¼«ÆäÅÓ´ó£¬ËäÈ»±¾Õ¾»á¾¡×î´óÅ¬Á¦±£Ö¤ÄúËùä¯ÀÀÉÌÆ·ÐÅÏ¢µÄ×¼È·ÐÔ£¬µ«ÓÉÓÚÖÚËùÖÜÖªµÄ»¥ÁªÍø¼¼ÊõÒòËØµÈ¿Í¹ÛÔ­Òò´æÔÚ£¬±¾Õ¾ÍøÒ³ÏÔÊ¾µÄÐÅÏ¢¿ÉÄÜ»áÓÐÒ»¶¨µÄÖÍºóÐÔ»ò²î´í£¬¶Ô´ËÇéÐÎÄúÖªÏ¤²¢Àí½â£»¾©¶«»¶Ó­¾À´í£¬²¢»áÊÓÇé¿ö¸øÓè¾À´íÕßÒ»¶¨µÄ½±Àø¡£</p>" +
+            "    <p>" + "        ï¿½ï¿½Õ¾ï¿½Ïµï¿½ï¿½ï¿½Æ·ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½Ü·ï¿½ï¿½ï¿½ï¿½ä¶¯ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½È»ï¿½ï¿½Õ¾ï¿½á¾¡ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½×¼È·ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öªï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ØµÈ¿Í¹ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖªÏ¤ï¿½ï¿½ï¿½ï¿½â£»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½</p>" +
 
-            "    <p> Îª±íÊö±ãÀû£¬ÉÌÆ·ºÍ·þÎñ¼ò³ÆÎª\"ÉÌÆ·\"»ò\"»õÎï\"¡£</p>" + "    <h5> µÚ6Ìõ ¶©µ¥</h5>" +
+            "    <p> Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½Îª\"ï¿½ï¿½Æ·\"ï¿½ï¿½\"ï¿½ï¿½ï¿½ï¿½\"ï¿½ï¿½</p>" + "    <h5> ï¿½ï¿½6ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</h5>" +
 
-            "    <p>" + "        <strong>6.1</strong>ÔÚÄúÏÂ¶©µ¥Ê±£¬ÇëÄú×ÐÏ¸È·ÈÏËù¹ºÉÌÆ·µÄÃû³Æ¡¢¼Û¸ñ¡¢ÊýÁ¿¡¢ÐÍºÅ¡¢¹æ¸ñ¡¢³ß´ç¡¢ÁªÏµµØÖ·¡¢µç»°¡¢ÊÕ»õÈËµÈÐÅÏ¢¡£<span>ÊÕ»õÈËÓëÓÃ»§±¾ÈË²»Ò»ÖÂµÄ£¬ÊÕ»õÈËµÄÐÐÎªºÍÒâË¼±íÊ¾ÊÓÎªÓÃ»§µÄÐÐÎªºÍÒâË¼±íÊ¾£¬ÓÃ»§Ó¦¶ÔÊÕ»õÈËµÄÐÐÎª¼°ÒâË¼±íÊ¾µÄ·¨ÂÉºó¹û³Ðµ£Á¬´øÔðÈÎ¡£</span>" + "    </p>" +
+            "    <p>" + "        <strong>6.1</strong>ï¿½ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍºÅ¡ï¿½ï¿½ï¿½ñ¡¢³ß´ç¡¢ï¿½ï¿½Ïµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ç»°ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½<span>ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ë²ï¿½Ò»ï¿½ÂµÄ£ï¿½ï¿½Õ»ï¿½ï¿½Ëµï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½Ê¾ï¿½ï¿½Îªï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ã»ï¿½Ó¦ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ëµï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½Ê¾ï¿½Ä·ï¿½ï¿½Éºï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¡ï¿½</span>" + "    </p>" +
 
-            "    <p>" + "        <strong>6.2</strong><strong>³ý·¨ÂÉÁíÓÐÇ¿ÖÆÐÔ¹æ¶¨Íâ£¬Ë«·½Ô¼¶¨ÈçÏÂ£º±¾Õ¾ÉÏÏúÊÛ·½Õ¹Ê¾µÄÉÌÆ·ºÍ¼Û¸ñµÈÐÅÏ¢½ö½öÊÇ½»Ò×ÐÅÏ¢µÄ·¢²¼£¬ÄúÏÂµ¥Ê±ÐëÌîÐ´ÄúÏ£Íû¹ºÂòµÄÉÌÆ·ÊýÁ¿¡¢¼Û¿î¼°Ö§¸¶·½Ê½¡¢ÊÕ»õÈË¡¢ÁªÏµ·½Ê½¡¢ÊÕ»õµØÖ·µÈÄÚÈÝ£»ÏµÍ³Éú³ÉµÄ¶©µ¥ÐÅÏ¢ÊÇ¼ÆËã»úÐÅÏ¢ÏµÍ³¸ù¾ÝÄúÌîÐ´µÄÄÚÈÝ×Ô¶¯Éú³ÉµÄÊý¾Ý£¬½öÊÇÄúÏòÏúÊÛ·½·¢³öµÄ½»Ò×ËßÇó£»ÏúÊÛ·½ÊÕµ½ÄúµÄ¶©µ¥ÐÅÏ¢ºó£¬Ö»ÓÐÔÚÏúÊÛ·½½«ÄúÔÚ¶©µ¥ÖÐ¶©¹ºµÄÉÌÆ·´Ó²Ö¿âÊµ¼ÊÖ±½ÓÏòÄú·¢³öÊ±£¨ ÒÔÉÌÆ·³ö¿âÎª±êÖ¾£©£¬·½ÊÓÎªÄúÓëÏúÊÛ·½Ö®¼ä¾ÍÊµ¼ÊÖ±½ÓÏòÄú·¢³öµÄÉÌÆ·½¨Á¢ÁË½»Ò×¹ØÏµ£»Èç¹ûÄúÔÚÒ»·Ý¶©µ¥Àï¶©¹ºÁË¶àÖÖÉÌÆ·²¢ÇÒÏúÊÛ·½Ö»¸øÄú·¢³öÁË²¿·ÖÉÌÆ·Ê±£¬ÄúÓëÏúÊÛ·½Ö®¼ä½ö¾ÍÊµ¼ÊÖ±½ÓÏòÄú·¢³öµÄÉÌÆ·½¨Á¢ÁË½»Ò×¹ØÏµ£»Ö»ÓÐÔÚÏúÊÛ·½Êµ¼ÊÖ±½ÓÏòÄú·¢³öÁË¶©µ¥ÖÐ¶©¹ºµÄÆäËûÉÌÆ·Ê±£¬ÄúºÍÏúÊÛ·½Ö®¼ä¾Í¶©µ¥ÖÐ¸ÃÆäËûÒÑÊµ¼ÊÖ±½ÓÏòÄú·¢³öµÄÉÌÆ·²Å³ÉÁ¢½»Ò×¹ØÏµ¡£Äú¿ÉÒÔËæÊ±µÇÂ¼ÄúÔÚ±¾Õ¾×¢²áµÄÕË»§£¬²éÑ¯ÄúµÄ¶©µ¥×´Ì¬¡£</strong>" + "    </p>" +
+            "    <p>" + "        <strong>6.2</strong><strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½Ô¹æ¶¨ï¿½â£¬Ë«ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Í¼Û¸ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¿î¼°Ö§ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ë¡ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ê½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ÏµÍ³ï¿½ï¿½ï¿½ÉµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ó²Ö¿ï¿½Êµï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½Ö®ï¿½ï¿½ï¿½Êµï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½ï¿½×¹ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¶©ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½ï¿½×¹ï¿½Ïµï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½Êµï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û·ï¿½Ö®ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¹ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ú±ï¿½Õ¾×¢ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½</strong>" + "    </p>" +
 
-            "    <p>" + "        <strong>6.3</strong><strong>ÓÉÓÚÊÐ³¡±ä»¯¼°¸÷ÖÖÒÔºÏÀíÉÌÒµÅ¬Á¦ÄÑÒÔ¿ØÖÆµÄÒòËØµÄÓ°Ïì£¬±¾Õ¾ÎÞ·¨±£Ö¤ÄúÌá½»µÄ¶©µ¥ÐÅÏ¢ÖÐÏ£Íû¹ºÂòµÄÉÌÆ·¶¼»áÓÐ»õ£»ÈçÄúÄâ¹ºÂòµÄÉÌÆ·£¬·¢ÉúÈ±»õ£¬ÄúÓÐÈ¨È¡Ïû¶©µ¥¡£</strong>" + "    </p>" + "    <h5> µÚ7Ìõ ÅäËÍ</h5>" +
+            "    <p>" + "        <strong>6.3</strong><strong>ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ÒµÅ¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Øµï¿½Ó°ï¿½ì£¬ï¿½ï¿½Õ¾ï¿½Þ·ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½á½»ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â¹ºï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</strong>" + "    </p>" + "    <h5> ï¿½ï¿½7ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</h5>" +
 
-            "    <p>" + "        <strong>7.1</strong>ÏúÊÛ·½½«»á°ÑÉÌÆ·£¨»õÎï£©ËÍµ½ÄúËùÖ¸¶¨µÄÊÕ»õµØÖ·£¬ËùÓÐÔÚ±¾Õ¾ÉÏÁÐ³öµÄËÍ»õÊ±¼äÎª²Î¿¼Ê±¼ä£¬²Î¿¼Ê±¼äµÄ¼ÆËãÊÇ¸ù¾Ý¿â´æ×´¿ö¡¢Õý³£µÄ´¦Àí¹ý³ÌºÍËÍ»õÊ±¼ä¡¢ËÍ»õµØµãµÄ»ù´¡ÉÏ¹À¼ÆµÃ³öµÄ¡£</p>" + "" + "    <p>" + "        <strong>7.2</strong>ÒòÈçÏÂÇé¿öÔì³É¶©µ¥ÑÓ³Ù»òÎÞ·¨ÅäËÍµÈ£¬ÏúÊÛ·½²»³Ðµ£ÑÓ³ÙÅäËÍµÄÔðÈÎ£º</p>" +
+            "    <p>" + "        <strong>7.1</strong>ï¿½ï¿½ï¿½Û·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï£©ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Í»ï¿½Ê±ï¿½ï¿½Îªï¿½Î¿ï¿½Ê±ï¿½ä£¬ï¿½Î¿ï¿½Ê±ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½Ý¿ï¿½ï¿½×´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ìºï¿½ï¿½Í»ï¿½Ê±ï¿½ä¡¢ï¿½Í»ï¿½ï¿½Øµï¿½Ä»ï¿½ï¿½ï¿½ï¿½Ï¹ï¿½ï¿½ÆµÃ³ï¿½ï¿½Ä¡ï¿½</p>" + "" + "    <p>" + "        <strong>7.2</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½Ó³Ù»ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ÍµÈ£ï¿½ï¿½ï¿½ï¿½Û·ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½Î£ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨1£©</strong>ÓÃ»§Ìá¹©µÄÐÅÏ¢´íÎó¡¢µØÖ·²»ÏêÏ¸µÈÔ­Òòµ¼ÖÂµÄ£»" + "    </p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½1ï¿½ï¿½</strong>ï¿½Ã»ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ó¡¢µï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ÂµÄ£ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>£¨2£©</strong>»õÎïËÍ´ïºóÎÞÈËÇ©ÊÕ£¬µ¼ÖÂÎÞ·¨ÅäËÍ»òÑÓ³ÙÅäËÍµÄ£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½2ï¿½ï¿½</strong>ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©ï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ÍµÄ£ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨3£©</strong>ÇéÊÆ±ä¸üÒòËØµ¼ÖÂµÄ£»</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½3ï¿½ï¿½</strong>ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ÂµÄ£ï¿½</p>" +
 
-            "    <p>" + "        <strong>£¨4£©</strong>²»¿É¿¹Á¦ÒòËØµ¼ÖÂµÄ£¬ÀýÈç£º×ÔÈ»ÔÖº¦¡¢½»Í¨½äÑÏ¡¢Í»·¢Õ½ÕùµÈ¡£</p>" + "    <h5> µÚ8Ìõ ËùÓÐÈ¨¼°ÖªÊ¶²úÈ¨Ìõ¿î</h5>" +
+            "    <p>" + "        <strong>ï¿½ï¿½4ï¿½ï¿½</strong>ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ÂµÄ£ï¿½ï¿½ï¿½ï¿½ç£ºï¿½ï¿½È»ï¿½Öºï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ï¡ï¿½Í»ï¿½ï¿½Õ½ï¿½ï¿½ï¿½È¡ï¿½</p>" + "    <h5> ï¿½ï¿½8ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ÖªÊ¶ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½</h5>" +
 
-            "    <p>" + "        <strong>8.1</strong><strong>ÓÃ»§Ò»µ©½ÓÊÜ±¾Ð­Òé£¬¼´±íÃ÷¸ÃÓÃ»§Ö÷¶¯½«ÆäÔÚÈÎºÎÊ±¼ä¶ÎÔÚ±¾Õ¾·¢±íµÄÈÎºÎÐÎÊ½µÄÐÅÏ¢ÄÚÈÝ£¨°üÀ¨µ«²»ÏÞÓÚ¿Í»§ÆÀ¼Û¡¢¿Í»§×ÉÑ¯¡¢¸÷Àà»°ÌâÎÄÕÂµÈÐÅÏ¢ÄÚÈÝ£©µÄ²Æ²úÐÔÈ¨ÀûµÈÈÎºÎ¿É×ªÈÃµÄÈ¨Àû£¬ÈçÖø×÷È¨²Æ²úÈ¨£¨°üÀ¨²¢²»ÏÞÓÚ£º¸´ÖÆÈ¨¡¢·¢ÐÐÈ¨¡¢³ö×âÈ¨¡¢Õ¹ÀÀÈ¨¡¢±íÑÝÈ¨¡¢·ÅÓ³È¨¡¢¹ã²¥È¨¡¢ÐÅÏ¢ÍøÂç´«²¥È¨¡¢ÉãÖÆÈ¨¡¢¸Ä±àÈ¨¡¢·­ÒëÈ¨¡¢»ã±àÈ¨ÒÔ¼°Ó¦µ±ÓÉÖø×÷È¨ÈËÏíÓÐµÄÆäËû¿É×ªÈÃÈ¨Àû£©£¬È«²¿¶À¼ÒÇÒ²»¿É³·ÏúµØ×ªÈÃ¸ø¾©¶«ËùÓÐ£¬ÓÃ»§Í¬Òâ¾©¶«ÓÐÈ¨¾ÍÈÎºÎÖ÷ÌåÇÖÈ¨¶øµ¥¶ÀÌáÆðËßËÏ¡£</strong>" + "    </p>" +
+            "    <p>" + "        <strong>8.1</strong><strong>ï¿½Ã»ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ü±ï¿½Ð­ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿Í»ï¿½ï¿½ï¿½ï¿½Û¡ï¿½ï¿½Í»ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½à»°ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ä²Æ²ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ÎºÎ¿ï¿½×ªï¿½Ãµï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½Æ²ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½Õ¹ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½Ó³È¨ï¿½ï¿½ï¿½ã²¥È¨ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ç´«ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ä±ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½Ô¼ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½É³ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½Ã»ï¿½Í¬ï¿½â¾©ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½</strong>" + "    </p>" +
 
-            "    <p>" + "        <strong>8.2</strong><strong>±¾Ð­ÒéÒÑ¾­¹¹³É¡¶ÖÐ»ªÈËÃñ¹²ºÍ¹úÖø×÷È¨·¨¡·µÚ¶þÊ®ÎåÌõ£¨ÌõÎÄÐòºÅÒÀÕÕ2011Äê°æÖø×÷È¨·¨È·¶¨£©¼°Ïà¹Ø·¨ÂÉ¹æ¶¨µÄÖø×÷²Æ²úÈ¨µÈÈ¨Àû×ªÈÃÊéÃæÐ­Òé£¬ÆäÐ§Á¦¼°ÓÚÓÃ»§ÔÚ¾©¶«ÍøÕ¾ÉÏ·¢²¼µÄÈÎºÎÊÜÖø×÷È¨·¨±£»¤µÄ×÷Æ·ÄÚÈÝ£¬ÎÞÂÛ¸ÃµÈÄÚÈÝÐÎ³ÉÓÚ±¾Ð­Òé¶©Á¢Ç°»¹ÊÇ±¾Ð­Òé¶©Á¢ºó¡£</strong>" + "    </p>" +
+            "    <p>" + "        <strong>8.2</strong><strong>ï¿½ï¿½Ð­ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½É¡ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ñ¹²ºÍ¹ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2011ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½É¹æ¶¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½È¨ï¿½ï¿½È¨ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½é£¬ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Û¸Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½ï¿½Ú±ï¿½Ð­ï¿½é¶©ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ç±ï¿½Ð­ï¿½é¶©ï¿½ï¿½ï¿½ï¿½</strong>" + "    </p>" +
 
-            "    <p>" + "        <strong>8.3</strong><strong>ÓÃ»§Í¬Òâ²¢ÒÑ³ä·ÖÁË½â±¾Ð­ÒéµÄÌõ¿î£¬³ÐÅµ²»½«ÒÑ·¢±íÓÚ±¾Õ¾µÄÐÅÏ¢£¬ÒÔÈÎºÎÐÎÊ½·¢²¼»òÊÚÈ¨ÆäËüÖ÷ÌåÒÔÈÎºÎ·½Ê½Ê¹ÓÃ£¨°üÀ¨µ«²»ÏÞÓÚÔÚ¸÷ÀàÍøÕ¾¡¢Ã½ÌåÉÏÊ¹ÓÃ£©¡£</strong></p>" +
+            "    <p>" + "        <strong>8.3</strong><strong>ï¿½Ã»ï¿½Í¬ï¿½â²¢ï¿½Ñ³ï¿½ï¿½ï¿½Ë½â±¾Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎºÎ·ï¿½Ê½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½</strong></p>" +
 
-            "    <p>" + "        <strong>8.4</strong><strong>¾©¶«ÊÇ±¾Õ¾µÄÖÆ×÷Õß,ÓµÓÐ´ËÍøÕ¾ÄÚÈÝ¼°×ÊÔ´µÄÖø×÷È¨µÈºÏ·¨È¨Àû,ÊÜ¹ú¼Ò·¨ÂÉ±£»¤,ÓÐÈ¨²»Ê±µØ¶Ô±¾Ð­Òé¼°±¾Õ¾µÄÄÚÈÝ½øÐÐÐÞ¸Ä£¬²¢ÔÚ±¾Õ¾ÕÅÌù£¬ÎÞÐëÁíÐÐÍ¨ÖªÓÃ»§¡£ÔÚ·¨ÂÉÔÊÐíµÄ×î´óÏÞ¶È·¶Î§ÄÚ£¬¾©¶«¶Ô±¾Ð­Òé¼°±¾Õ¾ÄÚÈÝÓµÓÐ½âÊÍÈ¨¡£</strong>" + "    </p>" +
+            "    <p>" + "        <strong>8.4</strong><strong>ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Óµï¿½Ð´ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ÈºÏ·ï¿½È¨ï¿½ï¿½,ï¿½Ü¹ï¿½ï¿½Ò·ï¿½ï¿½É±ï¿½ï¿½ï¿½,ï¿½ï¿½È¨ï¿½ï¿½Ê±ï¿½Ø¶Ô±ï¿½Ð­ï¿½é¼°ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½Þ¸Ä£ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Öªï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¶È·ï¿½Î§ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½Ð­ï¿½é¼°ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Óµï¿½Ð½ï¿½ï¿½ï¿½È¨ï¿½ï¿½</strong>" + "    </p>" +
 
-            "    <p>" + "        <strong>8.5</strong><strong>³ý·¨ÂÉÁíÓÐÇ¿ÖÆÐÔ¹æ¶¨Íâ£¬Î´¾­¾©¶«Ã÷È·µÄÌØ±ðÊéÃæÐí¿É,ÈÎºÎµ¥Î»»ò¸öÈË²»µÃÒÔÈÎºÎ·½Ê½·Ç·¨µØÈ«²¿»ò²¿·Ö¸´ÖÆ¡¢×ªÔØ¡¢ÒýÓÃ¡¢Á´½Ó¡¢×¥È¡»òÒÔÆäËû·½Ê½Ê¹ÓÃ±¾Õ¾µÄÐÅÏ¢ÄÚÈÝ£¬·ñÔò£¬¾©¶«ÓÐÈ¨×·¾¿Æä·¨ÂÉÔðÈÎ¡£</strong>" + "    </p>" + "    <p>" + "        <strong>8.6</strong>±¾Õ¾Ëù¿¯µÇµÄ×ÊÁÏÐÅÏ¢£¨ÖîÈçÎÄ×Ö¡¢Í¼±í¡¢±êÊ¶¡¢°´Å¥Í¼±ê¡¢Í¼Ïñ¡¢ÉùÒôÎÄ¼þÆ¬¶Î¡¢Êý×ÖÏÂÔØ¡¢Êý¾Ý±à¼­ºÍÈí¼þ£©£¬¾ùÊÇ¾©¶«»òÆäÄÚÈÝÌá¹©ÕßµÄ²Æ²ú£¬ÊÜÖÐ¹úºÍ¹ú¼Ê°æÈ¨·¨µÄ±£»¤¡£±¾Õ¾ÉÏËùÓÐÄÚÈÝµÄ»ã±àÊÇ¾©¶«µÄÅÅËû²Æ²ú£¬ÊÜÖÐ¹úºÍ¹ú¼Ê°æÈ¨·¨µÄ±£»¤¡£±¾Õ¾ÉÏËùÓÐÈí¼þ¶¼ÊÇ¾©¶«»òÆä¹ØÁª¹«Ë¾»òÆäÈí¼þ¹©Ó¦ÉÌµÄ²Æ²ú£¬ÊÜÖÐ¹úºÍ¹ú¼Ê°æÈ¨·¨µÄ±£»¤¡£" + "    </p>" + "    <h5> µÚ9Ìõ ÔðÈÎÏÞÖÆ¼°²»³ÐÅµµ£±£</h5>" + "    <p>" + "        <strong>³ý·ÇÁíÓÐÃ÷È·µÄÊéÃæËµÃ÷,±¾Õ¾¼°ÆäËù°üº¬µÄ»òÒÔÆäËü·½Ê½Í¨¹ý±¾Õ¾Ìá¹©¸øÄúµÄÈ«²¿ÐÅÏ¢¡¢ÄÚÈÝ¡¢²ÄÁÏ¡¢²úÆ·£¨°üÀ¨Èí¼þ£©ºÍ·þÎñ£¬¾ùÊÇÔÚ\"°´ÏÖ×´\"ºÍ\"°´ÏÖÓÐ\"µÄ»ù´¡ÉÏÌá¹©µÄ¡£</strong></p>" +
+            "    <p>" + "        <strong>8.5</strong><strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½Ô¹æ¶¨ï¿½â£¬Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ÎºÎµï¿½Î»ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎºÎ·ï¿½Ê½ï¿½Ç·ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ò²¿·Ö¸ï¿½ï¿½Æ¡ï¿½×ªï¿½Ø¡ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½×¥È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Ê¹ï¿½Ã±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ò£¬¾ï¿½ï¿½ï¿½ï¿½ï¿½È¨×·ï¿½ï¿½ï¿½ä·¨ï¿½ï¿½ï¿½ï¿½ï¿½Î¡ï¿½</strong>" + "    </p>" + "    <p>" + "        <strong>8.6</strong>ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½Å¥Í¼ï¿½ê¡¢Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Æ¬ï¿½Î¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¡ï¿½ï¿½ï¿½ï¿½Ý±à¼­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ßµÄ²Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½Í¹ï¿½ï¿½Ê°ï¿½È¨ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ»ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½Í¹ï¿½ï¿½Ê°ï¿½È¨ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ÌµÄ²Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½Í¹ï¿½ï¿½Ê°ï¿½È¨ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½" + "    </p>" + "    <h5> ï¿½ï¿½9ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½</h5>" + "    <p>" + "        <strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½,ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Í¨ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ñ£¬¾ï¿½ï¿½ï¿½ï¿½ï¿½\"ï¿½ï¿½ï¿½ï¿½×´\"ï¿½ï¿½\"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\"ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½Ä¡ï¿½</strong></p>" +
 
-            "    <p>" + "        <strong>³ý·ÇÁíÓÐÃ÷È·µÄÊéÃæËµÃ÷,¾©¶«²»¶Ô±¾Õ¾µÄÔËÓª¼°Æä°üº¬ÔÚ±¾ÍøÕ¾ÉÏµÄÐÅÏ¢¡¢ÄÚÈÝ¡¢²ÄÁÏ¡¢²úÆ·£¨°üÀ¨Èí¼þ£©»ò·þÎñ×÷ÈÎºÎÐÎÊ½µÄ¡¢Ã÷Ê¾»òÄ¬Ê¾µÄÉùÃ÷»òµ£±££¨¸ù¾ÝÖÐ»ªÈËÃñ¹²ºÍ¹ú·¨ÂÉÁíÓÐ¹æ¶¨µÄÒÔÍâ£©¡£</strong>" + "    </p>" + "    <p>" + "        <strong>¾©¶«²»µ£±£±¾Õ¾Ëù°üº¬µÄ»òÒÔÆäËü·½Ê½Í¨¹ý±¾Õ¾Ìá¹©¸øÄúµÄÈ«²¿ÐÅÏ¢¡¢ÄÚÈÝ¡¢²ÄÁÏ¡¢²úÆ·£¨°üÀ¨Èí¼þ£©ºÍ·þÎñ¡¢Æä·þÎñÆ÷»ò´Ó±¾Õ¾·¢³öµÄµç×ÓÐÅ¼þ¡¢ÐÅÏ¢Ã»ÓÐ²¡¶¾»òÆäËûÓÐº¦³É·Ö¡£</strong></p>" + "    <p>" + "        <strong>ÈçÒò²»¿É¿¹Á¦»òÆäËü±¾Õ¾ÎÞ·¨¿ØÖÆµÄÔ­ÒòÊ¹±¾Õ¾ÏúÊÛÏµÍ³±ÀÀ£»òÎÞ·¨Õý³£Ê¹ÓÃµ¼ÖÂÍøÉÏ½»Ò×ÎÞ·¨Íê³É»ò¶ªÊ§ÓÐ¹ØµÄÐÅÏ¢¡¢¼ÇÂ¼µÈ£¬¾©¶«»áºÏÀíµØ¾¡Á¦Ð­Öú´¦ÀíÉÆºóÊÂÒË¡£</strong></p>" + "    <h5> µÚ10Ìõ Ð­Òé¸üÐÂ¼°ÓÃ»§¹Ø×¢ÒåÎñ</h5>" + "    ¸ù¾Ý¹ú¼Ò·¨ÂÉ·¨¹æ±ä»¯¼°ÍøÕ¾ÔËÓªÐèÒª£¬¾©¶«ÓÐÈ¨¶Ô±¾Ð­ÒéÌõ¿î²»Ê±µØ½øÐÐÐÞ¸Ä£¬ÐÞ¸ÄºóµÄÐ­ÒéÒ»µ©±»ÕÅÌùÔÚ±¾Õ¾ÉÏ¼´ÉúÐ§£¬²¢´úÌæÔ­À´µÄÐ­Òé¡£ÓÃ»§¿ÉËæÊ±µÇÂ¼²éÔÄ×îÐÂÐ­Òé£»<strong><em>ÓÃ»§ÓÐÒåÎñ²»Ê±¹Ø×¢²¢ÔÄ¶Á×îÐÂ°æµÄÐ­Òé¼°ÍøÕ¾¹«¸æ¡£ÈçÓÃ»§²»Í¬Òâ¸üÐÂºóµÄÐ­Òé£¬¿ÉÒÔÇÒÓ¦Á¢¼´Í£Ö¹½ÓÊÜ¾©¶«ÍøÕ¾ÒÀ¾Ý±¾Ð­ÒéÌá¹©µÄ·þÎñ£»ÈçÓÃ»§¼ÌÐøÊ¹ÓÃ±¾ÍøÕ¾Ìá¹©µÄ·þÎñµÄ£¬¼´ÊÓÎªÍ¬Òâ¸üÐÂºóµÄÐ­Òé¡£¾©¶«½¨ÒéÄúÔÚÊ¹ÓÃ±¾Õ¾Ö®Ç°ÔÄ¶Á±¾Ð­Òé¼°±¾Õ¾µÄ¹«¸æ¡£</em></strong>" + "    Èç¹û±¾Ð­ÒéÖÐÈÎºÎÒ»Ìõ±»ÊÓÎª·ÏÖ¹¡¢ÎÞÐ§»òÒòÈÎºÎÀíÓÉ²»¿ÉÖ´ÐÐ£¬¸ÃÌõÓ¦ÊÓÎª¿É·ÖµÄÇÒ²¢²»Ó°ÏìÈÎºÎÆäÓàÌõ¿îµÄÓÐÐ§ÐÔºÍ¿ÉÖ´ÐÐÐÔ¡£" + "    <h5> µÚ11Ìõ ·¨ÂÉ¹ÜÏ½ºÍÊÊÓÃ</h5>" + "    ±¾Ð­ÒéµÄ¶©Á¢¡¢Ö´ÐÐºÍ½âÊÍ¼°ÕùÒéµÄ½â¾ö¾ùÓ¦ÊÊÓÃÔÚÖÐ»ªÈËÃñ¹²ºÍ¹ú´óÂ½µØÇøÊÊÓÃÖ®ÓÐÐ§·¨ÂÉ£¨µ«²»°üÀ¨Æä³åÍ»·¨¹æÔò£©¡£ Èç·¢Éú±¾Ð­ÒéÓëÊÊÓÃÖ®·¨ÂÉÏàµÖ´¥Ê±£¬ÔòÕâÐ©Ìõ¿î½«ÍêÈ«°´·¨ÂÉ¹æ¶¨ÖØÐÂ½âÊÍ£¬¶øÆäËüÓÐÐ§Ìõ¿î¼ÌÐøÓÐÐ§¡£" + "    ÈçµÞÔ¼·½¾Í±¾Ð­ÒéÄÚÈÝ»òÆäÖ´ÐÐ·¢ÉúÈÎºÎÕùÒé£¬Ë«·½Ó¦¾¡Á¦ÓÑºÃÐ­ÉÌ½â¾ö£»Ð­ÉÌ²»³ÉÊ±£¬ÈÎºÎÒ»·½¾ù¿ÉÏòÓÐ¹ÜÏ½È¨µÄÖÐ»ªÈËÃñ¹²ºÍ¹ú´óÂ½µØÇø·¨ÔºÌáÆðËßËÏ¡£" + "    <h5> µÚ12Ìõ ÆäËû </h5>" + "    <p>" + "        <strong>12.1</strong>¾©¶«ÍøÕ¾ËùÓÐÕßÊÇÖ¸ÔÚÕþ¸®²¿ÃÅÒÀ·¨Ðí¿É»ò±¸°¸µÄ¾©¶«ÍøÕ¾¾­ÓªÖ÷Ìå¡£</p>" +
+            "    <p>" + "        <strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½Óªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½Õ¾ï¿½Ïµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½Ê½ï¿½Ä¡ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ä¬Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½òµ£±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ñ¹²ºÍ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹æ¶¨ï¿½ï¿½ï¿½ï¿½ï¿½â£©ï¿½ï¿½</strong>" + "    </p>" + "    <p>" + "        <strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Í¨ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Ã»ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½É·Ö¡ï¿½</strong></p>" + "    <p>" + "        <strong>ï¿½ï¿½ï¿½ò²»¿É¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½Þ·ï¿½ï¿½ï¿½ï¿½Æµï¿½Ô­ï¿½ï¿½Ê¹ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½É»ï¿½Ê§ï¿½Ð¹Øµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½Â¼ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½Ë¡ï¿½</strong></p>" + "    <h5> ï¿½ï¿½10ï¿½ï¿½ Ð­ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ã»ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½</h5>" + "    ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½Ò·ï¿½ï¿½É·ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Óªï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½Ô±ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½î²»Ê±ï¿½Ø½ï¿½ï¿½ï¿½ï¿½Þ¸Ä£ï¿½ï¿½Þ¸Äºï¿½ï¿½Ð­ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Õ¾ï¿½Ï¼ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Ð­ï¿½é¡£ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½é£»<strong><em>ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½×¢ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Â°ï¿½ï¿½Ð­ï¿½é¼°ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½æ¡£ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Âºï¿½ï¿½Ð­ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½Ý±ï¿½Ð­ï¿½ï¿½ï¿½á¹©ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã±ï¿½ï¿½ï¿½Õ¾ï¿½á¹©ï¿½Ä·ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÍ¬ï¿½ï¿½ï¿½ï¿½Âºï¿½ï¿½Ð­ï¿½é¡£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã±ï¿½Õ¾Ö®Ç°ï¿½Ä¶ï¿½ï¿½ï¿½Ð­ï¿½é¼°ï¿½ï¿½Õ¾ï¿½Ä¹ï¿½ï¿½æ¡£</em></strong>" + "    ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½É²ï¿½ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Îªï¿½É·Öµï¿½ï¿½Ò²ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ÔºÍ¿ï¿½Ö´ï¿½ï¿½ï¿½Ô¡ï¿½" + "    <h5> ï¿½ï¿½11ï¿½ï¿½ ï¿½ï¿½ï¿½É¹ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h5>" + "    ï¿½ï¿½Ð­ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ÐºÍ½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ñ¹²ºÍ¹ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ð§ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ò£©¡ï¿½ ï¿½ç·¢ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½ï¿½î½«ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½É¹æ¶¨ï¿½ï¿½ï¿½Â½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½" + "    ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Í±ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½Ö´ï¿½Ð·ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½é£¬Ë«ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ñºï¿½Ð­ï¿½Ì½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½Ì²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Îºï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½Ï½È¨ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ñ¹²ºÍ¹ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½" + "    <h5> ï¿½ï¿½12ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ </h5>" + "    <p>" + "        <strong>12.1</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É»ò±¸°ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Óªï¿½ï¿½ï¿½å¡£</p>" +
 
-            "    <p>" + "        <strong>12.2</strong>¾©¶«×ðÖØÓÃ»§ºÍÏû·ÑÕßµÄºÏ·¨È¨Àû£¬±¾Ð­Òé¼°±¾ÍøÕ¾ÉÏ·¢²¼µÄ¸÷Àà¹æÔò¡¢ÉùÃ÷µÈÆäËûÄÚÈÝ£¬¾ùÊÇÎªÁË¸üºÃµÄ¡¢¸ü¼Ó±ãÀûµÄÎªÓÃ»§ºÍÏû·ÑÕßÌá¹©·þÎñ¡£±¾Õ¾»¶Ó­ÓÃ»§ºÍÉç»á¸÷½çÌá³öÒâ¼ûºÍ½¨Òé£¬¾©¶«½«ÐéÐÄ½ÓÊÜ²¢ÊÊÊ±ÐÞ¸Ä±¾Ð­Òé¼°±¾Õ¾ÉÏµÄ¸÷Àà¹æÔò¡£" + "    </p>" +
+            "    <p>" + "        <strong>12.2</strong>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄºÏ·ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½é¼°ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½Ï·ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ë¸ï¿½ï¿½ÃµÄ¡ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ñ¡£±ï¿½Õ¾ï¿½ï¿½Ó­ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½Ü²ï¿½ï¿½ï¿½Ê±ï¿½Þ¸Ä±ï¿½Ð­ï¿½é¼°ï¿½ï¿½Õ¾ï¿½ÏµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + "    </p>" +
 
-            "    <p>" + "        <strong>12.3</strong><span>±¾Ð­ÒéÄÚÈÝÖÐÒÔºÚÌå¡¢¼Ó´Ö¡¢ÏÂ»®Ïß¡¢Ð±ÌåµÈ·½Ê½ÏÔÖø±êÊ¶µÄÌõ¿î£¬ÇëÓÃ»§×ÅÖØÔÄ¶Á¡£</span></p>" + "    <p>" + "        <strong>12.4</strong><span>Äúµã»÷±¾Ð­ÒéÏÂ·½µÄ\"Í¬Òâ²¢¼ÌÐø\"°´Å¥¼´ÊÓÎªÄúÍêÈ«½ÓÊÜ±¾Ð­Òé£¬ÔÚµã»÷Ö®Ç°ÇëÄúÔÙ´ÎÈ·ÈÏÒÑÖªÏ¤²¢ÍêÈ«Àí½â±¾Ð­ÒéµÄÈ«²¿ÄÚÈÝ¡£</span></p>" + "</div>" + "      <div class=\"btnt\">" + "         <input  class=\"btn-img\"  type=\''button\" value='Í¬Òâ²¢¼ÌÐø' onclick='protocolReg();'/>" + "     </div>" + "</div>" + "</div>" + "</div>",
+            "    <p>" + "        <strong>12.3</strong><span>ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½å¡¢ï¿½Ó´Ö¡ï¿½ï¿½Â»ï¿½ï¿½ß¡ï¿½Ð±ï¿½ï¿½È·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½</span></p>" + "    <p>" + "        <strong>12.4</strong><span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½\"Í¬ï¿½â²¢ï¿½ï¿½ï¿½ï¿½\"ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Ü±ï¿½Ð­ï¿½é£¬ï¿½Úµï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ù´ï¿½È·ï¿½ï¿½ï¿½ï¿½ÖªÏ¤ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½â±¾Ð­ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½</span></p>" + "</div>" + "      <div class=\"btnt\">" + "         <input  class=\"btn-img\"  type=\''button\" value='Í¬ï¿½â²¢ï¿½ï¿½ï¿½ï¿½' onclick='protocolReg();'/>" + "     </div>" + "</div>" + "</div>" + "</div>",
             _autoReposi: true
         });
     });

@@ -18089,7 +18089,7 @@ function() {
 }),
 define("text!components/mainmenu/templates/tpl_1.html", [],
 function() {
-    return '<div class="nav-item clearfix">\n    <a href="#" <% if(active == 1) print(\'class="active"\') %>>\n    <span class="nav-item-name"><span><%= name %></span></span>\n    </a>\n</div>\n'
+    return '<div class="nav-item clearfix">\n    <a href="javascript:;" <% if(active == 1) print(\'class="active"\') %>>\n    <span class="nav-item-name"><span><%= name %></span></span>\n    </a>\n</div>\n'
 }),
 define("components/mainmenu/assets", ["require", "text!components/mainmenu/templates/config.html", "text!components/mainmenu/templates/preview.html", "text!components/mainmenu/templates/tpl_1.html"],
 function(t) {
@@ -18185,7 +18185,7 @@ function() {
 }),
 define("text!components/navigator/templates/tpl_1.html", [],
 function() {
-    return '<div class="nav-item clearfix" style="width:<%= width %>">\n    <a href="#">\n        <div class="nav-item-img <%= code %>"></div>\n        <div class="nav-item-name"><span><%= name %></span></div>\n    </a>\n</div>\n'
+    return '<div class="nav-item clearfix" style="width:<%= width %>">\n    <a href="javascript:;">\n        <div class="nav-item-img <%= code %>"></div>\n        <div class="nav-item-name"><span><%= name %></span></div>\n    </a>\n</div>\n'
 }),
 define("text!components/navigator/templates/tpl_2.html", [],
 function() {

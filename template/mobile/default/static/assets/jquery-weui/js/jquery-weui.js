@@ -5780,7 +5780,7 @@ Device/OS Detection
             '<div class="toolbar-inner">' +
                 '{{yearPicker}}' +
                 '{{monthPicker}}' +
-                // '<a href="#" class="link close-picker">{{closeText}}</a>' +
+                // '<a href="javascript:;" class="link close-picker">{{closeText}}</a>' +
             '</div>' +
         '</div>',
     /* Callbacks
