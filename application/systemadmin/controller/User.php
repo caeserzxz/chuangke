@@ -66,10 +66,12 @@ class User extends Base {
             $userList[$key]['tuijian_code'] = $tuijianCodeModel->where(['user_id'=>$val['user_id']])->value('code');
             // 是否有实名认证
             $is_real = M('user_authentication')->where(['user_id' => $val['user_id'],'status' => 1])->find();
+            $userList[$key]['user_name'] = $is_real['user_name'];
             if ($is_real) {
-                $userList[$key]['nickname'] = $is_real['user_name'];
+                //$userList[$key]['nickname'] = $is_real['user_name'];
+                $userList[$key]['user_name'] = $is_real['user_name'];
             }else{
-                $userList[$key]['nickname'] = $val['mobile'];
+                //$userList[$key]['nickname'] = $val['mobile'];
             }
             // 直推人数
             $userList[$key]['direct_num'] = $usersModel->where(['first_leader'=>$val['user_id']])->count();
@@ -819,7 +821,8 @@ exit("功能正在开发中。。。");
     public function upgrade_level(){
 
         I('user_id') ? $where['u.user_id']  =   I('user_id') : false; 
-        I('apply_status') ? $where['w.apply_status']  =   I('apply_status') : false; 
+        I('apply_status') ? $where['w.apply_status']  =   I('apply_status') : false;
+        I('apply_status')==='0' ? $where['w.apply_status']  =   I('apply_status') : false;
         I('shopping_type') ? $where['w.shopping_type']  =   I('shopping_type') : false;
         if (I('leader_id')) {
             $where2 = ' w.check_leader_1='.I('leader_id').' or w.check_leader_2='.I('leader_id');
