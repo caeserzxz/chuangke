@@ -37,9 +37,7 @@ class Login extends Controller
                 session('appType',$appType);
             }
         }else{
-            if(empty(session('appType'))){
                 session('appType','other');
-            }
         }
         //判断是否允许网页登录
         $config = tpCache('shop_info');
