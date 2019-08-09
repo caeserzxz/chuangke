@@ -368,6 +368,18 @@
                 </dd>
             </dl>
             <dl class="row">
+                <dt class="tit">是否发送拒绝实名短信</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="authen_mess1" class="cb-enable <if condition='$config[authen_mess] eq 1'>selected</if>">开启</label>
+                        <label for="authen_mess0" class="cb-disable <if condition='$config[authen_mess] eq 0'>selected</if>">关闭</label>
+                        <input id="authen_mess1" name="authen_mess" <if condition="$config['authen_mess'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="authen_mess0" name="authen_mess" <if condition="$config['authen_mess'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后将不再接收短信</p>
+                </dd>
+            </dl>
+            <dl class="row">
                 <dt class="tit">是否开启留言</dt>
                 <dd class="opt">
                     <div class="onoff">

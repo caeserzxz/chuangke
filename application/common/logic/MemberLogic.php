@@ -116,7 +116,9 @@ class MemberLogic extends Model
             add_message($user['user_id'],'实名认证失败');
             add_message($user['user_id'],'实名认证失败,扣除'.$config['earnest_money'].'保证金');
             //发送短信
-            jh_message($user['mobile'], Config::get('database.type_auth'),'');
+            if (tpCache('shop_info.authen_mess') == 1) {
+                jh_message($user['mobile'], Config::get('database.type_auth'),'');
+            }
             //添加保证金流水
             $this->addRecord($user['user_id'],'','实名认证失败,扣除'.$config['earnest_money'].'保证金',-$config['earnest_money'],1);
 
