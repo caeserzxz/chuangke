@@ -32,12 +32,12 @@ class Login extends Controller
     public function index(){
         //获取安装包的参数
         $appType = I('appType')?I('appType'):I('apptype');
-        if($appType=='IOS'||$appType=='Android'){
-            if(empty(session('appType'))||$appType!=session('appType')){
+        if(empty(session('appType'))){
+            if($appType=='IOS'||$appType=='Android'){
                 session('appType',$appType);
-            }
-        }else{
+            }else{
                 session('appType','other');
+            }
         }
         //判断是否允许网页登录
         $config = tpCache('shop_info');
@@ -85,15 +85,27 @@ class Login extends Controller
         $appType = session('appType');
 
         $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
+
+        //获取安装包的参数
+        $appType = I('appType')?I('appType'):I('apptype');
+        if(empty(session('appType'))){
+            if($appType=='IOS'||$appType=='Android'){
+                session('appType',$appType);
+            }else{
+                session('appType','other');
+            }
+        }
+
         $config = tpCache('shop_info');
         if($config['is_other_login']==1){
             $config['is_other_login']=1;
         }else{
             $config['is_other_login']=2;
         }
+
+        $this->assign('appType',session('appType'));
         $this->assign('config',$config);
         $this->assign('tuijian_code',$tuijian_code);
-        $this->assign('appType',$appType);
         return $this->fetch();
     }
 

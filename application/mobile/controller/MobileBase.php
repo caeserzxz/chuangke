@@ -49,12 +49,12 @@ class MobileBase extends Controller {
         }
         //获取安装包的参数
         $appType = I('appType')?I('appType'):I('apptype');
-        if($appType=='IOS'||$appType=='Android'){
-//            if(empty(session('appType'))||$appType!=session('appType')){
-                session('appType',$appType);
-//            }
-        }else{
-                session('appType','other');
+        if(empty(session('appType'))){
+            if($appType=='IOS'||$appType=='Android'){
+                    session('appType',$appType);
+            }else{
+                    session('appType','other');
+            }
         }
 
         //判断是否允许网页登录

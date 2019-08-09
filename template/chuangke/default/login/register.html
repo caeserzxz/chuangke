@@ -52,7 +52,7 @@
             <button class="fs30 fw_b color_w loading_btn">注册</button>
         </div>
 
-        <if condition="$config.is_other_login eq 1">
+        <if condition="$config.is_other_login eq 2 AND $appType eq 'other'">
             <a href="{:U('chuangke/Member/AppDownload')}" class="goLink fs26">下载App</a>
         <else />
             <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
