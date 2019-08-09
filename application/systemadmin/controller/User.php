@@ -386,7 +386,7 @@ class User extends Base {
     	return $this->fetch();
     }
 
-        /**
+    /**
      * 更换上级
      */
     function change_leader(){
@@ -394,17 +394,24 @@ class User extends Base {
         $uid = I('id');
 
         $list = M('users')->where('user_id',$uid)->find();
-
         if(IS_POST){
 
             $first_leader = I('first_leader');
-            
+
             if($first_leader == 0){
 
                 $first_leader = 0;
             }else{
-
+                //上级信息
                 $user_first = M('users')->where('user_id',$first_leader)->find();
+
+                //检测更改上级是否会导致关系错乱
+                $first_all = explode('_',$user_first['leader_all']);
+                $first_key = array_search($list['user_id'],$first_all);
+                if($first_key){
+                    $this->ajaxReturn(array('status' => 0, 'message' => '该ID已是下级', 'data' => ''));
+                }
+
 
                 if(empty($user_first)){
                     $this->ajaxReturn(array('status' => 0, 'message' => 'ID不存在', 'data' => ''));
@@ -412,26 +419,57 @@ class User extends Base {
                     $leader_all = $user_first['leader_all'].'_'.$list['user_id'];
                 }
             }
-
             if(intval($uid) == intval($first_leader)){
                 $this->ajaxReturn(array('status' => 0, 'message' => '修改失败,不能填自己的ID', 'data' => ''));
             }
 
+            M('users')->startTrans();
             $r = M('users')->where(array('user_id'=>$uid))->update(['first_leader'=>$first_leader,'leader_all'=>$leader_all]);
 
             if($r){
+                //查找所有下级,并更新下级的关系链
+                $where['leader_all'] = array('like',"%{$list['user_id']}%");
+                $where['user_id'] = array('neq',$list['user_id']);
+                $arr = M('users')->where($where)->select();
+                $model = M('users');
+                //更改当前用户的下级的关系链
+                foreach ($arr as $k=>$v){
+                    $all = explode('_',$v['leader_all']);
+                    $key = array_search($list['user_id'],$all);
+                    $str = '';
+                    foreach ($all as $j=>$i){
+                        if($j<$key){
+                            continue;
+                        }
+                        $str =  $str.'_'.$i;
+                    }
+                    $str = substr($str,1);
+                    $map['leader_all'] = $user_first['leader_all'].'_'.$str;
+                    $res = $model->where(array('user_id'=>$v['user_id']))->update($map);
+                    if(empty($res)){
+                        M('users')->rollback();
+                        $this->ajaxReturn(array('status' => 0, 'message' => '下级更新关系链失败'));
+                    }
+
+                }
+                M('users')->commit();
                 $this->ajaxReturn(array('status' => 1, 'message' => '更改成功'));
             }else{
+                M('users')->rollback();
+                if($list['first_leader']==$user_first['user_id']){
+                    $this->ajaxReturn(array('status' => 0, 'message' => '该ID已是上级'));
+                }
                 $this->ajaxReturn(array('status' => 0, 'message' => '更改失败'));
             }
 
-            
+
 
         }
         $this->assign('list',$list);
 
         return $this->fetch();
     }
+
 
     /**
      * 会员等级添加编辑删除
