@@ -243,6 +243,9 @@ class Plan extends MobileBase
                     $img_src = '/'.UPLOAD_PATH.'plan/'.$imgsrc;
                 }
             }
+            if($imgsrc){
+                $img_src =   $imgsrc;
+            }
             if ($money <= 0) $this->error('金额错误');
             // 金额是否是200整数倍
             $debt_based = $shop_info['debt_based'];
@@ -268,6 +271,8 @@ class Plan extends MobileBase
             if ($type < 1 || $type > 4) $this->error('债务类型错误');
             $debt_name = ['未知','信用卡','房贷','车贷','其他'];
 
+            $this->assign('config', tpCache('shop_info'));
+            $this->assign('appType',session('appType'));
             $this->assign('type',$type);
             $this->assign('debt_name',$debt_name);
             return $this->fetch();

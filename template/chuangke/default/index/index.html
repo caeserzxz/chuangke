@@ -28,11 +28,21 @@
             <div class="swiper-container swiperBox swiper1">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                        <if condition="$image_info.banner1 neq ''">
+                            <img src="{$image_info.banner1}" alt="" />
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />
+                        </if>
+
                     </div>
                     <div class="swiper-slide">
-                        <img src="http://youqianhuan.oss-cn-hongkong.aliyuncs.com/banner/1.png?tdsourcetag=s_pctim_aiomsg
+                        <if condition="$image_info.banner2 neq ''">
+                            <img src="{$image_info.banner2}" alt="" />
+                        <else />
+                            <img src="http://youqianhuan.oss-cn-hongkong.aliyuncs.com/banner/1.png?tdsourcetag=s_pctim_aiomsg
 " alt="" />
+                        </if>
+
                     </div>
                     <!--<div class="swiper-slide">-->
                         <!--<img src="__PUBLIC__/static/chuangke/images/swiper01.png" alt="" />-->
@@ -85,21 +95,59 @@
                     <p class="fs26">{:tpCache('shop_info.store_name')}学院</p><div class="fs22">学习更多还卡知识摆脱卡奴</div>
                 </div>
                 <div class="list">
-                    <a href="{:U('chuangke/index/earningInterest')}">
-                        <img src="__PUBLIC__/static/chuangke/images/index04.png" alt="">
-                        <p class="fs26 fw_b">0费率还款技巧</p>
+                    <a href="{:U('chuangke/index/paymentSkills')}">
+                        <if condition="$image_info.paymentSkills neq ''">
+                            <img src="{$image_info.paymentSkills}" alt="" />
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/index04.png" alt="">
+                        </if>
+
+                        <if condition="$image_info.paymentSkills_title neq ''">
+                            <p class="fs26 fw_b">{$image_info.paymentSkills_title}</p>
+                        <else/>
+                            <p class="fs26 fw_b">0费率还款技巧</p>
+                        </if>
+
                     </a>
                     <a href="{:U('chuangke/index/obtainGuarantee')}">
-                        <img src="__PUBLIC__/static/chuangke/images/index05.png" alt="">
-                        <p class="fs26 fw_b">担保金如何获取？</p>
+                        <if condition="$image_info.obtainGuarantee neq ''">
+                            <img src="{$image_info.obtainGuarantee}" alt="" />
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/index05.png" alt="">
+                        </if>
+
+                        <if condition="$image_info.obtainGuarantee_title neq ''">
+                            <p class="fs26 fw_b">{$image_info.obtainGuarantee_title}</p>
+                        <else/>
+                            <p class="fs26 fw_b">担保金如何获取？</p>
+                        </if>
                     </a>
                     <a href="{:U('chuangke/index/earningInterest')}">
-                        <img src="__PUBLIC__/static/chuangke/images/index06.png" alt="">
-                        <p class="fs26 fw_b">如何帮他人还款赚利息</p>
+                        <if condition="$image_info.earningInterest neq ''">
+                            <img src="{$image_info.earningInterest}" alt="" />
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/index06.png" alt="">
+                        </if>
+
+                        <if condition="$image_info.earningInterest_title neq ''">
+                            <p class="fs26 fw_b">{$image_info.earningInterest_title}</p>
+                        <else/>
+                            <p class="fs26 fw_b">如何帮他人还款赚利息</p>
+                        </if>
                     </a>
                     <a href="{:U('chuangke/index/noPayment')}">
-                        <img src="__PUBLIC__/static/chuangke/images/index07.png" alt="">
-                        <p class="fs26 fw_b">借款人不还钱怎么办？</p>
+                        <if condition="$image_info.noPayment neq ''">
+                            <img src="{$image_info.noPayment}" alt="" />
+                        <else />
+                            <img src="__PUBLIC__/static/chuangke/images/index07.png" alt="">
+                        </if>
+
+                        <if condition="$image_info.noPayment_title neq ''">
+                            <p class="fs26 fw_b">{$image_info.noPayment_title}</p>
+                        <else/>
+                            <p class="fs26 fw_b">借款人不还钱怎么办？</p>
+                        </if>
+
                     </a>
                 </div>
             </div>

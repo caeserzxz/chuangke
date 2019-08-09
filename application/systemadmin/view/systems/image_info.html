@@ -1,0 +1,457 @@
+<include file="public/layout" />
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<body style="background-color: #FFF; overflow: auto;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>商城设置</h3>
+                <h5>网站全局内容基本选项设置</h5>
+            </div>
+            <ul class="tab-base nc-row">
+                <foreach name="group_list" item="v" key="k">
+                    <li><a href="{:U('Systems/index',['inc_type'=> $k])}" <if condition="$k==$inc_type">class="current"</if>><span>{$v}</span></a></li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div class="explanation" id="explanation">
+        <div class="title" id="checkZoom"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+            <span id="explanationZoom" title="收起提示"></span> </div>
+        <ul>
+            <li>系统平台全局设置,包括基础设置、购物、短信、邮件、水印和分销等相关模块。</li>
+        </ul>
+    </div>
+    <form method="post" id="handlepost" action="{:U('Systems/handle')}" enctype="multipart/form-data" name="form1">
+        <input type="hidden" name="form_submit" value="ok" />
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">个人中心默认头像</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="userinfo_img_a" class="nyroModal" rel="gal" href="{$config.userinfo}">
+                                <i id="userinfo_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.userinfo}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="userinfo" name="userinfo" value="{$config.userinfo}" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','userinfo_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">个人中心默认头像</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页轮播图1</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="banner1_img_a" class="nyroModal" rel="gal" href="{$config.banner1}">
+                                <i id="banner1_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.banner1}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="banner1" name="banner1" value="{$config.banner1}" class="type-file-text">
+                            <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','banner1_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页轮播图1</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页轮播图2</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="banner2_img_a" class="nyroModal" rel="gal" href="{$config.banner1}">
+                                <i id="banner2_img_1" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.banner2}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="banner2" name="banner2" value="{$config.banner2}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','banner2_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页轮播图2</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="paymentSkills_title">原首页0费率还款技巧的标题</label>
+                </dt>
+                <dd class="opt">
+                    <input id="paymentSkills_title" name="paymentSkills_title" value="{$config.paymentSkills_title}" class="input-txt" type="text" />
+                    <p class="notic">原首页0费率还款技巧的标题</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页0费率还款技巧的封面图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="paymentSkills_img_a" class="nyroModal" rel="gal" href="{$config.paymentSkills}">
+                                <i id="paymentSkills_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.paymentSkills}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="paymentSkills" name="paymentSkills" value="{$config.paymentSkills}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','paymentSkills_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页0费率还款技巧的封面图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页0费率还款技巧的主图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="paymentSkills2_img_a" class="nyroModal" rel="gal" href="{$config.paymentSkills2}">
+                                <i id="paymentSkills2_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.paymentSkills2}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="paymentSkills2" name="paymentSkills2" value="{$config.paymentSkills2}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','paymentSkills2_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页0费率还款技巧的主图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="obtainGuarantee_title">原首页担保金如何获取的标题</label>
+                </dt>
+                <dd class="opt">
+                    <input id="obtainGuarantee_title" name="obtainGuarantee_title" value="{$config.obtainGuarantee_title}" class="input-txt" type="text" />
+                    <p class="notic">原首页担保金如何获取的标题</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页担保金如何获取的封面图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="obtainGuarantee_img_a" class="nyroModal" rel="gal" href="{$config.obtainGuarantee}">
+                                <i id="obtainGuarantee_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.obtainGuarantee}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="obtainGuarantee" name="obtainGuarantee" value="{$config.obtainGuarantee}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','obtainGuarantee_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页担保金如何获取的封面图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页担保金如何获取的主图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="obtainGuarantee2_img_a" class="nyroModal" rel="gal" href="{$config.obtainGuarantee2}">
+                                <i id="obtainGuarantee2_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.obtainGuarantee2}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="obtainGuarantee2" name="obtainGuarantee2" value="{$config.obtainGuarantee2}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','obtainGuarantee2_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页担保金如何获取的封面图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="earningInterest_title">原首页如何帮他人还款赚利息的标题</label>
+                </dt>
+                <dd class="opt">
+                    <input id="earningInterest_title" name="earningInterest_title" value="{$config.earningInterest_title}" class="input-txt" type="text" />
+                    <p class="notic">原首页如何帮他人还款赚利息的标题</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页如何帮他人还款赚利息的封面图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="earningInterest_img_a" class="nyroModal" rel="gal" href="{$config.earningInterest}">
+                                <i id="earningInterest_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.earningInterest}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="earningInterest" name="earningInterest" value="{$config.earningInterest}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','earningInterest_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页如何帮他人还款赚利息的封面图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页如何帮他人还款赚利息的主图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="earningInterest2_img_a" class="nyroModal" rel="gal" href="{$config.earningInterest2}">
+                                <i id="earningInterest2_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.earningInterest2}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="earningInterest2" name="earningInterest2" value="{$config.earningInterest2}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','earningInterest2_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页如何帮他人还款赚利息的主图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="noPayment_title">原首页借款人不还钱怎么办的标题</label>
+                </dt>
+                <dd class="opt">
+                    <input id="noPayment_title" name="noPayment_title" value="{$config.noPayment_title}" class="input-txt" type="text" />
+                    <p class="notic">原首页借款人不还钱怎么办的标题</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页借款人不还钱怎么办的封面图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="noPayment_img_a" class="nyroModal" rel="gal" href="{$config.noPayment}">
+                                <i id="noPayment_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.noPayment}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="noPayment" name="noPayment" value="{$config.noPayment}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','noPayment_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页借款人不还钱怎么办的封面图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">首页借款人不还钱怎么办的主图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="noPayment2_img_a" class="nyroModal" rel="gal" href="{$config.noPayment2}">
+                                <i id="noPayment2_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.noPayment2}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="noPayment2" name="noPayment2" value="{$config.noPayment2}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','noPayment2_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页借款人不还钱怎么办的主图</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="store_logo">申请代理页面主图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="applicationAgency_img_a" class="nyroModal" rel="gal" href="{$config.applicationAgency}">
+                                <i id="applicationAgency_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.applicationAgency}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="applicationAgency" name="applicationAgency" value="{$config.applicationAgency}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','applicationAgency_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">首页借款人不还钱怎么办的主图</p>
+                </dd>
+            </dl>
+            <div class="bot">
+                <input type="hidden" name="inc_type" value="{$inc_type}">
+                <a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green" onclick="document.form1.submit()">确认提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="goTop"> <a href="JavaScript:void(0);" id="btntop"><i class="fa fa-angle-up"></i></a><a href="JavaScript:void(0);" id="btnbottom"><i class="fa fa-angle-down"></i></a></div>
+</body>
+<script>
+var url="{:url('Ueditor/index',array('savePath'=>'goods'))}";
+var ue = UE.getEditor('help_content',{
+         serverUrl :url,
+         zIndex: 999,
+         initialFrameWidth: "100%", //初化宽度
+         initialFrameHeight: 200, //初化高度            
+         focus: false, //初始化时，是否让编辑器获得焦点true或false
+         maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+         pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+         autoHeightEnabled: true
+     });
+</script>
+<script>
+var url="{:url('Ueditor/index',array('savePath'=>'goods'))}";
+var ue = UE.getEditor('Notice_content',{
+         serverUrl :url,
+         zIndex: 999,
+         initialFrameWidth: "100%", //初化宽度
+         initialFrameHeight: 200, //初化高度            
+         focus: false, //初始化时，是否让编辑器获得焦点true或false
+         maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+         pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+         autoHeightEnabled: true
+     });
+</script>
+<script type="text/javascript">
+    //网站首页logo
+    function img_call_back(fileurl_tmp)
+    {
+        $("#store_logo").val(fileurl_tmp);
+        $("#img_a").attr('href', fileurl_tmp);
+        $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //网站用户中心logo
+    function user_img_call_back(fileurl_tmp)
+    {
+        $("#store_user_logo").val(fileurl_tmp);
+        $("#userimg_a").attr('href', fileurl_tmp);
+        $("#userimg_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //轮播图1
+    function userinfo_call_back(fileurl_tmp)
+    {
+        $("#userinfo").val(fileurl_tmp);
+        $("#userinfo_img_a").attr('href', fileurl_tmp);
+        $("#userinfo_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //轮播图1
+    function banner1_call_back(fileurl_tmp)
+    {
+        $("#banner1").val(fileurl_tmp);
+        $("#banner1_img_a").attr('href', fileurl_tmp);
+        $("#banner1_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //轮播图2
+    function banner2_call_back(fileurl_tmp)
+    {
+        $("#banner2").val(fileurl_tmp);
+        $("#banner2_img_a").attr('href', fileurl_tmp);
+        $("#banner2_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页0费率还款技巧的封面
+    function paymentSkills_call_back(fileurl_tmp)
+    {
+        $("#paymentSkills").val(fileurl_tmp);
+        $("#paymentSkills_img_a").attr('href', fileurl_tmp);
+        $("#paymentSkills_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页0费率还款技巧的主图
+    function paymentSkills2_call_back(fileurl_tmp)
+    {
+        $("#paymentSkills2").val(fileurl_tmp);
+        $("#paymentSkills2_img_a").attr('href', fileurl_tmp);
+        $("#paymentSkills2_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页担保金如何获取的封面图
+    function obtainGuarantee_call_back(fileurl_tmp)
+    {
+        $("#obtainGuarantee").val(fileurl_tmp);
+        $("#obtainGuarantee_img_a").attr('href', fileurl_tmp);
+        $("#obtainGuarantee_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页担保金如何获取的主图
+    function obtainGuarantee2_call_back(fileurl_tmp)
+    {
+        $("#obtainGuarantee2").val(fileurl_tmp);
+        $("#obtainGuarantee2_img_a").attr('href', fileurl_tmp);
+        $("#obtainGuarantee2_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页如何帮他人还款赚利息的封面图
+    function earningInterest_call_back(fileurl_tmp)
+    {
+        $("#earningInterest").val(fileurl_tmp);
+        $("#earningInterest_img_a").attr('href', fileurl_tmp);
+        $("#earningInterest_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页如何帮他人还款赚利息的主图
+    function earningInterest2_call_back(fileurl_tmp)
+    {
+        $("#earningInterest2").val(fileurl_tmp);
+        $("#earningInterest2_img_a").attr('href', fileurl_tmp);
+        $("#earningInterest2_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页借款人不还钱怎么办的封面图
+    function noPayment_call_back(fileurl_tmp)
+    {
+        $("#noPayment").val(fileurl_tmp);
+        $("#noPayment_img_a").attr('href', fileurl_tmp);
+        $("#noPayment_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+    //首页借款人不还钱怎么办的主图
+    function noPayment2_call_back(fileurl_tmp)
+    {
+        $("#noPayment2").val(fileurl_tmp);
+        $("#noPayment2_img_a").attr('href', fileurl_tmp);
+        $("#noPayment2_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+
+    //申请代理主图
+    function applicationAgency_call_back(fileurl_tmp)
+    {
+        $("#applicationAgency").val(fileurl_tmp);
+        $("#applicationAgency_img_a").attr('href', fileurl_tmp);
+        $("#applicationAgency_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+</script>
+</html>

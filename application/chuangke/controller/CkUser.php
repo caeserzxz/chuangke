@@ -703,6 +703,7 @@ class CkUser extends MobileBase
         $apply['account_code_img']  = $receipt['account_code_img'];
         $apply['receivables_name']  = $receipt['receivables_name'];
 
+        $this->assign('appType',session('appType'));
         $this->assign('apply',$apply);
         $this->assign('type',$type);
         return $this->fetch('plan/pay_detail');
@@ -725,6 +726,9 @@ class CkUser extends MobileBase
             if($upload_img){
                 $img_src = '/'.UPLOAD_PATH.'plan/'.$upload_img;
             }
+        }
+        if($upload_img){
+            $img_src = $upload_img;
         }
         if ($type == 1) {
             $updata['voucher_img1'] = $img_src;

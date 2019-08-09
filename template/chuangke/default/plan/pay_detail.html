@@ -32,15 +32,22 @@
             </div>
             <form id="form" method="post" enctype="multipart/form-data">
                 <div class="uploader__input-box">
-                    <img src="{$apply.img|default='__PUBLIC__/static/chuangke/images/money02.png'}" alt="" class="upload_img">
-                    <input id="upload_img" name="upload_img" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                    <if condition="$appType eq 'IOS'">
+                        <img src="{$apply.img|default='__PUBLIC__/static/chuangke/images/money02.png'}" onclick="loadimg('apply_img')" alt="" class="upload_img">
+                    <else />
+                        <img src="{$apply.img|default='__PUBLIC__/static/chuangke/images/money02.png'}" alt="" class="upload_img">
+                        <input id="upload_img" name="upload_img" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                    </if>
                 </div>
+                <div class="images-list"><!--上传图片列表--></div>
                 <input type="hidden" name="type" value="{$type}">
                 <input type="hidden" name="id" value="{$apply.id}">
                 <button class="fs30 color_w fw_b button_btn" type="button" onclick="upload_voucher();">我已付款</button>
             </form>
         </div>
     </div>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
 <script>
     $(function() {
@@ -48,6 +55,7 @@
     });
 </script>
 <script>
+    var  img_name = '';
     function upload_voucher() {
         var upload_img = $('#upload_img').val();
         if (upload_img == '') {
@@ -88,16 +96,13 @@
         $.ajax({
             'url': "{:url('Member/uploadimage')}",
             'type': 'post',
-            'data': {'img': base64imag, 'img_type': 'id_card','img_name':img_name},
+            'data': {'img': base64imag, 'img_type': 'apply_img','img_name':img_name},
             'dataType': 'json',
             'success': function (data) {
                 if (data) {
-                    if (data.img_name == 'upload_img') {
-                        $('.upload_img').attr('src',  data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="upload_img" class="imagesinput"/>';
-                    } else if (data.img_name == 'card_back') {
-                        $('.card_back').attr('src', data.image_path);
-                        var str = '<input type="hidden" value="' + data.image_path + '" placeholder="上传图片返回URM" name="card_back" class="imagesinput"/>';
+                    if (data.img_name == 'apply_img') {
+                        $('.upload_img').attr('src',  data.path);
+                        var str = '<input type="hidden" value="' + data.path + '" placeholder="上传图片返回URM" name="upload_img" class="imagesinput"/>';
                     }
                     $('.images-list').append(str);
                 } else {
@@ -109,7 +114,7 @@
     }
 
     function loadimg(uploadfile){
-        img_type = uploadfile;
+        img_name = uploadfile;
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { //ios
             window.app.Photo();
         }

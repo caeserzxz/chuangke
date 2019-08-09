@@ -5,25 +5,30 @@
     <div class="header-left">
         <a href="javascript:history.go(-1)" class="left-arrow"></a>
     </div>
-    <div class="header-title">如何帮他人还款利息</div>
+    <div class="header-title">{$title}</div>
     <div class="header-right">
         <a href="#"></a>
     </div>
 </div>
         </div>
         <div class="page-bd ruhe">
+            <if condition="$image_info.earningInterest2 neq ''">
+                <img src="{$image_info.earningInterest2}" alt="" style="width: 100%;height: 100%;">
+            <else />
+                <img src="__PUBLIC__/static/chuangke/images/advertisement03.png" alt="" style="width: 100%;height: 100%;">
+            </if>
             <!-- 页面内容-->
-            <div class="top_hd df_col">
-                <img src="__PUBLIC__/static/chuangke/images/biao_3.png" alt="" class="hd_title">
-                <div class="fs36 col_0 hd_txt df_con">帮他人还卡</div>
-            </div>
-            <div class="bottom_ft df_col">
-                <div class="wenben">
-                    <p class="fs24 col_9">您可以通过发起众筹计划帮助特任还款从而赚取利息。帮助特任还款的前提是，您比逊要有足够的担保金，只有拥有担保金才能帮助他人进行还卡。</p>
-                    <p class="fs24 col_9 ex">举例：</p>
-                    <p class="fs24 col_9">如您由200担保金，您就能解除1000元，在一个周期收回1200元，这个时候您账户上的200担保金将会被扣除。</p>
-                </div>
-            </div>
+            <!--<div class="top_hd df_col">-->
+                <!--<img src="__PUBLIC__/static/chuangke/images/biao_3.png" alt="" class="hd_title">-->
+                <!--<div class="fs36 col_0 hd_txt df_con">帮他人还卡</div>-->
+            <!--</div>-->
+            <!--<div class="bottom_ft df_col">-->
+                <!--<div class="wenben">-->
+                    <!--<p class="fs24 col_9">您可以通过发起众筹计划帮助特任还款从而赚取利息。帮助特任还款的前提是，您比逊要有足够的担保金，只有拥有担保金才能帮助他人进行还卡。</p>-->
+                    <!--<p class="fs24 col_9 ex">举例：</p>-->
+                    <!--<p class="fs24 col_9">如您由200担保金，您就能解除1000元，在一个周期收回1200元，这个时候您账户上的200担保金将会被扣除。</p>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 

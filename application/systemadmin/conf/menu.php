@@ -13,6 +13,7 @@ return	array(
 						// array('name'=>'友情链接','act'=>'linkList','op'=>'Article'),
 						array('name'=>'清除缓存','act'=>'cleanCache','op'=>'Systems'),
                         array('name'=>'APP下载','act'=>'download_setting','op'=>'Systems'),
+                        array('name'=>'图片设置','act'=>'image_setting','op'=>'Systems'),
 						// array('name'=>'自提点','act'=>'index','op'=>'Pickup'),
 						// array('name'=>'商城首页装修','act'=>'index|index','op'=>'shoppage'),
 				)),
