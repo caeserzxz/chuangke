@@ -728,7 +728,7 @@ class CkUser extends MobileBase
             }
         }
         if($upload_img){
-            $img_src = $img_src;
+            $img_src = $upload_img;
         }
         if ($type == 1) {
             $updata['voucher_img1'] = $img_src;
