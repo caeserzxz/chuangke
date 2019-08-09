@@ -29,7 +29,11 @@ class Wallet extends MobileBase
         $userInfo = $this->userInfo;
 
         $this->assign('userInfo',$userInfo);
-        return $this->fetch();
+        if (tpCache('shop_info.template3') == 2) {
+            return $this->fetch('plan/template3');
+        }else{
+            return $this->fetch();
+        }
     }
 
     /**
