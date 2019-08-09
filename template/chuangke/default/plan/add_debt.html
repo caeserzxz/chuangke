@@ -73,8 +73,7 @@
             contentType: false,
             dataType:"json",
             success : function(data) {
-                console.log(data);
-                $.toast(data.msg,"text");
+                $.toast(data.msg, "text");
                 if (data.code == 1) {
                     window.location.href = data.url;
                 } else {

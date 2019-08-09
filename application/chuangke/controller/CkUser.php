@@ -720,15 +720,15 @@ class CkUser extends MobileBase
         if(empty($upload_img) && empty($_FILES['upload_img']['tmp_name'])){
             $this->error('请上传打款凭证');
         }
+        if($upload_img){
+            $img_src = $upload_img;
+        }
         $MemberLogic  = new \app\common\logic\MemberLogic();
         if($_FILES['upload_img']['tmp_name']){//上传身份证正面
             $upload_img = $MemberLogic->upload_img('upload_img','plan');
             if($upload_img){
                 $img_src = '/'.UPLOAD_PATH.'plan/'.$upload_img;
             }
-        }
-        if($upload_img){
-            $img_src = $upload_img;
         }
         if ($type == 1) {
             $updata['voucher_img1'] = $img_src;

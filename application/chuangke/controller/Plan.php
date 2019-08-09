@@ -240,6 +240,9 @@ class Plan extends MobileBase
             if(empty($imgsrc) && empty($_FILES['imgsrc']['tmp_name'])){
                 $this->error('请上传债务凭证');
             }
+            if($imgsrc){
+                $img_src =   $imgsrc;
+            }
             $MemberLogic  = new MemberLogic();
             if($_FILES['imgsrc']['tmp_name']){//上传身份证正面
                 $imgsrc = $MemberLogic->upload_img('imgsrc','plan');
@@ -247,9 +250,7 @@ class Plan extends MobileBase
                     $img_src = '/'.UPLOAD_PATH.'plan/'.$imgsrc;
                 }
             }
-            if($imgsrc){
-                $img_src =   $imgsrc;
-            }
+
             if ($money <= 0) $this->error('金额错误');
             // 金额是否是200整数倍
             $debt_based = $shop_info['debt_based'];
