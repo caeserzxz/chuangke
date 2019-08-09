@@ -116,7 +116,7 @@ class Member extends  MobileBase
                 //更新用户的昵称
                 M('users')->where(array('user_id'=>$auth['user_id']))->update(array('nickname'=>$auth['user_name']));
                 //分佣保证金
-                $model->earnestSend($userInfo['user_id'],1);
+                //$model->earnestSend($userInfo['user_id'],1);
 
                 $return['status'] = 1;
                 $return['msg'] = '提交成功';
