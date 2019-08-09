@@ -65,6 +65,9 @@ class Plan extends MobileBase
         $surplus_debt = $all_debt;
         $surplus_rece = $all_rece;
 
+        $user['all_debt'] = $all_debt;
+        $user['all_rece'] = $all_rece;
+
         $check = 0;
         for($i=1;$i<10;$i++){
             $ratio_now = $rece_money = 0;

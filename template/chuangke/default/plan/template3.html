@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/js/Swiper-4.0.7/swiper.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/zpui.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/static/chuangke/css/all_template.css"/>
+    <script src="__PUBLIC__/static/chuangke/js/page.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+    <script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+    <title> {:tpCache('shop_info.store_name')} </title>
+</head>
+<body>
+<div class="page wallet">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">我的钱包</div>
+            <div class="header-right">
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd">
+        <!-- 页面内容-->
+        <div class="block one">
+            <div class="name">
+                <p class="fs26">佣金账户</p>
+                <a href="{:U('chuangke/Wallet/commission_list')}" class="fs24">明细</a>
+            </div>
+            <div class="money">
+                <span class="fs24">￥</span><p class="color_w fw_b">0.00</p>
+            </div>
+            <div class="info">
+                <div>
+                    <p class="fs26">冻结：<span>￥0.00</span></p>
+                    <p class="fs26">可用：<span>￥0.00</span></p>
+                </div>
+                <button class="fs22 color_w" onclick="commission();">提现</button>
+            </div>
+        </div>
+        <div class="block two">
+            <div class="name">
+                <p class="fs26">保证金账户</p>
+                <a href="{:U('chuangke/Wallet/walletRecord')}" class="fs24">明细</a>
+            </div>
+            <div class="money">
+                <span class="fs24">￥</span><p class="color_w fw_b">{$userInfo.earnest_money}</p>
+            </div>
+            <div class="info">
+                <div>
+                    <p class="fs26">可用：<span>￥{$userInfo.earnest_money}</span></p>
+                </div>
+                <button class="fs22 color_w"  onclick="bzj();">提现</button>
+            </div>
+        </div>
+        <div class="block there">
+            <div class="name">
+                <p class="fs26">日返账户</p>
+            </div>
+            <div class="money">
+                <span class="fs24">￥</span><p class="color_w fw_b">5.00</p>
+            </div>
+            <div class="info">
+                <div>
+                    <p class="fs26">预计今日返还：<span>￥0.00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file="common/chuangke_footer_nav" />
+</div>
+<script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    function bzj(){
+        layer.msg('正在努力开发中')
+    }
+    function commission(){
+        layer.msg('正在努力开发中')
+    }
+</script>
+</body>
+</html>
