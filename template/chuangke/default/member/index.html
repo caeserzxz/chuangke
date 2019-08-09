@@ -50,7 +50,12 @@
                 </div>
             </div>
             <div class="weui-cells">
-                <a href="javascript:;" class="weui-cell weui-cell_access" onclick="Authentication();">
+                <if condition="$auth_status eq 1">
+                    <a href="javascript:;" class="weui-cell weui-cell_access" >
+                <else />
+                    <a href="javascript:;" class="weui-cell weui-cell_access" onclick="Authentication();">
+                </if>
+
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my01.png" alt="">
                         <span class="fs30">实名认证</span>
