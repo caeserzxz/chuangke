@@ -101,27 +101,30 @@ class CkUser extends MobileBase
         $team_data = [];
         //满足审核条件的用户
         $check_id = 0;
-        foreach ($leader as $k=>$v){
-            if($k  < ($next_level['level_id']-1)) continue;//升级N星则从N层开始找，N-1层直接跳过
+        if ($next_level['level_id'] == 10 && tpCache('shop_info.nine_stars_rule') != 1) {
+            // 升级九星若后台设置的是规则二不找对应层级直接匹配给管理员
+            foreach ($leader as $k=>$v){
+                if($k  < ($next_level['level_id']-1)) continue;//升级N星则从N层开始找，N-1层直接跳过
 
-            $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
-            // 对应层级用户是否满足
-            if ($k == $next_level['level_id']-1) {
-                if($now_user['level'] >= $next_level['level_id'] && $now_user['is_lock'] != 1){
-                    $check_id = $v;
-                    // 添加订单数
-                    $team_data[$v]['team_order_'.$k] = 1;
-                    break;
-                }else{
-                    // 添加漏单记录
-                    $team_data[$v]['is_out'] = 1;
-                    $team_data[$v]['team_order_out_'.$k] = 1;
+                $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
+                // 对应层级用户是否满足
+                if ($k == $next_level['level_id']-1) {
+                    if($now_user['level'] >= $next_level['level_id'] && $now_user['is_lock'] != 1){
+                        $check_id = $v;
+                        // 添加订单数
+                        $team_data[$v]['team_order_'.$k] = 1;
+                        break;
+                    }else{
+                        // 添加漏单记录
+                        $team_data[$v]['is_out'] = 1;
+                        $team_data[$v]['team_order_out_'.$k] = 1;
+                    }
                 }
-            }
-            // 对应层级不满足找最近的链上管理员 不分等级
-            if ($now_user['user_type'] == 1 && !$now_user['is_lock']) {
-                $check_id = $v;
-                break;
+                // 对应层级不满足找最近的链上管理员 不分等级
+                if ($now_user['user_type'] == 1 && !$now_user['is_lock']) {
+                    $check_id = $v;
+                    break;
+                }
             }
         }
         //特殊情况 第N层找不到满足条件的用户，直接分配管理员

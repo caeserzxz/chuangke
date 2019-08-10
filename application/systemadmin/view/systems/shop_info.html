@@ -466,6 +466,17 @@
                     <p class="notic"></p>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="team_prize_money">九星匹配规则</label>
+                </dt>
+                <dd class="opt">
+                    <label><input type="radio"  id="nine_stars_rule" name="nine_stars_rule" value="0" <if condition="$config['nine_stars_rule'] eq 0">checked="checked"</if>>规则一</label>
+                    <label><input type="radio"  id="nine_stars_rule" name="nine_stars_rule" value="1" <if condition="$config['nine_stars_rule'] eq 1">checked="checked"</if>>规则二</label>
+                    <p class="notic">规则一:即默认规则八星升九星时匹配给第九层的九星,没有满足的匹配给管理员</p>
+                    <p class="notic">规则二:八星升九星直接匹配给管理员</p>
+                </dd>
+            </dl>
      <!--        <dl class="row">
                 <dt class="tit">
                     <label for="help_title">帮助标题</label>
