@@ -212,6 +212,8 @@ class Admin extends Base
         $group = array('system' => '系统设置', 'content' => '内容管理', 'goods' => '商品中心', 'member' => '会员中心',
             'order' => '订单中心', 'marketing' => '营销推广', 'tools' => '插件工具', 'count' => '统计报表'
         );
+        $group = array('system'=>'系统设置','content'=>'内容管理','member'=>'会员中心','finance'=>'财务管理','tools'=>'插件工具','count'=>'统计报表','distribut'=>'分销中心','debt' => '众筹相关'
+        );
         $this->assign('group', $group);
         $this->assign('modules', $modules);
         return $this->fetch();
