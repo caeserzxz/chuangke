@@ -101,5 +101,24 @@ class Debt extends Base {
 
         return $this->fetch();
     }
-    
+
+    /**
+     * 还款方式
+     * @date 2019/08/10
+     */
+    public function receivables_list(){
+        I('user_id') ? $where['u.user_id'] = I('user_id') : false;
+
+        $count = Db::name('receipt_information')->alias('w')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->count();
+        $Page  = new Page($count,20);
+        $list = Db::name('receipt_information')->alias('w')->field('w.*,u.nickname')->join('__USERS__ u', 'u.user_id = w.user_id', 'INNER')->where($where)->order("w.id desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $show  = $Page->show();
+
+        $this->assign('show',$show);
+        $this->assign('list',$list);
+        $this->assign('pager',$Page);
+
+
+        return $this->fetch();
+    }
 }

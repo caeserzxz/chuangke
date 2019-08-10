@@ -448,11 +448,31 @@ class Systems extends Base
          if(IS_POST){
              $param = I('post.');
              $inc_type = $param['inc_type'];
-             if($_FILES['android_app']){
+             if($_FILES['android_app']['name']){
+               $suffix_name=substr($_FILES['android_app']['name'], strrpos($_FILES['android_app']['name'], '.')+1);
+               if($suffix_name!='apk'){
+                   $this->error("请上传正确的安卓安装包类型",U('Systems/download_setting',array('inc_type'=>$inc_type)));
+               }
+               if (preg_match("/[\x7f-\xff]/", $_FILES['android_app']['name'])) {  //判断字符串中是否有中文
+                     $this->error("安卓安装包文件名不能包含中文",U('Systems/download_setting',array('inc_type'=>$inc_type)));
+               }
                 $app_link = $this->upload_img('android_app','',$_FILES['android_app']['name']);
                 if($app_link){
                     $param['android_app'] = 'http://'.$_SERVER['SERVER_NAME'].'/'.$app_link;
                 }
+             }
+             if($_FILES['ios_app']['name']){
+                 $suffix_name=substr($_FILES['ios_app']['name'], strrpos($_FILES['ios_app']['name'], '.')+1);
+                 if($suffix_name!='ipa'){
+                     $this->error("请上传正确的ios安装包类型",U('Systems/download_setting',array('inc_type'=>$inc_type)));
+                 }
+                 if (preg_match("/[\x7f-\xff]/", $_FILES['android_app']['name'])) {  //判断字符串中是否有中文
+                     $this->error("ios安装包文件名不能包含中文",U('Systems/download_setting',array('inc_type'=>$inc_type)));
+                 }
+                 $app_link = $this->upload_img('ios_app','',$_FILES['ios_app']['name']);
+                 if($app_link){
+                     $param['ios_app'] = 'http://'.$_SERVER['SERVER_NAME'].'/'.$app_link;
+                 }
              }
 //             if($param['android_link']){
 //                 $param['android_qrcode'] = $this->qr_code($param['android_link']);
@@ -469,6 +489,8 @@ class Systems extends Base
 
              $inc_type =  I('get.inc_type','shop_info');
              $url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/AppDownload';
+
+             $this->assign('sever_name','http://'.$_SERVER['SERVER_NAME']);
              $this->assign('url',$url);
              $this->assign('inc_type',$inc_type);
              $this->assign('config',$config);

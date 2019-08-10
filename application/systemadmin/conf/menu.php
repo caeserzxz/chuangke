@@ -29,6 +29,7 @@ return	array(
 						//array('name'=>'会员签到','act'=>'signList','op'=>'User'),
 						array('name'=>'债务列表','act'=>'debt_list','op'=>'Debt'),
                         array('name'=>'实名认证','act'=>'auth_list','op'=>'UserAuth'),
+                        array('name'=>'收款方式','act'=>'receivables_list','op'=>'Debt'),
                         array('name'=>'还款情况','act'=>'repayment_list','op'=>'Debt'),
 				)),
 				// array('name' => '广告','child' => array(
