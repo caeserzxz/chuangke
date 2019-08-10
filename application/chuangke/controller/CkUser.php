@@ -376,6 +376,10 @@ class CkUser extends MobileBase
             $info = Db::name('ck_apply')->where('id',$id)->find();
             if(empty($info)) $this->ajaxReturn(['status'=>0,'msg'=>'查无信息']);
 
+            // 账号是否被冻结
+            $is_lock = M('users')->where(['user_id' => $this->user_id])->value('is_lock');
+            if ($is_lock == 1) $this->ajaxReturn(['status'=>0,'msg'=>'账号已被冻结,请联系管理员']);
+
             //第一层领导审核
             $updata = array();
             if ($info['check_leader_1'] == $info['check_leader_2']) {
@@ -437,21 +441,21 @@ class CkUser extends MobileBase
                             }
                         }                        
                     }
-                    # 验证是否已还款完成 冻结账号
-                    if (!$user['is_lock']) {
-                        $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys'); // 所有负债
-                        // 已收款金额
-                        $all_rece = M('ck_apply')
-                            ->where(['check_leader_1' => $this->user_id,'apply_status' => 1])
-                            ->whereOR(['check_leader_2' => $this->user_id,'apply_status' => 1])
-                            ->sum('make_money');
+                }
+                # 验证是否已还款完成 冻结账号
+                if ($is_lock != 1) {
+                    $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys'); // 所有负债
+                    // 已收款金额
+                    $all_rece = M('ck_apply')
+                        ->where(['check_leader_1' => $this->user_id,'apply_status' => 1])
+                        ->whereOR('check_leader_2='.$this->user_id.' and apply_status=1')
+                        ->sum('make_money');
 
-                        if ($all_rece >= $all_debt) {
-                            $res3 = M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
-                            if (!$res3) {
-                                Db::rollback();
-                                $this->ajaxReturn(['status'=>0,'msg'=>'账号冻结失败']);
-                            }
+                    if ($all_rece >= $all_debt) {
+                        $res3 = M('users')->where(['user_id' => $this->user_id])->save(['is_lock' => 1]);
+                        if (!$res3) {
+                            Db::rollback();
+                            $this->ajaxReturn(['status'=>0,'msg'=>'账号冻结失败']);
                         }
                     }
                 }
