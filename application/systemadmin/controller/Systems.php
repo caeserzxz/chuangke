@@ -444,12 +444,18 @@ class Systems extends Base
          if(IS_POST){
              $param = I('post.');
              $inc_type = $param['inc_type'];
-             if($param['android_link']){
-                 $param['android_qrcode'] = $this->qr_code($param['android_link']);
+             if($_FILES['android_app']){
+                $app_link = $this->upload_img('android_app','',$_FILES['android_app']['name']);
+                if($app_link){
+                    $param['android_app'] = 'http://'.$_SERVER['SERVER_NAME'].'/'.$app_link;
+                }
              }
-             if($param['ios_link']){
-                 $param['ios_qrcode'] = $this->qr_code($param['ios_link']);
-             }
+//             if($param['android_link']){
+//                 $param['android_qrcode'] = $this->qr_code($param['android_link']);
+//             }
+//             if($param['ios_link']){
+//                 $param['ios_qrcode'] = $this->qr_code($param['ios_link']);
+//             }
              unset($param['inc_type']);
              unset($param['form_submit']);
              tpCache($inc_type,$param);
@@ -488,6 +494,19 @@ class Systems extends Base
 
         $img = request()->domain().'/'.$after_path;
         return  $img;
+    }
+
+    //上传付款凭证
+    public function upload_img($img_name,$path,$file_name){
+        $file = request()->file($img_name);
+        if($file){
+            $info = $file->move(ROOT_PATH,$file_name,true);
+            if($info){
+                return $info->getSaveName();
+            }else{
+                return $info->getError();die;
+            }
+        }
     }
 
     public function image_setting(){

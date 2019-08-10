@@ -39,13 +39,19 @@
                     <span class="err"></span>
                     <p class="notic">安卓下载链接</p>
                 </dd>
+                <dt class="tit">
+                    <label for="qq3">安卓安装包</label>
+                </dt>
+                <dd class="opt">
+                    <input id="qq4"  name="android_app" value="{$config.android_app}" class="input-txt" type="file">
+                    <span class="err"></span>
+                    <if condition="$config.android_app neq ''">
+                        <p class="notic"><a href="javascript:;">{$config.android_app}</a></p>
+                    <else />
+                        <p class="notic">请上传安卓APP</p>
+                    </if>
 
-                <!--<if condition="$config.android_qrcode neq ''">-->
-                    <!--<dd>-->
-                        <!--<p class="notic">安卓下载二维码</p>-->
-                        <!--<img style="width: 150px; height: 150px; margin-left: 20%;" src="{$config.android_qrcode}" alt="">-->
-                    <!--</dd>-->
-                <!--</if>-->
+                </dd>
             </dl>
             <dl class="row">
                 <dt class="tit">
