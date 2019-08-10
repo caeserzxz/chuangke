@@ -47,7 +47,10 @@ class Task extends Controller {
 
             if ($res) {
                 // 发送短信
-                // $msg = jh_message($mobile,Config::get('message.type_examine'),'');
+                $shop_info = tpCache('shop_info');
+                if($shop_info['debt_mess']==1){
+                     $msg = jh_message($mobile,Config::get('message.type_examine'),'');
+                }
             }
         }
         $this->AutomaticAudit();

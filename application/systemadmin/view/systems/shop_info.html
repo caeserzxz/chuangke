@@ -376,7 +376,19 @@
                         <input id="authen_mess1" name="authen_mess" <if condition="$config['authen_mess'] eq 1">checked="checked"</if> value="1" type="radio">
                         <input id="authen_mess0" name="authen_mess" <if condition="$config['authen_mess'] eq 0">checked="checked"</if> value="0" type="radio">
                     </div>
-                    <p class="notic">关闭后将不再接收短信</p>
+                    <p class="notic">关闭后将不再接收实名短信</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">是否发送债务录入成功短信</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="debt_mess1" class="cb-enable <if condition='$config[debt_mess] eq 1'>selected</if>">开启</label>
+                        <label for="debt_mess0" class="cb-disable <if condition='$config[debt_mess] eq 0'>selected</if>">关闭</label>
+                        <input id="debt_mess1" name="debt_mess" <if condition="$config['debt_mess'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="debt_mess0" name="debt_mess" <if condition="$config['debt_mess'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后将不再接收债务录入成功短信</p>
                 </dd>
             </dl>
             <dl class="row">
