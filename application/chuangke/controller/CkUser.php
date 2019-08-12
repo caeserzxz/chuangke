@@ -479,12 +479,11 @@ class CkUser extends MobileBase
             -> join('users B','A.user_id = B.user_id','left')
             -> join('user_level C','A.level = C.level_id','left')
             -> join('user_authentication D','A.user_id = D.user_id','left')
-            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1')
+            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 and  A.apply_status = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1 and  A.apply_status = 0 ')
             // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
             ->order('A.apply_time DESC')
             ->limit($Page->firstRow . ',' . $Page->listRows)
             -> select();
-
         foreach ($check_user as $key => $value) {
             $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
             $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
