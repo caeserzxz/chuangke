@@ -101,8 +101,10 @@ class CkUser extends MobileBase
         $team_data = [];
         //满足审核条件的用户
         $check_id = 0;
-        if ($next_level['level_id'] == 10 && tpCache('shop_info.nine_stars_rule') != 1) {
+        if ($next_level['level_id'] == 10 && tpCache('shop_info.nine_stars_rule') == 1) {
             // 升级九星若后台设置的是规则二不找对应层级直接匹配给管理员
+            // 其他等级不受影响
+        }else{
             foreach ($leader as $k=>$v){
                 if($k  < ($next_level['level_id']-1)) continue;//升级N星则从N层开始找，N-1层直接跳过
 
