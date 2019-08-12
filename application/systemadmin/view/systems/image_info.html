@@ -318,6 +318,27 @@
                     <p class="notic">首页借款人不还钱怎么办的主图</p>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="share_img">分享图片的底图</label>
+                </dt>
+                <dd class="opt">
+                    <div class="input-file-show">
+                        <span class="show">
+                            <a id="share_img_a" class="nyroModal" rel="gal" href="{$config.share_img}">
+                                <i id="share_img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$config.share_img}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                            </a>
+                        </span>
+                        <span class="type-file-box">
+                            <input type="text" id="share_img" name="share_img" value="{$config.share_img}" class="type-file-text">
+                            <input type="button" name="button" id="button2" value="选择上传..." class="type-file-button">
+                            <input class="type-file-file" onClick="GetUploadify(1,'','logo','share_img_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                        </span>
+                    </div>
+                    <span class="err"></span>
+                    <p class="notic">分享图片的底图</p>
+                </dd>
+            </dl>
             <div class="bot">
                 <input type="hidden" name="inc_type" value="{$inc_type}">
                 <a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green" onclick="document.form1.submit()">确认提交</a>
@@ -452,6 +473,14 @@ var ue = UE.getEditor('Notice_content',{
         $("#applicationAgency").val(fileurl_tmp);
         $("#applicationAgency_img_a").attr('href', fileurl_tmp);
         $("#applicationAgency_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+    }
+
+    //分享图片的底图
+    function share_img_back(fileurl_tmp)
+    {
+        $("#share_img").val(fileurl_tmp);
+        $("#share_img_a").attr('href', fileurl_tmp);
+        $("#share_img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
     }
 </script>
 </html>

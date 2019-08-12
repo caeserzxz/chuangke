@@ -89,7 +89,7 @@
                     }else if(apptype=='IOS'){
                         window.app.SavePhoto(share_img);
                     }else{
-                        console.log('other');
+                        // console.log('other');
                         //以下代码为下载此图片功能
                         var triggerDownload = $("<a>").attr("href", share_img).attr("download",  "saveImg.png").appendTo("body");
                         triggerDownload[0].click();

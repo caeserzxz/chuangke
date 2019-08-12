@@ -396,7 +396,13 @@ class Member extends  MobileBase
 
 
     public  function huahua(){
-        $im = './public/static/chuangke/images/shareBG.png';
+        $image_info = tpCache('image_info');
+        if(empty($image_info['share_img'])){
+            $im = './public/static/chuangke/images/shareBG.png';
+        }else{
+            $im = '.'.$image_info['share_img'];
+        }
+
         $erweima = I('erweima');
         $wx_code = I('wx_code');
             $config = array(
@@ -432,27 +438,10 @@ class Member extends  MobileBase
 
 
     function createPoster($config=array(),$filename=""){
-//        header("Content-type: text/html; charset=utf-8");
+        header("Content-type: text/html; charset=utf-8");
         //如果要看报什么错，可以先注释调这个header
-//        if(empty($filename))
+        if(empty($filename))
             header("content-type: image/png");
-//        $imageDefault = array(
-//            'left'=>0,
-//            'top'=>0,
-//            'right'=>0,
-//            'bottom'=>0,
-//            'width'=>100,
-//            'height'=>100,
-//            'opacity'=>100
-//        );
-//        $textDefault = array(
-//            'left'=>0,
-//            'top'=>0,
-//            'fontSize'=>32,       //字号
-//            'fontColor'=>'0,0,0', //字体颜色
-//            'angle'=>0,
-//        );
-
         $background = $config['background'];//海报最底层得背景
         //背景方法
         $backgroundInfo = getimagesize($background);
