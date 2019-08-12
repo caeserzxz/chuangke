@@ -14,7 +14,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);//报告运行时错误
 //定义应用目录
 //define('APP_PATH','./Application/');
 //定义插件目录
-define('ROOT_PATH', __DIR__ );
+define('ROOT_PATHS', __DIR__ );
 define('PLUGIN_PATH', __DIR__ . '/plugins/');
 define('UPLOAD_PATH', 'public/upload/'); //编辑器图片上传路径
 define('TPSHOP_CACHE_TIME', 86400); //缓存时间  31104000

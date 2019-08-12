@@ -507,7 +507,7 @@ class Systems extends Base
         //$url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/register?rec_id='.$user['user_id'];
         $after_path = 'public/qrcode/'.md5($url).'.png';
         //保存路径
-        $path =  ROOT_PATH.$after_path;
+        $path =  ROOT_PATHS.$after_path;
 
         //判断是该文件是否存在
         if(!is_file($path))
@@ -526,7 +526,7 @@ class Systems extends Base
     public function upload_img($img_name,$path,$file_name){
         $file = request()->file($img_name);
         if($file){
-            $info = $file->move(ROOT_PATH,$file_name,true);
+            $info = $file->move(ROOT_PATHS,$file_name,true);
             if($info){
                 return $info->getSaveName();
             }else{
