@@ -43,7 +43,7 @@ class Login extends Controller
         $config = tpCache('shop_info');
         if(session('appType')=='other'){
             if($config['is_other_login']==0){
-                $this->redirect('chuangke/Login/AppDownload');
+                //$this->redirect('chuangke/Login/AppDownload');
             }
         }
         return $this->fetch();
