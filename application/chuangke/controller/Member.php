@@ -243,7 +243,7 @@ class Member extends  MobileBase
     public function goodFriendList(){
         $userInfo = $this->userInfo;
         $count = M('users')->where("first_leader", $userInfo['user_id'])->count();
-        $Page = new Page($count, 12);
+        $Page = new Page($count, 15);
         
         $list = M('users')
             ->field('mobile,reg_time,head_pic,nickname')

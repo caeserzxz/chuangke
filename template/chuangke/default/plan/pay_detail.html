@@ -27,8 +27,16 @@
                 <p>付款金额：<span>{$apply['make_money']}</span> 元</p>
             </div>
             <div class="tipsBox">
-                <p class="fs26">请使用微信或支付宝App，扫码以上二维码付款{$apply['make_money']}元</p>
-                <span class="fs28 fw_b">付款时在微信或支付宝订单备注您平台认证的姓名</span>
+                <if condition="tpCache('shop_info.pay_blue_text')">
+                    <p class="fs26">{:tpCache('shop_info.pay_blue_text')}</p>
+                <else/>
+                    <p class="fs26">请使用微信或支付宝App，扫码以上二维码付款{$apply['make_money']}元</p>
+                </if>
+                <if condition="tpCache('shop_info.pay_orange_text')">
+                    <span class="fs28 fw_b">{:tpCache('shop_info.pay_orange_text')}</span>
+                <else/>
+                    <span class="fs28 fw_b">付款时在微信或支付宝订单备注您平台认证的姓名</span>
+                </if>
             </div>
             <form id="form" method="post" enctype="multipart/form-data">
                 <div class="uploader__input-box">

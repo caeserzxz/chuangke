@@ -479,12 +479,11 @@ class CkUser extends MobileBase
             -> join('users B','A.user_id = B.user_id','left')
             -> join('user_level C','A.level = C.level_id','left')
             -> join('user_authentication D','A.user_id = D.user_id','left')
-            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1')
+            -> where('check_leader_1 = '.$this->user_id.' and A.check_status_1 < 1 and  A.apply_status = 0 or A.check_leader_2 = '.$this->user_id.' and A.check_status_2 < 1 and  A.apply_status = 0 ')
             // -> where('check_leader_1 = '.$this->user_id.' or A.check_leader_2 = '.$this->user_id)
             ->order('A.apply_time DESC')
             ->limit($Page->firstRow . ',' . $Page->listRows)
             -> select();
-
         foreach ($check_user as $key => $value) {
             $check_user[$key]['user_name']  = $this->substr_cut($value['user_name']);
             $check_user[$key]['id_card']  = substr_replace($value['id_card'],'**********',4,10);
@@ -739,13 +738,21 @@ class CkUser extends MobileBase
                 $img_src = '/'.UPLOAD_PATH.'plan/'.$upload_img;
             }
         }
+        $apply = M('ck_apply')->where(['id' => $id])->find();
         if ($type == 1) {
             $updata['voucher_img1'] = $img_src;
+            $check_leader = $apply['check_leader_1'];
         }else{
             $updata['voucher_img2'] = $img_src;
+            $check_leader = $apply['check_leader_2'];
         }
         $res = M('ck_apply')->where(['id' => $id])->update($updata);
         if ($res) {
+            if (tpCache('shop_info.voucher_mess') == 1) {
+                // 给审核人发送短信 刘雄杰
+                $mobile = M('users')->where(['user_id' => $check_leader])->value('mobile');
+                jh_message($mobile,Config::get('message.type_voucher'),'');
+            }
             $this->success('上传成功',U('chuangke/CkUser/applying',['id' => $id]));
         }else{
             $this->error('上传失败');
