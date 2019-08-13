@@ -70,10 +70,10 @@
                     <thead>
                     <tr>
                         <th align="center" axis="col3" class="">
-                            <div style="text-align: center; width: 70px;" class="">记录ID</div>
+                            <div style="text-align: center; width: 50px;" class="">记录ID</div>
                         </th>
                         <th align="center" axis="col3" class="">
-                            <div style="text-align: center; width: 70px;" class="">会员ID</div>
+                            <div style="text-align: center; width: 50px;" class="">会员ID</div>
                         </th>
                         <th align="center" axis="col4" class="">
                             <div style="text-align: center; width: 150px;" class="">会员昵称</div>
@@ -88,7 +88,7 @@
                             <div style="text-align: center; width: 120px;" class="">审核人(1)用户昵称</div>
                         </th>
                         <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 120px;" class="">打款凭证(1)</div>
+                            <div style="text-align: center; width: 100px;" class="">打款凭证(1)</div>
                         </th>
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 100px;" class="">审核状态(1)</div>
@@ -97,13 +97,13 @@
                             <div style="text-align: center; width: 120px;" class="">审核人(2)用户昵称</div>
                         </th>
                         <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 120px;" class="">打款凭证(2)</div>
+                            <div style="text-align: center; width: 100px;" class="">打款凭证(2)</div>
                         </th>
                         <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 100px;" class="">审核状态(2)</div>
+                            <div style="text-align: center; width: 80px;" class="">审核状态(2)</div>
                         </th>
                         <th align="center" axis="col6" class="">
-                            <div style="text-align: center; width: 100px;" class="">审核状态</div>
+                            <div style="text-align: center; width: 80px;" class="">审核状态</div>
                         </th>
                         <th align="center" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">审核时间</div>
@@ -126,10 +126,10 @@
                         <volist name="list" id="v">
                             <tr data-order-id="{$v.id}">
                                 <td align="center"  axis="col3" class="">
-                                    <div style="text-align: center; width: 70px;" class="">{$v.id}</div>
+                                    <div style="text-align: center; width: 50px;" class="">{$v.id}</div>
                                 </td>
                                 <td align="center"  axis="col3" class="">
-                                    <div style="text-align: center; width: 70px;" class="">{$v.user_id}</div>
+                                    <div style="text-align: center; width: 50px;" class="">{$v.user_id}</div>
                                 </td>
                                 <td align="center" axis="col4" class="">
                                     <div style="text-align: center; width: 150px;" class="">{$v.nickname}</div>
@@ -146,11 +146,11 @@
                                 <td align="center" axis="col4" class="">
                                     <if condition="$v.voucher_img1">
                                     <a href="{$v.voucher_img1}" target="_blank">
-                                        <div style="text-align: center; width: 120px;height: 30px;" class=""><i class="fa fa-pencil-square-o"></i>点击查看
+                                        <div style="text-align: center; width: 100px;height: 30px;" class=""><i class="fa fa-pencil-square-o"></i>点击查看
                                         </div>
                                     </a>
                                     <else/>
-                                        <div style="text-align: center; width: 120px;height: 30px;" class="">/</div>
+                                        <div style="text-align: center; width: 100px;height: 30px;" class="">/</div>
                                     </a>
                                     </if>
                                 </td>
@@ -164,21 +164,21 @@
                                 <td align="center" axis="col4" class="">
                                     <if condition="$v.voucher_img2">
                                     <a href="{$v.voucher_img2}" target="_blank">
-                                        <div style="text-align: center; width: 120px;height: 30px;" class=""><i class="fa fa-pencil-square-o"></i>点击查看
+                                        <div style="text-align: center; width: 100px;height: 30px;" class=""><i class="fa fa-pencil-square-o"></i>点击查看
                                         </div>
                                     </a>
                                     <else/>
-                                        <div style="text-align: center; width: 120px;height: 30px;" class="">/</div>
+                                        <div style="text-align: center; width: 100px;height: 30px;" class="">/</div>
                                     </a>
                                     </if>
                                 </td>
                                 <td align="center" axis="col6" class="">
-                                    <div style="text-align: center; width: 100px;" class="">
+                                    <div style="text-align: center; width: 80px;" class="">
                                         <if condition="$v.check_leader_2">{$status[$v['check_status_2']]}<else/> / </if>
                                     </div>
                                 </td>
                                 <td align="center" axis="col6" class="">
-                                    <div style="text-align: center; width: 100px;" class="">{$status[$v['apply_status']]}</div>
+                                    <div style="text-align: center; width: 80px;" class="">{$status[$v['apply_status']]}</div>
                                 </td>
                                 <td align="center" axis="col6" class="">
                                     <div style="text-align: center; width: 120px;" class=""><if condition="$v[check_time_1]">{$v.check_time_1|date='Y-m-d H:i',###}<else></if></div>
