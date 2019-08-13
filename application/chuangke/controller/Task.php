@@ -49,7 +49,7 @@ class Task extends Controller {
                 // 发送短信
                 $shop_info = tpCache('shop_info');
                 if($shop_info['debt_mess']==1){
-                     $msg = jh_message($mobile,Config::get('message.type_examine'),'');
+                     $msg = jh_message($mobile,Config::get('database.type_examine'),'');
                 }
             }
         }
