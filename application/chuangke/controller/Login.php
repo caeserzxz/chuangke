@@ -152,6 +152,11 @@ class Login extends Controller
             //添加推荐码
             $code = getWelcode();
             Db::name('tuijian_code')->save(['user_id'=>$res['user_id'],'code'=>$code]);
+            if (tpCache('shop_info.new_mess') == 1 && $data['first_leader']) {
+                // 注册给直推人发送短信 刘雄杰
+                $mobile = M('users')->where(['user_id' => $data['first_leader']])->value('mobile');
+                jh_message($mobile,Config::get('message.type_new'),$data['mobile']);
+            }
             return array('status'=>1,'msg'=>'注册成功');
         }else{
             return array('status'=>-1,'msg'=>'注册失败');

@@ -355,6 +355,7 @@
                     <p class="notic">是否允许网页登录网站</p>
                 </dd>
             </dl>
+            <dt class="tit" style="color: #2cbca3"> --------- 短信开关设置 --------- </dt>
             <dl class="row">
                 <dt class="tit">是否开启验证码</dt>
                 <dd class="opt">
@@ -391,6 +392,31 @@
                     <p class="notic">关闭后将不再接收债务录入成功短信</p>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">上传打款凭证短信</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="voucher_mess1" class="cb-enable <if condition='$config[voucher_mess] eq 1'>selected</if>">开启</label>
+                        <label for="voucher_mess0" class="cb-disable <if condition='$config[voucher_mess] eq 0'>selected</if>">关闭</label>
+                        <input id="voucher_mess1" name="voucher_mess" <if condition="$config['voucher_mess'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="voucher_mess0" name="voucher_mess" <if condition="$config['voucher_mess'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后上传凭证审核人不再接受短信</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">新用户注册上级短信</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="new_mess1" class="cb-enable <if condition='$config[new_mess] eq 1'>selected</if>">开启</label>
+                        <label for="new_mess0" class="cb-disable <if condition='$config[new_mess] eq 0'>selected</if>">关闭</label>
+                        <input id="new_mess1" name="new_mess" <if condition="$config['new_mess'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="new_mess0" name="new_mess" <if condition="$config['new_mess'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后新用户注册上级不再接受短信</p>
+                </dd>
+            </dl>
+            <dt class="tit" style="color: #2cbca3"> ----------- 定制功能 ----------- </dt>
             <dl class="row">
                 <dt class="tit">是否开启留言</dt>
                 <dd class="opt">
@@ -454,16 +480,18 @@
                     <label><input type="radio"  id="template4" name="template4" value="1" <if condition="$config['template4'] eq 1">checked="checked"</if>>风格一</label>
                     <label><input type="radio"  id="template4" name="template4" value="2" <if condition="$config['template4'] eq 2">checked="checked"</if>>风格二</label>
                     <label><input type="radio"  id="template4" name="template4" value="3" <if condition="$config['template4'] eq 3">checked="checked"</if>>关闭</label>
+                    <p class="notic">风格一为默认界面,即蓝色界面;</p>
+                    <p class="notic">风格二为定制页面,即橙色界面</p>
                 </dd>
             </dl>
             <dl class="row">
                 <dt class="tit">
-                    <label for="safe_money">各阶段后跟文字</label>
+                    <label for="safe_money">阶段后跟文字</label>
                 </dt>
                 <dd class="opt">
                     <input id="stage_text"  name="stage_text" value="{$config.stage_text}" class="input-txt" type="text">
                     <span class="err"></span>
-                    <p class="notic"></p>
+                    <p class="notic">该设置只对风格二页面生效</p>
                 </dd>
             </dl>
             <dl class="row">
@@ -475,6 +503,26 @@
                     <label><input type="radio"  id="nine_stars_rule" name="nine_stars_rule" value="1" <if condition="$config['nine_stars_rule'] eq 1">checked="checked"</if>>规则二</label>
                     <p class="notic">规则一:即默认规则八星升九星时匹配给第九层的九星,没有满足的匹配给管理员</p>
                     <p class="notic">规则二:八星升九星直接匹配给管理员</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="safe_money">付款页面蓝色文字</label>
+                </dt>
+                <dd class="opt">
+                    <input id="pay_blue_text"  name="pay_blue_text" value="{$config.pay_blue_text}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">付款页面蓝色文字,不设置为默认</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="safe_money">付款页面金色文字</label>
+                </dt>
+                <dd class="opt">
+                    <input id="pay_orange_text"  name="pay_orange_text" value="{$config.pay_orange_text}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic">付款页面橙色文字,不设置为默认</p>
                 </dd>
             </dl>
      <!--        <dl class="row">
