@@ -53,9 +53,7 @@
             <button class="fs30 fw_b color_w loading_btn">注册</button>
         </div>
 
-
-         <a href="{:U('chuangke/Login/AppDownload')}" class="goLink fs26">下载App</a>
-
+        <a href="{:U('chuangke/login/index')}" class="goLink fs26">快速登录</a>
 
     </div>
 </div>
@@ -167,7 +165,7 @@
                    if(data.status==1){
                         layer.msg(data.msg,{time:2000},function(){
 
-                                window.location.href = "{:U('chuangke/Login/AppDownload')}";
+                                window.location.href = "{:U('chuangke/login/index')}";
 
                         })
                    }else{

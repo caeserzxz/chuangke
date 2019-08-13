@@ -751,7 +751,7 @@ class CkUser extends MobileBase
             if (tpCache('shop_info.voucher_mess') == 1) {
                 // 给审核人发送短信 刘雄杰
                 $mobile = M('users')->where(['user_id' => $check_leader])->value('mobile');
-                jh_message($mobile,Config::get('message.type_voucher'),'');
+                jh_message($mobile,Config::get('database.type_voucher'),'');
             }
             $this->success('上传成功',U('chuangke/CkUser/applying',['id' => $id]));
         }else{

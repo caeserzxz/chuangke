@@ -73,8 +73,8 @@ class Login extends Controller
     }
 
     /**
-     * 注册
-     */
+ * 注册
+ */
     public function register(){
         $recommendId = I('rec_id') ? I('rec_id') : 0;  //扫码分享的推荐人id
         if($recommendId!=0){
@@ -82,28 +82,36 @@ class Login extends Controller
         }else{
             $recommendId = session('recommendId');
         }
-        $appType = session('appType');
 
         $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
 
-        //获取安装包的参数
-        $appType = I('appType')?I('appType'):I('apptype');
-        if(empty(session('appType'))){
-            if($appType=='IOS'||$appType=='Android'){
-                session('appType',$appType);
-            }else{
-                session('appType','other');
-            }
-        }
-
         $config = tpCache('shop_info');
-        if($config['is_other_login']==1){
-            $config['is_other_login']=1;
-        }else{
-            $config['is_other_login']=2;
-        }
+//        if($config['is_other_login']==1){
+//            $config['is_other_login']=1;
+//        }else{
+//            $config['is_other_login']=2;
+//        }
 
         $this->assign('appType',session('appType'));
+        $this->assign('config',$config);
+        $this->assign('tuijian_code',$tuijian_code);
+        return $this->fetch();
+    }
+
+    /**
+     * 注册
+     */
+    public function appregister(){
+        $recommendId = I('rec_id') ? I('rec_id') : 0;  //扫码分享的推荐人id
+        if($recommendId!=0){
+            session('recommendId',$recommendId);
+        }else{
+            $recommendId = session('recommendId');
+        }
+
+        $tuijian_code = M('tuijian_code')->where(array('user_id'=>$recommendId))->getField('code');
+
+        $config = tpCache('shop_info');
         $this->assign('config',$config);
         $this->assign('tuijian_code',$tuijian_code);
         return $this->fetch();
@@ -155,7 +163,7 @@ class Login extends Controller
             if (tpCache('shop_info.new_mess') == 1 && $data['first_leader']) {
                 // 注册给直推人发送短信 刘雄杰
                 $mobile = M('users')->where(['user_id' => $data['first_leader']])->value('mobile');
-                jh_message($mobile,Config::get('message.type_new'),$data['mobile']);
+                jh_message($mobile,Config::get('database.type_new'),$data['mobile']);
             }
             return array('status'=>1,'msg'=>'注册成功');
         }else{
@@ -163,6 +171,8 @@ class Login extends Controller
         }
 
     }
+
+
     //获取手机验证码
     public function captcha()
     {
