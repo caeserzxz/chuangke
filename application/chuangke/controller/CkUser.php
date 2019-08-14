@@ -9,6 +9,7 @@ use app\common\model\Users;
 use think\Db;
 use app\mobile\controller\MobileBase;
 use think\Page;
+use think\Config;
 
 class CkUser extends MobileBase
 {
