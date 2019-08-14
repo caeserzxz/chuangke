@@ -1,0 +1,203 @@
+<include file="public/layout" />
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title">
+            <div class="subject">
+                <h3>近期还款列表</h3>
+                <h5>近期还款记录索引与管理</h5>
+            </div>
+        </div>
+    </div>
+    <!-- 操作说明 -->
+    <div id="explanation" class="explanation" style="color: rgb(44, 188, 163); background-color: rgb(237, 251, 248); width: 99%; height: 100%;">
+        <div id="checkZoom" class="title"><i class="fa fa-lightbulb-o"></i>
+            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
+            <span title="收起提示" id="explanationZoom" style="display: block;"></span>
+        </div>
+        <ul>
+        	<li>该列表用于首页轮播</li>
+        </ul>
+    </div>
+    <div class="flexigrid">
+        <div class="mDiv">
+            <div class="ftitle">
+                <h3>近期还款列表</h3>
+                <h5>(共{$Page->totalRows}条记录)</h5>
+            </div>
+            <div title="刷新数据" class="pReload"><a href=""><i class="fa fa-refresh"></i></a></div>
+            <form class="navbar-form form-inline" id="search-form" method="get" action="{:U('Admin/Order.Order/loop_order')}">
+                <div class="sDiv">
+                    <div class="sDiv2" style="margin-right: 10px;border: none;">
+                        <select id="is_show" name="is_show" class="form-control">
+                            <option value="">状态</option>
+                            <option value="0" <?php if(isset($_REQUEST['is_show']) && $_REQUEST['is_show'] == 0){echo "selected";}  ?>>隐藏</option>
+                            <option value="1" <if condition="$_REQUEST['is_show'] eq 1">selected</if>>展示</option>
+                        </select>
+                    </div>
+                    <div class="sDiv2" style="margin-right: 10px;">
+                        <input size="30" id="nickname" name="nickname" value="{$_GET[nickname]}" placeholder="昵称" class="qsbox" type="text">
+                        <input class="btn" value="搜索" type="submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="hDiv">
+            <div class="hDivBox">
+                <table cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th align="center" abbr="article_title" axis="col3" class="">
+                            <div style="text-align: center; width: 50px;" class="">编号</div>
+                        </th>
+                        <th align="center" abbr="ac_id" axis="col4" class="">
+                            <div style="text-align: center; width: 120px;" class="">名称</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">文字一</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">文字二</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">文字三</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 60px;" class="">状态</div>
+                        </th>
+                        <!-- <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">添加时间</div>
+                        </th>
+                        <th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 150px;" class="">更新时间</div>
+                        </th> -->
+                        <th align="center" axis="col1" class="handle">
+                            <div style="text-align: center; width: 250px;">操作</div>
+                        </th>
+                        <th style="width:100%" axis="col7">
+                            <div></div>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="tDiv">
+            <div class="tDiv2">
+                <div class="fbutton">
+                    <a href="/index.php?m=systemadmin&c=Article&a=addEditLoopNotice">
+                        <div class="add" title="添加记录">
+                            <span><i class="fa fa-plus"></i>添加记录</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="bDiv" style="height: auto;">
+            <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
+                <table>
+                    <tbody>
+                    <if condition="empty($list) eq true">
+				 		<tr data-id="0">
+					        <td class="no-data" align="center" axis="col0" colspan="50">
+					        	<i class="fa fa-exclamation-circle"></i>没有符合条件的记录
+					        </td>
+					     </tr>
+					<else/>
+                    <volist name="list" id="v">
+                        <tr data-order-id="{$v.id}" id="{$v.id}">
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 50px;">{$v.id}</div>
+                            </td>
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 120px;">{$v.name}</div>
+                            </td>
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 150px;">{$v.text_1}</div>
+                            </td>
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 150px;">{$v.text_2}</div>
+                            </td>
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 150px;">{$v.text_3}</div>
+                            </td>
+                            <!-- <td align="center" class="">
+                                <div style="text-align: center; width: 150px;">
+                                    <a href="{$v.head_pic}" target="_blank">
+                                        <img  width="120" height="30" src="{$v.head_pic}">
+                                    </a>
+                                </div>
+                            </td> -->
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 60px;"><if condition="$v.is_show eq 1">展示<else/>隐藏</if></div>
+                            </td>
+                            <!-- <td align="center" class="">
+                                <div style="text-align: center; width: 150px;">{$v.create_time|date="Y-m-d H:i:s",###}</div>
+                            </td>
+                            <td align="center" class="">
+                                <div style="text-align: center; width: 150px;">{$v.update_time|date="Y-m-d H:i:s",###}</div>
+                            </td> -->
+                            <td align="left" class="">
+                                <div style="text-align: center; width: 180px;">
+                                    <a class="btn green" href="{:U('systemadmin/Article/addEditLoopNotice',array('id'=>$v['id']))}"><i class="fa fa-list-alt"></i>查看</a>
+                                    <a class="btn red" href="javascript:void(0);" data-order-id="{$v['id']}" onclick="del(this)"><i class="fa fa-trash-o"></i>删除</a>
+                                </div>
+                            </td>
+                            <td align="" class="" style="width: 100%;">
+                                <div>&nbsp;</div>
+                            </td>
+                        </tr>
+                    </volist>
+                    </if>
+                    </tbody>
+                </table>
+            </div>
+            <div class="iDiv" style="display: none;"></div>
+        </div>
+        <!--分页位置-->
+        {$show} </div>
+</div>
+<script>
+    $(document).ready(function(){
+        // 表格行点击选中切换
+        $('#flexigrid > table>tbody >tr').click(function(){
+            $(this).toggleClass('trSelected');
+        });
+        // 点击刷新数据
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+    });
+
+    // 删除操作
+    function del(obj) {
+        layer.confirm('确定要删除吗?', function(){
+            var id=$(obj).data('order-id');
+            $.ajax({
+                type : "POST",
+                url: "{:U('systemadmin/Article/delLoopNotice')}",
+                data:{id:id},
+                dataType:'json',
+                async:false,
+                success: function(data){
+                    if(data.code ==1){
+                        layer.alert(data.msg, {icon: 1});
+                        $('#'+id).remove();
+                    }else{
+                        layer.alert(data.msg, {icon: 2});
+                    }
+                },
+                error:function(){
+                    layer.alert('网络异常，请稍后重试',{icon: 2});
+                }
+            });
+        });
+    }
+
+</script>
+</body>
+</html>
