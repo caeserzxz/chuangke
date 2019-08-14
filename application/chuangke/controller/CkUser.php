@@ -268,7 +268,7 @@ class CkUser extends MobileBase
         if(!$user) return -1;//用户不存在
         $leader_arr = explode('_',$user['leader_all']);//计算出所有上级
         $leader_arr[] = $no_id;
-        $admin_list = Users::where(['user_type'=>1,'user_id'=>['NOT IN',$leader_arr],'is_lock'=>0])->select();
+        $admin_list = Users::where(['user_type'=>1,'user_id'=>['NOT IN',$leader_arr],'is_lock'=>0])->select();//查出所有管理员（排除上级和指定ID）
         if($admin_list){
             $admin_count = count($admin_list);
             $check = rand(0,$admin_count-1);//随机取出一个管理员
