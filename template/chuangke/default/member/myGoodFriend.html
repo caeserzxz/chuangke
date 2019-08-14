@@ -1,4 +1,15 @@
 <layout name="common/layout_nav" />
+<style>
+    pre{
+        display: block;
+        font-family: -moz-fixed;
+        white-space: pre;
+        margin: 1em 0;
+        width: 100%;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+</style>
     <div class="page friend">
         <div class="page-hd">
             <div class="header">
@@ -23,11 +34,18 @@
                     -<button class="fs28 color_w saveImg">保存为图片</button>
                 </div>
             </div>
-            <div class="tips fs26 color_8">
-                1、每推荐一个用户注册可得50元保证金，可提现{$userInfo.wx_number}<br/>
-                2、好友每次还款可获得5%-10%手续费提成<br/>
-                3、好友每次众筹可获得3%-8%收益分成
-            </div>
+            <if condition="shop_info.friends_notes neq ''">
+                <div class="tips fs26 color_8">
+                    <pre>{$shop_info.friends_notes}</pre>
+                </div>
+            <else />
+                <div class="tips fs26 color_8">
+                    1、每推荐一个用户注册可得50元保证金，可提现{$userInfo.wx_number}<br/>
+                    2、好友每次还款可获得5%-10%手续费提成<br/>
+                    3、好友每次众筹可获得3%-8%收益分成
+                </div>
+            </if>
+
         </div>
         <!--<a href="javascript:;" download="img" id="img"></a>-->
         <div class="shareImg" >

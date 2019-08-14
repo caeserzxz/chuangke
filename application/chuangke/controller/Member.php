@@ -230,6 +230,7 @@ class Member extends  MobileBase
         $data['url'] = $url;
         $data['img'] = $img;
         $data['code'] = $code;
+        $this->assign('shop_info',tpCache('shop_info'));
         $this->assign('appType',session('appType'));
         $this->assign('user',$user);
         $this->assign('data',$data);
