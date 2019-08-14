@@ -506,11 +506,25 @@ img {
 .index .page-hd {
   background-color: #fff;
 }
-.index .page-hd .left-arrow:before {
-  border-color: #000;
+.index .header {
+  padding: 0 4vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          -webkit-justify-content: space-between;
+          justify-content: space-between;
 }
-.index .header .header-title {
-  color: #000;
+.index .header a {
+  width: 5.6vw;
+  height: 5.6vw;
+}
+.index .header img {
+  width: 100%;
+  height: 100%;
 }
 .index .page-bd {
   background-color: #fff;

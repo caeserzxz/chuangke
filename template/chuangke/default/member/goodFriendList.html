@@ -17,7 +17,18 @@
                 <volist name="list" id="vo">
                     <div class="weui-cell">
                         <div class="weui-cell__bd fs24">
-                            <img src="{$vo.head_pic|default='__PUBLIC__/static/chuangke/images/userImg.png'}" alt="">
+
+                            <if condition="empty($vo.head_pic) eq true">
+                                <if condition="tpCache('image_info.userinfo') neq ''">
+                                    <img src="{:tpCache('image_info.userinfo')}" alt="">
+                                <else />
+                                    <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
+                                </if>
+                            <else />
+                                <img src="{$vo.head_pic}" onclick="loadimg('head_pic');" alt="">
+                            </if>
+
+                            <!-- <img src="{$vo.head_pic|default='__PUBLIC__/static/chuangke/images/userImg.png'}" alt=""> -->
                             <p class="color_w">
                                 <if condition="$vo.nickname neq ''">
                                     {$vo.nickname}

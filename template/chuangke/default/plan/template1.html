@@ -14,6 +14,15 @@
 </head>
 <body>
 <style>
+    .unread{
+        position:absolute;
+        display:inline-block;
+        color: red;
+        font-weight:bold;
+        font-size: 14px;
+        margin-left: 5.2%;
+        margin-top: -1.5%;
+    }
     .index .swiper2{
         height: 7vw;
     }
@@ -44,13 +53,12 @@
 <div class="page index">
     <div class="page-hd">
         <div class="header">
-            <div class="header-left">
-                <a href="javascript:history.go(-1)" class="left-arrow"></a>
-            </div>
-            <div class="header-title">首页</div>
-            <div class="header-right">
-                <a href="#"></a>
-            </div>
+            <a href="{:U('chuangke/news/newsList')}"><img src="__PUBLIC__/static/chuangke/images/template01.png" alt=""></a>
+            <if condition="$unread_message gt 0">
+                <b class="unread">{$unread_message}</b>
+            </if>
+            <p class="fs30 color_3">{:tpCache('shop_info.store_name')}</p>
+            <a href="{:U('chuangke/article/index')}?id=6"><img src="__PUBLIC__/static/chuangke/images/template02.png" alt=""></a>
         </div>
     </div>
     <div class="page-bd">
