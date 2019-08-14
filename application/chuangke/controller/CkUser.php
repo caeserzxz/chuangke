@@ -271,11 +271,11 @@ class CkUser extends MobileBase
         $admin_list = Users::where(['user_type'=>1,'user_id'=>['NOT IN',$leader_arr],'is_lock'=>0])->select();//查出所有管理员（排除上级和指定ID）
         if($admin_list){
             $admin_count = count($admin_list);
-            $check = rand(0,$admin_count-1);//随机取出一个管理员
+            $rand_id = rand(0,$admin_count-1);//随机取出一个管理员
         }else{
             return 0;//没有合适的管理员
         }
-        return $check['user_id'];
+        return $admin_list[$rand_id]['user_id'];
     }
 
 
