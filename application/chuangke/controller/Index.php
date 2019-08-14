@@ -36,6 +36,18 @@ class Index extends MobileBase
         $article = M('article')->where(['cat_id' => 7])->select();
         $this->assign('article',$article);
 
+        // 最近还款列表
+        $loopNotice = M('loopNotice')->where(['is_show' => 1])->select();
+        $this->assign('loopNotice',$loopNotice);
+
+        // 首页公告
+        $notice = M('article')->where(['cat_id' => 8])->find();
+        $this->assign('notice',htmlspecialchars_decode($notice['content']));
+
+        // 是否弹出公告
+        if (!$_SERVER['HTTP_REFERER'] && $notice) $is_popup = 1;
+        $this->assign('is_popup',$is_popup);
+
         if (tpCache('shop_info.template1') == 2) {
             return $this->fetch('plan/template1');
         }else{

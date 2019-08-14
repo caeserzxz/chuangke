@@ -204,4 +204,74 @@ class Article extends Base {
             $this->error("操作失败");
     	}
     }
+
+    /*
+     * 轮播订单列表  虚拟
+     * 
+     */
+    public function  loopNotice(){
+        $nickname = input('nickname');
+        $is_show = input('is_show');
+        $nickname && $where['nickname'] = $nickname;
+        if (is_numeric($is_show)) {
+            $where['is_show'] = $is_show;
+        }
+        $count = M('loop_notice')->where($where)->count();
+        $Page = new Page($count, 15);
+        $show = $Page->show();
+
+        $list = M('loop_notice')
+                ->where($where)
+                ->order('id DESC')
+                ->limit($Page->firstRow . ',' . $Page->listRows)
+                ->select();
+        $this->assign('list', $list);
+        $this->assign('show', $show);
+        $this->assign('Page', $Page);
+
+        return $this->fetch();
+    }
+    /*
+     * 添加修改轮播订单  虚拟
+     * 
+     */
+    public function addEditLoopNotice(){
+        if (IS_POST) {
+            $post = I('post.');
+            $post['update_time'] = time();
+
+            if ($post['id']) {
+                // 编辑
+                $res = M('loop_notice')->where(['id' => $post['id']])->save($post);
+                adminLog("编辑轮播订单“". $post['id']."”" );
+            }else{
+                // 新增
+                $post['create_time'] = time();
+                $res = M('loop_notice')->add($post);
+                adminLog("添加轮播订单“". $res."”" );
+            }
+            if (!$res) $this->error('操作失败');
+            $this->success('操作成功');
+        }else{
+            $id = I('get.id');
+            $data = M('loop_notice')->where(['id' => $id])->find();
+        }
+        $this->assign('data', $data);
+        return $this->fetch();
+    }
+    /*
+     * 删除轮播订单  虚拟
+     * 
+     */
+    public function delLoopNotice(){
+        if (IS_POST) {
+            $post = I('post.');
+            $res = M('loop_notice')->where(['id' => $post['id']])->delete();
+            adminLog("删除轮播订单“". $post['id']."”" );
+
+            if (!$res) $this->error('操作失败');
+            $this->success('操作成功');
+        }
+    }
+
 }

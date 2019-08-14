@@ -49,4 +49,14 @@ class News extends MobileBase
 
         }
     }
+    /**
+     * 近期还款公告列表
+     */
+    public function noticeList(){
+        // 最近还款列表
+        $list = M('loopNotice')->where(['is_show' => 1])->select();
+
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
 }

@@ -1,0 +1,48 @@
+<layout name="common/layout_nav" />
+<div class="page ">
+    <div class="page-hd">
+        <div class="header">
+            <div class="header-left">
+                <a href="javascript:history.go(-1)" class="left-arrow"></a>
+            </div>
+            <div class="header-title">近期还款</div>
+            <div class="header-right">
+                <a href="javascript:;"></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-bd message">
+    <!-- 页面内容-->
+        <if condition="$list eq null">
+            <div class="box_t " >
+                <img src="__PUBLIC__/static/chuangke/images/message_no.png" alt="" class="mess_img">
+                <div class="heng">
+                    <p>——————</p>
+                    <p class="fs24 wen">暂无相关数据</p>
+                    <p>——————</p>
+                </div>
+            </div>
+        <else />
+            <volist name="list" id="vo">
+                <div class="listBox">
+                    <div class="list">
+                        <div class="cell">
+                            <p class="fs26 color_a title"> 
+                                <span style="padding-left: 1rem;padding-right: 1rem">{$vo.text_1} </span>
+                                <span style="padding-right: 1rem">{$vo.text_2} </span>
+                                <span style="padding-right: 1rem">{$vo.text_3} </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+        </if>
+    </div>
+</div>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+</body>
+</html>
