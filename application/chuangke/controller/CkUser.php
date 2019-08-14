@@ -131,23 +131,25 @@ class CkUser extends MobileBase
         }
         //特殊情况 第N层找不到满足条件的用户，直接分配管理员
         if(empty($check_id)){
-            //关系链最近的N星管理员
-            /*$check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>$next_level['level_id'],'user_type'=>1])->value('user_id');
-            if($check_user){
-                $check_id = $check_user;
-            }else{*/
-                //关系链上没有N星管理员则选择平台管理员 不分等级 取比自己ID大的
-                $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['GT',$this->user_id],'is_lock' => 0])->value('user_id');
-                if (!$check_user) {
-                    // 没有比自己大的取最近的
-                    $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['NEQ',$this->user_id],'is_lock' => 0])->value('user_id');
-                }
-                if($check_user){
-                    $check_id = $check_user;
-                }else{
-                    $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
-                }
-            // }
+//            //关系链最近的N星管理员
+//            /*$check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>$next_level['level_id'],'user_type'=>1])->value('user_id');
+//            if($check_user){
+//                $check_id = $check_user;
+//            }else{*/
+//                //关系链上没有N星管理员则选择平台管理员 不分等级 取比自己ID大的
+//                $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['GT',$this->user_id],'is_lock' => 0])->value('user_id');
+//                if (!$check_user) {
+//                    // 没有比自己大的取最近的
+//                    $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['NEQ',$this->user_id],'is_lock' => 0])->value('user_id');
+//                }
+//                if($check_user){
+//                    $check_id = $check_user;
+//                }else{
+//                    $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
+//                }
+//            // }
+            $check_id = $this->getAdminId($this->user_id);
+            if(!$check_id)$this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
         }
 
         //升级一星 需要增加一个九星星身份的审核
@@ -180,28 +182,30 @@ class CkUser extends MobileBase
             }
             //特殊情况 关系链没有九星以上身份 则分配管理员
             if(empty($check_id_2)){
-                //关系链最近的管理员
-                // $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
-                $leaders = implode(',',$leader);
-                $where_admin = "user_id in ($leaders) and user_type=1 and is_lock=0 and user_id <> ".$check_id." and user_id <>".$this->user_id;
-                $check_user = Db::name('users')->where($where_admin)->value('user_id');
-
-                if($check_user){
-                    $check_id_2 = $check_user;
-                }else{
-                    $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id > ' . $this->user_id . ' and is_lock = 0';
-                    //关系链上没有管理员则选择平台管理员
-                    $check_user = Db::name('users')->where($where_id2)->value('user_id');
-                    if (!$check_user) {
-                        $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id <> ' . $this->user_id . ' and is_lock = 0';
-                        $check_user = Db::name('users')->where($where_id2)->value('user_id');
-                    }
-                    if($check_user){
-                        $check_id_2 = $check_user;
-                    }else{
-                        $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
-                    }
-                }
+//                //关系链最近的管理员
+//                // $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
+//                $leaders = implode(',',$leader);
+//                $where_admin = "user_id in ($leaders) and user_type=1 and is_lock=0 and user_id <> ".$check_id." and user_id <>".$this->user_id;
+//                $check_user = Db::name('users')->where($where_admin)->value('user_id');
+//
+//                if($check_user){
+//                    $check_id_2 = $check_user;
+//                }else{
+//                    $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id > ' . $this->user_id . ' and is_lock = 0';
+//                    //关系链上没有管理员则选择平台管理员
+//                    $check_user = Db::name('users')->where($where_id2)->value('user_id');
+//                    if (!$check_user) {
+//                        $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id <> ' . $this->user_id . ' and is_lock = 0';
+//                        $check_user = Db::name('users')->where($where_id2)->value('user_id');
+//                    }
+//                    if($check_user){
+//                        $check_id_2 = $check_user;
+//                    }else{
+//                        $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
+//                    }
+//                }
+                $check_id_2 = $this->getAdminId($this->user_id,$check_id);
+                if(!$check_id_2)$this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
             }
         }
 
@@ -256,6 +260,23 @@ class CkUser extends MobileBase
             $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);
         }
     }
+
+    //随机取出一个管理员ID（$user_id用户名，排除ID）
+    function getAdminId($user_id,$no_id=0){
+        $user = Users::get($user_id);
+        if(!$user) return -1;//用户不存在
+        $leader_arr = explode('_',$user['leader_all']);//计算出所有上级
+        $leader_arr[] = $no_id;
+        $admin_list = Users::where(['user_type'=>1,'user_id'=>['NOT IN',$leader_arr],'is_lock'=>0])->select();
+        if($admin_list){
+            $admin_count = count($admin_list);
+            $check = rand(0,$admin_count-1);//随机取出一个管理员
+        }else{
+            return 0;//没有合适的管理员
+        }
+        return $check['user_id'];
+    }
+
 
 	public function addOrder(){
 		if($this->request->isPost()){
