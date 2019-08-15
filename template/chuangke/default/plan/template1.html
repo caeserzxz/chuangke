@@ -49,6 +49,12 @@
         width: 100%;
         padding: 0 5vw;
     }
+    .index .rowBox .block {
+        width: 100%;
+        border-radius: 1.33333vw;
+        padding: 5.33333vw 4vw 8vw;
+        margin-bottom: 3.2vw;
+    }
 </style>
 <div class="page index">
     <div class="page-hd">
@@ -131,11 +137,55 @@
         </div>
         <div class="rowBox">
             <div class="title fs26">特色产品</div>
-            <volist name="article" id="vo">
-                <a href="{:U('article/detail',['id' => $vo.article_id])}">
-                    <img src="{$vo.thumb}">
-                </a>
-            </volist>
+            <if condition="$article">
+
+                <volist name="article" id="vo">
+                    <a href="{:U('article/detail',['id' => $vo.article_id])}">
+                        <img src="{$vo.thumb}">
+                    </a>
+                </volist>
+            <else/>
+                <div class="block one">
+                    <div class="fs36 fw_b color_w">智能还贷</div>
+                    <div class="tips">
+                        <div class="left color_w">
+                            <p class="fs28 fw_b">还房贷 还车贷</p>
+                            <span class="fs24">3-5个月还清百万债务</span>
+                        </div>
+                        <a href="#" class="fs24">了解详情</a>
+                    </div>
+                </div>
+                <div class="block two">
+                    <div class="fs36 fw_b color_w">0费率还卡</div>
+                    <div class="tips">
+                        <div class="left color_w">
+                            <p class="fs28 fw_b">随借谁还 低门槛</p>
+                            <span class="fs24">担保金抵扣利息</span>
+                        </div>
+                        <a href="#" class="fs24">了解详情</a>
+                    </div>
+                </div>
+                <div class="block there">
+                    <div class="fs36 fw_b color_w">帮还赚利息</div>
+                    <div class="tips">
+                        <div class="left color_w">
+                            <p class="fs28 fw_b">担保抵押 平台担保</p>
+                            <span class="fs24">帮助他人还卡赚利息，轻松摆脱债务</span>
+                        </div>
+                        <a href="#" class="fs24">了解详情</a>
+                    </div>
+                </div>
+                <div class="block four">
+                    <div class="fs36 fw_b color_w">申请代理</div>
+                    <div class="tips">
+                        <div class="left color_w">
+                            <p class="fs28 fw_b">无忧裂变计划 长期稳定高收入</p>
+                            <span class="fs24">长期稳定高收入</span>
+                        </div>
+                        <a href="#" class="fs24">了解详情</a>
+                    </div>
+                </div>
+            </if>
         </div>
         <div class="columnBox">
             <div class="title">
