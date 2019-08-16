@@ -264,15 +264,6 @@
   background-image: -webkit-linear-gradient(bottom, #37c0fd 0%, #56dfff 100%);
   background-image: linear-gradient(0deg, #37c0fd 0%, #56dfff 100%);
   border-radius: 1.33333vw;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
   margin: 4vw 0 6.66667vw 4.8vw;
 }
 .login .goLink {
