@@ -138,6 +138,13 @@
                                     <if condition="$v[status] eq 1">
                                         <a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>2))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>通过</a>
                                         <a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>3))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>拒绝</a>
+                                        <a href="javascript:void(0);" class="btn blue" onclick="del_debt();"><i class="fa fa-pencil-square-o"></i>删除</a>
+                                    </if>
+                                    <if condition="$v[status] eq 2">
+                                        <a href="javascript:void(0);" class="btn blue" onclick="del_debt2();"><i class="fa fa-pencil-square-o"></i>删除</a>
+                                    </if>
+                                    <if condition="$v[status] eq 3">
+                                        <a href="javascript:void(0);" class="btn blue" onclick="del_debt3({$v.id});"><i class="fa fa-pencil-square-o"></i>删除</a>
                                     </if>
                                 </div>
                             </td>
@@ -193,6 +200,17 @@
             });
         });
     });
+    function  del_debt(){
+        layer.msg('未审核的债务无法删除');
+    }
+    function  del_debt2(){
+        layer.msg('已通过的债务无法删除');
+    }
+    function  del_debt3(id){
+        if(confirm('删除的债务无法恢复,确认删除?')){
+            window.location.href = "{:url('Debt/del_debt')}?id="+id;
+        }
+    }
 </script>
 </body>
 </html>

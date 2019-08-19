@@ -65,6 +65,18 @@ class Debt extends Base {
         $this->success('操作成功');
     }
     /**
+     * 删除债务
+     */
+    public function del_debt(){
+        $id = I('get.id');
+        $res = M('user_debt')->where(['id' => $id])->delete();
+        if($res){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
+    }
+    /**
      * 还款情况
      */
     public function repayment_list(){
