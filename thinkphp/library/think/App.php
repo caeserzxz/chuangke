@@ -358,10 +358,6 @@ class App
             throw new HttpException(404, 'controller not exists:' . $controller);
         }
         $controller = $convert ? strtolower($controller) : $controller;
-
-        if (!preg_match('/^[A-Za-z](\w|\.)*$/', $controller)) {
-            throw new HttpException(404, 'controller not exists:' . $controller);
-        }
         // 获取操作名
         $actionName = strip_tags($result[2] ?: $config['default_action']);
         $actionName = $convert ? strtolower($actionName) : $actionName;
