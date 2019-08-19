@@ -58,8 +58,8 @@ class Plan extends MobileBase
         }
         // 是否有审核订单
         $is_check = M('ck_apply')
-            ->where(['check_leader_1' => $this->user_id,'check_status_1' => ['LT',1]])
-            ->whereOR('check_leader_2='.$this->user_id.' and check_status_2<1')
+            ->where(['check_leader_1' => $this->user_id,'check_status_1' => ['LT',1],'apply_status' => 0])
+            ->whereOR('check_leader_2='.$this->user_id.' and check_status_2<1 and apply_status=0')
             ->count();
 
         $surplus_debt = $all_debt;
