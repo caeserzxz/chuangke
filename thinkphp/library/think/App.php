@@ -354,11 +354,10 @@ class App
         $convert = is_bool($convert) ? $convert : $config['url_convert'];
         // 获取控制器名
         $controller = strip_tags($result[1] ?: $config['default_controller']);
-        $controller = $convert ? strtolower($controller) : $controller;
-
-        if (!preg_match('/^[A-Za-z](\w|\.)*$/', $controller)) {
+        if (!preg_match('/^[A-Za-z](\w)*$/', $controller)) {
             throw new HttpException(404, 'controller not exists:' . $controller);
         }
+        $controller = $convert ? strtolower($controller) : $controller;
         // 获取操作名
         $actionName = strip_tags($result[2] ?: $config['default_action']);
         $actionName = $convert ? strtolower($actionName) : $actionName;
