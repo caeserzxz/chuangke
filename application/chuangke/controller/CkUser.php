@@ -419,7 +419,7 @@ class CkUser extends MobileBase
                 if($info['check_leader_1'] == $this->user_id){
                     if(empty($info['check_leader_2']) && $status == 1) $updata['apply_status'] = $status;
                     // if(!empty($info['check_status_2'])) $updata['apply_status'] = $status;
-                    if($info['check_status_2'] == 1) $updata['apply_status'] = $status;
+                    if($info['check_status_2'] == 1 && $status == 1) $updata['apply_status'] = $status;
                     $updata['check_status_1'] = $status;
                     $updata['check_time_1']   = time();
                 }elseif($info['check_leader_2'] == $this->user_id){
