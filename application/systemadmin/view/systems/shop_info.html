@@ -417,6 +417,30 @@
                 </dd>
             </dl>
             <dl class="row">
+                <dt class="tit">升级成功的短信</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="type_upgrade1" class="cb-enable <if condition='$config[type_upgrade] eq 1'>selected</if>">开启</label>
+                        <label for="type_upgrade0" class="cb-disable <if condition='$config[type_upgrade] eq 0'>selected</if>">关闭</label>
+                        <input id="type_upgrade1" name="type_upgrade" <if condition="$config['type_upgrade'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="type_upgrade0" name="type_upgrade" <if condition="$config['type_upgrade'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后升级将不再接受短信</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">匹配到审核人，审核人收到短信</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="type_matching1" class="cb-enable <if condition='$config[type_matching] eq 1'>selected</if>">开启</label>
+                        <label for="type_matching0" class="cb-disable <if condition='$config[type_matching] eq 0'>selected</if>">关闭</label>
+                        <input id="type_matching1" name="type_matching" <if condition="$config['type_matching'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="type_matching0" name="type_matching" <if condition="$config['type_matching'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后审核人不再接受短信</p>
+                </dd>
+            </dl>
+            <dl class="row">
                 <dt class="tit">
                     <label for="friends_notes">我的好友下面的文字</label>
                 </dt>

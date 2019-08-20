@@ -922,6 +922,14 @@ exit("功能正在开发中。。。");
             if($updata['apply_status'] == 1){
                 //审核通过 更新用户等级
                 $res1 = Db::name('users')->where('user_id',$info['user_id'])->setField('level',$info['level']);
+                if($res1){
+                    //升级成功后发送短信通知
+                    $shop_info = tpCache('shop_info');
+                    if($shop_info['type_upgrade']==1){
+                        $user_info = Db::name('users')->where('user_id',$info['user_id'])->find();
+                        jh_message($user_info['mobile'],Config::get('database.type_upgrade'),'');
+                    }
+                }
                 if (!$res1) {
                     Db::rollback();
                     $this->ajaxReturn(['status'=>0,'msg'=>'等级更新失败']);
