@@ -36,13 +36,15 @@
             <div class="tipsBox">
                 <p class="fs26">请确认收到款后再点击“通过审核”操作</p>
             </div>
-            <if condition="$apply.img">
-                <button class="fs30 color_w fw_b button_btn" onclick="change_status(1)">通过审核</button>
-                <if condition="tpCache('shop_info.is_refuse_check')">
-                <button class="fs30 color_w fw_b button_btn2" style="margin-top: -4vw;" onclick="change_status(-1)">拒绝审核</button>
+            <if condition="$apply.apply_status eq 0">
+                <if condition="$apply.img">
+                    <button class="fs30 color_w fw_b button_btn" onclick="change_status(1)">通过审核</button>
+                    <if condition="tpCache('shop_info.is_refuse_check')">
+                    <button class="fs30 color_w fw_b button_btn2" style="margin-top: -4vw;" onclick="change_status(-1)">拒绝审核</button>
+                    </if>
+                <else/>
+                    <button class="fs30 color_w fw_b button_btn2" style="">等待凭证</button>
                 </if>
-            <else/>
-                <button class="fs30 color_w fw_b button_btn2" style="">等待凭证</button>
             </if>
         </div>
     </div>

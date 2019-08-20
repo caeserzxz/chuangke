@@ -22,7 +22,8 @@
                      <div class="btnBox">
                         <p class="fs26 fw_b">打款金额：<span>{$vo.make_money}</span></p>
                         <if condition="$vo.is_check eq 1">
-                            <a href="JavaScript:;" class="fs24 color_w check_end">已审核</a>
+                            <!-- <a href="JavaScript:;" class="fs24 color_w check_end">已审核</a> -->
+                            <a href="{:U('chuangke/CkUser/rece_detail',['id' => $vo.id])}" class="fs24 color_w check_end">查看</a>
                         <else/>
                             <a href="{:U('chuangke/CkUser/rece_detail',['id' => $vo.id])}" class="fs24 color_w">去审核</a>
                         </if>

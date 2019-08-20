@@ -88,12 +88,8 @@ class CkUser extends MobileBase
         if ($check_recom_condition['code'] != 1) {
             $this->ajaxReturn(['status'=>0,'msg'=>'您的推荐人数不足']);
         }
-        //我的N层下级一星以上用户数量
-       /* $user_id_arr = sub_user1([$user['user_id']],$user['level']-1);
-        $num = count($user_id_arr) - 1;
-        if($num < $next_level['need_num']) $this->ajaxReturn(['status'=>0,'msg'=>'你的团队的一星或以上人数不足'.$next_level['need_num'].'人' ]);*/
         //如果没有关系链
-        // if(!$user['leader_all']) $this->ajaxReturn(['status'=>0,'msg'=>'没有关系链']);
+        if(!$user['leader_all']) $this->ajaxReturn(['status'=>0,'msg'=>'没有关系链']);
 
         //获取拥有审核权的用户
         $leader_arr = explode('_',$user['leader_all']);        
@@ -132,79 +128,58 @@ class CkUser extends MobileBase
         }
         //特殊情况 第N层找不到满足条件的用户，直接分配管理员
         if(empty($check_id)){
-//            //关系链最近的N星管理员
-//            /*$check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>$next_level['level_id'],'user_type'=>1])->value('user_id');
-//            if($check_user){
-//                $check_id = $check_user;
-//            }else{*/
-//                //关系链上没有N星管理员则选择平台管理员 不分等级 取比自己ID大的
-//                $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['GT',$this->user_id],'is_lock' => 0])->value('user_id');
-//                if (!$check_user) {
-//                    // 没有比自己大的取最近的
-//                    $check_user = Db::name('users')->where(['user_type'=>1,'user_id' => ['NEQ',$this->user_id],'is_lock' => 0])->value('user_id');
-//                }
-//                if($check_user){
-//                    $check_id = $check_user;
-//                }else{
-//                    $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
-//                }
-//            // }
             $check_id = $this->getAdminId($this->user_id);
             if(!$check_id)$this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
         }
 
         //升级一星 需要增加一个九星星身份的审核
         if($next_level['level_id'] == 2){
-            //满足审核条件的用户
             $check_id_2 = 0;
-            foreach ($leader as $k=>$v){
-                // if($k < 9) continue;//从第九层开始找
-                $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
-                // if ($k == 9) {
-                    //找最近的九星
-                if($now_user['level'] >= 10 ){
-                    if ($now_user['is_lock'] != 1) {
+            if (tpCache('shop_info.one_stars_rule') == 1) {
+                // 规则二 匹配给第九层九星
+                foreach ($leader as $k=>$v){
+                    if($k < 9) continue;//从第九层开始找
+                    $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
+                    if ($k == 9) {
+                        // 第九层用户
+                        if($now_user['level'] >= 10 && $now_user['is_lock'] != 1){
+                            $check_id_2 = $v;
+                            // 添加订单记录
+                            $team_data[$v]['team_order_'.$k] = 1;
+                            break;
+                        }else{
+                            // 添加漏单记录
+                            $team_data[$v]['is_out'] = 1;
+                            $team_data[$v]['team_order_out_'.$k] = 1;
+                        }
+                    }
+                    // 对应层级不满足找最近的链上管理员 不分等级
+                    if (($now_user['user_type'] == 1) && ($v != $check_id) && ($now_user['is_lock'] != 1)) {
                         $check_id_2 = $v;
-                        // 添加订单记录
-                        $team_data[$v]['team_order_'.$k] = 1;
                         break;
-                    }else{
-                        // 添加漏单记录
-                        $team_data[$v]['is_out'] = 1;
-                        $team_data[$v]['team_order_out_'.$k] = 1;
                     }
                 }
-                // }
-                // 对应层级不满足找最近的链上管理员 不分等级
-                /*if (($now_user['user_type'] == 1) && ($v != $check_id) && ($now_user['is_lock'] != 1)) {
-                    $check_id_2 = $v;
-                    break;
-                }*/
-            }
+            }else{
+                // 规则一 匹配给最近九星
+                foreach ($leader as $k=>$v){
+                    $now_user = Db::name('users')->field('level,user_type,is_lock')->where('user_id',$v)->find();
+                        //找最近的九星
+                    if($now_user['level'] >= 10 ){
+                        if ($now_user['is_lock'] != 1) {
+                            $check_id_2 = $v;
+                            // 添加订单记录
+                            $team_data[$v]['team_order_'.$k] = 1;
+                            break;
+                        }else{
+                            // 添加漏单记录
+                            $team_data[$v]['is_out'] = 1;
+                            $team_data[$v]['team_order_out_'.$k] = 1;
+                        }
+                    }
+                }
+            }            
             //特殊情况 关系链没有九星以上身份 则分配管理员
             if(empty($check_id_2)){
-//                //关系链最近的管理员
-//                // $check_user = Db::name('users')->where(['user_id'=>['In',implode(',',$leader)],'level'=>10,'user_type'=>1])->value('user_id');
-//                $leaders = implode(',',$leader);
-//                $where_admin = "user_id in ($leaders) and user_type=1 and is_lock=0 and user_id <> ".$check_id." and user_id <>".$this->user_id;
-//                $check_user = Db::name('users')->where($where_admin)->value('user_id');
-//
-//                if($check_user){
-//                    $check_id_2 = $check_user;
-//                }else{
-//                    $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id > ' . $this->user_id . ' and is_lock = 0';
-//                    //关系链上没有管理员则选择平台管理员
-//                    $check_user = Db::name('users')->where($where_id2)->value('user_id');
-//                    if (!$check_user) {
-//                        $where_id2 = 'user_type = 1 and user_id <> ' . $check_id . ' and user_id <> ' . $this->user_id . ' and is_lock = 0';
-//                        $check_user = Db::name('users')->where($where_id2)->value('user_id');
-//                    }
-//                    if($check_user){
-//                        $check_id_2 = $check_user;
-//                    }else{
-//                        $this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
-//                    }
-//                }
                 $check_id_2 = $this->getAdminId($this->user_id,$check_id);
                 if(!$check_id_2)$this->ajaxReturn(['status'=>0,'msg'=>'平台暂无符合的管理员']);
             }
