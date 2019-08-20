@@ -258,7 +258,7 @@ class CkUser extends MobileBase
 
             //给审核人发送短信通知
             $shop_info = tpCache('shop_info');
-            if($shop_info['']){
+            if($shop_info['type_matching']==1){
                 $check_info_1 =  Users::get($check_id);
                 $msg = jh_message($check_info_1['mobile'],Config::get('database.type_matching'),'');
 
