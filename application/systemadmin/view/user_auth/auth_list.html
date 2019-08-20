@@ -147,6 +147,10 @@
                                         <!--<a href="{:url('Debt/edit_debt',array('id'=>$v['id'],'status'=>3))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>拒绝</a>-->
                                     <!--</if>-->
                                     <a href="{:url('UserAuth/auth_detail',array('id'=>$v['id']))}" class="btn blue"><i class="fa fa-pencil-square-o"></i>查看</a>
+                                <if condition="$v.status eq 2">
+                                    <a href="javascript:void(0);" class="btn blue" onclick="del_auth({$v['id']});"><i class="fa fa-pencil-square-o"></i>删除</a>
+                                </if>
+
                                 </div>
                             </td>
                                 <td align="" class="" style="width: 100%;">
@@ -203,6 +207,27 @@
             });
         });
     });
+
+    function del_auth(id){
+        console.log(id);
+        if(confirm('删除的记录无法恢复,确认删除?')){
+            $.ajax({
+                'url':"{:U('UserAuth/del_auth')}",
+                'type':'post',
+                'data':{'id':id},
+                'dataType':'json',
+                'success':function(data){
+                    if(data.status==1){
+                        layer.msg(data.msg,function(){
+                            window.location.href = "{:U('UserAuth/auth_list')}";
+                        })
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            });
+        }
+    }
 </script>
 </body>
 </html>

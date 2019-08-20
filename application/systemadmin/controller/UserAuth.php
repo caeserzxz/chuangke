@@ -58,7 +58,10 @@ class UserAuth extends Base {
         if($status==$auth['status']){
             return  array('status'=>-1,'msg'=>'状态未修改');
         }
-
+        $user = M('users')->where(array('user_id'=>$auth['user_id']))->find();
+        if(empty($user)){
+            return  array('status'=>-1,'msg'=>'用户不存在');
+        }
         M('users')->startTrans();
         M('record')->startTrans();
         M('user_authentication')->startTrans();
@@ -67,7 +70,6 @@ class UserAuth extends Base {
             $data['save_time'] = time();
             //更新实名认证状态
             $res = M('user_authentication')->where(array('id'=>$id))->update($data);
-            $user = M('users')->where(array('user_id'=>$auth['user_id']))->find();
             $model = new MemberLogic();
             $config = tpCache('shop_info');
             if($status==1){  //通过
@@ -91,4 +93,14 @@ class UserAuth extends Base {
 
     }
 
+    public function del_auth(){
+        $id= I('id');
+        $res = M('user_authentication')->where(array('id'=>$id))->delete();
+        if($res){
+            return  array('status'=>1,'msg'=>'删除成功');
+
+        }else{
+            return  array('status'=>-1,'msg'=>'删除失败');
+        }
+    }
 }
