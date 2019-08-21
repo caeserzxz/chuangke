@@ -57,9 +57,9 @@
               <th align="left" abbr="ac_id" axis="col4" class="">
                 <div style="text-align: left; width: 150px;" class="">文章分类</div>
               </th>
-              <th align="center" abbr="article_show" axis="col5" class="">
-                <div style="text-align: center; width: 80px;" class="">显示</div>
-              </th>
+              <!--<th align="center" abbr="article_show" axis="col5" class="">-->
+                <!--<div style="text-align: center; width: 80px;" class="">显示</div>-->
+              <!--</th>-->
               <th align="center" abbr="article_time" axis="col6" class="">
                 <div style="text-align: center; width: 160px;" class="">发布时间</div>
               </th>
@@ -98,15 +98,15 @@
                 <td align="left" class="">
                   <div style="text-align: left; width: 150px;">{$vo.category}</div>
                 </td>
-                <td align="center" class="">
-                  <div style="text-align: center; width: 80px;">
-                    <if condition='$vo[is_open] eq 1'>
-                      <span class="yes" onClick="changeTableVal('Article','article_id','{$vo.article_id}','is_open',this)" ><i class="fa fa-check-circle"></i>是</span>
-                      <else />
-                      <span class="no" onClick="changeTableVal('Article','article_id','{$vo.article_id}','is_open',this)" ><i class="fa fa-ban"></i>否</span>
-                    </if>
-                  </div>
-                </td>
+                <!--<td align="center" class="">-->
+                  <!--<div style="text-align: center; width: 80px;">-->
+                    <!--<if condition='$vo[is_open] eq 1'>-->
+                      <!--<span class="yes" onClick="changeTableVal('Article','article_id','{$vo.article_id}','is_open',this)" ><i class="fa fa-check-circle"></i>是</span>-->
+                      <!--<else />-->
+                      <!--<span class="no" onClick="changeTableVal('Article','article_id','{$vo.article_id}','is_open',this)" ><i class="fa fa-ban"></i>否</span>-->
+                    <!--</if>-->
+                  <!--</div>-->
+                <!--</td>-->
                 <td align="center" class="">
                   <div style="text-align: center; width: 160px;">{$vo.add_time}</div>
                 </td>
