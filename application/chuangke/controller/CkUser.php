@@ -230,6 +230,7 @@ class CkUser extends MobileBase
                 Db::rollback();
                 $this->ajaxReturn(['status'=>0,'msg'=>'添加审核失败']);
             }*/
+            Db::commit();
 
             //给审核人发送短信通知
             $shop_info = tpCache('shop_info');
@@ -241,7 +242,7 @@ class CkUser extends MobileBase
                 $msg = jh_message($check_info_2['mobile'],Config::get('database.type_matching'),'');
 
             }
-            Db::commit();
+
             $this->ajaxReturn(['status'=>1,'msg'=>'添加审核成功','data'=>$resID]);
         } catch (\Exception $e){
             $this->ajaxReturn(['status'=>0,'msg'=>'操作失败']);

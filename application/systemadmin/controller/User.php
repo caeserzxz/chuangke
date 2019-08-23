@@ -5,6 +5,7 @@ use app\systemadmin\logic\OrderLogic;
 use think\AjaxPage;
 use think\Page;
 use think\Verify;
+use think\Config;
 use think\Db;
 use app\systemadmin\logic\UsersLogic;
 use think\Loader;
