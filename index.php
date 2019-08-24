@@ -1,4 +1,4 @@
-<?php 
+<?php
 // [ 应用入口文件 ]
 if (extension_loaded('zlib')) {
 	ob_end_clean();
