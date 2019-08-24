@@ -187,7 +187,23 @@
                                     <td align="center" class="handle">
                                         <div style="text-align: center; width: 120px; max-width:120px;">
                                             <a class="btn blue" href="javascript:manual_check({$v.id},1);"><i class="fa fa-check"></i>手动通过</a>
-                                             <a class="btn blue" href="javascript:manual_check({$v.id},-1);"><i class="fa fa-close"></i>手动拒绝</a>
+                                            <a class="btn blue" href="javascript:manual_check({$v.id},-1);"><i class="fa fa-close"></i>手动拒绝</a>
+                                            <!--<a class="btn blue" href="javascript:del_ck({$v.id},0);"><i class="fa fa-close"></i>删除</a>-->
+                                        </div>
+                                    </td>
+                                </if>
+
+                                <if condition="$v.apply_status eq -1">
+                                    <td align="center" class="handle">
+                                        <div style="text-align: center; width: 120px; max-width:120px;">
+                                            <a class="btn blue" href="javascript:del_ck({$v.id},-1);"><i class="fa fa-close"></i>删除</a>
+                                        </div>
+                                    </td>
+                                </if>
+                                <if condition="$v.apply_status eq 1">
+                                    <td align="center" class="handle">
+                                        <div style="text-align: center; width: 120px; max-width:120px;">
+                                            <a class="btn blue" href="javascript:del_ck({$v.id},1);"><i class="fa fa-close"></i>删除</a>
                                         </div>
                                     </td>
                                 </if>
@@ -280,6 +296,21 @@
         }, function () {
             layer.closeAll();
         });
+    }
+
+    function del_ck(id,status){
+        if(status==-1){
+            if(confirm('删除的审核记录无法恢复,确认删除?')){
+                window.location.href = "{:url('User/del_ck')}?id="+id;
+            }
+            return false;
+        }else if(status==0){
+            layer.msg('未审核的记录无法删除');
+            return false;
+        }else if(status==1){
+            layer.msg('已通过的记录无法删除');
+            return false;
+        }
     }
 </script>
 </body>
