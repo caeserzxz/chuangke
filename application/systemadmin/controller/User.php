@@ -5,6 +5,7 @@ use app\systemadmin\logic\OrderLogic;
 use think\AjaxPage;
 use think\Page;
 use think\Verify;
+use think\Config;
 use think\Db;
 use app\systemadmin\logic\UsersLogic;
 use think\Loader;
@@ -959,6 +960,17 @@ exit("功能正在开发中。。。");
         }
     }
 
+    //删除审核
+    public  function del_ck(){
+        $id = I('id');
+        $res = M('ck_apply')->where(array('id'=>$id))->delete();
+
+        if($res){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
+        }
+    }
     /**
      * 签到列表
      * @date 2017/09/28

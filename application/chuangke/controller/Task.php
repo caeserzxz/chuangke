@@ -22,9 +22,16 @@ class Task extends Controller {
     }
 
     /**
-     * 首页
+     * 系统维护中
      */
     public function index(){
+        if (tpCache('shop_info.system_switch') != 1) {
+            $this->redirect('chuangke/Index/index');
+        }
+        $config = tpCache('shop_info');
+        $this->assign('config',$config);
+
+        return $this->fetch('plan/system_maintain');
     }
     /**
      * 自动审核计划任务

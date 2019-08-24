@@ -18,6 +18,12 @@ class MobileBase extends Controller {
     public function _initialize() {
         //echo base64_encode("陈洋（系统定制开发商）");
         //exit;
+        //关闭系统
+        $system_switch = tpCache('shop_info.system_switch');
+        if ($system_switch) {
+            $this->redirect('chuangke/Task/index');
+        }
+
         $first_leader = I('first_leader/d', 0);
         if ($first_leader > 0) session('first_leader', $first_leader);
         session('user'); //不用这个在忘记密码不能获取session('validate_code');
