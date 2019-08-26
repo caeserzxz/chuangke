@@ -486,6 +486,18 @@
                     <p class="notic">是否允许审核人拒绝审核</p>
                 </dd>
             </dl>
+            <dl class="row">
+                <dt class="tit">是否开启修改密码</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="is_edit_pass1" class="cb-enable <if condition='$config[is_edit_pass] eq 1'>selected</if>">开启</label>
+                        <label for="is_edit_pass0" class="cb-disable <if condition='$config[is_edit_pass] eq 0'>selected</if>">关闭</label>
+                        <input id="is_edit_pass1" name="is_edit_pass" <if condition="$config['is_edit_pass'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="is_edit_pass0" name="is_edit_pass" <if condition="$config['is_edit_pass'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">开启后会在个人中心展示修改密码菜单</p>
+                </dd>
+            </dl>
 
             <dl class="row">
                 <dt class="tit">

@@ -547,4 +547,41 @@ class Member extends  MobileBase
         return $img_base64; //返回图片的base64
     }
 
+    /**
+     * 修改密码
+     * @date 2019-08-26
+     */
+    function edit_password(){
+        $user_id = Session('user_id');
+        $user = M('users')->field('user_id,password')->where(['user_id' => $user_id])->find();
+        if (IS_AJAX) {
+            $post = I('post.');
+            // 验证两次新密码是否一致
+            if($post['new_pass'] != $post['confirm_pass']){
+                return ['status' => 0, 'msg' => '两次密码不一致'];
+            }
+            // 验证旧密码是否正确
+            if(encrypt($post['old_pass']) != $user['password']){
+                return ['status' => 0, 'msg' => '原密码错误'];
+            }
+            // 验证新旧密码不一致
+            if(encrypt($post['new_pass']) == $user['password']){
+                return ['status' => 0, 'msg' => '新密码与原密码不能一致'];
+            }
+            // 验证新密码强度
+            if (strlen($post['new_pass']) < 6) {
+                return ['status' => 0, 'msg' => '密码必须大于六字符'];
+            }
+
+            // 更改新密码
+            $data['password'] = encrypt($post['new_pass']);
+            $res = Db::name('users')->where(['user_id'=>$user['user_id']])->save($data);
+            if($res){
+                return ['status' => 1, 'msg' => '修改成功'];
+            }else{
+                return ['status' => 0, 'msg' => '修改失败'];
+            }
+        }
+        return $this->fetch();
+    }
 }

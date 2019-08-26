@@ -112,6 +112,16 @@
                     <div class="weui-cell__ft"></div>
                 </a>
                 </if>
+                <if condition="$config.is_edit_pass eq 1">
+                <a href="{:U('chuangke/member/edit_password')}" class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <img src="__PUBLIC__/static/chuangke/images/my09.png" alt="">
+                        <span class="fs30">修改密码</span>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
+                </if>
+
                 <a href="javascript:;" class="weui-cell weui-cell_access" onclick="clear_m();">
                     <div class="weui-cell__bd">
                         <img src="__PUBLIC__/static/chuangke/images/my07.png" alt="">
