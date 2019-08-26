@@ -191,6 +191,17 @@ class Login extends Controller
 //        {
 //            return array('status' => 500, 'msg' => '手机用户已存在', 'result' => '');
 //        }
+        if($config['code_number']>0){
+            $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
+            $endToday=mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1;
+
+            $where['mobile'] = $input['mobile'];
+            $where['create_time'] =array(array('EGT', $beginToday), array('ELT', $endToday));
+            $code_num = M('n_mobile_captcha')->where($where)->count('*');
+            if($code_num>=$config['code_number']){
+                return array('status' => 500, 'msg' =>'一个手机号一天只能发送'.$config['code_number'].'条验证码', 'result' => "");
+            }
+        }
         //生成验证码
         $captcha = mt_rand(100000, 999999);
         //发送验证码接口（阿里云短信）

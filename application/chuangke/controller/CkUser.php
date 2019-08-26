@@ -199,7 +199,11 @@ class CkUser extends MobileBase
         $data['city']           = $city;
         $data['district']       = $district;
         $data['address']        = $address;
-        $data['make_money']     = $next_level['make_money'];
+        $random_float = 0;
+        if(tpCache('shop_info.random_float')==1){
+            $random_float =mt_rand(1,49)/100;
+        }
+        $data['make_money']     = $next_level['make_money']+$random_float;
 
         Db::startTrans();
         try {

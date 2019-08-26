@@ -498,7 +498,28 @@
                     <p class="notic">开启后会在个人中心展示修改密码菜单</p>
                 </dd>
             </dl>
-
+            <dl class="row">
+                <dt class="tit">是否开启打款金额的小数点区间</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="random_float1" class="cb-enable <if condition='$config[random_float] eq 1'>selected</if>">开启</label>
+                        <label for="random_float0" class="cb-disable <if condition='$config[random_float] eq 0'>selected</if>">关闭</label>
+                        <input id="random_float1" name="random_float" <if condition="$config['random_float'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="random_float0" name="random_float" <if condition="$config['random_float'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">关闭后打款金额将不生成随机小数</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label for="safe_money">每个手机号每天只能收到( )验证码</label>
+                </dt>
+                <dd class="opt">
+                    <input id="code_number"  name="code_number" value="{$config.code_number}" class="input-txt" type="text">
+                    <span class="err"></span>
+                    <p class="notic"></p>
+                </dd>
+            </dl>
             <dl class="row">
                 <dt class="tit">
                     <label for="team_prize_money">'首页' 页面设置</label>
