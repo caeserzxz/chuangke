@@ -103,7 +103,7 @@
                     <p class="notic">留空表示不修改密码</p>
                 </dd>
             </dl>
-            <dl class="row">
+            <!-- <dl class="row">
                 <dt class="tit">
                     <label>管理员身份</label>
                 </dt>
@@ -114,9 +114,21 @@
                         <input id="user_type1" name="user_type" value="1" type="radio" <if condition="$user['user_type'] eq 1">checked</if>>
                         <input id="user_type0" name="user_type" value="0" type="radio" <if condition="$user['user_type'] eq 0">checked</if>>
                     </div>
-                    <!-- <p class="notic">如果冻结会员，会员将不能操作资金。</p> -->
+                    <p class="notic">如果冻结会员，会员将不能操作资金。</p>
+                </dd>
+            </dl> -->
+            <dl class="row">
+                <dt class="tit">
+                    <label for="team_prize_money">用户身份</label>
+                </dt>
+                <dd class="opt">
+                    <label><input type="radio" name="user_type" value="0" <if condition="$user['user_type'] eq 0">checked="checked"</if>>普通用户</label>
+                    <label><input type="radio" name="user_type" value="1" <if condition="$user['user_type'] eq 1">checked="checked"</if>>管理员</label>
+                    <label><input type="radio" name="user_type" value="2" <if condition="$user['user_type'] eq 2">checked="checked"</if>>省/区代理</label>
+                    <p class="notic">注:省/区代理仅对八星和九星用户有效</p>
                 </dd>
             </dl>
+
             <dl class="row">
                 <dt class="tit">
                     <label for="record_no">会员等级</label>

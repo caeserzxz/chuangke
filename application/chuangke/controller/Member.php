@@ -49,6 +49,19 @@ class Member extends  MobileBase
         }else{
             $is_account = 2;
         }
+        if (tpCache('shop_info.agent_user_switch') == 1) {
+            if ($userInfo['user_type'] && $userInfo['level'] >= 9) {
+                if ($userInfo['level'] == 9) {
+                    $userInfo['level_text'] = '区代';
+                }elseif ($userInfo['level'] == 10) {
+                    $userInfo['level_text'] = '省代';
+                }else{
+                    $userInfo['level_text'] = '其他';
+                }
+            }else{
+                $userInfo['level_text'] = M('user_level')->where(['level_id' => $userInfo['level']])->value('level_name');
+            }
+        }
         //缓存
         $cache = sprintf("%.2f",$userInfo['cache']/1024);
         $image_info = tpCache('image_info');
@@ -251,8 +264,8 @@ class Member extends  MobileBase
             ->where(['first_leader' => $userInfo['user_id']])
             ->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
-        $is_sub_team = Config::get('database.is_sub_team');
-        if ($is_sub_team == 1 && count($list) > 0) {
+        $sub_team_switch = Config::get('database.sub_team_switch');
+        if ($sub_team_switch == 1 && count($list) > 0) {
             foreach ($list as $key => $value) {
                 $all_subs = $all_sub = []; // 二维数组合并成一维数组
                 $all_sub = get_team_all_user($value['user_id'],0,[]);                    
@@ -263,7 +276,7 @@ class Member extends  MobileBase
             }
         }
         $this->assign('list',$list);
-        $this->assign('is_sub_team',$is_sub_team);
+        $this->assign('sub_team_switch',$sub_team_switch);
         $this->assign('userInfo',$userInfo);
 
         if (IS_AJAX) return $this->fetch('ajax_friend_list');

@@ -132,6 +132,15 @@ class User extends Base {
                 $is_check = M('ck_apply')->where(['user_id' => $uid,'apply_status' => 0])->count();
                 if ($is_check > 0) $this->error('该用户有申请正在审核中');
             }
+            // 是否设置成省/区代理
+            if ($_POST['user_type'] == 2 && $user['user_type'] != 2) {
+                if ($user['level'] < 9 && $_POST['level'] < 9) {
+                    exit($this->error('只有八星及以上才能设置成省/区代理'));
+                }
+            }
+            // 若八星及以上降级 撤掉代理
+            if ($user['level'] > 8 && $_POST['level'] < 9 && $user['user_type'] == 2) $_POST['user_type'] = 0;
+
             $row = M('users')->where(array('user_id'=>$uid))->save($_POST);
             if($row)
                 exit($this->success('修改成功'));

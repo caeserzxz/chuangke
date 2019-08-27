@@ -40,7 +40,7 @@
                                 <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
                             </span>
                         </div>
-                        <if condition="$is_sub_team eq 1">
+                        <if condition="$sub_team_switch eq 1">
                             <div class="weui-cell__ft color_a">
                                 {$vo.reg_time|date='Y-m-d',###} 
                                 <span>{$vo.sub_team}人</span>

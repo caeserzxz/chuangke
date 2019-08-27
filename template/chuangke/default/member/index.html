@@ -46,7 +46,11 @@
                     <else />
                         <p>{$userInfo.mobile}</p>
                     </if>
-                    <span onclick="applicationAgency();">申请代理</span>
+                    <if condition="tpCache('shop_info.agent_user_switch') eq 1">
+                        <span>{$userInfo.level_text}</span>
+                    <else />
+                        <span onclick="applicationAgency();">申请代理</span>
+                    </if>
                 </div>
             </div>
             <div class="weui-cells">

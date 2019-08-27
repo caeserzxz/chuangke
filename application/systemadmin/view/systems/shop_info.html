@@ -510,6 +510,20 @@
                     <p class="notic">关闭后打款金额将不生成随机小数</p>
                 </dd>
             </dl>
+            <!-- 是否开启代理用户 裴宇明定制功能 -->
+            <dl class="row">
+                <dt class="tit">是否开启个人中心等级</dt>
+                <dd class="opt">
+                    <div class="onoff">
+                        <label for="agent_user_switch1" class="cb-enable <if condition='$config[agent_user_switch] eq 1'>selected</if>">开启</label>
+                        <label for="agent_user_switch0" class="cb-disable <if condition='$config[agent_user_switch] eq 0'>selected</if>">关闭</label>
+                        <input id="agent_user_switch1" name="agent_user_switch" <if condition="$config['agent_user_switch'] eq 1">checked="checked"</if> value="1" type="radio">
+                        <input id="agent_user_switch0" name="agent_user_switch" <if condition="$config['agent_user_switch'] eq 0">checked="checked"</if> value="0" type="radio">
+                    </div>
+                    <p class="notic">注:默认标版为不开启,统一展示'申请代理'字眼</p>
+                    <p class="notic">开启后展示用户等级,后台设置为省/区代理的八星及以上用户将特殊展示</p>
+                </dd>
+            </dl>
             <dl class="row">
                 <dt class="tit">
                     <label for="safe_money">每个手机号每天只能收到( )验证码</label>

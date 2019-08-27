@@ -40,7 +40,16 @@
                     <td align="left" class=""><div style="text-align: center; width: 120px;">{$list.reg_time|date='Y-m-d H:i',###}</div></td>
                     <td align="left" class=""><div style="text-align: center; width: 120px;">{$list.leader_mobile}</div></td>
                     <td align="left" class=""><div style="text-align: center; width: 80px;">{$list.tuijian_code}</div></td>
-                    <td align="left" class=""><div style="text-align: center; width: 120px;"><if $list.user_type eq 0 >普通会员<else><span style="color:red">管理员</span></if></div></td>
+
+                    <td align="left" class="">
+                        <div style="text-align: center; width: 120px;">
+                            <if $list.user_type eq 0 >普通会员
+                            <elseif $list.user_type eq 1><span style="color:red">管理员</span>
+                            <elseif $list.user_type eq 2><span style="color:red">省/区代理</span>
+                            <else>其他
+                            </if>
+                        </div>
+                    </td>
                     <td align="left" class=""><div style="text-align: center; width: 70px;"><if $list.is_lock eq 0 >正常<else><span style="color:red">冻结</span></if></div></td>
                     <td align="left" class=""><div style="text-align: center; width: 70px;">{$list.direct_num}</div></td>
                     <td align="left" class=""><div style="text-align: center; width: 70px;">{$list.team_num}</div></td>
