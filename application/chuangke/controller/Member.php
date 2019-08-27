@@ -247,13 +247,26 @@ class Member extends  MobileBase
         $Page = new Page($count, 15);
         
         $list = M('users')
-            ->field('mobile,reg_time,head_pic,nickname')
+            ->field('user_id,mobile,reg_time,head_pic,nickname')
             ->where(['first_leader' => $userInfo['user_id']])
             ->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
+        $is_sub_team = Config::get('database.is_sub_team');
+        if ($is_sub_team == 1 && count($list) > 0) {
+            foreach ($list as $key => $value) {
+                $all_subs = $all_sub = []; // 二维数组合并成一维数组
+                $all_sub = get_team_all_user($value['user_id'],0,[]);                    
+                array_walk_recursive($all_sub, function($value2) use (&$all_subs) {
+                    array_push($all_subs, $value2);
+                });
+                $list[$key]['sub_team'] = count($all_subs);
+            }
+        }
         $this->assign('list',$list);
-        if (IS_AJAX) return $this->fetch('ajax_friend_list');
+        $this->assign('is_sub_team',$is_sub_team);
         $this->assign('userInfo',$userInfo);
+
+        if (IS_AJAX) return $this->fetch('ajax_friend_list');
         return $this->fetch();
     }
 
