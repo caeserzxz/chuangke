@@ -86,10 +86,10 @@ class MemberLogic extends Model
 
 
     //实名认证通过后分佣保证金
-    public function earnestSend($user_id,$status){
+    public function earnestSend($user_id,$status,$auth_old){
         $user = M('users')->where(array('user_id'=>$user_id))->find();
         $config = tpCache('shop_info');
-
+//        $auth = M('user_authentication')->where(array('user_id'=>$user_id))->find();
         if($status==1){
             //自己获得保证金
             $this->earnestMoney($user['user_id'],$config['earnest_money']);
@@ -110,28 +110,41 @@ class MemberLogic extends Model
                 $this->addRecord($user['first_leader'],$user['user_id'],'推荐奖励',$config['safe_money'],1);
             }
         }else if($status == 2){
-            //扣除自己获得保证金
-            $this->earnestMoney($user['user_id'],-$config['earnest_money']);
-            //添加消息
-            add_message($user['user_id'],'实名认证失败');
-            add_message($user['user_id'],'实名认证失败,扣除'.$config['earnest_money'].'保证金');
-            //发送短信
-            if (tpCache('shop_info.authen_mess') == 1) {
-                jh_message($user['mobile'], Config::get('database.type_auth'),'');
-            }
-            //添加保证金流水
-            $this->addRecord($user['user_id'],'','实名认证失败,扣除'.$config['earnest_money'].'保证金',-$config['earnest_money'],1);
-
-
-            //扣除推荐人获得保证金
-            if(!empty($user['first_leader'])){
-                //更新账户保证金
-                $this->earnestMoney($user['first_leader'],-$config['safe_money']);
+            if($auth_old['status']==0){
                 //添加消息
-                add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证失败,扣除'.$config['safe_money'].'保证金');
+                add_message($user['user_id'],'实名认证失败');
+                add_message($user['first_leader'],'下级用户实名认证失败');
+                if (tpCache('shop_info.authen_mess') == 1) {
+                    jh_message($user['mobile'], Config::get('database.type_auth'),'');
+                }
+            }else if($auth_old['status']==1){
+                //扣除自己获得保证金
+                $this->earnestMoney($user['user_id'],-$config['earnest_money']);
+                //添加消息
+                add_message($user['user_id'],'实名认证失败');
+
                 //添加保证金流水
-                $this->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证失败,扣除'.$config['safe_money'].'保证金',-$config['safe_money'],1);
+                $this->addRecord($user['user_id'],'','实名认证失败,扣除'.$config['earnest_money'].'保证金',-$config['earnest_money'],1);
+                add_message($user['user_id'],'实名认证失败,扣除'.$config['earnest_money'].'保证金');
+
+                //发送短信
+                if (tpCache('shop_info.authen_mess') == 1) {
+                    jh_message($user['mobile'], Config::get('database.type_auth'),'');
+                }
+
+                //扣除推荐人获得保证金
+                if(!empty($user['first_leader'])){
+                    //更新账户保证金
+                    $this->earnestMoney($user['first_leader'],-$config['safe_money']);
+                    //添加消息
+                    add_message($user['first_leader'],'下级用户'.$user['mobile'].'实名认证失败,扣除'.$config['safe_money'].'保证金');
+                    //添加保证金流水
+                    $this->addRecord($user['first_leader'],$user['user_id'],'下级用户'.$user['mobile'].'实名认证失败,扣除'.$config['safe_money'].'保证金',-$config['safe_money'],1);
+                }
+
             }
+
+
         }
 
     }

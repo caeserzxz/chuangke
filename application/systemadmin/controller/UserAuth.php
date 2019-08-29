@@ -75,9 +75,9 @@ class UserAuth extends Base {
             if($status==1){  //通过
                 //更新用户的昵称
                 M('users')->where(array('user_id'=>$auth['user_id']))->update(array('nickname'=>$auth['user_name']));
-                $model->earnestSend($auth['user_id'],1);
+                $model->earnestSend($auth['user_id'],1,'');
             }elseif($status==2){//不通过
-                $model->earnestSend($auth['user_id'],2);
+                $model->earnestSend($auth['user_id'],2,$auth);
             }
         }catch (Exception $e){
             M('users')->rollback();

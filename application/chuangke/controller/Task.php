@@ -84,7 +84,7 @@ class Task extends Controller {
                 //更改昵称
                 M('users')->where(array('user_id'=>$v['user_id']))->update(array('nickname'=>$v['user_name']));
                 //分佣保证金
-                $model->earnestSend($v['user_id'],1);
+                $model->earnestSend($v['user_id'],1,'');
             }
         }catch (\Exception $e) {  //如书写为（Exception $e）将无效
             M('users')->rollback();
