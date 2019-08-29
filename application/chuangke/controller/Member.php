@@ -256,24 +256,30 @@ class Member extends  MobileBase
      */
     public function goodFriendList(){
         $userInfo = $this->userInfo;
-        $count = M('users')->where("first_leader", $userInfo['user_id'])->count();
-        $Page = new Page($count, 15);
         
-        $list = M('users')
-            ->field('user_id,mobile,reg_time,head_pic,nickname')
-            ->where(['first_leader' => $userInfo['user_id']])
-            ->limit($Page->firstRow . ',' . $Page->listRows)->select();
 
         $sub_team_switch = Config::get('database.sub_team_switch');
-        if ($sub_team_switch == 1 && count($list) > 0) {
-            foreach ($list as $key => $value) {
-                $all_subs = $all_sub = []; // 二维数组合并成一维数组
-                $all_sub = get_team_all_user($value['user_id'],0,[]);                    
-                array_walk_recursive($all_sub, function($value2) use (&$all_subs) {
-                    array_push($all_subs, $value2);
-                });
-                $list[$key]['sub_team'] = count($all_subs);
-            }
+        if ($sub_team_switch == 1) {
+             // 是否展示整个团队 邱臣臣定制功能
+            $count = M('users')
+                ->where(['leader_all' => ['like','%\_'.$userInfo['user_id'].'\_%']])
+                ->whereOR(['leader_all' => ['like',$userInfo['user_id'].'\_%']])
+                ->count();
+            $Page = new Page($count, 15);
+
+            $list = M('users')
+                ->field('user_id,mobile,reg_time,head_pic,nickname')
+                ->where(['leader_all' => ['like','%\_'.$userInfo['user_id'].'\_%']])
+                ->whereOR(['leader_all' => ['like',$userInfo['user_id'].'\_%']])
+                ->limit($Page->firstRow . ',' . $Page->listRows)
+                ->select();
+        }else{
+            $count = M('users')->where("first_leader", $userInfo['user_id'])->count();
+            $Page = new Page($count, 15);
+            $list = M('users')
+                ->field('user_id,mobile,reg_time,head_pic,nickname')
+                ->where(['first_leader' => $userInfo['user_id']])
+                ->limit($Page->firstRow . ',' . $Page->listRows)->select();
         }
         $this->assign('list',$list);
         $this->assign('sub_team_switch',$sub_team_switch);
