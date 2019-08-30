@@ -231,7 +231,8 @@
             direction: type,
             loop: true,
             autoplay: {
-                delay: time
+                delay: time,
+                disableOnInteraction: false,
             },
             onSlideChangeEnd: function (swiper) {
                 swiper.update(); //swiper更新
