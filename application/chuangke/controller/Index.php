@@ -41,12 +41,14 @@ class Index extends MobileBase
         $this->assign('loopNotice',$loopNotice);
 
         // 首页公告
-        $notice = M('article')->where(['cat_id' => 8])->find();
+        $notice = M('article')->where(['cat_id' => 8])->order('article_id DESC')->find();
         $this->assign('notice',htmlspecialchars_decode($notice['content']));
 
         // 是否弹出公告
-        if (!$_SERVER['HTTP_REFERER'] && $notice) $is_popup = 1;
-        $this->assign('is_popup',$is_popup);
+        if ($notice && tpCache('shop_info.is_notice') == 1) {
+            $is_login = strpos($_SERVER['HTTP_REFERER'],'/chuangke/Login/index.html');
+            if (!$_SERVER['HTTP_REFERER'] || $is_login) $is_popup = 1;
+        }
 
         if (tpCache('shop_info.template1') == 2) {
             return $this->fetch('plan/template1');
