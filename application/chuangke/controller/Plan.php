@@ -50,6 +50,7 @@ class Plan extends MobileBase
             ->where(['check_leader_1' => $this->user_id,'check_status_1' => 1])
             ->whereOR('check_leader_2='. $this->user_id.' and check_status_2=1')
             ->sum('make_money');
+        $all_rece = floor($all_rece);
         $user['all_rece'] = $all_rece;
         $user['all_debt'] = $all_debt;
         
