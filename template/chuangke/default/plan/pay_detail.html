@@ -67,7 +67,8 @@
     function upload_voucher() {
         var upload_img = $('#upload_img').val();
         if (upload_img == '') {
-            $.toast("请上传债务凭证", "text");
+            layer.msg('请上传债务凭证');
+            // $.toast("请上传债务凭证", "text");
             return false;
         }
         $.ajax({
@@ -82,7 +83,8 @@
                 if (data.code == 1) {
                     window.location.href = data.url;
                 } else {
-                    $.toast(data.msg, "text");
+                    layer.msg(data.msg);
+                    // $.toast(data.msg, "text");
                 }
             }
         });
