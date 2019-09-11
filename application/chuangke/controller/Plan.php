@@ -227,7 +227,7 @@ class Plan extends MobileBase
             if ($status1) $this->error('已有同类型债务审核中');
 
             $status2 = M('user_debt')->where(['user_id' => $this->user_id,'type' => $type,'status' => 2])->count();
-            if ($status1) $this->error('已有同类型债务众筹中');
+            if ($status2) $this->error('已有同类型债务众筹中');
 
             // 是否超过最大额度
             $all_adopt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys');
