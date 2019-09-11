@@ -64,30 +64,37 @@
 </script>
 <script>
     var  img_name = '';
+    var  num = 0;
     function upload_voucher() {
+
         var upload_img = $('#upload_img').val();
         if (upload_img == '') {
             layer.msg('请上传债务凭证');
             // $.toast("请上传债务凭证", "text");
             return false;
         }
-        $.ajax({
-            url: "{:url('/chuangke/CkUser/pay_voucher')}",
-            type: 'POST',
-            cache: false,
-            data: new FormData($('#form')[0]),
-            processData: false,
-            contentType: false,
-            dataType:"json",
-            success : function(data) {
-                if (data.code == 1) {
-                    window.location.href = data.url;
-                } else {
-                    layer.msg(data.msg);
-                    // $.toast(data.msg, "text");
+        if(num==0){
+            num = 1;
+            $.ajax({
+                url: "{:url('/chuangke/CkUser/pay_voucher')}",
+                type: 'POST',
+                cache: false,
+                data: new FormData($('#form')[0]),
+                processData: false,
+                contentType: false,
+                dataType:"json",
+                success : function(data) {
+                    if (data.code == 1) {
+                        window.location.href = data.url;
+                    } else {
+                        layer.msg(data.msg);
+                        // $.toast(data.msg, "text");
+                    }
+                    num = 0;
                 }
-            }
-        });
+            });
+        }
+
     }
 
     $("input[name=upload_img]").change(function() {
