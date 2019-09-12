@@ -36,6 +36,9 @@
             <div class="tipsBox">
                 <p class="fs26">请确认收到款后再点击“通过审核”操作</p>
             </div>
+            <div class="tipsBox">
+                <p class="fs26">打款备注&nbsp:&nbsp{$apply.check_pay_text}</p>
+            </div>
             <if condition="$Request.param.is_hide neq 1">
                 <if condition="$apply.img">
                     <button class="fs30 color_w fw_b button_btn" onclick="change_status(1)">通过审核</button>

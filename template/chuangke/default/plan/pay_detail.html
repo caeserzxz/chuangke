@@ -47,6 +47,10 @@
                         <input id="upload_img" name="upload_img" class="weui-uploader__input" type="file" accept="image/*" multiple="">
                     </if>
                 </div>
+                <div class="inputBox">
+                    <span class="fs28">备注</span>
+                    <input type="text" class="weui-input fs28 color_w" id="pay_name" name="pay_name" value="{$apply.check_pay_text}" placeholder="请填写付款人名称" >
+                </div>
                 <div class="images-list"><!--上传图片列表--></div>
                 <input type="hidden" name="type" value="{$type}">
                 <input type="hidden" name="id" value="{$apply.id}">

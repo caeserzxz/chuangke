@@ -721,9 +721,11 @@ class CkUser extends MobileBase
         if ($type == 1) {
             $check_leader = $apply['check_leader_1'];
             $apply['img'] = $apply['voucher_img1'];
+            $apply['check_pay_text'] = $apply['check_pay_name1'];
         }else{
             $check_leader = $apply['check_leader_2'];
             $apply['img'] = $apply['voucher_img2'];
+            $apply['check_pay_text'] = $apply['check_pay_name2'];
         }
         $authent = M('user_authentication')->where(['user_id' => $check_leader])->find();
         $receipt = M('receipt_information')->where(['user_id' => $check_leader])->find();
@@ -733,6 +735,7 @@ class CkUser extends MobileBase
         $apply['account_number']  = $receipt['account_number'];
         $apply['account_code_img']  = $receipt['account_code_img'];
         $apply['receivables_name']  = $receipt['receivables_name'];
+
 
         $this->assign('appType',session('appType'));
         $this->assign('apply',$apply);
@@ -746,6 +749,7 @@ class CkUser extends MobileBase
     public function pay_voucher(){
         $upload_img = input('post.upload_img');
         $type = input('post.type');
+        $pay_name = input('post.pay_name');
         $id = input('post.id');
 
         if(empty($upload_img) && empty($_FILES['upload_img']['tmp_name'])){
@@ -764,9 +768,11 @@ class CkUser extends MobileBase
         $apply = M('ck_apply')->where(['id' => $id])->find();
         if ($type == 1) {
             $updata['voucher_img1'] = $img_src;
+            $updata['check_pay_name1'] = $pay_name;
             $check_leader = $apply['check_leader_1'];
         }else{
             $updata['voucher_img2'] = $img_src;
+            $updata['check_pay_name2'] = $pay_name;
             $check_leader = $apply['check_leader_2'];
         }
         $res = M('ck_apply')->where(['id' => $id])->update($updata);
@@ -786,6 +792,8 @@ class CkUser extends MobileBase
      * @author MEI
      */
     public function rece_detail($id){
+        $userId   = Session('user_id');
+
         $apply = M('ck_apply')->alias('A')
             ->field('A.*,B.user_name,B.id_card,C.account_number,C.receivables_name')
             ->join('user_authentication B','A.user_id = B.user_id')
@@ -809,7 +817,11 @@ class CkUser extends MobileBase
                 $this->error('数据错误');
             }
         }
-        
+        if($userId==$apply['check_leader_1']){
+            $apply['check_pay_text'] =  $apply['check_pay_name1'];
+        }else if($userId==$apply['check_leader_2']){
+            $apply['check_pay_text'] =  $apply['check_pay_name2'];
+        }
         $apply['user_name']  = $this->substr_cut($apply['user_name']);
         $apply['id_card']  = substr_replace($apply['id_card'],'**********',4,10);
 

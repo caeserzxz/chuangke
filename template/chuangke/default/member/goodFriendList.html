@@ -12,37 +12,51 @@
             </div>
         </div>
         <div class="page-bd">
+            <if condition="empty($list) eq true">
+                <div class="Box" >
+                    <div class="box_t ">
+                        <img src="__PUBLIC__/static/chuangke//images/message_no.png" alt="" class="mess_img">
+                        <div class="heng">
+                            <p>——————</p>
+                            <p class="fs24 wen">暂无相关数据</p>
+                            <p>——————</p>
+                        </div>
+                    </div>
+                </div>
+            </if>
             <!-- 页面内容-->
             <div class="weui-cells">
-                <volist name="list" id="vo">
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd fs24">
+                <if condition="empty($list) eq false">
+                    <volist name="list" id="vo">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd fs24">
 
-                            <if condition="empty($vo.head_pic) eq true">
-                                <if condition="tpCache('image_info.userinfo') neq ''">
-                                    <img src="{:tpCache('image_info.userinfo')}" alt="">
-                                <else />
-                                    <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
+                                <if condition="empty($vo.head_pic) eq true">
+                                    <if condition="tpCache('image_info.userinfo') neq ''">
+                                        <img src="{:tpCache('image_info.userinfo')}" alt="">
+                                        <else />
+                                        <img src="__PUBLIC__/static/chuangke/images/userImg.png" alt="">
+                                    </if>
+                                    <else />
+                                    <img src="{$vo.head_pic}" onclick="loadimg('head_pic');" alt="">
                                 </if>
-                            <else />
-                                <img src="{$vo.head_pic}" onclick="loadimg('head_pic');" alt="">
-                            </if>
-                            <p class="color_w">
-                                <if condition="$vo.nickname neq ''">
-                                    {$vo.nickname}
-                                <else />
-                                    {$vo['mobile']}
-                                    <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
-                                </if>
-                            </p>
-                            <span>
+                                <p class="color_w">
+                                    <if condition="$vo.nickname neq ''">
+                                        {$vo.nickname}
+                                        <else />
+                                        {$vo['mobile']}
+                                        <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
+                                    </if>
+                                </p>
+                                <span>
                                  {$vo['mobile']}
-                                <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
+                                    <!--{:substr_replace($vo['mobile'],'****',3,4)}-->
                             </span>
+                            </div>
+                            <div class="weui-cell__ft color_a">{$vo.reg_time|date='Y-m-d H:i',###}</div>
                         </div>
-                        <div class="weui-cell__ft color_a">{$vo.reg_time|date='Y-m-d H:i',###}</div>
-                    </div>
-                </volist>
+                    </volist>
+                </if>
             </div>
         </div>
     </div>

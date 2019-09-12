@@ -880,6 +880,31 @@ img {
           flex: 1;
   height: 6.66667vw;
 }
+
+.inputBox {
+  width: 92.53333vw;
+  height: 10.93333vw;
+  background-color: #3b4375;
+  border-radius: 1.06667vw;
+  padding: 0 3.46667vw;
+  margin: 3.2vw auto 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.inputBox span {
+  width: 23vw;
+  color: #aac2dd;
+}
+.inputBox input {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  height: 6.66667vw;
+}
 .collection .title {
   height: 12.8vw;
   margin: 0 3.73333vw;
@@ -1577,13 +1602,14 @@ img {
   color: #879dbb;
 }
 .plan .Box .planMoney div img {
-  width: 5.33333vw;
-  height: 4.53333vw;
+  width: 9.33333vw;
+  height: 8.53333vw;
   margin-left: 1.33333vw;
 }
 .plan .Box .planMoney a {
   color: #35bffd;
 }
+
 .plan .planList {
   width: 92.53333vw;
   margin: 0 auto;
@@ -1674,6 +1700,44 @@ img {
           -webkit-align-items: center;
           align-items: center;
 }
+
+ .box_t {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-top: 20vw;
+}
+ .box_t img {
+  width: 29.06667vw;
+  height: 26.13333vw;
+  margin-bottom: 6.66667vw;
+}
+ .box_t p {
+  color: #a0a4b5;
+}
+ .box_t .wen {
+  margin: 0 1.6vw;
+}
+.box_t .heng {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+
 .plan .chunk {
   width: 92.26667vw;
   height: 25.33333vw;
