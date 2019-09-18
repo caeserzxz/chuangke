@@ -36,6 +36,7 @@
 
                     <span class="err"></span>
                     <p class="notic">请填写更改的上级ID</p>
+                    <p class="notic">填写0则归属于平台用户</p>
                 </dd>
             </dl>
             <div class="bot"><a href="JavaScript:void(0);" onclick="change_leader();" data-url="{:U('system/user/change_leader',array('id'=>$list['user_id']))}" class="ncap-btn-big ncap-btn-green">确认提交</a></div>
@@ -46,6 +47,10 @@
     function change_leader(obj){
         var url = $(obj).attr('data-url')
         var first_leader = $('.first_leader').val();
+        if(first_leader==''||first_leader==null){
+            layer.msg('请填写上级ID');
+            return false;
+        }
         console.log(first_leader);
         $.ajax({
             type: 'post',

@@ -413,6 +413,7 @@ class User extends Base {
             if($first_leader == 0){
 
                 $first_leader = 0;
+                $leader_all = $list['user_id'];
             }else{
                 //上级信息
                 $user_first = M('users')->where('user_id',$first_leader)->find();
@@ -455,8 +456,14 @@ class User extends Base {
                         }
                         $str =  $str.'_'.$i;
                     }
+
                     $str = substr($str,1);
-                    $map['leader_all'] = $user_first['leader_all'].'_'.$str;
+                    if(empty($user_first['leader_all'])){
+                        $map['leader_all'] = $str;
+                    }else{
+                        $map['leader_all'] = $user_first['leader_all'].'_'.$str;
+                    }
+
                     $res = $model->where(array('user_id'=>$v['user_id']))->update($map);
                     if(empty($res)){
                         M('users')->rollback();
