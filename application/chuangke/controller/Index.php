@@ -48,8 +48,8 @@ class Index extends MobileBase
         if ($notice && tpCache('shop_info.is_notice') == 1) {
             $is_login = strpos($_SERVER['HTTP_REFERER'],'/chuangke/Login/index.html');
             if (!$_SERVER['HTTP_REFERER'] || $is_login) $is_popup = 1;
+            $this->assign('is_popup',$is_popup);
         }
-
         if (tpCache('shop_info.template1') == 2) {
             return $this->fetch('plan/template1');
         }else{
