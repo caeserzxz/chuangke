@@ -209,7 +209,7 @@ class Plan extends MobileBase
             $user = M('users')->field('is_lock,level')->where(['user_id' => $this->user_id])->find();
             if ($user['is_lock'] == 1) $this->error('账号已被冻结,请联系管理员');
             $shop_info = tpCache('shop_info');
-            $text = $shop_info['shop_text'];
+            $text = $shop_info['store_name'];
 
             // 是否实名认证
             $is_authent = M('user_authentication')->where(['user_id' => $this->user_id,'status' => ['IN',[0,1]]])->count();
