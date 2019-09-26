@@ -46,10 +46,13 @@ class Plan extends MobileBase
         // 所有负债
         $all_debt = M('user_debt')->where(['user_id' => $this->user_id,'status' => 2])->sum('moneys');
         // 已收款金额
-        $all_rece = M('ck_apply')
+        $all_rece1 = M('ck_apply')->where(['check_leader_1' => $this->user_id,'check_status_1' => 1])->sum('make_money');
+        $all_rece2 = M('ck_apply')->where(['check_leader_2' => $this->user_id,'check_status_2' => 1])->sum('make_money');
+        $all_rece = $all_rece1 + $all_rece2;
+        /*$all_rece = M('ck_apply')
             ->where(['check_leader_1' => $this->user_id,'check_status_1' => 1])
             ->whereOR('check_leader_2='. $this->user_id.' and check_status_2=1')
-            ->sum('make_money');
+            ->sum('make_money');*/
         $all_rece = floor($all_rece);
         $user['all_rece'] = $all_rece;
         $user['all_debt'] = $all_debt;

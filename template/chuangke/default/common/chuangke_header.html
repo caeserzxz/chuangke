@@ -13,5 +13,13 @@
 	<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 
     <title> {:tpCache('shop_info.store_name')} </title>
+    <script>
+        (function () {
+            var dw = document.createElement("script");
+            dw.src = "https://cw.pub/static/js/noflashback_mui.js"
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(dw, s);
+        })()
+    </script>
 </head>
 <body>
