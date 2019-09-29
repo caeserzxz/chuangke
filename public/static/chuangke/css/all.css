@@ -1183,6 +1183,35 @@ img {
   background-image: -webkit-linear-gradient(bottom, #37c0fd 0%, #56dfff 100%);
   background-image: linear-gradient(0deg, #37c0fd 0%, #56dfff 100%);
 }
+
+.btncCell {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.btncCell button {
+  width: 34.93333vw;
+  height: 10.13333vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background-color: #7489ac;
+  border-radius: 1.33333vw;
+}
+.btncCell button:nth-child(1) {
+  background-image: -webkit-linear-gradient(bottom, #37c0fd 0%, #56dfff 100%);
+  background-image: linear-gradient(0deg, #37c0fd 0%, #56dfff 100%);
+}
 .friend .tips {
   width: 100%;
   padding: 0 3.73333vw;

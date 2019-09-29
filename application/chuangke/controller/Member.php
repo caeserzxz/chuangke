@@ -469,6 +469,19 @@ class Member extends  MobileBase
         exit;
     }
 
+    public  function huahua2(){
+        $image_info = tpCache('image_info');
+        $im = '.'.I('erweima');
+        $erweima = I('erweima');
+        $wx_code = I('wx_code');
+        $config = array(
+            'background'=>$im,         //背景图
+        );
+
+        $filename = 'public/qrcode/'.time().'.png';
+        return  $this->createPoster($config,$filename);
+        exit;
+    }
 
     function createPoster($config=array(),$filename=""){
         header("Content-type: text/html; charset=utf-8");

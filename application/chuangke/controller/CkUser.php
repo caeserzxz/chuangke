@@ -733,7 +733,7 @@ class CkUser extends MobileBase
         $apply['user_name']  = $this->substr_cut($authent['user_name']);
         $apply['id_card']  = substr_replace($authent['id_card'],'**********',4,10);
         $apply['account_number']  = $receipt['account_number'];
-        $apply['account_code_img']  = $receipt['account_code_img'];
+        $apply['account_code_img']  =  str_replace("\\","/",$receipt['account_code_img']);
         $apply['receivables_name']  = $receipt['receivables_name'];
 
 

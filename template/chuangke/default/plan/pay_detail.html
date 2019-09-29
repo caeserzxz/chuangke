@@ -26,6 +26,9 @@
                 <p>{$apply['receivables_name']}账号：<span>{$apply['account_number']}</span></p>
                 <p>付款金额：<span>{$apply['make_money']}</span> 元</p>
             </div>
+            <div class="btncCell" >
+                <button style="margin-left: 30%" class="fs28 color_w saveImg">保存付款码</button>
+            </div>
             <div class="tipsBox">
                 <if condition="tpCache('shop_info.pay_blue_text')">
                     <p class="fs26">{:tpCache('shop_info.pay_blue_text')}</p>
@@ -64,6 +67,36 @@
 <script>
     $(function() {
         FastClick.attach(document.body);
+    });
+</script>
+<script>
+    var apptype = "{$appType}";
+    var wx_qrcode = "{$apply['account_code_img']}";
+
+    //保存图片
+    $(function () {
+        $('.saveImg').on('click',function(){
+            $.ajax({
+                'url':"{:url('Member/huahua2')}",
+                'type':'post',
+                'data':{'erweima':wx_qrcode},
+                'dataType':'json',
+                'success':function(data){
+                    share_img = data;
+                    if(apptype=='Android'){
+                        window.auc.downloadPicturetToBase64(share_img);
+                    }else if(apptype=='IOS'){
+                        window.app.SavePhoto(share_img);
+                    }else{
+                        console.log('other');
+                        //以下代码为下载此图片功能
+                        var triggerDownload = $("<a>").attr("href", share_img).attr("download",  "saveImg.png").appendTo("body");
+                        triggerDownload[0].click();
+                        triggerDownload.remove();
+                    }
+                }
+            });
+        })
     });
 </script>
 <script>
