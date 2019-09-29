@@ -142,7 +142,7 @@
 
                 <volist name="article" id="vo">
                     <a href="{:U('article/detail',['id' => $vo.article_id])}">
-                        <img src="{$vo.thumb}">
+                        <img src="{$vo.thumb}"  style="width: 100%;height:100%;border-radius: 1.86667vw;">
                     </a>
                 </volist>
             <else/>
