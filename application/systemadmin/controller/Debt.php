@@ -82,7 +82,7 @@ class Debt extends Base {
     public function repayment_list(){
         I('user_id') ? $where['u.user_id'] = I('user_id') : false;
 
-        $count = Db::name('users')->alias('u')->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')->where($where)->count();
+        $count = Db::name('users')->alias('u')->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')->where($where)->group('u.user_id')->count();
         $Page  = new Page($count,20);
         $list = Db::name('users')->alias('u')->field('u.user_id,u.mobile,u.nickname')
             ->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')
@@ -91,6 +91,7 @@ class Debt extends Base {
         foreach ($list as $key => $value) {
             // 众筹总额
             $uid = $value['user_id'];
+            if (!$uid) continue;
             $debt_money = M('user_debt')->where(['user_id' => $uid,'status' => 2])->sum('moneys');
             // 已收款
             $where = 'check_leader_1='.$uid.' and check_status_1=1 or check_leader_2='.$uid.' and check_status_2=1';
