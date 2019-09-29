@@ -91,6 +91,7 @@ class Debt extends Base {
         foreach ($list as $key => $value) {
             // 众筹总额
             $uid = $value['user_id'];
+            if (!$uid) continue;
             $debt_money = M('user_debt')->where(['user_id' => $uid,'status' => 2])->sum('moneys');
             // 已收款
             $where = 'check_leader_1='.$uid.' and check_status_1=1 or check_leader_2='.$uid.' and check_status_2=1';
