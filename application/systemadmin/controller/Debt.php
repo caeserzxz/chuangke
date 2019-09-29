@@ -82,7 +82,7 @@ class Debt extends Base {
     public function repayment_list(){
         I('user_id') ? $where['u.user_id'] = I('user_id') : false;
 
-        $count = Db::name('users')->alias('u')->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')->where($where)->count();
+        $count = Db::name('users')->alias('u')->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')->where($where)->group('u.user_id')->count();
         $Page  = new Page($count,20);
         $list = Db::name('users')->alias('u')->field('u.user_id,u.mobile,u.nickname')
             ->join('user_debt d', 'u.user_id = d.user_id', 'RIGHT')
