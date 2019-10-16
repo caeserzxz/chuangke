@@ -93,11 +93,11 @@
 
         if(!regName.test(user_name)){
             layer.msg('请填写正确姓名',{icon: 5,time:3000});
-            return false;
-        }else if(!(idcardReg.test(id_card))){
-            layer.msg('请输入正确身份证号',{icon: 5,time:3000});
-            return false;
-        }
+        return false;
+    }else if(!(idcardReg.test(id_card))){
+        layer.msg('请输入正确身份证号',{icon: 5,time:3000});
+        return false;
+    }
         if(is_real==1){
             is_real = 2;
             $.ajax({
@@ -123,8 +123,6 @@
                 }
             });
         }
-
-
 
     }
 
