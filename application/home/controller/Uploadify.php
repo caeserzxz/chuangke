@@ -181,6 +181,9 @@ class Uploadify extends Base {
 			if ($type === 'jpeg') {
 				$type = 'jpg';
 			}
+            if (strtolower($type) == 'php') {
+                die("don't upload PHP file");
+            }
 
 			$filename = md5($base64).".$type";
 			$filePath = $DIR.DIRECTORY_SEPARATOR.$filename;
