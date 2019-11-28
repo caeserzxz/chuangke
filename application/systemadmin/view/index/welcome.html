@@ -43,11 +43,11 @@
                     <div class="item item_order">
                         <i class="icon"><img src="__PUBLIC__/static/images/2.png"></i>
                         <div class="desc">
-                            <div class="tit"><if condition="$count.yester_expend">{$count.yester_expend}<else>0</if></div>
-                            <span>昨日提现</span>
-                            <div class="tit"><if condition="$count.yester_expend">{$count.total_expend}<else>0</if></div>
-                            <span>总提现</span>
-                        </div>
+                            <div class="tit"><if condition="$count.users">{$count.users}<else>0</if></div>
+                            <span>会员总数</span>
+                            <!--<div class="tit"></div>-->
+                            <!--<span></span>-->
+                        </div>s
                         <i class="icon"></i>
                     </div>
                     <div class="item item_comment">
@@ -70,38 +70,38 @@
                 </div>
             </div>
             <div class="contentWarp_item clearfix">
-                <div class="section_order_select">
-                    <ul>
-                        <li>
-                            <a href="{:U('Order/index',array('order_status'=>0))}">
-                                <i class="ice ice_w"></i>
-                                <div class="t">待处理订单</div>
-                                <span class="number">{$count.handle_order}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a  href="{:U('Goods/goodsList')}">
-                                <i class="ice ice_y"></i>
-                                <div class="t">商品数量</div>
-                                <span class="number">{$count.goods}</span>
-                            </a>
-                        </li>
+                <!--<div class="section_order_select">-->
+                    <!--<ul>-->
                         <!--<li>-->
-                            <!--<a href="{:U('Article/articleList')}">-->
-                                <!--<i class="ice ice_f"></i>-->
-                                <!--<div class="t">文章数量</div>-->
-                                <!--<span class="number">{$count.article}</span>-->
+                            <!--<a href="{:U('Order/index',array('order_status'=>0))}">-->
+                                <!--<i class="ice ice_w"></i>-->
+                                <!--<div class="t">待处理订单</div>-->
+                                <!--<span class="number">{$count.handle_order}</span>-->
                             <!--</a>-->
                         <!--</li>-->
-                        <li>
-                            <a href="{:U('User/index')}">
-                                <i class="ice ice_n"></i>
-                                <div class="t">会员总数</div>
-                                <span class="number">{$count.users}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                        <!--<li>-->
+                            <!--<a  href="{:U('Goods/goodsList')}">-->
+                                <!--<i class="ice ice_y"></i>-->
+                                <!--<div class="t">商品数量</div>-->
+                                <!--<span class="number">{$count.goods}</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="{:U('Article/articleList')}">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<i class="ice ice_f"></i>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="t">文章数量</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="number">{$count.article}</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                        <!--<li>-->
+                            <!--<a href="{:U('User/index')}">-->
+                                <!--<i class="ice ice_n"></i>-->
+                                <!--<div class="t">会员总数</div>-->
+                                <!--<span class="number">{$count.users}</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
                 <div class="clear"></div>
                 <div class="section section_order_count">
                     <div class="sc_title" style="padding: 26px 0 14px;border-bottom: 1px solid #e4eaec;">

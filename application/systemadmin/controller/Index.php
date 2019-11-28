@@ -28,12 +28,39 @@ class Index extends Base {
     	$today = strtotime(date("Y-m-d"));
     	$count['handle_order'] = M('order')->where("order_status=0 and (pay_status=1 or pay_code='cod')")->count();//待处理订单
     	$count['new_order'] = M('order')->where("add_time>=$today")->count();//今天新增订单
-        $count['total_money'] = M('order')->where("pay_status=1")->sum('total_amount');//平台总收入
+        #所有管理员
+        $admin_user = M('users')->where('user_type',1)->column('user_id');
+        $admin_user2=implode(',',$admin_user);
+        $where = 'check_leader_1 in ('.$admin_user2.') or check_leader_2 in ('.$admin_user2.')';
+        #所有管理员相关的订单
+        $total_order = M('ck_apply')->where($where)->select();
+        $total_amouont = 0;//总收入
+        $yester_income = 0;//昨日收入
+        $dayend=strtotime(date("Ymd"));
+        $daybegin=$dayend-86400;
+        foreach ($total_order as $k=>$v){
+            #总收入
+             if(in_array($v['check_leader_1'], $admin_user)&&$v['check_status_1']==1){
+                 $total_amouont = $total_amouont+$v['make_money'];
+             }
+            if(in_array($v['check_leader_2'], $admin_user)&&$v['check_status_2']==1){
+                $total_amouont = $total_amouont+$v['make_money'];
+            }
+            #昨日收入
+            if(in_array($v['check_leader_1'], $admin_user)&&$v['check_status_1']==1&&($v['check_time_1']>$daybegin&&$v['check_time_1']<$dayend)){
+                $yester_income = $yester_income+$v['make_money'];
+            }
+            if(in_array($v['check_leader_2'], $admin_user)&&$v['check_status_2']==1&&($v['check_time_2']>$daybegin&&$v['check_time_2']<$dayend)){
+                $yester_income = $yester_income+$v['make_money'];
+            }
+
+        }
+        $count['total_money'] =  sprintf("%.2f",$total_amouont);;//平台总收入
 
         //昨日支出
         $yester_time = strtotime("-1 day");
         $yester_day = date("Y-m-d",$yester_time);
-        $count['yester_income'] = M('order')->where(['pay_status'=>1,'FROM_UNIXTIME(add_time,"%Y-%m-%d")'=>$yester_day])->sum('total_amount');//昨日收入
+        $count['yester_income'] = $yester_income;//昨日收入
         $count['yester_expend'] = M('withdrawals')->where(['status'=>2,'FROM_UNIXTIME(pay_time,"%Y-%m-%d")'=>$yester_day])->sum('money');//昨日支出
         $count['total_expend'] = M('withdrawals')->where(['status'=>2])->sum('money');//总提现
         $count['yester_comeex'] = $yester_income - $yester_expend;

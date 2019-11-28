@@ -67,7 +67,9 @@ class Login extends Controller
 
         session('user', $user_data);
         session('user_id', $user_data['user_id']);
-
+        //更新最近一次登录时间
+        $map['last_login'] = time();
+        db('users')->where('user_id',$user_data['user_id'])->update($map);
         //5、跳转到首页
         return array('status' => 1, 'msg' => '登录成功', 'result' => $user_data['user_id']);
     }

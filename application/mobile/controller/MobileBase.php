@@ -54,12 +54,12 @@ class MobileBase extends Controller {
             }
         }
         //获取安装包的参数
-        $appType = I('appType')?I('appType'):I('apptype');
-        if(empty(session('appType'))){
+        $appType = input('appType');
+        if(!empty($appType)){
             if($appType=='IOS'||$appType=='Android'){
-                    session('appType',$appType);
+                session('appType',$appType);
             }else{
-                    session('appType','other');
+                session('appType','other');
             }
         }
 
