@@ -169,7 +169,10 @@ class Uploadify extends Base{
 		    if ($type === 'jpeg') {
 		        $type = 'jpg';
 		    }
-
+            $arr = ['jpg','png','gif','doc','docx','xls','xlsx','csv'];
+            if(!in_array(strtolower($type),$arr)){
+                dump('非法访问');die;
+            }
 		    $filename = md5($base64).".$type";
 		    $filePath = $DIR.DIRECTORY_SEPARATOR.$filename;
 
