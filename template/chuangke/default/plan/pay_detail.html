@@ -112,6 +112,10 @@
         }
         if(num==0){
             num = 1;
+            $.showLoading();
+            setTimeout(function() {
+                $.hideLoading();
+            }, 30000);
             $.ajax({
                 url: "{:url('/chuangke/CkUser/pay_voucher')}",
                 type: 'POST',
@@ -121,6 +125,7 @@
                 contentType: false,
                 dataType:"json",
                 success : function(data) {
+                    $.hideLoading();
                     if (data.code == 1) {
                         window.location.href = data.url;
                     } else {
