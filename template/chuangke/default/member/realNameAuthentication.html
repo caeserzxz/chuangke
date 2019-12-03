@@ -100,6 +100,10 @@
     }
         if(is_real==1){
             is_real = 2;
+            $.showLoading();
+            setTimeout(function() {
+                $.hideLoading();
+            }, 30000);
             $.ajax({
                 url: "{:url('/chuangke/Member/realNameAuthentication')}",
                 type: 'POST',
@@ -109,6 +113,7 @@
                 contentType: false,
                 dataType:"json",
                 success : function(data) {
+                    $.hideLoading();
                     console.log(data);
                     // return false;
                     if(data.status==1){
