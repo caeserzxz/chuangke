@@ -493,6 +493,7 @@ class Systems extends Base
 
              $this->assign('sever_name','http://'.$_SERVER['SERVER_NAME']);
              $this->assign('url',$url);
+             $this->assign('url2',$url2);
              $this->assign('inc_type',$inc_type);
              $this->assign('config',$config);
              return $this->fetch();
