@@ -142,7 +142,10 @@
             layer.msg('请填写验证码',{icon: 5,time:3000});
             return false;
         }
-
+        $.showLoading();
+        setTimeout(function() {
+            $.hideLoading();
+        }, 30000);
         $.ajax({
             url: "{:url('/chuangke/Member/paymentMethod')}",
             type: 'POST',
@@ -152,6 +155,7 @@
             contentType: false,
             dataType:"json",
             success : function(data) {
+                $.hideLoading();
                 console.log(data);
                 // return false;
                 if(data.status==1){

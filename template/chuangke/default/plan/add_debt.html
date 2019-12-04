@@ -64,6 +64,10 @@
             $.toast("请输入金额", "text");
             return false;
         }
+        $.showLoading();
+        setTimeout(function() {
+            $.hideLoading();
+        }, 30000);
         $.ajax({
             url: "{:url('/chuangke/Plan/add_debt')}",
             type: 'POST',
@@ -73,6 +77,7 @@
             contentType: false,
             dataType:"json",
             success : function(data) {
+                $.hideLoading();
                 $.toast(data.msg, "text");
                 if (data.code == 1) {
                     window.location.href = data.url;

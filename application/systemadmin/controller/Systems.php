@@ -488,10 +488,12 @@ class Systems extends Base
              $config = tpCache('shop_info');
 
              $inc_type =  I('get.inc_type','shop_info');
-             $url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/AppDownload';
+             $url = 'http://'.$_SERVER['SERVER_NAME'].'/chuangke/Login/AppDownload.html';
+             $url2 = 'http://'.$_SERVER['SERVER_NAME'].'/AppDownload.html';
 
              $this->assign('sever_name','http://'.$_SERVER['SERVER_NAME']);
              $this->assign('url',$url);
+             $this->assign('url2',$url2);
              $this->assign('inc_type',$inc_type);
              $this->assign('config',$config);
              return $this->fetch();

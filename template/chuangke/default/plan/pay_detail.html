@@ -62,6 +62,8 @@
         </div>
     </div>
 <script src="__PUBLIC__/static/chuangke/js/lib/jquery-2.1.4.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/static/chuangke/js/lib/fastclick.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/layer/layer.js"></script>
 <script src="__PUBLIC__/static/chuangke/js/ios.js"></script>
 <script>
@@ -112,6 +114,10 @@
         }
         if(num==0){
             num = 1;
+            $.showLoading();
+            setTimeout(function() {
+                $.hideLoading();
+            }, 30000);
             $.ajax({
                 url: "{:url('/chuangke/CkUser/pay_voucher')}",
                 type: 'POST',
@@ -121,6 +127,7 @@
                 contentType: false,
                 dataType:"json",
                 success : function(data) {
+                    $.hideLoading();
                     if (data.code == 1) {
                         window.location.href = data.url;
                     } else {
