@@ -33,7 +33,10 @@ class Index extends Base {
         $admin_user2=implode(',',$admin_user);
         $where = 'check_leader_1 in ('.$admin_user2.') or check_leader_2 in ('.$admin_user2.')';
         #所有管理员相关的订单
-        $total_order = M('ck_apply')->where($where)->select();
+        $total_order = [];
+        if(!empty($admin_user)){
+            $total_order = M('ck_apply')->where($where)->select();
+        }
         $total_amouont = 0;//总收入
         $yester_income = 0;//昨日收入
         $dayend=strtotime(date("Ymd"));
