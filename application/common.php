@@ -3,6 +3,7 @@
 use think\Db;
 use think\Config;
 use app\common\logic\Reward;
+use app\common\aliyunsdk\api_demo\SmsDemoAli;
 /**
  * shop检验登陆
  * @param
@@ -1675,18 +1676,34 @@ function hidestr($string, $start = 0, $length = 0, $re = '*') {
 */
 #################################
 function jh_message($mobile,$tpl_id,$captcha){
-    $url = "http://v.juhe.cn/sms/send";
-    $params = array(
-        'key'   => Config::get('database.key'), //您申请的APPKEY
-        'mobile'    => $mobile, //接受短信的用户手机号码
-        'tpl_id'    => $tpl_id, //您申请的短信模板ID，根据实际情况修改
-        'tpl_value' =>urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
-    );
-
-    $paramstring = http_build_query($params);
-    $content = juheCurl($url, $paramstring);
-    $result = json_decode($content, true);
-    return $result;
+    $jh_key = Config::get('database.key');
+    $al_AccessKeyID = Config::get('database.AccessKeyID');
+    $al_AccessKeySecret = Config::get('database.AccessKeySecret');
+    $al_SignName = Config::get('database.SignName');
+    if($jh_key){//聚合短信
+        $url = "http://v.juhe.cn/sms/send";
+        $params = array(
+            'key'   => Config::get('database.key'), //您申请的APPKEY
+            'mobile'    => $mobile, //接受短信的用户手机号码
+            'tpl_id'    => $tpl_id, //您申请的短信模板ID，根据实际情况修改
+            'tpl_value' =>urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
+        );
+        $paramstring = http_build_query($params);
+        $content = juheCurl($url, $paramstring);
+        $result = json_decode($content, true);
+        return $result;
+    }else if($al_AccessKeyID && $al_AccessKeySecret && $al_SignName){//阿里大于短信
+        $SmsDemoAli= new SmsDemoAli;
+        $result_data=$SmsDemoAli->sendSms($mobile,$captcha,$al_AccessKeyID,$al_AccessKeySecret,$al_SignName);
+        if($result_data->Message != OK)
+        {
+            return ['error_code'=>1,'msg'=>'发送失败'];
+        }else{
+            return ['error_code'=>0];
+        }
+    }else{
+        return ['error_code'=>1,'msg'=>'未接短信'];
+    }
 }
 
 /**

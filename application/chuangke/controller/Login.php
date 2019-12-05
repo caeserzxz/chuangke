@@ -208,17 +208,14 @@ class Login extends Controller
         $captcha = mt_rand(100000, 999999);
         //发送验证码接口（阿里云短信）
         ####################
-
-        //        set_time_limit(0);
-        //        header('Content-Type: text/plain; charset=utf-8');
-        //        $SmsDemoAli= new SmsDemoAli;
-        //        $result_data=$SmsDemoAli->sendSms($input['mobile'],$captcha);
-        //
-        //        if($result_data->Message != OK)
-        //        {
-        //            return array('status' => 500, 'msg' => '发送失败', 'result' => "");
-        //        }
-
+//        set_time_limit(0);
+//        header('Content-Type: text/plain; charset=utf-8');
+//        $SmsDemoAli= new SmsDemoAli;
+//        $result_data=$SmsDemoAli->sendSms($input['mobile'],$captcha);
+//        if($result_data->Message != OK)
+//        {
+//            return array('status' => 500, 'msg' => '发送失败', 'result' => "");
+//        }
         #################################
         //聚合数据短信
         #################################
