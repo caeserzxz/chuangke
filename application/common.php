@@ -1694,15 +1694,15 @@ function jh_message($mobile,$tpl_id,$captcha){
         return $result;
     }else if($al_AccessKeyID && $al_AccessKeySecret && $al_SignName){//阿里大于短信
         $SmsDemoAli= new SmsDemoAli;
-        $result_data=$SmsDemoAli->sendSms($mobile,$captcha,$al_AccessKeyID,$al_AccessKeySecret,$al_SignName);
+        $result_data=$SmsDemoAli->sendSms($mobile,$tpl_id,$al_AccessKeyID,$al_AccessKeySecret,$al_SignName,$captcha);
         if($result_data->Message != OK)
         {
-            return ['error_code'=>1,'msg'=>'发送失败'];
+            return ['error_code'=>'1','msg'=>'发送失败'];
         }else{
-            return ['error_code'=>0];
+            return ['error_code'=>'0','msg'=>'发送成功'];
         }
     }else{
-        return ['error_code'=>1,'msg'=>'未接短信'];
+        return ['error_code'=>'1','msg'=>'未接短信'];
     }
 }
 

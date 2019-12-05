@@ -229,7 +229,7 @@ class Login extends Controller
                 'create_time' => time(),
             ]);
 
-            return array('status' => 200, 'msg' => '发送成功', 'result' => $captcha);
+            return array('status' => 200, 'msg' => '发送成功');
         } else {
             return array('status' => 500, 'msg' =>$send['reason'] , 'result' => "");
             //请求异常
