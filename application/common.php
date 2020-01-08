@@ -1680,26 +1680,47 @@ function jh_message($mobile,$tpl_id,$captcha){
     $al_AccessKeyID = Config::get('database.AccessKeyID');
     $al_AccessKeySecret = Config::get('database.AccessKeySecret');
     $al_SignName = Config::get('database.SignName');
-    if($jh_key){//聚合短信
+    $Sms_id = Config::get('database.Sms_id');
+    $Sms_name = Config::get('database.Sms_name');
+    $Sms_psw = Config::get('database.Sms_psw');
+    if($jh_key){ //聚合短信
         $url = "http://v.juhe.cn/sms/send";
         $params = array(
-            'key'   => Config::get('database.key'), //您申请的APPKEY
+            'key'       => $jh_key, //您申请的APPKEY
             'mobile'    => $mobile, //接受短信的用户手机号码
             'tpl_id'    => $tpl_id, //您申请的短信模板ID，根据实际情况修改
-            'tpl_value' =>urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
+            'tpl_value' => urlencode("#code#=").$captcha //您设置的模板变量，根据实际情况修改
         );
         $paramstring = http_build_query($params);
         $content = juheCurl($url, $paramstring);
         $result = json_decode($content, true);
         return $result;
-    }else if($al_AccessKeyID && $al_AccessKeySecret && $al_SignName){//阿里大于短信
+    }else if($al_AccessKeyID && $al_AccessKeySecret && $al_SignName){ //阿里大于短信
         $SmsDemoAli= new SmsDemoAli;
         $result_data=$SmsDemoAli->sendSms($mobile,$tpl_id,$al_AccessKeyID,$al_AccessKeySecret,$al_SignName,$captcha);
-        if($result_data->Message != OK)
-        {
+        if($result_data->Message != OK){
             return ['error_code'=>'1','msg'=>'发送失败'];
         }else{
             return ['error_code'=>'0','msg'=>'发送成功'];
+        }
+    }else if($Sms_id && $Sms_name && $Sms_psw){ //Sms短信
+        $url = "http://124.172.234.157:8180/Service.asmx/SendMessage";
+        $Sms_sign = Config::get('database.Sms_sign');
+        $Message = $Sms_sign.str_replace('#code#',$captcha,$tpl_id);
+        $params = array(
+            'Id'        => $Sms_id,   //机构代码
+            'Name'      => $Sms_name, //帐户名
+            'Psw'       => $Sms_psw,  //密码，支持使用明文或MD5加密大写
+            'Phone'     => $mobile,   //接受短信的用户手机号码
+            'Message'   => $Message,  //短信内容
+            'Timestamp' => 0,         //时间戳，可为0
+        );
+        $paramstring = http_build_query($params);
+        $resualt = smsCurl($url, $paramstring);
+        if($resualt){
+            return ['error_code'=>'0','msg'=>'发送成功'];
+        }else{
+            return ['error_code'=>'1','msg'=>'发送失败'];
         }
     }else{
         return ['error_code'=>'1','msg'=>'未接短信'];
@@ -1761,5 +1782,49 @@ function check_verify_code($mobile,$verify_code){
     }
     if ($mobile_captcha['mobile'] != $mobile) {
         return array('status' => 500, 'msg' => '手机号码有误', 'result' => '');
+    }
+}
+
+//xms转数组
+function xml_to_arr($xml){//xml字符串转数组
+    $objectxml = simplexml_load_string($xml);//将文件转换成 对象
+    $xmljson = json_encode($objectxml);//将对象转换个JSON
+    $xmlarray = json_decode($xmljson, true);//将json转换成数组
+    return $xmlarray;
+}
+
+/**
+ * SMS发送短信
+ * 请求接口返回内容
+ * @param  string $url [请求的URL地址]
+ * @param  string $params [请求的参数]
+ * @param  int $ipost [是否采用POST形式]
+ * @return  string
+ */
+function smsCurl($url, $params = false, $ispost = 0)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    if ($ispost) {
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_URL, $url);
+    } else {
+        if ($params) {
+            curl_setopt($ch, CURLOPT_URL, $url.'?'.$params);
+        } else {
+            curl_setopt($ch, CURLOPT_URL, $url);
+        }
+    }
+    $response = curl_exec($ch);
+    $rearr = xml_to_arr($response);
+    if ($rearr['State'] == 1) {
+        return true;
+    }else{
+        return false;
     }
 }
