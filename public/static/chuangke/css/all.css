@@ -367,6 +367,9 @@
 }
 .lianxi {
   background-color: #1f2751;
+  color: #fff;
+  padding: .5rem .1rem;
+  font-size: 1rem;
 }
 .lianxi .box_t {
   display: -webkit-box;
