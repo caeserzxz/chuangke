@@ -74,9 +74,7 @@ class Task extends Controller {
         $ahtu_time = time()-($config['auth_time']*60);
         $auth_list = $model->getAuthList($ahtu_time);
 
-        M('users')->startTrans();
-        M('record')->startTrans();
-        M('user_authentication')->startTrans();
+        Db::startTrans();
         try {
             foreach($auth_list as $k=>$v){
                 //更改状态
@@ -87,15 +85,10 @@ class Task extends Controller {
                 $model->earnestSend($v['user_id'],1,'');
             }
         }catch (\Exception $e) {  //如书写为（Exception $e）将无效
-            M('users')->rollback();
-            M('record')->rollback();
-            M('user_authentication')->rollback();
+            Db::rollback();
             dump($e->getMessage());
             exit;
         }
-        M('users')->commit();
-        M('record')->commit();
-        M('user_authentication')->commit();
         Db::commit();// 提交事务
         dump('执行成功');
     }
