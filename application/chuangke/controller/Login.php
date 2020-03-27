@@ -231,7 +231,7 @@ class Login extends Controller
 
             return array('status' => 200, 'msg' => '发送成功');
         } else {
-            return array('status' => 500, 'msg' =>$send['reason'] , 'result' => "");
+            return array('status' => 500, 'msg' =>$send['msg'] , 'result' => "");
             //请求异常
         }
         ################################
