@@ -87,6 +87,7 @@
             <notempty name="$source"> <!--如果是下订单时提交过了的页面-->
                 <!--<input type="button" value="保存并使用该地址" class="dotm_btn1 beett" onclick="checkForm()" />-->
                 <input type="button" value="保存并使用该地址" class="weui-btn weui-btn_primary" onclick="checkForm()" />
+                <input type="hidden" name="action" value="{$Request.param.action}" />
                 <input type="hidden" name="source" value="{$Request.param.source}" />
                 <input type="hidden" name="order_id" value="{$Request.param.order_id}" />
                 <input type="hidden" name="act_id" value="{$Request.param.act_id}" />

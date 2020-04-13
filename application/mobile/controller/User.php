@@ -461,7 +461,7 @@ class User extends MobileBase
             if ($data['status'] != 1) {
                 $this->error($data['msg']);
             } elseif ($source == 'cart2') {
-                $data['url'] = U('/Mobile/Cart/cart2', array('address_id' => $data['result'], 'goods_id' => $goods_id, 'goods_num' => $goods_num, 'item_id' => $item_id, 'action' => $source));
+                $data['url'] = U('/Mobile/Cart/cart2', array('address_id' => $data['result'], 'goods_id' => $goods_id, 'goods_num' => $goods_num, 'item_id' => $item_id, 'action' => $action));
                 $this->ajaxReturn($data);
             } elseif ($_POST['source'] == 'integral') {
                 $data['url'] = U('/Mobile/Cart/integral', array('address_id' => $data['result'], 'goods_id' => $goods_id, 'goods_num' => $goods_num, 'item_id' => $item_id));
@@ -478,7 +478,9 @@ class User extends MobileBase
             }
         }
 
-        $p = M('region')->where(array('parent_id' => 0, 'level' => 1))->select();
+        // $p = M('region')->where(array('parent_id' => 0, 'level' => 1))->select();
+        $p = M('region')->where(array('parent_id' => 100000, 'level' => 1))->select();
+        
         $this->assign('province', $p);
         //return $this->fetch('edit_address');
         return $this->fetch();
@@ -503,8 +505,7 @@ class User extends MobileBase
             $logic = new UsersLogic();
             $data = $logic->add_address($this->user_id, $id, $post_data);
             if ($source == 'cart2') {
-                $data['url'] = U('/Mobile/Cart/cart2', array('address_id' => $data['result'], 'goods_id' => $goods_id, 'goods_num' => $goods_num, 'item_id' => $item_id, 'action' => $source));
-                $data['url']=U('/Mobile/Cart/cart2', array('address_id' => $data['result'],'goods_id'=>$goods_id,'goods_num'=>$goods_num,'item_id'=>$item_id,'action'=>$action));
+                $data['url'] = U('/Mobile/Cart/cart2', array('address_id' => $data['result'], 'goods_id' => $goods_id, 'goods_num' => $goods_num, 'item_id' => $item_id, 'action'=>$action));
                 $this->ajaxReturn($data);
             }  elseif ($source == 'buy_now') {
                 $data['url'] = U('/Mobile/Cart/cart2', array('address_id' => $data['result'], 'goods_id' => $goods_id, 'goods_num' => $goods_num, 'item_id' => $item_id, 'action' => $source));
@@ -927,18 +928,18 @@ class User extends MobileBase
 
     public function points_list()
     {
-    	$type = I('type','all');
-    	$usersLogic = new UsersLogic;
-    	$result = $usersLogic->points($this->user_id, $type);
+        $type = I('type','all');
+        $usersLogic = new UsersLogic;
+        $result = $usersLogic->points($this->user_id, $type);
 
-    	$this->assign('type', $type);
-    	$showpage = $result['page']->show();
-    	$this->assign('account_log', $result['account_log']);
-    	$this->assign('page', $showpage);
-    	if ($_GET['is_ajax']) {
-    		 return $this->fetch('ajax_points');
-    	}
-    	return $this->fetch();
+        $this->assign('type', $type);
+        $showpage = $result['page']->show();
+        $this->assign('account_log', $result['account_log']);
+        $this->assign('page', $showpage);
+        if ($_GET['is_ajax']) {
+             return $this->fetch('ajax_points');
+        }
+        return $this->fetch();
     }
 
 
@@ -1070,7 +1071,7 @@ class User extends MobileBase
         );
         $Verify = new Verify($config);
         $Verify->entry($type);
-		exit();
+        exit();
     }
 
     /**
@@ -1111,14 +1112,14 @@ class User extends MobileBase
     }
 
     public function recharge_list(){
-    	$usersLogic = new UsersLogic;
-    	$result= $usersLogic->get_recharge_log($this->user_id);  //充值记录
-    	$this->assign('page', $result['show']);
-    	$this->assign('lists', $result['result']);
-    	if (I('is_ajax')) {
-    		return $this->fetch('ajax_recharge_list');
-    	}
-    	return $this->fetch();
+        $usersLogic = new UsersLogic;
+        $result= $usersLogic->get_recharge_log($this->user_id);  //充值记录
+        $this->assign('page', $result['show']);
+        $this->assign('lists', $result['result']);
+        if (I('is_ajax')) {
+            return $this->fetch('ajax_recharge_list');
+        }
+        return $this->fetch();
     }
 
     /**

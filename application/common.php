@@ -899,7 +899,7 @@ function orderBtn($order_id = 0, $order = array())
     }
 
     if($order['order_status'] == 3 && ($order['pay_status'] == 1 || $order['pay_status'] == 4)){
-    	$btn_arr['cancel_info'] = 1; // 取消订单详情
+        $btn_arr['cancel_info'] = 1; // 取消订单详情
     }
 
     return $btn_arr;
@@ -965,7 +965,7 @@ function update_pay_status($order_sn,$ext=array())
          */
 
         
-        $reward = new Reward();
+        /*$reward = new Reward();
         
         $users = M('users')->where("user_id",$order['user_id'])->find();
 
@@ -974,7 +974,7 @@ function update_pay_status($order_sn,$ext=array())
         $reward->rerance($order['user_id'],$level_id,$order['order_amount']);
 
         //会员升级
-        $reward->chuangke_conditions($order['user_id'],$users['level'],$users['distribut_money']);
+        $reward->chuangke_conditions($order['user_id'],$users['level'],$users['distribut_money']);*/
 
         // 记录订单操作日志
         if(array_key_exists('admin_id',$ext)){
@@ -1145,7 +1145,7 @@ function calculate_price($user_id = 0, $order_goods, $shipping_code = '', $shipp
      2.在不使用积分的情况下, 计算商品应付金额
      3.原则上, 积分支付不能超过商品应付金额的50%, 该值可在平台设置
      @{ */
-    $point_rate = tpCache('shopping.point_rate'); //兑换比例: 如果拥有的积分小于该值, 不可使用
+    $point_rate = tpCache('shopping.point_rate') ? tpCache('shopping.point_rate') : 1; //兑换比例: 如果拥有的积分小于该值, 不可使用
     $min_use_limit_point = tpCache('shopping.point_min_limit'); //最低使用额度: 如果拥有的积分小于该值, 不可使用
 
     if ($min_use_limit_point > 0 && $pay_points > 0 && $pay_points < $min_use_limit_point) {
@@ -1399,13 +1399,13 @@ function getPayBody($order_id){
 //-- 创建下拉缩进
 /*------------------------------------------------------ */   
 function iconTmp($level = 0){
-	$now_icon = '';
-	if ($level < 1) return $now_icon;
-	$icon = array('&nbsp;&nbsp;│ ','&nbsp;&nbsp;├─ ','&nbsp;&nbsp;└─ ');
-	for($i=1;$i<$level;$i++){
-		$now_icon .= ($i == $level-1) ? $icon[1] : $icon[0];
-	}
-	return $now_icon;
+    $now_icon = '';
+    if ($level < 1) return $now_icon;
+    $icon = array('&nbsp;&nbsp;│ ','&nbsp;&nbsp;├─ ','&nbsp;&nbsp;└─ ');
+    for($i=1;$i<$level;$i++){
+        $now_icon .= ($i == $level-1) ? $icon[1] : $icon[0];
+    }
+    return $now_icon;
 }
 /*------------------------------------------------------ */
 //-- 创建目录

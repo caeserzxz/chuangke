@@ -393,7 +393,7 @@ class OrderLogic
 				'user_money'       =>$car_price['balance'],//'使用余额',
 				'coupon_price'     =>$car_price['couponFee'],//'使用优惠券',
 				'integral'         =>($car_price['pointsFee'] * tpCache('shopping.point_rate')), //'使用积分',
-				'integral_money'   =>$car_price['pointsFee'],//'使用积分抵多少钱',
+				'integral_money'   =>$car_price['pointsFee'] ? $car_price['pointsFee'] : 0,//'使用积分抵多少钱',
 				'total_amount'     =>($car_price['goodsFee'] + $car_price['postFee']),// 订单总额
 				'order_amount'     =>$car_price['payables'],//'应付款金额',
 				'add_time'         =>time(), // 下单时间
@@ -485,12 +485,12 @@ class OrderLogic
 
 		//分销开关全局
 		try{
-			$distribut_switch = tpCache('distribut.switch');
+			/*$distribut_switch = tpCache('distribut.switch');
 			if($distribut_switch  == 1 && file_exists(APP_PATH.'common/logic/DistributLogic.php'))
 			{
 				$distributLogic = new \app\common\logic\DistributLogic();
 				$distributLogic->rebateLog($order); // 生成分成记录
-			}
+			}*/
 		}catch(\Exception $e)
 		{
 			trace('生成记录:'.$e->getMessage(),'debug');

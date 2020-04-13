@@ -1,5 +1,5 @@
 <include file="common/header" title="填写订单" body="g4"/>
-<include file="common/header_nav" title="填写订单" href="{:U('mobile/Cart/index')}"/>
+<include file="common/header_nav" title="填写订单" href="javascript:history.go(-1);"/>
 <script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
 <script src="__STATIC__/js/swipeSlide.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -60,7 +60,7 @@
                     <a href="{:U('Mobile/User/address_list',array('source'=>'cart2'))}" class="weui-cell weui-cell_access">
             </if>
             <!--立即购买和购物车的路径来源e-->
-            <a href="{:U('Mobile/User/address_list',array('source'=>'cart2'))}" class="weui-cell weui-cell_access">
+            <!-- <a href="{:U('Mobile/User/address_list',array('source'=>'cart2'))}" class="weui-cell weui-cell_access"> -->
             </if>
             <!--立即购买和购物车的路径来源e-->
             <div class="weui-cell__bd">
@@ -127,7 +127,7 @@
                     </div>
                 </div>
             </div>-->
-            <div class="weui-cell weui-cell_access weui-cell_link fs11">
+            <div class="weui-cell weui-cell_access weui-cell_link fs11" hidden>
                 <div class="weui-cell__bd">
                     <div>可使用卡券</div>
                 </div>
@@ -149,7 +149,7 @@
             <input type="hidden" name="coupon_id"  value=""/>
         </div>
     </div>
-    <div class="weui-cells weui-cells_checkbox cardbox">
+    <div class="weui-cells weui-cells_checkbox cardbox" >
         <label class="weui-cell tbornone after-left__0 weui-check__label" for="user_money">
             <div class="weui-cell__hd">
                 <input type="checkbox" class="weui-check pay_other" name="user_money" id="user_money" data-value="{$user['user_money']}">
@@ -161,9 +161,8 @@
             </div>
             <div><span>￥</span><b>{$user['user_money']}</b></div>
         </label>
-        <label class="weui-cell after-left__0 weui-check__label" for="pay_other">
+        <label class="weui-cell after-left__0 weui-check__label" for="pay_other" hidden>
             <div class="weui-cell__hd">
-                <!--<input type="hidden" name="pay_points" class="pay_sub" />-->
                 <input type="checkbox" id="pay_other" class="weui-check pay_other"  name="pay_points" data-value="{$user['pay_points']}">
                 <i class="weui-icon-checked"  ></i>
             </div>
@@ -173,12 +172,11 @@
             </div>
             <div><span>￥</span><b>{$user['pay_points']}</b></div>
         </label>
-        <div class=" myorder-2 p" id="paypwd_view", style="display: none">
+        <div class=" myorder-2 p" id="paypwd_view" style="display: none">
             <div class="content30">
                 <label>
                     <div class="incorise" style="padding-left: 1rem;padding-bottom: 0.5rem">
                         <span>支付密码：</span>
-                        <!--解决google浏览器识别text+password,自动填充已保存的账户密码-->
                         <input type="password" id="paypwd" name="paypwd"  placeholder="请输入支付密码"/>
                         <p>
                             <if condition="empty($user['paypwd'])">
@@ -433,14 +431,14 @@
             var user_money = $.trim($('#user_money').val());
             var pay_points = $.trim($('#pay_other').val());
             if ((user_money !== '' && user_money >0) || (pay_points !== '' || pay_points >0)) {
-                $('#paypwd_view').show();
+                // $('#paypwd_view').show();
             } else {
                 $('#paypwd_view').hide();
             }
         });
         //有使用余额，积分就得用密码
         if($('#user_money').val() > 0 || $('#pay_points').val() > 0){
-            $('#paypwd_view').show();
+            // $('#paypwd_view').show();
         }
         $('.radio .che').bind('click',function(){
             //选择配送方式
@@ -681,7 +679,6 @@
         }else{
             i.val(0);
         }*/
-
     })
 </script>
 

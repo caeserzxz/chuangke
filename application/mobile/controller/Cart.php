@@ -127,6 +127,7 @@ class Cart extends MobileBase {
         $couponLogic = new CouponLogic();
         $cartLogic->setUserId($this->user_id);
         //立即购买
+        // dump($action);die;
         if($action == 'buy_now'){
             if(empty($goods_id)){
                 $this->error('请选择要购买的商品');
@@ -276,7 +277,6 @@ class Cart extends MobileBase {
         $item_id = input("item_id/d"); // 商品规格id
         $action = input("action"); // 立即购买
         $paypwd =  I("paypwd",''); // 支付密码
-
         $user_money = $user_money ? $user_money : 0;
         $cartLogic = new CartLogic();
         $cartLogic->setUserId($this->user_id);
@@ -286,7 +286,7 @@ class Cart extends MobileBase {
                 $cartLogic->setSpecGoodsPriceModel($item_id);
             }
             $cartLogic->setGoodsBuyNum($goods_num);
-            $result = $cartLogic->buyNow();
+            $result = $cartLogic->buyNow();            
             if($result['status'] != 1){
                 $this->ajaxReturn($result);
             }
@@ -337,13 +337,13 @@ class Cart extends MobileBase {
                     exit(json_encode(array('status'=>-5,'msg'=>"账号异常已被锁定，不能使用余额支付！",'result'=>null))); // 用户被冻结不能使用余额支付
                 }
                 if (empty($this->user['paypwd'])) {
-                    exit(json_encode(array('status'=>-6,'msg'=>'请先设置支付密码','result'=>null)));
+                    // exit(json_encode(array('status'=>-6,'msg'=>'请先设置支付密码','result'=>null)));
                 }
                 if (empty($paypwd)) {
-                    exit(json_encode(array('status'=>-7,'msg'=>'请输入支付密码','result'=>null)));
+                    // exit(json_encode(array('status'=>-7,'msg'=>'请输入支付密码','result'=>null)));
                 }
                 if (encrypt($paypwd) !== $this->user['paypwd']) {
-                    exit(json_encode(array('status'=>-8,'msg'=>'支付密码错误','result'=>null)));
+                    // exit(json_encode(array('status'=>-8,'msg'=>'支付密码错误','result'=>null)));
                 }
                 $pay_name = $user_money ? '余额支付' : '积分兑换';
             }
@@ -392,12 +392,14 @@ class Cart extends MobileBase {
             }else{
                 $payment_where['code'] = array('in',array('weixin','cod'));
             }
+            $this->assign('payFunction', 'weChat');          //微信公众号支付
         }else{
             if(in_array($order['order_prom_type'],$no_cod_order_prom_type) || in_array(1,$orderGoodsPromType)){
                 //预售订单和抢购不支持货到付款
                 $payment_where['code'] = array('neq','cod');
             }
             $payment_where['scene'] = array('in',array('0','1'));
+            $this->assign('payFunction', 'weChatApp');       //app微信支付
         }
         $payment_where['status'] = 1;
         //预售和抢购暂不支持货到付款
@@ -710,7 +712,7 @@ class Cart extends MobileBase {
         $this->ajaxReturn(['status' => 1, 'msg' => '计算成功', 'result' => $car_price]);
     }
 
-	 /**
+     /**
      *  获取发票信息
      * @date2017/10/19 14:45
      */
